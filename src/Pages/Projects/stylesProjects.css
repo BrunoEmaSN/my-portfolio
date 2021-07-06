@@ -1,14 +1,22 @@
-.flex{
+.container {
     align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+    font-family: 'Roboto', sans-serif;
+}
+.flex {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.flex .row{
+.flex .row {
     flex-direction: row;
 }
 
-.flex .wrap{
+.flex .wrap {
     flex-wrap: wrap;
 }
