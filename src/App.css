@@ -9,6 +9,12 @@
   padding: 0 10px;
   font-family: 'Roboto', sans-serif;
 }
+
+section{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
 .flex {
   display: flex;
   flex-direction: column;

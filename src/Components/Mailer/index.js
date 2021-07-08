@@ -43,16 +43,16 @@ export default class Mailer extends React.Component {
             <form className="form" onSubmit={ this.handleSubmit.bind(this) }>
                 <input type="hidden" id="me" name="me" value="Bruno" />
                 <div>
-                    <input type="text" id="name" name="name" placeholder="Name..." className="elemento" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} required="true" />
+                    <input type="text" id="name" name="name" placeholder="Name..." className="elemento" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} required />
                 </div>
                 <div>
-                    <input type="email" id="email" name="email" placeholder="E-mail..." className="elemento" value={this.state.email} onChange={this.handleChange.bind(this, 'email')} required="true" />
+                    <input type="email" id="email" name="email" placeholder="E-mail..." className="elemento" value={this.state.email} onChange={this.handleChange.bind(this, 'email')} required />
                 </div>
                 <div>
-                    <input type="text" id="subject" name="subject" placeholder="Subject..." className="elemento" value={this.state.subject} onChange={this.handleChange.bind(this, 'subject')} required="true" />
+                    <input type="text" id="subject" name="subject" placeholder="Subject..." className="elemento" value={this.state.subject} onChange={this.handleChange.bind(this, 'subject')} required />
                 </div>
                 <div>
-                    <textarea id="message" name="message"  placeholder="Message..." className="elemento" rows="3" value={this.state.message}  onChange={this.handleChange.bind(this, 'message')} required="true"></textarea>
+                    <textarea id="message" name="message"  placeholder="Message..." className="elemento" rows="3" value={this.state.message}  onChange={this.handleChange.bind(this, 'message')} required></textarea>
                 </div>
                 <div>
                     <div id="success"></div>
