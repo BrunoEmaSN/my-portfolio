@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../../Components/Card';
 import projects from '../../Services/projects';
+import '../../App.css';
 import './stylesProjects.css';
 
 export default class Projects extends React.Component{
