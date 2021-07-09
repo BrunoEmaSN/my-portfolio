@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Home from './Pages/Home';
 import About from './Pages/About';
 import Projects from './Pages/Projects';
@@ -7,9 +8,20 @@ import Footer from './Components/Footer';
 
 
 function App() {
+  const [scrollHeight, setScrollHeight] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollHeight(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+  }, [scrollHeight]);
+
   return (
     <div>
-      <Nav />
+      <Nav isScrolling={scrollHeight} />
       <Home/>
       <About />
       <Projects />

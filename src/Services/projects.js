@@ -1,4 +1,4 @@
-import WebAlumnos from '../Img/exams.svg';
+import WebAlumnos from '../Media/exams.svg';
 
 const projects = [
     {

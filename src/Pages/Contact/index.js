@@ -1,6 +1,6 @@
 import React from 'react';
 import Mailer from '../../Components/Mailer';
-import Developer from '../../Img/developer.svg';
+import Developer from '../../Media/developer.svg';
 import '../../App.css';
 
 export default class Contact extends React.Component{
@@ -19,7 +19,7 @@ export default class Contact extends React.Component{
                             <p>+15 376 4184 291</p>
                             <h4>E-mail</h4>
                             <p>sanchezbruno689@gmail.com</p>
-                            <img src={ Developer } alt="developer" />
+                            <img src={ Developer } alt="developer" style={{ width: '100%', height: '100vh' }} />
                         </div>
                     </div>
                 </div>
