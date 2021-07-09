@@ -55,13 +55,14 @@
     background: #e31b6d;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 425px){
     .nav-container{
         background: #252934;
     }
 
     .nav-menu {
         display: grid;
+        height: 90vh;
         grid-template-columns: auto;
         background: #252934;
         margin: 0;
