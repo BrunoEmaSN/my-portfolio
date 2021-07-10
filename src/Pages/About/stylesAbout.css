@@ -1,17 +1,12 @@
 .about-container{
-    max-width: 1200px;
-    width: 100%;
     height: auto;
     background: white;
-    padding: 70px 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
 .about-desc {
-    padding-left: 25px;
-    padding-right: 25px;
     flex: 0 0 50%;
     max-width: auto;
     margin-top: auto;

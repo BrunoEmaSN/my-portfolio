@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Home from './Pages/Home';
 import About from './Pages/About';
-import Projects from './Pages/Projects';
+import Portfolio from './Pages/Portfolio';
 import Contact from './Pages/Contact';
 import Nav from './Components/Nav';
 import Footer from './Components/Footer';
@@ -24,7 +24,7 @@ function App() {
       <Nav isScrolling={scrollHeight} />
       <Home/>
       <About />
-      <Projects />
+      <Portfolio />
       <Contact />
       <Footer />
     </div>

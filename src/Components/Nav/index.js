@@ -33,7 +33,7 @@ export default class Nav extends React.Component{
                             <a href="#about" className="nav-links" onClick={this.handleClick}>About Me</a>
                         </li>
                         <li>
-                            <a href="#projects" className="nav-links" onClick={this.handleClick}>Projects</a>
+                            <a href="#portfolio" className="nav-links" onClick={this.handleClick}>Portfolio</a>
                         </li>
                         <li>
                             <a href="#contact" className="nav-links" onClick={this.handleClick}>Contact</a>

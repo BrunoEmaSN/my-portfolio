@@ -1,0 +1,25 @@
+.portfolio-title {
+    color:#fff;
+    margin: 20px 0 40px;
+    align-items: center;
+}
+
+.portfolio-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    grid-gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto 30px;
+}
+
+.card {
+    min-height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.25s;
+    position: relative;
+}

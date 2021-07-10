@@ -30,7 +30,6 @@ export default class About extends React.Component{
                             <img src={AboutImg} alt="about-foto" />
                         </div>
                     </div>
-                    
                 </div>
             </section>
         );

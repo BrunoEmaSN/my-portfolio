@@ -1,4 +1,7 @@
 import WebAlumnos from '../Media/exams.svg';
+import BusinessShop from '../Media/business_shop.svg';
+import UnderConstructor from '../Media/under_construction.svg';
+import Development from '../Media/developer.svg';
 
 const projects = [
     {
@@ -8,50 +11,38 @@ const projects = [
             alt: 'Web Alumnos'
         },
         title: 'Web Alumnos',
-        description: 'A system for some schools in the interior of Misiones that meets their needs.',
-        links: {
-            href: '#',
-            description: 'view web site'
-        }
+        description: 'React Js',
+        href: '#'
     },
     {
         id: 2,
         image: {
-            src: WebAlumnos,
-            alt: 'Web Alumnos'
+            src: BusinessShop,
+            alt: 'Business Shop'
         },
-        title: 'Web Alumnos',
-        description: 'A system for some schools in the interior of Misiones that meets their needs.',
-        links: {
-            href: '#',
-            description: 'view web site'
-        }
+        title: 'Businnes Shop',
+        description: 'React Js',
+        href: '#'
     },
     {
         id: 3,
         image: {
-            src: WebAlumnos,
-            alt: 'Web Alumnos'
+            src: UnderConstructor,
+            alt: 'Under Constructor'
         },
-        title: 'Web Alumnos',
-        description: 'A system for some schools in the interior of Misiones that meets their needs.',
-        links: {
-            href: '#',
-            description: 'view web site'
-        }
+        title: 'Under Constructor',
+        description: 'React Js',
+        href: '#'
     },
     {
         id: 4,
         image: {
-            src: WebAlumnos,
-            alt: 'Web Alumnos'
+            src: Development,
+            alt: 'Development'
         },
-        title: 'Web Alumnos',
-        description: 'A system for some schools in the interior of Misiones that meets their needs.',
-        links: {
-            href: '#',
-            description: 'view web site'
-        }
+        title: 'Development',
+        description: 'React Js',
+        href: '#'
     },
     {
         id: 5,
@@ -60,12 +51,9 @@ const projects = [
             alt: 'Web Alumnos'
         },
         title: 'Web Alumnos',
-        description: 'A system for some schools in the interior of Misiones that meets their needs.',
-        links: {
-            href: '#',
-            description: 'view web site'
-        }
-    }
+        description: 'React Js',
+        href: '#'
+    },
 ];
 
 export default projects;
