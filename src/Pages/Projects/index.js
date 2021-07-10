@@ -7,7 +7,7 @@ import './stylesProjects.css';
 export default class Projects extends React.Component{
     render(){
         return (
-            <section id="projects" className="flex">
+            <section id="projects" className="flex project-container">
                 <div className="container">
                     <h1>Projects</h1>
                     <div className="flex row wrap">

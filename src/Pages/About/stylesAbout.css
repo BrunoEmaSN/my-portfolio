@@ -1,7 +1,57 @@
-[data-tab-content] {
-    display: none;
+.about-container{
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+    background: white;
+    padding: 70px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-.active[data-tab-content]{
-    display: block;
+.about-desc {
+    padding-left: 25px;
+    padding-right: 25px;
+    flex: 0 0 50%;
+    max-width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.about-tab {
+    margin-top: 30px;
+    position: relative;
+    width: 100%;
+    margin-top: 30px!important;
+}
+
+.about-img{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.about-img > img {
+    max-width: auto;
+    padding-left: auto;
+    padding-right: auto;
+    border-radius: 8px;
+    box-shadow: 0 25px 65px rgb(0 0 0 / 10%);
+    vertical-align: middle;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screem and (min-width: 1200px){
+    .about-container{
+        max-width: 1260px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about-container{
+        height: auto;
+    }
 }

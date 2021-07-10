@@ -10,9 +10,14 @@
 .container {
   align-items: center;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.fix {
+  overflow: hidden;
 }
 
 .flex {
@@ -21,10 +26,30 @@
   justify-content: center;
 }
 
-.flex .row {
+.flex.row {
   flex-direction: row;
 }
 
-.flex .wrap {
+.flex.wrap {
   flex-wrap: wrap;
+}
+
+.section-title{
+  margin-top: -20px;
+}
+
+.title{
+  font-size: 60px;
+  margin-bottom: 8px;
+}
+
+.section-title.description > p{
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.section-title.description > h3 {
+  font-size: 30px;
+  margin: 5px 0;
 }
