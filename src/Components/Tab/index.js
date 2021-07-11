@@ -1,4 +1,7 @@
 import React from 'react';
+import mySkills from '../../Services/skills';
+import myEducation from '../../Services/education';
+import myExperience from '../../Services/experience';
 import './stylesTab.css';
 
 export default class Tab extends React.Component {
@@ -32,42 +35,31 @@ export default class Tab extends React.Component {
                 </ul>
                 <div className="tab-content">
                     <div id="skills" data-tab-content className={this.state.skills}>
-                        <div className="tab-list">
-                            <h3>FrondEnd</h3>
-                            <p>JavaScript</p>
-                            <p>HTML</p>
-                            <p>Css</p>
-                            <p>React.Js</p>
-                        </div>
-                        <div className="tab-list">
-                            <h3>BackEnd</h3>
-                            <p>PHP</p>
-                            <p>SQL Server</p>
-                            <p>MySQL</p>
-                            <p>Node.Js</p>
-                        </div>
-                        <div className="tab-list">
-                            <h3>Others</h3>
-                            <p>UX/UI</p>
-                        </div>
+                        { mySkills.map((data) => (
+                            <div key={data.id} className="tab-list">
+                                <h3>{data.title}</h3>
+                                { data.list.map((data) => (
+                                    <p>{data.skill}</p>
+                                )) }
+                            </div>
+                        )) }
                     </div>
                     <div id="experience" data-tab-content className={this.state.experience}>
-                        <h2>Experience</h2>
+                        { myExperience.map((data) => (
+                            <div key={data.id} className="tab-list">
+                                <h3>{data.title}</h3>
+                                <p>{data.description}</p>
+                            </div>
+                        )) }
                     </div>
                     <div id="education" data-tab-content className={this.state.education}>
-                    <div className="tab-list">
-                            <h3>FrondEnd</h3>
-                            <p>JavaScript</p>
-                            <p>HTML</p>
-                            <p>Css</p>
-                            <p>React.Js</p>
-                        </div>
                         <div className="tab-list">
-                            <h3>BackEnd</h3>
-                            <p>PHP</p>
-                            <p>SQL Server</p>
-                            <p>MySQL</p>
-                            <p>Node.Js</p>
+                            { myEducation.map((data) => (
+                                <div key={data.id} className="tab-list">
+                                    <h3>{data.title}</h3>
+                                    <p>{data.description}</p>
+                                </div>
+                            )) }
                         </div>
                     </div>
                 </div>

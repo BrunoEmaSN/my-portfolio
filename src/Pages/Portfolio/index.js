@@ -14,7 +14,6 @@ export default class Projects extends React.Component{
 
     handleHover = (id) => {
         this.setState({isActive: id});
-        console.log(this.state.isActive);
     }
 
     resetHover = () => {
@@ -32,9 +31,9 @@ export default class Projects extends React.Component{
                     <div className="row">
                         <section className="portfolio-section">
                             {projects.map((data) => (
-                                <div className="card">
+                                <div className="card" key={data.id}>
                                     <Card 
-                                        key={data.id}
+                                        id={data.id}
                                         image={data.image}
                                         title={data.title}
                                         description={data.description}

@@ -55,8 +55,7 @@ export default class Mailer extends React.Component {
                     <textarea id="message" name="message"  placeholder="Message..." className="elemento" rows="3" value={this.state.message}  onChange={this.handleChange.bind(this, 'message')} required></textarea>
                 </div>
                 <div>
-                    <div id="success"></div>
-                    <input type="submit" id="submit" name="submit" value="SUBMIT" className="button" />
+                    <input type="submit" id="submit" name="submit" value="SUBMIT" className="btn-submit" />
                 </div>
             </form>
         );

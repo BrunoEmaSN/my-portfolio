@@ -53,17 +53,17 @@
     height: 3px;
     margin: 5px auto;
     transition: all .3s ease-in-out;
-    background: #e31b6d;
+    background: white;
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 592px){
     .nav-container{
         background: #252934;
     }
 
     .nav-menu {
         display: grid;
-        height: 90vh;
+        height: 100vh;
         grid-template-columns: auto;
         background: #252934;
         margin: 0;

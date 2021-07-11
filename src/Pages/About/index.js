@@ -11,6 +11,9 @@ export default class About extends React.Component{
             <section id="about" className="fix">
                 <div className="container about-container">
                     <div className="row">
+                        <div className="about-img">
+                            <img src={AboutImg} alt="about-foto" />
+                        </div>
                         <div className="about-desc">
                             <div className="section-title">
                                 <h2 className="title">About Me</h2>
@@ -26,9 +29,7 @@ export default class About extends React.Component{
                                 </div>
                             </div>
                         </div>
-                        <div className="about-img">
-                            <img src={AboutImg} alt="about-foto" />
-                        </div>
+                        
                     </div>
                 </div>
             </section>

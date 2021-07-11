@@ -19,7 +19,7 @@ export default class Card extends React.Component{
     }
     render(){
         return(
-            <div id={this.props.key} className={`portfolio-content ${this.state.isActive === this.props.key ? 'active' : null}`} onMouseOver={this.handleHover.bind(this, this.props.key)} onMouseOut={this.resetHover}>
+            <div id={this.props.id} className={`portfolio-content ${this.state.isActive === this.props.id ? 'active' : null}`} onMouseOver={this.handleHover.bind(this, this.props.id)} onMouseOut={this.resetHover}>
                 <img className="portfolio-img" src={this.props.image.src} alt={this.props.image.alt}/>
                 <div className="bg-blr-image"></div>
                 <div className="portfolio-text">
