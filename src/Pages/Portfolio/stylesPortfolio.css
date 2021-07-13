@@ -1,7 +1,6 @@
 .portfolio-title {
-    color:#fff;
+    color:var(--main-color-white);
     margin: 20px 0 40px;
-    align-items: center;
 }
 
 .portfolio-section {

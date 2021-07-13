@@ -8,7 +8,7 @@ export default class Contact extends React.Component{
     render(){
         return (
             <section id="contact" className="fix bg-second">
-                <div className="container">
+                <div className="container container-body">
                     <div className="contact-section">
                         <div className="contact-item">
                             <div className="contact-form">
@@ -21,7 +21,7 @@ export default class Contact extends React.Component{
                         </div>
                         <div className="contact-item">
                             <div className="contact-img">
-                                <img src={ Developer } alt="developer" />
+                                <img src={ Developer } alt="developer"className="width-100" />
                                 <div className="contact-info">
                                     <h4>Phone number</h4>
                                     <p>+15 376 4184 291</p>

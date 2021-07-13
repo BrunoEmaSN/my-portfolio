@@ -1,39 +1,53 @@
-@import url('https://fonts-googleapis.com(css?family=Open+Sans|Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+
+:root{
+  /*--main-color-primary: #f9004d;*/
+  --main-color-primary: #339EAA;
+  --main-color-second: #191919;
+  --main-color-thrid: #252934;
+  --main-color-forth: #8f9aa7;
+  --main-color-fifth: #616161;
+  --main-color-dark: #101010;
+  --main-color-white: #fff;
+  --main-color-gray: #c6c9d8;
+}
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
 }
 
 .container {
-  align-items: center;
   width: 100%;
   max-width: 1200px;
   margin: auto;
-  padding-top: 70px;
-  padding-bottom: 70px;
   padding-left: 50px;
   padding-right: 50px;
 }
 
+.container-body {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
 .bg-dark {
-  background-color: #101010;
+  background-color: var(--main-color-dark);
   z-index: -3;
 }
 
 .bg-second {
-  background: #191919;
+  background: var(--main-color-second);
 }
 
 .fix {
   overflow: hidden;
-}
-
-.header{
-  flex: 0 0 100%;
-  max-width: 100%;
 }
 
 .flex {
@@ -53,6 +67,38 @@
 
 .flex.wrap {
   flex-wrap: wrap;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.max-width {
+  max-width: 1200px;
+}
+
+.height-100 {
+  height: 100%;
+}
+
+.height-100vh {
+  height: 100vh;
+}
+
+.height-auto {
+  height: auto;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.padding-auto {
+  padding: auto;
 }
 
 .section-title{

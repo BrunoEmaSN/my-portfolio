@@ -5,29 +5,49 @@ export default class Card extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            isActive: ''
+            cardActive: ''
         };
     }
 
     handleHover = (id) => {
-        this.setState({isActive: id});
-        console.log(this.state.isActive);
+        this.setState({cardActive: id});
     }
 
     resetHover = () => {
-        this.setState({isActive: ''});
+        this.setState({cardActive: ''});
     }
     render(){
         return(
-            <div id={this.props.id} className={`portfolio-content ${this.state.isActive === this.props.id ? 'active' : null}`} onMouseOver={this.handleHover.bind(this, this.props.id)} onMouseOut={this.resetHover}>
-                <img className="portfolio-img" src={this.props.image.src} alt={this.props.image.alt}/>
+            <div
+                id={ this.props.id }
+                className={
+                    `card-content ${this.state.cardActive === this.props.id ? 'active' : null}`
+                }
+                onMouseOver={
+                    this.handleHover.bind( this, this.props.id )
+                }
+                onMouseOut={ this.resetHover }>
+                <img
+                    className="card-img"
+                    src={ this.props.image.src }
+                    alt={ this.props.image.alt }
+                />
                 <div className="bg-blr-image"></div>
-                <div className="portfolio-text">
-                    <p className="portfolio-description">{this.props.description}</p>
-                    <h4 className="portfolio-title">{this.props.title}</h4>
+                <div className="card-text">
+                    <p className="card-description">
+                        { this.props.description }
+                    </p>
+                    <h4 className="card-title">
+                        { this.props.title }
+                    </h4>
                 </div>
-                <div className="portfolio-button">
-                    <a className="overlay" href={this.props.href}>view website</a>
+                <div className="card-button">
+                    <a
+                        className="overlay"
+                        href={ this.props.href }
+                    >
+                        view website
+                    </a>
                 </div>
             </div>
         );

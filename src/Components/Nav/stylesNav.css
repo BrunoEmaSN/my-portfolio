@@ -3,15 +3,14 @@
     background: transparent;
     transition: all .3s ease-out;
     height: 60px;
-    width: 100%;
-    padding-left: 50px;
-    padding-right: 50px;
     font-size: 20px;
     z-index: 12;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .scrolling {
-    background-color: #252934;
+    background-color: var(--main-color-thrid);
     transition: all .5s ease-out;
 }
 
@@ -21,51 +20,74 @@
     overflow: hidden;
 }
 
+.logo {
+    float: left;
+}
+
+.logo > a img {
+    width: auto;
+    height: 70px;
+    padding: 10px 10px 0;
+    object-fit: cover;
+}
+
 .nav-menu {
     width: 100%;
     max-width: 1000px;
-    margin: 0 auto;
     padding: 0 10px;
+    height: 60px;
 }
 
 .nav-menu > li {
     display: inline-block;
     line-height: 60px;
     margin: 0 5px;
+    height: 60px;
 }
 
 .nav-links {
+    display: block;
     text-decoration: none;
-    color: white;
+    color: var(--main-color-white);
     font-size: 17px;
     padding: 7px 13px;
     text-transform: uppercase;
-    text-decoration: none;
+    height: 60px;
 }
 
 .nav-links:hover {
-    color: #e31b6d;
+    color: var(--main-color-primary);
+    font-weight: bolder;
     transition: all .2s ease-out;
+    border-bottom: 1px solid var(--main-color-primary);;
 }
+
+.nav-links.active{
+    color: var(--main-color-primary);;
+    font-weight: bolder;
+    transition: all .2s ease;
+    border-bottom: 1px solid var(--main-color-primary);;
+}
+
 
 .menu-toggle .bar {
     width: 25px;
     height: 3px;
     margin: 5px auto;
     transition: all .3s ease-in-out;
-    background: white;
+    background: var(--main-color-white);
 }
 
 @media screen and (max-width: 592px){
     .nav-container{
-        background: #252934;
+        background: var(--main-color-thrid);
     }
 
     .nav-menu {
         display: grid;
         height: 100vh;
         grid-template-columns: auto;
-        background: #252934;
+        background: var(--main-color-thrid);
         margin: 0;
         width: 100%;
         position: absolute;
@@ -76,7 +98,7 @@
     }
 
     .nav-menu.active{
-        background: #252934;
+        background: var(--main-color-thrid);
         left: 0;
         opacity: 1;
         transition: all .5 ease;
@@ -90,8 +112,15 @@
     }
 
     .nav-links:hover {
-        background-color: #e31b6d;
-        color: white;
+        background-color: var(--main-color-primary);
+        color: var(--main-color-white);
+        transition: all .4s ease-out;
+    }
+
+    .nav-links.active {
+        border: none;
+        background-color: var(--main-color-primary);
+        color: var(--main-color-white);
         transition: all .4s ease-out;
     }
 

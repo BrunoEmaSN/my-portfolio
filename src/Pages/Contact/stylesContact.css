@@ -18,12 +18,12 @@
 }
 
 .contact-form .section-title .title{
-    color: #fff;
+    color: var(--main-color-white);
     margin-bottom: 20px;
 }
 
 .contact-form .section-title .description{
-    color: #e31b6d;
+    color: var(--main-color-primary);
     margin-bottom: 10px;
 }
 
@@ -35,7 +35,6 @@
 }
 
 .contact-img > img {
-    max-width: 100%;
     border-radius: 8px;
     box-shadow: 0 25px 65px rgb(0 0 0 / 10%);
     object-fit: cover;
@@ -46,7 +45,7 @@
     z-index: 6;
     padding: 25px;
     margin: 0;
-    color: #fff;
+    color: var(--main-color-primary);
 }
 
 .contact-info > h4 {

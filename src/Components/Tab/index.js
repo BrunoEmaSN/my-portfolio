@@ -8,20 +8,17 @@ export default class Tab extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            skills: 'active',
-            experience: '',
-            education: ''
+            tabActive: 'skills',
+            tab: [
+                'skills',
+                'experience',
+                'education'
+            ]
         };
     }
     handleClick = (param) => {
         this.setState({
-            skills: '',
-            experience: '',
-            education: ''
-        });
-
-        this.setState({
-            [param]: 'active'
+            tabActive: param
         });
     }
     render(){
@@ -29,22 +26,38 @@ export default class Tab extends React.Component {
         return (
             <div className="tab-container">
                 <ul>
-                    <li data-tab-target="#skills" onClick={ this.handleClick.bind(this, 'skills') } className={this.state.skills} >Skills<div className="border-bottom" /></li>
-                    <li data-tab-target="#experience" onClick={ this.handleClick.bind(this, 'experience') } className={this.state.experience} >Experience<div className="border-bottom" /></li>
-                    <li data-tab-target="#education" onClick={ this.handleClick.bind(this, 'education') } className={this.state.education}>Education <div className="border-bottom" /></li>
+                    { this.state.tab.map(( data ) => (
+                        <li
+                            key={ data }
+                            data-tab-target={ `#data` }
+                            onClick={ this.handleClick.bind( this, data ) }
+                            className={ this.state.tabActive === data ? 'active' : '' }
+                        >
+                            { data }
+                            <div></div>
+                        </li>
+                    )) }
                 </ul>
-                <div className="tab-content">
-                    <div id="skills" data-tab-content className={this.state.skills}>
+                <div className="tab-content flex width-100" style={{ alignItems:'initial' }}>
+                    <div
+                        id="skills"
+                        data-tab-content
+                        className={ this.state.tabActive === this.state.tab[0] ? 'active' : '' }
+                    >
                         { mySkills.map((data) => (
                             <div key={data.id} className="tab-list">
                                 <h3>{data.title}</h3>
                                 { data.list.map((data) => (
-                                    <p>{data.skill}</p>
+                                    <p key={data.skill}>{data.skill}</p>
                                 )) }
                             </div>
                         )) }
                     </div>
-                    <div id="experience" data-tab-content className={this.state.experience}>
+                    <div
+                        id="experience"
+                        data-tab-content
+                        className={ this.state.tabActive === this.state.tab[1] ? 'active' : '' }
+                    >
                         { myExperience.map((data) => (
                             <div key={data.id} className="tab-list">
                                 <h3>{data.title}</h3>
@@ -52,15 +65,17 @@ export default class Tab extends React.Component {
                             </div>
                         )) }
                     </div>
-                    <div id="education" data-tab-content className={this.state.education}>
-                        <div className="tab-list">
-                            { myEducation.map((data) => (
-                                <div key={data.id} className="tab-list">
-                                    <h3>{data.title}</h3>
-                                    <p>{data.description}</p>
-                                </div>
-                            )) }
-                        </div>
+                    <div
+                        id="education"
+                        data-tab-content
+                        className={ this.state.tabActive === this.state.tab[2] ? 'active' : '' }
+                    >
+                        { myEducation.map((data) => (
+                            <div key={data.id} className="tab-list">
+                                <h3>{data.title}</h3>
+                                <p>{data.description}</p>
+                            </div>
+                        )) }
                     </div>
                 </div>
             </div>

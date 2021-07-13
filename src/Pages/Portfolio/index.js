@@ -5,25 +5,11 @@ import '../../App.css';
 import './stylesPortfolio.css';
 
 export default class Projects extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            isActive: ''
-        };
-    }
-
-    handleHover = (id) => {
-        this.setState({isActive: id});
-    }
-
-    resetHover = () => {
-        this.setState({isActive: ''});
-    }
     render(){
         return (
             <section id="portfolio" className="fix bg-dark">
-                <div className="container">
-                    <div className="row flex">
+                <div className="container container-body">
+                    <div className="flex row">
                         <div className="section-title">
                             <h2 className="title portfolio-title">My Projects</h2>
                         </div>
