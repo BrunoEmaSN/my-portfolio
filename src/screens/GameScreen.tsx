@@ -6,13 +6,16 @@ import Menu from "../components/Menu"
 import Layout from "../components/Layout"
 import type { Position, AnimationState, MobileProps } from "../types"
 import { STATES, ANIMATION_CONFIG } from "../../constants"
+import clsx from "clsx"
 
 const GameScreen = ({ isMobile }: MobileProps) => {
-  const { showMenu } = useAppStore((state) => state)
+  const { showMenu, showSplash } = useAppStore((state) => state)
   const menuRef = useRef<HTMLDivElement>(null)
   const layoutRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const revealBlockRef = useRef<HTMLDivElement>(null)
   const isInitialized = useRef(false)
+  const hasRevealedBlockRef = useRef(false)
 
   // Memoize the current state to avoid recalculations
   const currentState = useMemo(() => STATES[showMenu ? 'true' : 'false'], [showMenu])
@@ -67,6 +70,24 @@ const GameScreen = ({ isMobile }: MobileProps) => {
     animateFromTo(previousState, currentState, false)
   }, { scope: containerRef, dependencies: [showMenu, currentState, previousState] })
 
+  // Animación del bloque azul de revelado cuando aparece GameScreen
+  useGSAP(() => {
+    if (!revealBlockRef.current || showSplash || hasRevealedBlockRef.current) return
+
+    // Inicializar bloque fuera de la vista (izquierda)
+    gsap.fromTo(revealBlockRef.current, {
+      xPercent: -100,
+    }, {
+      xPercent: 100,
+      duration: 0.5,
+      ease: "power3.out",
+      delay: 0.1,
+      onComplete: () => {
+        hasRevealedBlockRef.current = true;
+      },
+    })
+  }, { scope: containerRef, dependencies: [showSplash] })
+
   return (
     <div
       ref={containerRef}
@@ -84,6 +105,14 @@ const GameScreen = ({ isMobile }: MobileProps) => {
           transformStyle: "preserve-3d",
         }}
       >
+        {/* Bloque Azul de Revelado - centrado abajo en posición del menú */}
+        <div
+          ref={revealBlockRef}
+          className={clsx(
+            "absolute bottom-40 right-0 bg-blue-700 z-10",
+            isMobile ? "h-16 w-full" : "h-44 w-full"
+          )}
+        />
         <Menu isMobile={isMobile} />
       </div>
 

@@ -12,11 +12,11 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   const revealBlockRef = useRef(null);
 
   const handleInteraction = () => {
-    // FadeOut before starting
+    // Deslizar hacia la izquierda antes de iniciar
     gsap.to(splashRef.current, {
-      opacity: 0,
-      duration: 0.6,
-      ease: 'power2.in',
+      xPercent: -100,
+      duration: 0.8,
+      ease: 'power3.in',
       onComplete: () => {
         toggleApp();
       },
@@ -26,12 +26,8 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   useGSAP(() => {
     if (!splashRef.current) return;
 
-    // FadeIn initial
-    gsap.fromTo(
-      splashRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.8, ease: 'power2.out' }
-    );
+    // Reset position inicial
+    gsap.set(splashRef.current, { xPercent: 0 });
 
     // Creamos la línea de tiempo
     const tl = gsap.timeline({
@@ -60,7 +56,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
     <div
       onClick={handleInteraction}
       ref={splashRef}
-      className="fixed inset-0 w-full h-screen bg-black flex items-center justify-start z-50"
+      className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden bg-black"
     >
       <div className="overflow-hidden">
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />

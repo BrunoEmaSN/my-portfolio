@@ -11,43 +11,40 @@ const App = () => {
   const { showSplash } = useAppStore((state) => state)
   const gameScreenRef = useRef<HTMLDivElement>(null)
 
-  // GameScreen FadeIn when the application starts (from splash screen)
+  // GameScreen aparece cuando el splash screen se oculta
   useGSAP(() => {
     if (!gameScreenRef.current) return
 
     if (!showSplash) {
-      // GameScreen fade-in after splash screen fade-out
-      gsap.fromTo(
-        gameScreenRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.1 }
-      )
+      // GameScreen visible inmediatamente (sin fade)
+      gsap.set(gameScreenRef.current, {
+        opacity: 1,
+        visibility: 'visible',
+      })
     }
   }, { scope: gameScreenRef, dependencies: [showSplash] })
 
-  // GameScreen fadeout when the splash screen appears
+  // GameScreen se oculta cuando el splash screen aparece
   useGSAP(() => {
     if (!gameScreenRef.current || !showSplash) return
 
-    // GameScreen fade-out before showing the splash
-    gsap.to(gameScreenRef.current, {
+    // GameScreen oculto cuando aparece el splash
+    gsap.set(gameScreenRef.current, {
       opacity: 0,
-      duration: 0.6,
-      ease: "power2.in",
+      visibility: 'hidden',
     })
   }, { scope: gameScreenRef, dependencies: [showSplash] })
 
   return (
-    <>
+    <div className="bg-black">
       {showSplash && <SplashScreen isMobile={isMobile} />}
       <main
         ref={gameScreenRef}
         className="w-full h-screen overflow-hidden relative"
-        style={{ opacity: showSplash ? 0 : 1, visibility: showSplash ? 'hidden' : 'visible' }}
       >
         <GameScreen isMobile={isMobile} />
       </main>
-    </>
+    </div>
   )
 }
 
