@@ -51,46 +51,45 @@ const Menu = ({ isMobile }: MobileProps) => {
 
   return (
     <>
-      {/* FIXED NAVBAR */}
-      <nav className="fixed w-full max-w-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-gray-200">
-        <ul className="flex flex-col gap-3">
-          {navItems.map((item, index) => (
-            <li key={item.id}>
-              <a
-                href={`#${item.id}`}
-                ref={(el: HTMLAnchorElement | null) => {
-                  if (el) {
-                    linkRefs.current[index] = el;
-                  }
-                }}
-                onMouseEnter={() => setActiveSection(item.id)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (item.id === 'exit') {
-                    toggleApp();
-                  } else {
-                    selectSection(item.id);
-                    setActiveSection(item.id)
-                  }
-                }}
-                className={clsx(
-                  'relative px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-300 block hover:bg-gray-900 min-w-[200px] text-center',
-                  {
-                    'bg-gray-900 text-white scale-105 shadow-lg': selectedIndex === index,
-                    'text-gray-500': selectedIndex !== index,
-                  }
-                )}
-              >
-                {item.label}
-                {selectedIndex === index && <span className="text-sm opacity-80 absolute top-3/5 right-5">
-                  {item.subLabel}
-                </span>}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="w-full h-full flex items-end justify-end pb-40">
+        {/* FIXED NAVBAR */}
+        <nav className="fixed max-w-md z-50">
+          <ul className="flex flex-col gap-1">
+            {navItems.map((item, index) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  ref={(el: HTMLAnchorElement | null) => {
+                    if (el) {
+                      linkRefs.current[index] = el;
+                    }
+                  }}
+                  onMouseEnter={() => setActiveSection(item.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (item.id === 'exit') {
+                      toggleApp();
+                    } else {
+                      selectSection(item.id);
+                      setActiveSection(item.id)
+                    }
+                  }}
+                  className={clsx(
+                    'relative pr-50 font-black text-4xl transition-all duration-300 block hover:bg-blue-700 text-right uppercase',
+                    {
+                      'bg-blue-700 text-white scale-105 shadow-lg': selectedIndex === index,
+                      'text-gray-500': selectedIndex !== index,
+                    }
+                  )}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
+      </div>
       {/* CONTROLS INDICATOR */}
       {!isMobile && (
         <div className="fixed bottom-5 right-5 bg-black text-white p-4 rounded-lg text-xs font-mono opacity-50">
