@@ -8,6 +8,7 @@ interface AppState {
   selectSection: (sectionId: string) => void;
   backToMenu: () => void;
   toggleApp: () => void;
+  closeSplash: () => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -18,4 +19,5 @@ export const useAppStore = create<AppState>((set) => ({
   selectSection: (sectionId: string) => set({ activeSection: sectionId, showMenu: false }),
   backToMenu: () => set({ showMenu: true }),
   toggleApp: () => set((prev) => ({ showSplash: !prev.showSplash, activeSection: 'skills' })),
+  closeSplash: () => set({ showSplash: false }),
 }));

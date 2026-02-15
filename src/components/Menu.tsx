@@ -7,7 +7,7 @@ import { useAppStore } from '../store';
 import type { MobileProps } from '../types';
 
 const Menu = ({ isMobile }: MobileProps) => {
-  const { activeSection, setActiveSection, selectSection, toggleApp, showSplash } = useAppStore();
+  const { activeSection, setActiveSection, selectSection, toggleApp, showSplash, showMenu } = useAppStore();
   const [selectedIndex, setSelectedIndex] = useState(0);
   // References so that the keyboard "knows" which link to click on
   const linkRefs = useRef<HTMLAnchorElement[]>([]);
@@ -24,6 +24,9 @@ const Menu = ({ isMobile }: MobileProps) => {
   }, [activeSection]);
 
   useEffect(() => {
+    // Solo escuchar teclas cuando el menú está visible y el splash no está visible
+    if (!showMenu || showSplash) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
 
@@ -52,7 +55,7 @@ const Menu = ({ isMobile }: MobileProps) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, setActiveSection, selectSection, toggleApp]);
+  }, [selectedIndex, setActiveSection, selectSection, toggleApp, showMenu, showSplash]);
 
   // Animación stagger de los items del menu cuando aparece
   useGSAP(() => {

@@ -7,18 +7,24 @@ import MainTitle from '../components/MainTitle';
 import clsx from 'clsx';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
-  const { toggleApp } = useAppStore();
+  const { closeSplash } = useAppStore();
   const splashRef = useRef<HTMLDivElement>(null);
   const revealBlockRef = useRef(null);
 
-  const handleInteraction = () => {
+  const handleInteraction = (event?: KeyboardEvent | MouseEvent) => {
+    // Prevenir que el evento se propague si es Enter
+    if (event && 'key' in event && event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    
     // Deslizar hacia la izquierda antes de iniciar
     gsap.to(splashRef.current, {
       xPercent: -100,
       duration: 0.8,
       ease: 'power3.in',
       onComplete: () => {
-        toggleApp();
+        closeSplash();
       },
     });
   };
@@ -45,12 +51,16 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
         "+=0.2" // Empieza 0.2 segundos después de que el texto haya sido revelado
       );
 
-    window.addEventListener('keydown', handleInteraction);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      handleInteraction(event);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleInteraction);
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, { scope: splashRef, dependencies: [toggleApp] });
+  }, { scope: splashRef, dependencies: [closeSplash] });
 
   return (
     <div
