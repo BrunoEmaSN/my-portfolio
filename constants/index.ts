@@ -1,9 +1,17 @@
+export const SECTIONS = {
+  SKILLS: 'skills',
+  EXPERIENCES: 'experiences',
+  TESTIMONIALS: 'testimonials',
+  CONTACT: 'contact',
+  EXIT: 'exit',
+} as const;
+
 export const navItems = [
-  { id: 'skills', label: 'Skills', subLabel: 'About me', color: 'bg-red-500' },
-  { id: 'experiences', label: 'Experiences', subLabel: 'View projects', color: 'bg-blue-500' },
-  { id: 'testimonials', label: 'Testimonials', subLabel: 'Help provided', color: 'bg-green-500' },
-  { id: 'contact', label: 'Contact', subLabel: 'Forge bonds', color: 'bg-purple-500' },
-  { id: 'exit', label: 'Exit', subLabel: 'Goodbye friend', color: 'bg-gray-500' },
+  { id: SECTIONS.SKILLS, label: 'Skills', color: 'bg-red-500' },
+  { id: SECTIONS.EXPERIENCES, label: 'Experiences', color: 'bg-blue-500' },
+  { id: SECTIONS.TESTIMONIALS, label: 'Testimonials', color: 'bg-green-500' },
+  { id: SECTIONS.CONTACT, label: 'Contact', color: 'bg-purple-500' },
+  { id: SECTIONS.EXIT, label: 'Exit', color: 'bg-gray-500' },
 ];
 
 export const ANIMATION_CONFIG = {

@@ -11,7 +11,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   const splashRef = useRef<HTMLDivElement>(null);
   const revealBlockRef = useRef(null);
 
-  const handleInteraction = (event?: KeyboardEvent | MouseEvent) => {
+  const handleInteraction = (event: KeyboardEvent | MouseEvent) => {
     // Prevenir que el evento se propague si es Enter
     if (event && 'key' in event && event.key === 'Enter') {
       event.preventDefault();
@@ -72,7 +72,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />
         <div
           ref={revealBlockRef}
-          className={clsx("absolute top-1/2 -translate-y-1/2 size-128 w-full bg-blue-700 z-10", isMobile && 'h-16 md:h-44 w-full ')}
+          className={clsx("absolute top-1/2 -translate-y-1/2 size-128 w-full bg-blue-700 z-10", isMobile ? 'h-16 md:h-44 w-full ' : '')}
         />
       </div>
     </div>

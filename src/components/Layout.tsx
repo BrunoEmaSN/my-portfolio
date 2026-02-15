@@ -5,6 +5,7 @@ import Experiences from './Experiences';
 import Testimonials from './Testimonials';
 import Contact from './Contact';
 import type { MobileProps } from '../types';
+import { SECTIONS } from '../../constants';
 
 const Layout = ({ isMobile }: MobileProps) => {
   const { activeSection, backToMenu, showMenu } = useAppStore();
@@ -32,10 +33,10 @@ const Layout = ({ isMobile }: MobileProps) => {
       </button>
 
       {/* Sections */}
-      {activeSection === 'skills' && <Skills />}
-      {activeSection === 'experiences' && <Experiences />}
-      {activeSection === 'testimonials' && <Testimonials />}
-      {activeSection === 'contact' && <Contact />}
+      {activeSection === SECTIONS.SKILLS && <Skills />}
+      {activeSection === SECTIONS.EXPERIENCES && <Experiences />}
+      {activeSection === SECTIONS.TESTIMONIALS && <Testimonials />}
+      {activeSection === SECTIONS.CONTACT && <Contact />}
       {/* CONTROLS INDICATOR */}
       {!isMobile && (
         <div className="fixed bottom-5 right-5 bg-black text-white p-4 rounded-lg text-xs font-mono opacity-50">

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
-import { navItems } from '../../constants';
+import { navItems, SECTIONS } from '../../constants';
 import { useAppStore } from '../store';
 import type { MobileProps } from '../types';
 
@@ -45,7 +45,7 @@ const Menu = ({ isMobile }: MobileProps) => {
       } else if (key === 'enter') {
         // Handle the selection
         const selectedItem = navItems[selectedIndex];
-        if (selectedItem.id === 'exit') {
+        if (selectedItem.id === SECTIONS.EXIT) {
           toggleApp();
         } else {
           selectSection(selectedItem.id);
@@ -106,7 +106,7 @@ const Menu = ({ isMobile }: MobileProps) => {
                   onMouseEnter={() => setActiveSection(item.id)}
                   onClick={(e) => {
                     e.preventDefault();
-                    if (item.id === 'exit') {
+                    if (item.id === SECTIONS.EXIT) {
                       toggleApp();
                     } else {
                       selectSection(item.id);
