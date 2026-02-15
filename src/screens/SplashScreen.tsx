@@ -56,11 +56,10 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
     <div
       onClick={handleInteraction}
       ref={splashRef}
-      className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden bg-black"
+      className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden"
     >
       <div className="overflow-hidden">
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />
-        {/* Bloque Azul de Revelado */}
         <div
           ref={revealBlockRef}
           className={clsx("absolute top-1/2 -translate-y-1/2 size-128 w-full bg-blue-700 z-10", isMobile && 'h-16 md:h-44 w-full ')}

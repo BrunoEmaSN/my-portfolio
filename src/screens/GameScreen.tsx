@@ -15,7 +15,6 @@ const GameScreen = ({ isMobile }: MobileProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const revealBlockRef = useRef<HTMLDivElement>(null)
   const isInitialized = useRef(false)
-  const hasRevealedBlockRef = useRef(false)
 
   // Memoize the current state to avoid recalculations
   const currentState = useMemo(() => STATES[showMenu ? 'true' : 'false'], [showMenu])
@@ -72,7 +71,7 @@ const GameScreen = ({ isMobile }: MobileProps) => {
 
   // Animación del bloque azul de revelado cuando aparece GameScreen
   useGSAP(() => {
-    if (!revealBlockRef.current || showSplash || hasRevealedBlockRef.current) return
+    if (!revealBlockRef.current || showSplash) return
 
     // Inicializar bloque fuera de la vista (izquierda)
     gsap.fromTo(revealBlockRef.current, {
@@ -81,10 +80,6 @@ const GameScreen = ({ isMobile }: MobileProps) => {
       xPercent: 100,
       duration: 0.5,
       ease: "power3.out",
-      delay: 0.1,
-      onComplete: () => {
-        hasRevealedBlockRef.current = true;
-      },
     })
   }, { scope: containerRef, dependencies: [showSplash] })
 
@@ -109,8 +104,7 @@ const GameScreen = ({ isMobile }: MobileProps) => {
         <div
           ref={revealBlockRef}
           className={clsx(
-            "absolute bottom-40 right-0 bg-blue-700 z-10",
-            isMobile ? "h-16 w-full" : "h-44 w-full"
+            "absolute bottom-84 right-0 bg-blue-700 z-10 h-10 w-full"
           )}
         />
         <Menu isMobile={isMobile} />
