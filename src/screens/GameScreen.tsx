@@ -1,0 +1,104 @@
+import { useRef, useLayoutEffect, useMemo } from "react"
+import { gsap } from "gsap"
+import { useGSAP } from "@gsap/react"
+import { useAppStore } from "../store"
+import Menu from "../components/Menu"
+import Layout from "../components/Layout"
+import type { Position, AnimationState, MobileProps } from "../types"
+import { STATES, ANIMATION_CONFIG } from "../../constants"
+
+const GameScreen = ({ isMobile }: MobileProps) => {
+  const { showMenu } = useAppStore((state) => state)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const layoutRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInitialized = useRef(false)
+
+  // Memoize the current state to avoid recalculations
+  const currentState = useMemo(() => STATES[showMenu ? 'true' : 'false'], [showMenu])
+  const previousState = useMemo(() => STATES[showMenu ? 'false' : 'true'], [showMenu])
+
+  // Helper to set positions
+  const setPositions = (menuPos: Position, layoutPos: Position, immediate = true) => {
+    if (!menuRef.current || !layoutRef.current) return
+    
+    gsap.set(menuRef.current, { ...menuPos, immediateRender: immediate })
+    gsap.set(layoutRef.current, { ...layoutPos, immediateRender: immediate })
+  }
+
+  // Helper to animate from/to positions
+  const animateFromTo = (from: AnimationState, to: AnimationState, immediate = false) => {
+    if (!menuRef.current || !layoutRef.current) return
+
+    gsap.fromTo(
+      menuRef.current,
+      from.menu,
+      {
+        ...to.menu,
+        duration: ANIMATION_CONFIG.duration,
+        ease: ANIMATION_CONFIG.ease,
+        immediateRender: immediate,
+      }
+    )
+    gsap.fromTo(
+      layoutRef.current,
+      from.layout,
+      {
+        ...to.layout,
+        duration: ANIMATION_CONFIG.duration,
+        ease: ANIMATION_CONFIG.ease,
+        immediateRender: immediate,
+      }
+    )
+  }
+
+  // Set initial positions only on the first render
+  useLayoutEffect(() => {
+    if (isInitialized.current) return
+    
+    setPositions(currentState.menu, currentState.layout, true)
+    isInitialized.current = true
+  }, [currentState])
+
+  // Animation of movement between menu and sections
+  useGSAP(() => {
+    if (!isInitialized.current) return
+
+    animateFromTo(previousState, currentState, false)
+  }, { scope: containerRef, dependencies: [showMenu, currentState, previousState] })
+
+  return (
+    <div
+      ref={containerRef}
+      className="absolute w-full h-full"
+      style={{
+        perspective: "1500px",
+        perspectiveOrigin: "center center",
+      }}
+    >
+      {/* Menu - initially in front */}
+      <div
+        ref={menuRef}
+        className="absolute w-full h-full"
+        style={{
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <Menu isMobile={isMobile} />
+      </div>
+
+      {/* Sections - initially to the right */}
+      <div
+        ref={layoutRef}
+        className="absolute w-full h-full"
+        style={{
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <Layout isMobile={isMobile} />
+      </div>
+    </div>
+  )
+}
+
+export default GameScreen
