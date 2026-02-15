@@ -7,14 +7,14 @@ export const navItems = [
 ];
 
 export const ANIMATION_CONFIG = {
-  duration: 1.2,
+  duration: 0.8,
   ease: "power2.inOut" as const,
 } as const
 
 export const POSITIONS = {
   center: { x: 0, scale: 1, opacity: 1 },
-  left: { x: "-100%", scale: 0.8, opacity: 0.3 },
-  right: { x: "100%", scale: 0.8, opacity: 0.3 },
+  left: { x: 0, scale: 1.3, opacity: 0 },
+  right: { x: 0, scale: 1.3, opacity: 0 },
 } as const
 
 export const STATES = {
@@ -23,7 +23,7 @@ export const STATES = {
     layout: POSITIONS.right,
   },
   false: {
-    menu: POSITIONS.left,
+    menu: POSITIONS.center,
     layout: POSITIONS.center,
   },
 } as const

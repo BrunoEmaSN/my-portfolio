@@ -5,7 +5,7 @@ import { useAppStore } from "../store"
 import Menu from "../components/Menu"
 import Layout from "../components/Layout"
 import type { Position, AnimationState, MobileProps } from "../types"
-import { STATES, ANIMATION_CONFIG } from "../../constants"
+import { STATES, ANIMATION_CONFIG, POSITIONS } from "../../constants"
 import clsx from "clsx"
 
 const GameScreen = ({ isMobile }: MobileProps) => {
@@ -21,10 +21,11 @@ const GameScreen = ({ isMobile }: MobileProps) => {
   const previousState = useMemo(() => STATES[showMenu ? 'false' : 'true'], [showMenu])
 
   // Helper to set positions
-  const setPositions = (menuPos: Position, layoutPos: Position, immediate = true) => {
+  const setPositions = (layoutPos: Position, immediate = true) => {
     if (!menuRef.current || !layoutRef.current) return
     
-    gsap.set(menuRef.current, { ...menuPos, immediateRender: immediate })
+    // Menú siempre estático en posición center
+    gsap.set(menuRef.current, { ...POSITIONS.center, immediateRender: immediate })
     gsap.set(layoutRef.current, { ...layoutPos, immediateRender: immediate })
   }
 
@@ -32,16 +33,10 @@ const GameScreen = ({ isMobile }: MobileProps) => {
   const animateFromTo = (from: AnimationState, to: AnimationState, immediate = false) => {
     if (!menuRef.current || !layoutRef.current) return
 
-    gsap.fromTo(
-      menuRef.current,
-      from.menu,
-      {
-        ...to.menu,
-        duration: ANIMATION_CONFIG.duration,
-        ease: ANIMATION_CONFIG.ease,
-        immediateRender: immediate,
-      }
-    )
+    // Menú siempre estático - no se anima
+    gsap.set(menuRef.current, { ...POSITIONS.center, immediateRender: immediate })
+    
+    // Solo animar el layout (secciones) con zoom y fadeIn
     gsap.fromTo(
       layoutRef.current,
       from.layout,
@@ -58,7 +53,7 @@ const GameScreen = ({ isMobile }: MobileProps) => {
   useLayoutEffect(() => {
     if (isInitialized.current) return
     
-    setPositions(currentState.menu, currentState.layout, true)
+    setPositions(currentState.layout, true)
     isInitialized.current = true
   }, [currentState])
 
