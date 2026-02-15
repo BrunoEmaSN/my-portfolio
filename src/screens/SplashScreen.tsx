@@ -4,20 +4,13 @@ import { useGSAP } from '@gsap/react';
 import { useAppStore } from '../store';
 import type { MobileProps } from '../types';
 import MainTitle from '../components/MainTitle';
-import clsx from 'clsx';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
   const { closeSplash } = useAppStore();
   const splashRef = useRef<HTMLDivElement>(null);
   const revealBlockRef = useRef(null);
 
-  const handleInteraction = (event: KeyboardEvent | MouseEvent) => {
-    // Prevenir que el evento se propague si es Enter
-    if (event && 'key' in event && event.key === 'Enter') {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    
+  const startTransition = () => {
     // Deslizar hacia la izquierda antes de iniciar
     gsap.to(splashRef.current, {
       xPercent: -100,
@@ -29,20 +22,35 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
     });
   };
 
+  const handleClick = () => {
+    startTransition();
+  };
+
   useGSAP(() => {
-    if (!splashRef.current) return;
+    if (!splashRef.current || !revealBlockRef.current) return;
 
     // Reset position inicial
     gsap.set(splashRef.current, { xPercent: 0 });
+    
+    // Establecer dimensiones fijas desde el inicio para evitar layout shift
+    const blockElement = revealBlockRef.current as HTMLElement;
+    if (blockElement) {
+      // Establecer dimensiones iniciales antes de cualquier animación
+      gsap.set(blockElement, {
+        width: '100%',
+        height: isMobile ? '64px' : '512px', // h-16 = 64px, size-128 = 512px (32 * 16)
+        xPercent: 100, // Iniciar fuera de la vista
+        immediateRender: true,
+      });
+    }
 
     // Creamos la línea de tiempo
     const tl = gsap.timeline({
       defaults: { ease: "expo.inOut" }
     });
 
-    tl.fromTo(
+    tl.to(
       revealBlockRef.current,
-      { xPercent: 100 }, // Empieza 100% fuera de la vista a la izquierda
       { xPercent: 0, duration: 0.4, ease: "power3.out" } // Se desliza a su posición
     )
       .to(
@@ -52,7 +60,12 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
       );
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      handleInteraction(event);
+      // Prevenir que el evento se propague si es Enter
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      startTransition();
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -60,11 +73,11 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, { scope: splashRef, dependencies: [closeSplash] });
+  }, { scope: splashRef, dependencies: [closeSplash, isMobile] });
 
   return (
     <div
-      onClick={handleInteraction}
+      onClick={handleClick}
       ref={splashRef}
       className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden"
     >
@@ -72,7 +85,11 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />
         <div
           ref={revealBlockRef}
-          className={clsx("absolute top-1/2 -translate-y-1/2 size-128 w-full bg-blue-700 z-10", isMobile ? 'h-16 md:h-44 w-full ' : '')}
+          className="absolute top-1/2 -translate-y-1/2 w-full bg-blue-700 z-10"
+          style={{
+            height: isMobile ? '64px' : '512px',
+            willChange: 'transform',
+          }}
         />
       </div>
     </div>
