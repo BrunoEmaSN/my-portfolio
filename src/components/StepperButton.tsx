@@ -10,14 +10,15 @@ interface StepperButtonProps {
 const StepperButton = ({ 
   direction, 
   label,
-  className = '' 
+  className = '',
+  onClick
 }: StepperButtonProps) => {
   const isLeft = direction === 'left';
 
   return (
     <div className={clsx('flex items-center gap-5', className)}>
       {isLeft && (
-        <div className="relative">
+        <div className="relative cursor-pointer hover:scale-110 transition-all duration-300" onClick={onClick}>
           <div 
             className="absolute p-2 inset-0 bg-red-600 z-10 opacity-70" 
             style={{ clipPath: 'polygon(100% 0, 0 60%, 70% 100%)' }} 
@@ -52,7 +53,7 @@ const StepperButton = ({
       </div>
 
       {!isLeft && (
-        <div className="relative">
+        <div className="relative cursor-pointer hover:scale-110 transition-all duration-300" onClick={onClick}>
           <div 
             className="absolute p-2 inset-0 bg-red-600 z-10 opacity-70" 
             style={{ clipPath: 'polygon(30% 0, 100% 40%, 0% 100%)' }} 

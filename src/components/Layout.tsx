@@ -24,14 +24,6 @@ const Layout = ({ isMobile }: MobileProps) => {
 
   return (
     <div className="relative w-full h-screen">
-      {/* Floating Esc button to the left */}
-      <button
-        onClick={backToMenu}
-        className="fixed bottom-5 left-5 z-50 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 border border-white/30 shadow-lg hover:scale-105"
-      >
-        Esc
-      </button>
-
       {/* Sections */}
       {activeSection === SECTIONS.SKILLS && <Skills />}
       {activeSection === SECTIONS.EXPERIENCES && <Experiences />}

@@ -16,10 +16,10 @@ const SectionTitle = ({ lines, className = '' }: SectionTitleProps) => {
         transition-colors
         uppercase
         text-8xl
-        sm:text-[100px]
-        md:text-[200px]
-        lg:text-[300px]
-        xl:text-[400px]
+        sm:text-[70px]
+        md:text-[120px]
+        lg:text-[170px]
+        xl:text-[300px]
         -rotate-10
         opacity-50
         ${className}

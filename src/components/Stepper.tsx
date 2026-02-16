@@ -19,7 +19,7 @@ const Stepper = ({
   items, 
   onItemChange, 
   initialIndex = 0,
-  className = '' 
+  className = ''
 }: StepperProps) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
@@ -57,7 +57,7 @@ const Stepper = ({
   return (
     <div
       className={clsx(
-        'relative overflow-hidden bg-transparent mt-20 h-20 -rotate-10',
+        'absolute overflow-hidden bg-transparent -rotate-10 z-20',
         className
       )}
     >
@@ -67,6 +67,7 @@ const Stepper = ({
         <StepperButton
           direction="left"
           label="A"
+          onClick={() => setCurrentIndex((prev) => prev > 0 ? prev - 1 : items.length - 1)}
         />
 
         {/* Centro: Nombre y puntos de navegación */}
@@ -99,6 +100,7 @@ const Stepper = ({
         <StepperButton
           direction="right"
           label="D"
+          onClick={() => setCurrentIndex((prev) => prev < items.length - 1 ? prev + 1 : 0)}
         />
       </div>
     </div>
