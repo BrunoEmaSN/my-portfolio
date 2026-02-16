@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import clsx from 'clsx';
-import StepperButton from './StepperButton';
+import StepperButton from '../StepperButton';
 
 export interface StepperItem {
   id: string;
@@ -15,12 +15,12 @@ interface StepperProps {
   className?: string;
 }
 
-const Stepper = ({ 
+const Stepper = forwardRef<HTMLDivElement, StepperProps>(({ 
   items, 
   onItemChange, 
   initialIndex = 0,
   className = ''
-}: StepperProps) => {
+}, ref) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const currentItem = items[currentIndex];
@@ -56,6 +56,7 @@ const Stepper = ({
 
   return (
     <div
+      ref={ref}
       className={clsx(
         'absolute overflow-hidden bg-transparent -rotate-6 sm:-rotate-8 md:-rotate-10 z-20',
         className
@@ -105,6 +106,8 @@ const Stepper = ({
       </div>
     </div>
   );
-};
+});
+
+Stepper.displayName = 'Stepper';
 
 export default Stepper;

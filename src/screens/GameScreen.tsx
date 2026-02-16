@@ -93,13 +93,14 @@ const GameScreen = ({ isMobile }: MobileProps) => {
         className="absolute w-full h-full"
         style={{
           transformStyle: "preserve-3d",
+          pointerEvents: showMenu ? "auto" : "none",
         }}
       >
         {/* Bloque Azul de Revelado - centrado abajo en posición del menú */}
         <div
           ref={revealBlockRef}
           className={clsx(
-            "absolute bottom-84 right-0 bg-blue-700 z-10 h-10 w-full"
+            "absolute bottom-84 right-0 bg-blue-700 z-10 h-10 w-full pointer-events-none"
           )}
         />
         <Menu isMobile={isMobile} />
@@ -111,6 +112,7 @@ const GameScreen = ({ isMobile }: MobileProps) => {
         className="absolute w-full h-full"
         style={{
           transformStyle: "preserve-3d",
+          pointerEvents: showMenu ? "none" : "auto",
         }}
       >
         <Layout isMobile={isMobile} />

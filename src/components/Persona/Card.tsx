@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 interface CardProps {
     title: string;
     description: string;
@@ -5,10 +7,11 @@ interface CardProps {
     className?: string;
 }
 
-const Card = ({ title, description, footer, className = '' }: CardProps) => {
+const Card = forwardRef<HTMLDivElement, CardProps>(({ title, description, footer, className = '' }, ref) => {
     return (
         <div className="flex relative w-full h-full justify-end items-end pb-20">
             <div
+                ref={ref}
                 className={`
                     relative
                     w-full
@@ -29,7 +32,7 @@ const Card = ({ title, description, footer, className = '' }: CardProps) => {
                             {title}
                         </h3>
                         <div className="flex justify-center items-center">
-                            <p className="text-black leading-relaxed p-2 sm:p-3 md:p-4 lg:p-5 text-xs sm:text-sm md:text-base">
+                            <p className="text-black leading-relaxed p-2 sm:p-3 md:p-4 lg:p-5 text-xs sm:text-sm md:text-base max-w-lg mx-auto">
                                 {description}
                             </p>
                         </div>
@@ -43,6 +46,8 @@ const Card = ({ title, description, footer, className = '' }: CardProps) => {
             </div>
         </div>
     );
-};
+});
+
+Card.displayName = 'Card';
 
 export default Card;

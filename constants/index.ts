@@ -1,5 +1,5 @@
 export const SECTIONS = {
-  SKILLS: 'skills',
+  ABOUT_ME: 'about-me',
   EXPERIENCES: 'experiences',
   TESTIMONIALS: 'testimonials',
   CONTACT: 'contact',
@@ -7,7 +7,7 @@ export const SECTIONS = {
 } as const;
 
 export const navItems = [
-  { id: SECTIONS.SKILLS, label: 'Skills', color: 'bg-gray-500' },
+  { id: SECTIONS.ABOUT_ME, label: 'About Me', color: 'bg-gray-500' },
   { id: SECTIONS.EXPERIENCES, label: 'Experiences', color: 'bg-blue-500' },
   { id: SECTIONS.TESTIMONIALS, label: 'Testimonials', color: 'bg-green-500' },
   { id: SECTIONS.CONTACT, label: 'Contact', color: 'bg-purple-500' },
@@ -49,3 +49,7 @@ export const skillsItems = [
   { id: 'docker', name: 'Docker' },
   { id: 'kubernetes', name: 'Kubernetes' },
 ]
+
+export const aboutTitle = "Hi, I'm Bruno"
+
+export const aboutDescription = "Passionate about software development with frontend expertise. Proficient in programming, analysis, and systems design. Committed to staying updated with emerging technologies and methodologies. Eager to contribute and innovate in the technology industry."

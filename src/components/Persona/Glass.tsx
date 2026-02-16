@@ -1,6 +1,8 @@
-const Glass = () => {
+import { forwardRef } from 'react';
+
+const Glass = forwardRef<HTMLDivElement>((_, ref) => {
     return (
-        <div className="relative w-full h-full overflow-hidden">
+        <div ref={ref} className="relative w-full h-full overflow-hidden">
             <div className="bg-gray-700/70 w-5/6 sm:w-1/3 md:w-1/2 h-full absolute left-3"
                 style={{ clipPath: 'polygon(45% 0, 100% 0, 97% 15%, 100% 54%, 78% 74%, 55% 100%, 0 100%, 0 60%, 23% 10%)' }}/>
             <div className="relative bg-gray-400/90 w-5/6 sm:w-1/3 md:w-1/2 h-full absolute left-0"
@@ -11,6 +13,8 @@ const Glass = () => {
             </div>
         </div>
     );
-};
+});
+
+Glass.displayName = 'Glass';
 
 export default Glass;

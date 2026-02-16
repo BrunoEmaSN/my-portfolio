@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { SECTIONS } from '../../constants';
 
 interface AppState {
   activeSection: string;
@@ -12,12 +13,12 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  activeSection: 'skills',
+  activeSection: SECTIONS.ABOUT_ME,
   showMenu: true,
   showSplash: true,
   setActiveSection: (sectionId: string) => set({ activeSection: sectionId }),
   selectSection: (sectionId: string) => set({ activeSection: sectionId, showMenu: false }),
   backToMenu: () => set({ showMenu: true }),
-  toggleApp: () => set((prev) => ({ showSplash: !prev.showSplash, activeSection: 'skills' })),
+  toggleApp: () => set((prev) => ({ showSplash: !prev.showSplash, activeSection: SECTIONS.ABOUT_ME })),
   closeSplash: () => set({ showSplash: false }),
 }));

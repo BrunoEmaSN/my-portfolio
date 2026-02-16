@@ -10,7 +10,7 @@ const Menu = ({ isMobile }: MobileProps) => {
   const { activeSection, setActiveSection, selectSection, toggleApp, showSplash, showMenu } = useAppStore();
   const [selectedIndex, setSelectedIndex] = useState(0);
   // References so that the keyboard "knows" which link to click on
-  const linkRefs = useRef<HTMLAnchorElement[]>([]);
+  const linkRefs = useRef<HTMLButtonElement[]>([]);
   const menuItemsRef = useRef<HTMLLIElement[]>([]);
   const menuContainerRef = useRef<HTMLUListElement>(null);
   const hasAnimatedRef = useRef(false);
@@ -96,9 +96,8 @@ const Menu = ({ isMobile }: MobileProps) => {
                   }
                 }}
               >
-                <a
-                  href={`#${item.id}`}
-                  ref={(el: HTMLAnchorElement | null) => {
+                <button
+                  ref={(el: HTMLButtonElement | null) => {
                     if (el) {
                       linkRefs.current[index] = el;
                     }
@@ -114,7 +113,7 @@ const Menu = ({ isMobile }: MobileProps) => {
                     }
                   }}
                   className={clsx(
-                    'relative pr-10 sm:pr-20 md:pr-30 lg:pr-50 font-black text-4xl transition-all duration-300 block hover:bg-blue-700 text-right uppercase',
+                    'cursor-pointer relative pr-10 sm:pr-20 md:pr-30 lg:pr-50 font-black text-4xl transition-all duration-300 block hover:bg-blue-700 text-right uppercase',
                     {
                       'bg-blue-700 text-white scale-105 shadow-lg': selectedIndex === index,
                       'text-gray-500': selectedIndex !== index,
@@ -122,7 +121,7 @@ const Menu = ({ isMobile }: MobileProps) => {
                   )}
                 >
                   {item.label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
