@@ -7,6 +7,7 @@ const SectionTitle = ({ lines, className = '' }: SectionTitleProps) => {
   return (
     <h1
       className={`
+        absolute
         flex
         flex-col
         leading-[0.85]

@@ -7,7 +7,7 @@ export const SECTIONS = {
 } as const;
 
 export const navItems = [
-  { id: SECTIONS.SKILLS, label: 'Skills', color: 'bg-red-500' },
+  { id: SECTIONS.SKILLS, label: 'Skills', color: 'bg-gray-500' },
   { id: SECTIONS.EXPERIENCES, label: 'Experiences', color: 'bg-blue-500' },
   { id: SECTIONS.TESTIMONIALS, label: 'Testimonials', color: 'bg-green-500' },
   { id: SECTIONS.CONTACT, label: 'Contact', color: 'bg-purple-500' },
@@ -35,3 +35,17 @@ export const STATES = {
     layout: POSITIONS.center,
   },
 } as const
+
+export const skillsItems = [
+  { id: 'html', name: 'HTML' },
+  { id: 'css', name: 'CSS' },
+  { id: 'javascript', name: 'JavaScript' },
+  { id: 'react', name: 'React' },
+  { id: 'nodejs', name: 'Node.js' },
+  { id: 'express', name: 'Express' },
+  { id: 'mongodb', name: 'MongoDB' },
+  { id: 'mysql', name: 'MySQL' },
+  { id: 'postgresql', name: 'PostgreSQL' },
+  { id: 'docker', name: 'Docker' },
+  { id: 'kubernetes', name: 'Kubernetes' },
+]
