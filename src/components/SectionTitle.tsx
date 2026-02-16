@@ -15,13 +15,22 @@ const SectionTitle = ({ lines, className = '' }: SectionTitleProps) => {
         tracking-tighter
         transition-colors
         uppercase
-        text-8xl
-        sm:text-[70px]
-        md:text-[120px]
-        lg:text-[170px]
-        xl:text-[300px]
-        -rotate-10
-        opacity-50
+        text-4xl
+        xs:text-5xl
+        sm:text-[60px]
+        md:text-[100px]
+        lg:text-[150px]
+        xl:text-[250px]
+        2xl:text-[300px]
+        -rotate-6
+        sm:-rotate-8
+        md:-rotate-10
+        opacity-40
+        sm:opacity-45
+        md:opacity-50
+        top-2
+        sm:top-4
+        md:top-0
         ${className}
       `}
     >

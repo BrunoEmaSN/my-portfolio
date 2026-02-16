@@ -1,5 +1,3 @@
-import Glass from "./Glass";
-
 interface CardProps {
     title: string;
     description: string;
@@ -10,39 +8,34 @@ interface CardProps {
 const Card = ({ title, description, footer, className = '' }: CardProps) => {
     return (
         <div className="flex relative w-full h-full justify-end items-end pb-20">
-            <div className="absolute top-0 left-0 w-full h-full z-10">
-                <Glass />
-            </div>
             <div
                 className={`
                     relative
                     w-full
-                    -skew-x-10
-                    -rotate-10
+                    -skew-x-6 sm:-skew-x-8 md:-skew-x-10
+                    rotate-0 sm:-rotate-10 md:-rotate-10 lg:-rotate-10 xl:-rotate-10
                     bg-white
-                    border-t-4
+                    border-t-2 sm:border-t-3 md:border-t-4
                     border-red-600/50
                     duration-300
-                    scale-x-110
-                    pt-10
-                    pb-10
+                    scale-x-120
                     ${className}
                 `}
             >
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-3">
                     <div />
                     <div className="col-span-2">
-                        <h3 className="text-xl font-bold text-white/50 mt-5 mb-3 uppercase tracking-tight bg-black pt-10 pb-2 text-center italic">
+                        <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white/50 mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-2 sm:mb-3 uppercase tracking-tight bg-black pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-1 sm:pb-2 text-center italic">
                             {title}
                         </h3>
                         <div className="flex justify-center items-center">
-                            <p className="text-black leading-relaxed p-5">
+                            <p className="text-black leading-relaxed p-2 sm:p-3 md:p-4 lg:p-5 text-xs sm:text-sm md:text-base">
                                 {description}
                             </p>
                         </div>
 
                         {/* Footer */}
-                        <div className="text-black/15 text-9xl font-black italic flex justify-center items-center">
+                        <div className="text-black/15 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black italic flex justify-center items-center">
                             <span>{footer}</span>
                         </div>
                     </div>

@@ -25,7 +25,7 @@ const Layout = ({ isMobile }: MobileProps) => {
   return (
     <div className="relative w-full h-screen">
       {/* Sections */}
-      {activeSection === SECTIONS.SKILLS && <Skills />}
+      {activeSection === SECTIONS.SKILLS && <Skills isMobile={isMobile} />}
       {activeSection === SECTIONS.EXPERIENCES && <Experiences />}
       {activeSection === SECTIONS.TESTIMONIALS && <Testimonials />}
       {activeSection === SECTIONS.CONTACT && <Contact />}
