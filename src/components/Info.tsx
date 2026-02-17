@@ -17,18 +17,15 @@ const Info = () => {
   }
 
   return (
-    <>
-      <div className="flex w-full justify-end">
-        <Stepper items={STEPPER_ITEMS} onItemChange={handleStepChange} />
-      </div>
-      <div className="w-full bg-white text-black border-t-3 border-red-600 pt-5 pb-5">
+    <div className="h-full w-full flex flex-col justify-end items-center absolute">
+      <div className="w-full bg-white text-black border-t-3 border-red-600 pt-3 pb-2">
         <div>
           <div className="w-full bg-black flex flex-col gap-4 items-center justify-center p-4 text-white">
             <h2 className="text-xl">
               Hi. I'm <span className="text-blue-700 font-bold">Bruno Sanchez</span>, a creative developer passionate about technology.
             </h2>
           </div>
-          <div className="w-full flex flex-col items-center justify-center p-4 gap-4">
+          <div className="flex flex-col items-center justify-center p-4 gap-4">
             {
               STEPPER_ITEMS[currentStep].id === 'info' && (
                 <ul className="flex flex-col gap-2">
@@ -44,9 +41,9 @@ const Info = () => {
 
             {
               STEPPER_ITEMS[currentStep].id === 'skills' && (
-                <div className="grid grid-cols-6 gap-4">
+                <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12">
                   {skillsItems.flatMap(item => item.values).map((value) => (
-                    <div key={value.id} className="flex flex-col items-center justify-between min-w-20 gap-2">
+                    <div key={value.id} className="flex flex-col items-start justify-between gap-4">
                       <div className="rounded-md bg-gray-200 w-15 h-15 flex items-center justify-center">
                         <img src={value.logo} alt={value.name} className="w-10 ratio-square" />
                       </div>
@@ -58,9 +55,9 @@ const Info = () => {
             }
             {
               STEPPER_ITEMS[currentStep].id === 'stats' && (
-                <div className="w-full flex items-center justify-center p-1 grid grid-cols-2 gap-4">
+                <div className="p-1 grid grid-cols-2 gap-4">
                   {infoStats.map((stat) => (
-                    <p key={stat.label} className="text-xl font-bold text-center">
+                    <p key={stat.label} className="text-xl font-bold text-start">
                       {stat.label} • <span className="text-blue-700 font-bold text-2xl">{stat.value}</span>
                     </p>
                   ))}
@@ -68,13 +65,16 @@ const Info = () => {
               )
             }
           </div>
-          <div className="w-full bg-black flex items-center justify-center p-1">
-            <h3 className="text-xl font-bold text-white">{STEPPER_ITEMS[currentStep].name}</h3>
+          <div className="bg-black flex items-center justify-center p-1">
+            <h3 className="text-xl font-bold text-white text-start">{STEPPER_ITEMS[currentStep].name}</h3>
           </div>
-          <p className="text-md text-center p-2 font-bold text-gray-500">{STEPPER_ITEMS[currentStep].description}</p>
+          <p className="text-md p-2 font-bold text-gray-500 w-full text-center">{STEPPER_ITEMS[currentStep].description}</p>
         </div>
       </div>
-    </>
+      <div className="flex w-full justify-center bg-gray-900">
+        <Stepper items={STEPPER_ITEMS} onItemChange={handleStepChange} />
+      </div>
+    </div>
   );
 
 };

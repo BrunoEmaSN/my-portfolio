@@ -14,7 +14,9 @@ const AboutMe = () => {
     <section
       id="about-me">
       <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
-      <Glass />
+      <div className="h-full w-full flex justify-end items-end">
+        <Glass />
+      </div>
       <Info />
     </section>
   );
