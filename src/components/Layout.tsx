@@ -14,6 +14,8 @@ const Layout = ({ isMobile }: MobileProps) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && !showMenu) {
+        event.preventDefault();
+        event.stopPropagation();
         backToMenu();
       }
     };

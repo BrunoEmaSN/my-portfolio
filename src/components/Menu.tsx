@@ -21,7 +21,7 @@ const Menu = ({ isMobile }: MobileProps) => {
     if (currentIndex !== -1) {
       setSelectedIndex(currentIndex);
     }
-  }, [activeSection]);
+  }, [activeSection, showMenu]);
 
   useEffect(() => {
     // Solo escuchar teclas cuando el menú está visible y el splash no está visible
@@ -43,6 +43,8 @@ const Menu = ({ isMobile }: MobileProps) => {
           return newIndex;
         });
       } else if (key === 'enter') {
+        event.preventDefault();
+        event.stopPropagation();
         // Handle the selection
         const selectedItem = navItems[selectedIndex];
         if (selectedItem.id === SECTIONS.EXIT) {
