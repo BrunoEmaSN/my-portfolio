@@ -37,19 +37,50 @@ export const STATES = {
 } as const
 
 export const skillsItems = [
-  { id: 'html', name: 'HTML' },
-  { id: 'css', name: 'CSS' },
-  { id: 'javascript', name: 'JavaScript' },
-  { id: 'react', name: 'React' },
-  { id: 'nodejs', name: 'Node.js' },
-  { id: 'express', name: 'Express' },
-  { id: 'mongodb', name: 'MongoDB' },
-  { id: 'mysql', name: 'MySQL' },
-  { id: 'postgresql', name: 'PostgreSQL' },
-  { id: 'docker', name: 'Docker' },
-  { id: 'kubernetes', name: 'Kubernetes' },
+  {
+    id: 'languages', name: 'Languages', values: [
+      { id: 'typescript', name: 'Typescript', stats: 255, logo: '/images/skills/typescript.png' },
+      { id: 'python', name: 'Python', stats: 200, logo: '/images/skills/python.png' },
+    ]
+  },
+  {
+    id: 'frontend', name: 'Frontend', values: [
+      { id: 'react', name: 'React', stats: 200, logo: '/images/skills/react.png' },
+      { id: 'tailwindcss', name: 'Tailwindcss', stats: 150, logo: '/images/skills/tailwind.png' },
+      { id: 'threejs', name: 'Threejs', stats: 50, logo: '/images/skills/threejs.png' },
+      { id: 'gsap', name: 'Gsap', stats: 50, logo: '/images/skills/gsap.png' },
+    ]
+  },
+  {
+    id: 'backend', name: 'Backend', values: [
+      { id: 'nestjs', name: 'Nestjs', stats: 100, logo: '/images/skills/nestjs.png' },
+      { id: 'mysql', name: 'Mysql', stats: 100, logo: '/images/skills/mysql.png' },
+      { id: 'postgres', name: 'Postgres', stats: 50, logo: '/images/skills/postgres.png' },
+    ]
+  },
+  {
+    id: 'tools', name: 'Tools', values: [
+      { id: 'git', name: 'Git', stats: 255, logo: '/images/skills/git.png' },
+      { id: 'docker', name: 'Docker', stats: 50, logo: '/images/skills/docker.png' },
+      { id: 'cursor', name: 'Cursor', stats: 50, logo: '/images/skills/cursor.png' },
+    ]
+  },
 ]
 
 export const aboutTitle = "Hi, I'm Bruno"
 
 export const aboutDescription = "Passionate about software development with frontend expertise. Proficient in programming, analysis, and systems design. Committed to staying updated with emerging technologies and methodologies. Eager to contribute and innovate in the technology industry."
+
+export const infoStats = [
+  { label: 'Year Experiencies', value: '15+' },
+  { label: 'Satisfied Clients', value: '200+' },
+  { label: 'Completed Projects', value: '108+' },
+  { label: 'Client Retention Rate', value: '90%' },
+]
+
+export const infoFeatures = [
+  'Full Stack development with a focus on frontend technologies.',
+  'Passionate about software development with frontend expertise.',
+  'Proficient in programming, analysis, and systems design.',
+  'Eager to contribute and innovate in the technology industry.',
+]

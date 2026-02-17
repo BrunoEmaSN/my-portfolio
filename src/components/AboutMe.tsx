@@ -1,4 +1,6 @@
 import SectionTitle from './SectionTitle';
+import Info from './Info';
+import Glass from './Glass';
 
 const AboutMe = () => {
   const size = {
@@ -12,6 +14,8 @@ const AboutMe = () => {
     <section
       id="about-me">
       <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
+      <Glass />
+      <Info />
     </section>
   );
 };

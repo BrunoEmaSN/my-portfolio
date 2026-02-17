@@ -10,7 +10,7 @@ export interface StepperItem {
 
 interface StepperProps {
   items: StepperItem[];
-  onItemChange?: (item: StepperItem, index: number) => void;
+  onItemChange?: (index: number) => void;
   initialIndex?: number;
   className?: string;
 }
@@ -22,8 +22,6 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(({
   className = ''
 }, ref) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
-
-  const currentItem = items[currentIndex];
 
   // Navegación con teclas A y D
   useEffect(() => {
@@ -50,15 +48,15 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(({
   // Notificar cambios
   useEffect(() => {
     if (onItemChange) {
-      onItemChange(currentItem, currentIndex);
+      onItemChange(currentIndex);
     }
-  }, [currentIndex, currentItem, onItemChange]);
+  }, [currentIndex, onItemChange]);
 
   return (
     <div
       ref={ref}
       className={clsx(
-        'absolute overflow-hidden bg-transparent -rotate-6 sm:-rotate-8 md:-rotate-10 z-20',
+        'overflow-hidden bg-transparent',
         className
       )}
     >
@@ -73,13 +71,6 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(({
 
         {/* Centro: Nombre y puntos de navegación */}
         <div className="flex-1 flex flex-col items-center justify-center gap-1 sm:gap-1.5 md:gap-2 pl-2 sm:pl-3 md:pl-4 pr-2 sm:pr-3 md:pr-4">
-          {/* Nombre del personaje */}
-          <div
-            className="text-white font-black text-sm sm:text-base md:text-lg lg:text-xl uppercase tracking-tight text-center"
-          >
-            {currentItem?.name || ''}
-          </div>
-
           {/* Puntos de navegación */}
           <div className="flex gap-1.5 sm:gap-2 md:gap-3 items-center">
             {items.map((_, index) => (
