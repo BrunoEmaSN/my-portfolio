@@ -18,7 +18,7 @@ const StepperButton = ({
   return (
     <div className={clsx('flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5', className)}>
       {isLeft && (
-        <div className="relative cursor-pointer hover:scale-110 transition-all duration-300" onClick={onClick}>
+        <div className="relative cursor-pointer hover:scale-110 transition-all duration-300 pointer-events-auto" onClick={onClick}>
           <div 
             className="absolute p-1 sm:p-1.5 md:p-2 inset-0 bg-red-600 z-10 opacity-70" 
             style={{ clipPath: 'polygon(100% 0, 0 60%, 70% 100%)' }} 
@@ -53,7 +53,7 @@ const StepperButton = ({
       </div>
 
       {!isLeft && (
-        <div className="relative cursor-pointer hover:scale-110 transition-all duration-300" onClick={onClick}>
+        <div className="relative cursor-pointer hover:scale-110 transition-all duration-300 pointer-events-auto" onClick={onClick}>
           <div 
             className="absolute p-1 sm:p-1.5 md:p-2 inset-0 bg-red-600 z-10 opacity-70" 
             style={{ clipPath: 'polygon(30% 0, 100% 40%, 0% 100%)' }} 

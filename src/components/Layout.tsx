@@ -33,7 +33,7 @@ const Layout = ({ isMobile }: MobileProps) => {
           backToMenu();
           console.log('backToMenu');
         }}
-        className="text-right button-menu absolute top-5 text-white/50 hover:text-white z-50"
+        className="text-right button-menu absolute top-5 text-white/50 hover:text-white z-50 pointer-events-auto"
       >
         Esc
       </button>

@@ -99,7 +99,7 @@ const GameScreen = ({ isMobile }: MobileProps) => {
         <div
           ref={revealBlockRef}
           className={clsx(
-            "absolute bottom-84 right-0 bg-blue-700 z-10 h-10 w-full"
+            "absolute bottom-84 right-0 bg-blue-700 z-50 h-10 w-full"
           )}
         />
         <Menu isMobile={isMobile} />
@@ -108,7 +108,7 @@ const GameScreen = ({ isMobile }: MobileProps) => {
       {/* Sections - initially to the right */}
       <div
         ref={layoutRef}
-        className="absolute w-full h-full"
+        className="absolute w-full h-full pointer-events-none"
         style={{
           transformStyle: "preserve-3d",
         }}
