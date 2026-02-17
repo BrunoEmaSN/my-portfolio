@@ -97,6 +97,7 @@ const Menu = ({ isMobile }: MobileProps) => {
                 }}
               >
                 <button
+                  id="button-menu"
                   ref={(el: HTMLButtonElement | null) => {
                     if (el) {
                       linkRefs.current[index] = el;
@@ -113,7 +114,7 @@ const Menu = ({ isMobile }: MobileProps) => {
                     }
                   }}
                   className={clsx(
-                    'cursor-pointer relative pr-10 sm:pr-20 md:pr-30 lg:pr-50 font-black text-4xl transition-all duration-300 block hover:bg-blue-700 text-right uppercase',
+                    'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50 w-full font-black text-4xl transition-all duration-300 block hover:bg-blue-700 uppercase',
                     {
                       'bg-blue-700 text-white scale-105 shadow-lg': selectedIndex === index,
                       'text-gray-500': selectedIndex !== index,

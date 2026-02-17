@@ -1,6 +1,6 @@
 import { useState, useEffect, forwardRef } from 'react';
 import clsx from 'clsx';
-import StepperButton from '../StepperButton';
+import StepperButton from './StepperButton';
 
 export interface StepperItem {
   id: string;

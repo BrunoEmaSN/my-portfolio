@@ -1,13 +1,17 @@
 import SectionTitle from './SectionTitle';
 
 const AboutMe = () => {
+  const size = {
+    sm: 100,
+    md: 200,
+    lg: 300,
+    xl: 400
+  }
 
   return (
     <section
-      id="about-me"
-      className="relativeh-screen w-full h-full flex flex-col items-start justify-start bg-gray-900 text-white overflow-hidden px-4 sm:px-6 md:px-8 lg:px-12"
-    >
-      <SectionTitle lines={['ABOUT', 'ME']} />
+      id="about-me">
+      <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
     </section>
   );
 };

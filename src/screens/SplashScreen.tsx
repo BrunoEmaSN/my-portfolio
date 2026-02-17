@@ -11,7 +11,6 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   const revealBlockRef = useRef(null);
 
   const startTransition = () => {
-    // Deslizar hacia la izquierda antes de iniciar
     gsap.to(splashRef.current, {
       xPercent: -100,
       duration: 0.8,
@@ -29,38 +28,32 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   useGSAP(() => {
     if (!splashRef.current || !revealBlockRef.current) return;
 
-    // Reset position inicial
     gsap.set(splashRef.current, { xPercent: 0 });
-    
-    // Establecer dimensiones fijas desde el inicio para evitar layout shift
     const blockElement = revealBlockRef.current as HTMLElement;
+
     if (blockElement) {
-      // Establecer dimensiones iniciales antes de cualquier animación
       gsap.set(blockElement, {
         width: '100%',
-        height: isMobile ? '64px' : '512px', // h-16 = 64px, size-128 = 512px (32 * 16)
-        xPercent: 100, // Iniciar fuera de la vista
+        xPercent: 100,
         immediateRender: true,
       });
     }
 
-    // Creamos la línea de tiempo
     const tl = gsap.timeline({
       defaults: { ease: "expo.inOut" }
     });
 
     tl.to(
       revealBlockRef.current,
-      { xPercent: 0, duration: 0.4, ease: "power3.out" } // Se desliza a su posición
+      { xPercent: 0, duration: 0.4, ease: "power3.out" }
     )
       .to(
         revealBlockRef.current,
-        { xPercent: -100, duration: 0.4, ease: "power3.in" }, // Se desliza 100% fuera de la vista a la derecha
-        "+=0.2" // Empieza 0.2 segundos después de que el texto haya sido revelado
+        { xPercent: -100, duration: 0.4, ease: "power3.in" },
+        "+=0.2"
       );
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Prevenir que el evento se propague si es Enter
       if (event.key === 'Enter') {
         event.preventDefault();
         event.stopPropagation();
@@ -85,9 +78,8 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />
         <div
           ref={revealBlockRef}
-          className="absolute top-1/2 -translate-y-1/2 w-full bg-blue-700 z-10"
+          className="absolute top-1/2 -translate-y-1/2 w-full bg-blue-700 z-10 h-16 md:h-44 lg:h-128"
           style={{
-            height: isMobile ? '64px' : '512px',
             willChange: 'transform',
           }}
         />

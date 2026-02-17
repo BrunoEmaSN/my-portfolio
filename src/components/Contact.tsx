@@ -1,13 +1,15 @@
 import SectionTitle from './SectionTitle';
 
 const Contact = () => {
+  const size = {
+    sm: 100,
+    md: 120,
+    lg: 200,
+    xl: 400
+  }
   return (
-    <section
-      id="contact"
-      className="h-screen w-full flex flex-col items-start justify-start bg-purple-500 text-white"
-    >
-      <SectionTitle lines={['FORGE', 'BONDS']} />
-      <p className="mt-4 text-xl opacity-80">Section with ID: #contact</p>
+    <section id="contact">
+      <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
     </section>
   );
 };
