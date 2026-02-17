@@ -14,8 +14,6 @@ const Layout = ({ isMobile }: MobileProps) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && !showMenu) {
-        event.preventDefault();
-        event.stopPropagation();
         backToMenu();
       }
     };
@@ -29,8 +27,13 @@ const Layout = ({ isMobile }: MobileProps) => {
       {/* Floating Esc button to the left */}
       <button
         id="button-esc"
-        onClick={backToMenu}
-        className="text-right button-menu absolute top-5 bg-blue-700 hover:text-white"
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          backToMenu();
+          console.log('backToMenu');
+        }}
+        className="text-right button-menu absolute top-5 text-white/50 hover:text-white z-50"
       >
         Esc
       </button>
