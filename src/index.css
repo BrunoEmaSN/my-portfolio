@@ -6,7 +6,7 @@
     @apply h-screen w-full flex flex-col items-start justify-start bg-gray-950 text-white;
   }
 
-  h1[id="section-title"] {
+  h1[id^="section-title"] {
     @apply absolute flex flex-col leading-[0.85] text-white/10 font-black tracking-tighter transition-colors text-4xl flex text-center justify-center items-center -rotate-10 uppercase w-full h-full;
   }
 
