@@ -5,6 +5,9 @@ import { useAppStore } from "./store"
 import SplashScreen from "./screens/SplashScreen"
 import GameScreen from "./screens/GameScreen"
 import { useMediaQuery } from "react-responsive"
+import { ScrollTrigger, SplitText } from "gsap/all"
+
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
 const App = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });

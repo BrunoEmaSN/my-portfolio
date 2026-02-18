@@ -36,7 +36,7 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                     : 'md:pl-6 md:text-left'
                 } text-left`}
               >
-                <div className="relative w-full max-w-md border-2 border-blue-900 bg-blue-950/90 hover:border-blue-700 p-4 sm:p-5 transition-all duration-300 overflow-hidden">
+                <div className="relative w-full max-w-md border-2 border-blue-900 bg-blue-950/90 hover:border-blue-700 p-4 sm:p-5 transition-all duration-300 overflow-hidden skew-x-[-15deg] lg:skew-x-0">
                   {/* Patrón de cuadrícula sutil como en Card */}
                   <div
                     className="absolute inset-0 pointer-events-none z-0 opacity-10"
