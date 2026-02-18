@@ -85,7 +85,9 @@ const Menu = ({ isMobile }: MobileProps) => {
 
   return (
     <>
-      <div className="w-full h-full flex items-end justify-end pb-40">
+      <div className={clsx("w-full h-full flex items-end justify-end pb-40", {
+        "pointer-events-none": !showMenu,
+      })}>
         {/* FIXED NAVBAR */}
         <nav className="fixed max-w-md z-50">
           <ul ref={menuContainerRef} className="flex flex-col gap-1">

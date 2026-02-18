@@ -22,3 +22,7 @@
     @apply pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50
   }
 }
+
+@theme {
+  --shadow-card: 8px 8px 0 rgb(20, 71, 228); 
+}
