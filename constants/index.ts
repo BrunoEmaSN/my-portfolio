@@ -84,3 +84,54 @@ export const infoFeatures = [
   'Proficient in programming, analysis, and systems design.',
   'Eager to contribute and innovate in the technology industry.',
 ]
+
+export const projectsData = [
+  {
+    windowTitle: 'Work Experience 1',
+    image: '/images/projects/project-1.png',
+    imageAlt: 'Work Experience 1',
+    tags: ['Tag 1', 'Tag 2', 'Tag 3'],
+    title: 'Work Experience 1',
+    description: 'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+  },
+  {
+    windowTitle: 'Work Experience 2',
+    image: '/images/projects/project-2.png',
+    imageAlt: 'Work Experience 2',
+    tags: ['Tag 1', 'Tag 2', 'Tag 3'],
+    title: 'Work Experience 2',
+    description: 'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+  },
+  {
+    windowTitle: 'Work Experience 3',
+    image: '/images/projects/project-3.png',
+    imageAlt: 'Work Experience 3',
+    tags: ['Tag 1', 'Tag 2', 'Tag 3'],
+    title: 'Work Experience 3',
+    description: 'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+  },
+]
+
+export const experiencesData = [
+  {
+    title: 'Frontend Developer',
+    company: 'Digital Solutions Co.',
+    period: '2019 - 2021',
+    description:
+      'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+  },
+  {
+    title: 'Senior Frontend Engineer',
+    company: 'Tech Innovations Inc.',
+    period: '2021 - Present',
+    description:
+      'Lead frontend architecture and mentor junior developers. Implemented design systems and improved performance across multiple product lines.',
+  },
+  {
+    title: 'Web Developer',
+    company: 'Creative Agency',
+    period: '2017 - 2019',
+    description:
+      'Built and maintained client websites with modern JavaScript frameworks. Worked closely with design teams to implement pixel-perfect interfaces.',
+  },
+]
