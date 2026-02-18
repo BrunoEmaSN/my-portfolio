@@ -11,10 +11,10 @@ interface ExperienceTimelineProps {
 
 const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
   return (
-    <div className="relative w-full max-w-4xl mx-auto py-8 px-4 sm:px-6 skew-x-[-15deg]">
+    <div className="relative w-full max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:skew-x-[-15deg]">
       {/* Línea vertical central — en md+ centrada; en móvil a la izquierda */}
       <div
-        className="absolute top-0 bottom-0 w-px bg-blue-900/60 left-4 sm:left-6 md:left-1/2 md:-translate-x-1/2"
+        className="absolute top-0 bottom-0 w-px bg-blue-900/60 left-4 sm:left-6 md:left-1/2 md:-translate-x-1/2 "
         aria-hidden
       />
 
@@ -24,17 +24,19 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
           return (
             <li
               key={`${exp.company}-${exp.period}`}
-              className={`relative flex w-full items-center gap-4 sm:gap-6 md:gap-8 pl-12 sm:pl-14 md:pl-0 ${
+              className={`relative flex w-full items-center pl-12 sm:pl-14 md:pl-0 ${
                 isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
               } flex-row`}
             >
-              {/* Contenido: tarjeta */}
+              {/* Contenido: tarjeta — en md cada lado ocupa 50% para alinear */}
               <div
-                className={`w-full max-w-md flex-1 min-w-0 ${
-                  isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'
+                className={`w-full min-w-0 flex-1 md:flex-initial md:w-1/2 ${
+                  isLeft
+                    ? 'md:pr-6 md:flex md:justify-end md:text-right'
+                    : 'md:pl-6 md:text-left'
                 } text-left`}
               >
-                <div className="relative border-2 border-blue-900 bg-blue-950/90 hover:border-blue-700 p-4 sm:p-5 transition-all duration-300 overflow-hidden">
+                <div className="relative w-full max-w-md border-2 border-blue-900 bg-blue-950/90 hover:border-blue-700 p-4 sm:p-5 transition-all duration-300 overflow-hidden">
                   {/* Patrón de cuadrícula sutil como en Card */}
                   <div
                     className="absolute inset-0 pointer-events-none z-0 opacity-10"
@@ -47,13 +49,13 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                     }}
                   />
                   <div className={`relative z-10 space-y-2 ${isLeft ? 'md:text-right' : ''} text-left`}>
-                    <h3 className="font-sans text-lg sm:text-xl text-white font-semibold tracking-wide skew-x-[15deg]">
+                    <h3 className="font-sans text-lg sm:text-xl text-white font-semibold tracking-wide lg:skew-x-[15deg]">
                       {exp.title}
                     </h3>
-                    <p className="font-sans text-xs sm:text-sm text-cyan-400 tracking-wide skew-x-[15deg]">
+                    <p className="font-sans text-xs sm:text-sm text-cyan-400 tracking-wide lg:skew-x-[15deg]">
                       {exp.company} <span className="text-gray-500">|</span> {exp.period}
                     </p>
-                    <p className="font-sans text-xs sm:text-sm text-gray-300 leading-relaxed skew-x-[15deg]">
+                    <p className="font-sans text-xs sm:text-sm text-gray-300 leading-relaxed lg:skew-x-[15deg]">
                       {exp.description}
                     </p>
                   </div>
