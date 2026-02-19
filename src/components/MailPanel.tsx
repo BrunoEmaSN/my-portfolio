@@ -58,31 +58,7 @@ const MailPanel = ({
         </div>
       </div>
       <div
-        className=" z-50 absolute top-0 left-0 w-full h-full flex justify-end items-end border-l-16 border-b-16 blur-[0.5px] border-r-16 border-white/90 rounded-lg rotate-3 translate-x-10 translate-y-5">
-        <button
-          type="button"
-          onClick={onAction}
-          className="z-50 w-20 h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer">
-          <img
-            src="/images/run.svg"
-            alt="Mail button"
-            className="absolute w-full h-full rotate-20 pb-2"
-            style={{ filter: "invert(17%) sepia(89%) saturate(3464%) hue-rotate(226deg) brightness(95%) contrast(97%)" }}
-          />
-          {/* <span
-            className="rotate-10 mb-10 mr-5 w-13 h-13 flex items-center justify-center rounded-full border-5 border-gray-300 text-3xl font-bold"
-            aria-label={actionLabel ?? 'Acción'}
-          >
-            A
-          </span> */}
-          <span
-            className="rotate-10 m-auto flex items-center justify-center text-3xl font-bold"
-            aria-label={actionLabel ?? 'Acción'}
-          >
-            SEND EMAIL
-          </span>
-        </button>
-      </div>
+        className="absolute top-0 left-0 w-full h-full flex justify-end items-end border-l-16 border-b-16 blur-[0.5px] border-r-16 border-white/90 rounded-lg rotate-3 translate-x-10 translate-y-5" />
 
       {/* Contenido sobre la imagen */}
       <div className="relative z-50 flex h-full flex-col p-5 sm:p-6 md:p-8 rotate-10 translate-x-20">
@@ -98,7 +74,7 @@ const MailPanel = ({
                 placeholder="Your name..."
                 value={fromNameValue}
                 onChange={(e) => setFromNameValue(e.target.value)}
-                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300"
+                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300 truncate"
               />
             </div>
             <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
@@ -111,7 +87,7 @@ const MailPanel = ({
                 placeholder="Your email..."
                 value={fromEmailValue}
                 onChange={(e) => setFromEmailValue(e.target.value)}
-                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300"
+                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300 truncate"
               />
             </div>
           </div>
@@ -136,6 +112,31 @@ const MailPanel = ({
               className="mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain w-full resize-none bg-transparent border-none outline-none text-inherit"
             />
           </div>
+        </div>
+        <div className="flex justify-end items-end">
+          <button
+            type="button"
+            onClick={onAction}
+            className="w-20 h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer">
+            <img
+              src="/images/run.svg"
+              alt="Mail button"
+              className="absolute w-full h-full p-2"
+              style={{ filter: "invert(17%) sepia(89%) saturate(3464%) hue-rotate(226deg) brightness(95%) contrast(97%)" }}
+            />
+            {/* <span
+              className="rotate-10 mb-10 mr-5 w-13 h-13 flex items-center justify-center rounded-full border-5 border-gray-300 text-3xl font-bold"
+              aria-label={actionLabel ?? 'Acción'}
+            >
+              A
+            </span> */}
+            <span
+              className="m-auto flex items-center justify-center text-3xl font-bold z-10"
+              aria-label={actionLabel ?? 'Acción'}
+            >
+              SEND EMAIL
+            </span>
+          </button>
         </div>
       </div>
     </div>
