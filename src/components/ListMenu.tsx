@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useAppStore } from '../store';
 
 export interface ListMenuProps {
   title?: string;
@@ -22,14 +24,34 @@ const ListMenu = ({
   const selectedIndex = isControlled ? controlledIndex : internalIndex;
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const prevSelectedRef = useRef(selectedIndex);
+  const { showMenu } = useAppStore();
 
   const handleSelect = (index: number) => {
     if (!isControlled) setInternalIndex(index);
     onSelect?.(index);
   };
 
-  // Transición GSAP al cambiar el ítem seleccionado (scale + ligero brillo)
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (items.length === 0) return;
+    if (e.key === 'w' || e.key === 'W') {
+      e.preventDefault();
+      const prev = (selectedIndex - 1 + items.length) % items.length;
+      handleSelect(prev);
+    } else if (e.key === 's' || e.key === 'S') {
+      e.preventDefault();
+      const next = (selectedIndex + 1) % items.length;
+      handleSelect(next);
+    }
+  };
+  
   useEffect(() => {
+    if(showMenu) return;
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown, showMenu]);
+
+  // Transición GSAP al cambiar el ítem seleccionado (scale + ligero brillo)
+  useGSAP(() => {
     if (prevSelectedRef.current === selectedIndex) return;
     const prev = prevSelectedRef.current;
     prevSelectedRef.current = selectedIndex;
@@ -43,13 +65,14 @@ const ListMenu = ({
       gsap.fromTo(nextEl, { scale: 1 }, { scale: 1.02, duration: 0.2, ease: 'back.out(1.4)' });
       gsap.to(nextEl, { scale: 1, duration: 0.25, delay: 0.1, ease: 'power2.out' });
     }
-  }, [selectedIndex]);
+  }, { scope: buttonRefs, dependencies: [selectedIndex] });
 
   return (
     <div
-      className={clsx("relative w-full max-w-xs lg:translate-x-15 md:-translate-y-10", className)}
+      tabIndex={0}
       role="listbox"
-      aria-label={title}
+      aria-label={`${title}. Usa W y S para cambiar.`}
+      className={clsx("relative w-full max-w-xs lg:translate-x-15 md:-translate-y-10 outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-inset rounded", className)}
     >
       <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(40vh,28rem)]">
         {/* Título LIST con estilo 3D/retro (fijo, no hace scroll) */}

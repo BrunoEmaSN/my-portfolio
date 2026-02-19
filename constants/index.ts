@@ -144,8 +144,43 @@ export const socialLinksData = [
     arcanaName: 'Fool',
     rank: 5,
     description:
-      'The SEES group visited Yakushima together. Over the course of an eventful three days, we gained a new ally, making it a very worthwhile trip...',
+      'A third-year Gekkoukan High School student, Class D. A memeber of the fencing team. Also the student council president.',
     arcanaLabel: 'ARCANA',
-    backgroundImage: undefined,
+  },
+  {
+    id: 'magician',
+    bannerText: 'Makoto Yuki',
+    arcanaName: 'Magician',
+    rank: 10,
+    description:
+      'Makoto Yuki is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
+    arcanaLabel: 'ARCANA',
+  },
+  {
+    id: 'priestess',
+    bannerText: 'Akihiko Sanada',
+    arcanaName: 'Priestess',
+    rank: 7,
+    description:
+      'Akihiko Sanada is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
+    arcanaLabel: 'ARCANA',
+  },
+  {
+    id: 'empress',
+    bannerText: 'Shinjiro Aragaki',
+    arcanaName: 'Empress',
+    rank: 9,
+    description:
+      'Shinjiro Aragaki is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
+    arcanaLabel: 'ARCANA',
+  },
+  {
+    id: 'emperor',
+    bannerText: 'Yukari Takeba',
+    arcanaName: 'Emperor',
+    rank: 8,
+    description:
+      'Yukari Takeba is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
+    arcanaLabel: 'ARCANA',
   },
 ]

@@ -51,10 +51,7 @@ const SocialLink = ({
 
           {/* Etiqueta diagonal ARCANA (cinta angular) */}
           <div
-            className="absolute top-10 left-0 bg-black flex items-center justify-end pr-2 pl-2 pt-2 origin-left"
-            style={{
-              transform: 'rotate(-20deg) translateX(30px) translateY(20px)',
-            }}
+            className="absolute top-10 left-0 bg-black flex items-center justify-end pr-2 pl-2 pt-2 origin-left -rotate-20 translate-x-10 md:translate-x-30"
           >
             <span className="text-white text-[10px] font-bold tracking-widest uppercase">
               {arcanaLabel}
