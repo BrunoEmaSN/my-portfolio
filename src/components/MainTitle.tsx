@@ -2,6 +2,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
+import { ANIMATION_CONFIG } from "../../constants";
 
 const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
   const containerRef = useRef(null);
@@ -32,7 +33,7 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
     )
     .to(fillRef.current, {
         clipPath: "polygon(110% 0%, 110% 0%, 100% 100%, 100% 100%)",
-        duration: 1,
+        duration: ANIMATION_CONFIG.fast,
         delay: 0.5
     });
   }, { scope: containerRef, dependencies: [titleWrapperRef] });

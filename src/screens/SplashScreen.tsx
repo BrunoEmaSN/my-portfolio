@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import { useNavigate } from 'react-router-dom';
 import type { MobileProps } from '../types';
 import MainTitle from '../components/MainTitle';
-import { ROUTES } from '../../constants';
+import { ANIMATION_CONFIG, ROUTES } from '../../constants';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   const startTransition = () => {
     gsap.to(splashRef.current, {
       xPercent: -100,
-      duration: 0.8,
+      duration: ANIMATION_CONFIG.duration,
       ease: 'power3.in',
       onComplete: () => {
         navigate(ROUTES.HOME);
@@ -46,11 +46,11 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
 
     tl.to(
       revealBlockRef.current,
-      { xPercent: 0, duration: 0.4, ease: "power3.out" }
+      { xPercent: 0, duration: ANIMATION_CONFIG.fast, ease: "power3.out" }
     )
       .to(
         revealBlockRef.current,
-        { xPercent: -100, duration: 0.4, ease: "power3.in" },
+        { xPercent: -100, duration: ANIMATION_CONFIG.fast, ease: "power3.in" },
         "+=0.2"
       );
 

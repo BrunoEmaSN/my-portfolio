@@ -4,14 +4,13 @@ import { useGSAP } from '@gsap/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { navItems, ROUTES } from '../../constants';
-import type { MobileProps } from '../types';
 import { useAppStore } from '../store';
 
-const Menu = ({ isMobile }: MobileProps) => {
+const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMenu = location.pathname === ROUTES.HOME;
-  const {selectedIndex, setSelectedIndex} = useAppStore();
+  const { selectedIndex, setSelectedIndex } = useAppStore();
 
   const linkRefs = useRef<HTMLButtonElement[]>([]);
   const menuItemsRef = useRef<HTMLLIElement[]>([]);
@@ -36,7 +35,15 @@ const Menu = ({ isMobile }: MobileProps) => {
         event.preventDefault();
         event.stopPropagation();
         const selectedItem = navItems[selectedIndex];
-        navigate(selectedItem.path);
+        gsap.to(menuContainerRef.current, {
+          xPercent: 100,
+          duration: 0.3,
+          ease: 'power3.in',
+          onComplete: () => {
+            navigate(selectedItem.path);
+            if (selectedIndex === 4) setSelectedIndex(0);
+          }
+      })
       }
     };
 
@@ -55,7 +62,7 @@ const Menu = ({ isMobile }: MobileProps) => {
     gsap.to(menuItemsRef.current, {
       opacity: 1,
       y: 0,
-      duration: 0.6,
+      duration: 0.3,
       ease: 'power3.out',
       stagger: 0.1,
       delay: 0.3,
@@ -66,48 +73,39 @@ const Menu = ({ isMobile }: MobileProps) => {
   }, { scope: menuContainerRef });
 
   return (
-    <>
-      <div className={clsx("w-full h-full flex items-end justify-end pb-40")}>
-        <nav className="fixed max-w-md z-50 bg-red-500">
-          <ul ref={menuContainerRef} className="flex flex-col gap-1">
-            {navItems.map((item, index) => (
-              <li
-                key={item.id}
-                ref={(el: HTMLLIElement | null) => {
-                  if (el) menuItemsRef.current[index] = el;
-                }}
-              >
-                <button
-                  id="button-menu"
-                  ref={(el: HTMLButtonElement | null) => {
-                    if (el) linkRefs.current[index] = el;
-                  }}
-                  onMouseEnter={() => setSelectedIndex(index)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (item.path) navigate(item.path);
-                  }}
-                  className={clsx(
-                    'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50 w-full font-black text-4xl h-[40px] transition-all duration-300 block hover:bg-blue-700 uppercase',
-                    {
-                      'bg-blue-700 text-white scale-105 shadow-lg': selectedIndex === index,
-                      'text-gray-500': selectedIndex !== index,
-                    }
-                  )}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-      {!isMobile && isMenu && (
-        <div className="fixed bottom-5 right-5 bg-black text-white p-4 rounded-lg text-xs font-mono opacity-50">
-          CONTROLS: [W] [S] [ENTER]
-        </div>
-      )}
-    </>
+    <nav className="fixed max-w-md z-50">
+      <ul ref={menuContainerRef} className="flex flex-col gap-1">
+        {navItems.map((item, index) => (
+          <li
+            key={item.id}
+            ref={(el: HTMLLIElement | null) => {
+              if (el) menuItemsRef.current[index] = el;
+            }}
+          >
+            <button
+              id="button-menu"
+              ref={(el: HTMLButtonElement | null) => {
+                if (el) linkRefs.current[index] = el;
+              }}
+              onMouseEnter={() => setSelectedIndex(index)}
+              onClick={(e) => {
+                e.preventDefault();
+                if (item.path) navigate(item.path);
+              }}
+              className={clsx(
+                'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50 w-full font-black text-4xl h-[40px] transition-all duration-300 block hover:bg-blue-700 uppercase',
+                {
+                  'bg-blue-700 text-white scale-105 shadow-lg': selectedIndex === index,
+                  'text-gray-500': selectedIndex !== index,
+                }
+              )}
+            >
+              {item.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 

@@ -2,6 +2,7 @@ import { useMemo, useRef, useEffect, useLayoutEffect } from "react"
 import clsx from "clsx"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
+import { ANIMATION_CONFIG } from "../../constants"
 export interface ImageGalleryProps {
   /** Array de 1 a 5 URLs de imágenes */
   images: string[]
@@ -13,7 +14,6 @@ export interface ImageGalleryProps {
   className?: string
 }
 
-const DURATION = 0.8
 const EASE = "power1.inOut"
 
 const STAGGER_DURATION = 0.4
@@ -42,10 +42,10 @@ const ImageGallery = ({
     const fromEl = imgRefs.current[prev]
     const toEl = imgRefs.current[currentIndex]
     if (fromEl) {
-      gsap.to(fromEl, { filter: "grayscale(100%)", duration: DURATION, ease: EASE })
+      gsap.to(fromEl, { filter: "grayscale(100%)", duration: ANIMATION_CONFIG.duration, ease: EASE })
     }
     if (toEl) {
-      gsap.fromTo(toEl, { filter: "grayscale(100%)" }, { filter: "grayscale(0%)", duration: DURATION, ease: EASE })
+      gsap.fromTo(toEl, { filter: "grayscale(100%)" }, { filter: "grayscale(0%)", duration: ANIMATION_CONFIG.duration, ease: EASE })
     }
   }, [currentIndex])
 
@@ -70,7 +70,6 @@ const ImageGallery = ({
       duration: STAGGER_DURATION,
       stagger: STAGGER_DELAY,
       ease: EASE,
-      delay: 0.3
     })
   }, { scope: gridRef, dependencies: [] })
 
@@ -104,7 +103,7 @@ const ImageGallery = ({
           y: 0,
           scaleX: 1,
           scaleY: 1,
-          duration: DURATION,
+          duration: ANIMATION_CONFIG.fast,
           ease: EASE,
           overwrite: true,
           onComplete: () => {

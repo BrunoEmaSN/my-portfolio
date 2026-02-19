@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ANIMATION_CONFIG } from '../../constants';
 export interface ListMenuProps {
   title?: string;
   items: string[];
@@ -26,7 +27,7 @@ const ListMenu = ({
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.fromTo(containerRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: 'power2.inOut' });
+    gsap.fromTo(containerRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: ANIMATION_CONFIG.fast, delay: 0.5, ease: 'power2.inOut' });
   }, { scope: containerRef, dependencies: [] });
 
   const handleSelect = (index: number) => {
@@ -64,8 +65,8 @@ const ListMenu = ({
       gsap.to(prevEl, { scale: 1, duration: 0.2, ease: 'power2.out' });
     }
     if (nextEl) {
-      gsap.fromTo(nextEl, { scale: 1 }, { scale: 1.02, duration: 0.2, ease: 'back.out(1.4)' });
-      gsap.to(nextEl, { scale: 1, duration: 0.25, delay: 0.1, ease: 'power2.out' });
+      gsap.fromTo(nextEl, { scale: 1 }, { scale: 1.02, duration: ANIMATION_CONFIG.fast, ease: 'back.out(1.4)' });
+      gsap.to(nextEl, { scale: 1, duration: ANIMATION_CONFIG.fast, delay: 0.1, ease: 'power2.out' });
     }
   }, { scope: buttonRefs, dependencies: [selectedIndex] });
 

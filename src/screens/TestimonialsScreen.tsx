@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import SectionTitle from "../components/SectionTitle"
 import SocialLink from "../components/SocialLink"
-import { socialLinksData } from "../../constants"
+import { ANIMATION_CONFIG, socialLinksData } from "../../constants"
 import SocialDescription from "../components/SocialDescription"
 import ListMenu from "../components/ListMenu"
 import TransitionImage from "../components/TransitionImage"
@@ -37,7 +37,7 @@ const TestimonialsScreen = () => {
 
   useGSAP(() => {
     if (!sectionRef.current) return
-    gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" })
+    gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: ANIMATION_CONFIG.fast, ease: "power2.out" })
   }, { scope: sectionRef, dependencies: [] })
 
   return (

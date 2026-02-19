@@ -3,6 +3,7 @@ import { Mail } from "lucide-react";
 import clsx from "clsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ANIMATION_CONFIG } from "../../constants";
 
 export interface MailPanelProps {
   /** Imagen de fondo del panel (semitransparente, escala de grises) */
@@ -35,7 +36,7 @@ const MailPanel = ({
     gsap.fromTo(
       panelRef.current,
       { x: -120, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.6, delay: 0.2, ease: 'power2.out' }
+      { x: 0, opacity: 1, duration: ANIMATION_CONFIG.fast, delay: 0.2, ease: 'power2.out' }
     );
   }, { scope: panelRef, dependencies: [] });
 

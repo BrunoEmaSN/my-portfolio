@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react"
 import clsx from "clsx"
 import { gsap } from "gsap"
+import { ANIMATION_CONFIG } from "../../constants"
 
 export interface TransitionImageProps {
   /** URL de la imagen a mostrar */
@@ -12,15 +13,12 @@ export interface TransitionImageProps {
   /** Duración de la transición en segundos */
   duration?: number
 }
-
-const DEFAULT_DURATION = 0.1
 const EASE = "power1.inOut"
 
 const TransitionImage = ({
   image,
   imageAlt = "Image",
   className = "",
-  duration = DEFAULT_DURATION,
 }: TransitionImageProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
@@ -43,10 +41,10 @@ const TransitionImage = ({
     gsap.fromTo(imgEl, { opacity: 0, x: 10 }, {
       x: 0,
       opacity: 1,
-      duration,
+      duration: ANIMATION_CONFIG.fast,
       ease: EASE,
     })
-  }, [image, duration])
+  }, [image])
 
   return (
     <div

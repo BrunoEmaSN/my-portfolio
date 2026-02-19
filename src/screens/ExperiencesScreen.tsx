@@ -4,7 +4,7 @@ import gsap from "gsap"
 import SectionTitle from "../components/SectionTitle"
 import ExperienceTimeline from "../components/ExperienceTimeline"
 import Card from "../components/Card"
-import { experiencesData, projectsData } from "../../constants"
+import { ANIMATION_CONFIG, experiencesData, projectsData } from "../../constants"
 
 const size = {
   sm: 100,
@@ -27,7 +27,7 @@ const ExperiencesScreen = () => {
     gsap.fromTo(titleFeatured.current, from, {
       x: 0,
       opacity: 1,
-      duration: 0.8,
+      duration: ANIMATION_CONFIG.fast,
       ease: "power2.out",
       scrollTrigger: {
         trigger: titleFeatured.current,
@@ -40,7 +40,7 @@ const ExperiencesScreen = () => {
     gsap.fromTo(titleJourney.current, from, {
       x: 0,
       opacity: 1,
-      duration: 0.6,
+      duration: ANIMATION_CONFIG.fast,
       ease: "power2.out",
       scrollTrigger: {
         trigger: titleJourney.current,
@@ -58,7 +58,7 @@ const ExperiencesScreen = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 0.3,
+          duration: ANIMATION_CONFIG.fast,
           stagger: 0.2,
           ease: "power2.out",
           scrollTrigger: {

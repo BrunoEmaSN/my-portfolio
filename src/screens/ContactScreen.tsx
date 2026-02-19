@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react"
 import MailPanel from "../components/MailPanel"
 import SectionTitle from "../components/SectionTitle"
 import SocialItem from "../components/SocialItem"
+import { ANIMATION_CONFIG } from "../../constants"
 
 const socialItems = [
   {
@@ -53,7 +54,7 @@ const ContactScreen = () => {
     gsap.fromTo(
       children,
       { x: 60, opacity: 0, skewX: -10 },
-      { x: 0, opacity: 1, skewX: -10, duration: 0.5, stagger: 0.2, ease: "power2.out" }
+      { x: 0, opacity: 1, skewX: -10, duration: ANIMATION_CONFIG.fast, stagger: 0.2, ease: "power2.out" }
     )
   }, { scope: socialListRef, dependencies: [] })
 

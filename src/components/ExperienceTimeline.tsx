@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import clsx from 'clsx';
+import { ANIMATION_CONFIG } from '../../constants';
 
 export interface TimelineExperience {
   title: string;
@@ -28,7 +29,7 @@ const ExperienceTimeline = ({ experiences, sectionRef }: ExperienceTimelineProps
       const to = {
         x: 0,
         opacity: 1,
-        duration: 0.6,
+        duration: ANIMATION_CONFIG.duration,
         ease: 'power2.out',
       };
       gsap.fromTo(el, from, {

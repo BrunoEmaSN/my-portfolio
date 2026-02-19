@@ -28,7 +28,7 @@ const AboutMeScreen = () => {
       {
         y: 0,
         opacity: 1,
-        duration: ANIMATION_CONFIG.duration,
+        duration: ANIMATION_CONFIG.fast,
         ease: ANIMATION_CONFIG.ease,
       }
     )
@@ -38,7 +38,7 @@ const AboutMeScreen = () => {
       {
         x: 0,
         opacity: 1,
-        duration: ANIMATION_CONFIG.duration,
+        duration: ANIMATION_CONFIG.fast,
         ease: ANIMATION_CONFIG.ease,
       }
     )
@@ -48,7 +48,7 @@ const AboutMeScreen = () => {
       {
         x: 0,
         opacity: 1,
-        duration: ANIMATION_CONFIG.duration,
+        duration: ANIMATION_CONFIG.fast,
         ease: ANIMATION_CONFIG.ease,
       }
     )

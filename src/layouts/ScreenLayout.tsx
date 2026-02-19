@@ -16,7 +16,7 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                 gsap.fromTo(layoutRef.current, { opacity: 1, scale: 1 }, {
                     opacity: 0,
                     scale: 1.3,
-                    duration: ANIMATION_CONFIG.duration / 2,
+                    duration: ANIMATION_CONFIG.fast,
                     ease: ANIMATION_CONFIG.ease,
                     onComplete: () => {
                         navigate(ROUTES.HOME)

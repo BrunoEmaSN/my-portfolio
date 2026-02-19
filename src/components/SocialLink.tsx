@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ANIMATION_CONFIG } from '../../constants';
 export interface SocialLinkProps {
   /** Texto del banner superior (ej. "SEES") */
   bannerText?: string;
@@ -41,12 +42,12 @@ const SocialLink = ({
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.fromTo(containerRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.3, ease: 'power2.inOut' });
+    gsap.fromTo(containerRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: ANIMATION_CONFIG.fast, delay: 0.3, ease: 'power2.inOut' });
   }, { scope: containerRef, dependencies: [] });
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.fromTo(containerRef.current, { x: -10 }, { x: 0, duration: 0.3, ease: 'power2.inOut' });
+    gsap.fromTo(containerRef.current, { x: -10 }, { x: 0, duration: ANIMATION_CONFIG.fast, ease: 'power2.inOut' });
   }, { scope: containerRef, dependencies: [bannerText] });
 
   return (
