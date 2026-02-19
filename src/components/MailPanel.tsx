@@ -30,7 +30,7 @@ const MailPanel = ({
   const [messageValue, setMessageValue] = useState("");
   return (
     <div
-      className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-[#1E1E1E] -translate-y-15 lg:-rotate-10 scale-103", className, {
+      className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-[#1E1E1E] md:-translate-y-15 lg:-rotate-10 scale-103", className, {
         "pointer-events-none": showMenu,
         "pointer-events-auto": !showMenu,
       })}
@@ -48,7 +48,7 @@ const MailPanel = ({
             className="absolute top-0 right-0 w-full h-full bg-[#1E1E1E]"
             style={{ clipPath: 'polygon(100% 0, 30% 0, 100% 70%)' }}
           />
-          <span className="absolute top-0 left-1/2 -translate-x-2/3 text-white text-[150px] font-bold -skew-x-20 lg:-rotate-10">
+          <span className="absolute top-0 md:left-1/2 md:-translate-x-2/3 text-white text-8xl md:text-[150px] font-bold -skew-x-20 lg:-rotate-10">
             MAIL
           </span>
           <div
@@ -101,7 +101,7 @@ const MailPanel = ({
               placeholder="Subject..."
               value={subjectValue}
               onChange={(e) => setSubjectValue(e.target.value)}
-              className="w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold border-none outline-none"
+              className="w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold border-none outline-none truncate"
             />
 
             {/* Cuerpo del mensaje */}
