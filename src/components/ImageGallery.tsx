@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import clsx from "clsx"
 
 export interface ImageGalleryProps {
   /** Array de 1 a 5 URLs de imágenes */
@@ -62,20 +63,18 @@ const ImageGallery = ({
 
   return (
     <div
-      className={`grid gap-1 sm:gap-2 w-full h-full min-h-[200px] sm:min-h-[280px] md:min-h-[320px] ${gridClass} ${className}`}
+      className={clsx("grid gap-1 sm:gap-2 w-full h-full min-h-[200px] sm:min-h-[280px] md:min-h-[320px]", gridClass, className)}
       style={{ aspectRatio: count === 1 ? "16/10" : count <= 2 ? "16/9" : undefined }}
     >
       {orderedItems.map(({ src, index }, position) => (
         <div
           key={index}
-          className={`relative w-full h-full min-h-[120px] overflow-hidden border-4 border-gray-700/50 ${getItemClass(index, position === 0)}`}
+          className={clsx("relative w-full h-full min-h-[120px] overflow-hidden border-4 border-gray-700/50", getItemClass(index, position === 0))}
         >
           <img
             src={src}
             alt={`${imageAlt} ${index + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-[filter] duration-500 ease-out ${
-              index === currentIndex ? "grayscale-0" : "grayscale"
-            }`}
+            className={clsx("absolute inset-0 w-full h-full object-cover transition-[filter] duration-500 ease-out", index === currentIndex ? "grayscale-0" : "grayscale")}
             style={{
               filter: index === currentIndex ? "grayscale(0%)" : "grayscale(100%)",
             }}

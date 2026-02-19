@@ -91,7 +91,7 @@ const ExperienceTimeline = ({ experiences, sectionRef }: ExperienceTimelineProps
                       backgroundSize: '20px 20px',
                     }}
                   />
-                  <div className={`relative z-10 space-y-2 ${isLeft ? 'md:text-right' : ''} text-left`}>
+                  <div className={clsx("relative z-10 space-y-2 text-left", isLeft && "md:text-right")}>
                     <h3 className="font-sans text-lg sm:text-xl text-white font-semibold tracking-wide skew-x-5">
                       {exp.title}
                     </h3>

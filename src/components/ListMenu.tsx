@@ -27,7 +27,7 @@ const ListMenu = ({
 
   return (
     <div
-      className={`relative w-full max-w-xs lg:translate-x-15 md:-translate-y-10 ${className}`}
+      className={clsx("relative w-full max-w-xs lg:translate-x-15 md:-translate-y-10", className)}
       role="listbox"
       aria-label={title}
     >
