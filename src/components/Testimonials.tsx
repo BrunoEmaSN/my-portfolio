@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import clsx from 'clsx';
 import SectionTitle from './SectionTitle';
 import { useAppStore } from '../store';
@@ -25,6 +26,7 @@ const personaeImages = [
 
 const Testimonials = () => {
   const { showMenu } = useAppStore();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const size = {
     sm: 100,
     md: 120,
@@ -47,11 +49,11 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="w-full h-[50vh] p-8">
-            <ImageGallery images={personaeImages} imageCurrent={2} />
+            <ImageGallery images={personaeImages} imageCurrent={selectedIndex} />
           </div>
         </div>
         <div className="flex md:flex-row flex-col justify-between items-center pr-10 lg:pr-20 gap-5">
-          <ListMenu items={personae} />
+          <ListMenu items={personae} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
           <SocialDescription
             name="Mitsuru Kirijo"
             description="A third-year Gekkoukan High School student, Class D. A memeber of the fencing team. Also the student council president."

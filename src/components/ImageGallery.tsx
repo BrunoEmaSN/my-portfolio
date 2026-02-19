@@ -1,5 +1,6 @@
-import { useMemo } from "react"
+import { useMemo, useRef, useEffect, useLayoutEffect } from "react"
 import clsx from "clsx"
+import { gsap } from "gsap"
 
 export interface ImageGalleryProps {
   /** Array de 1 a 5 URLs de imágenes */
@@ -12,6 +13,9 @@ export interface ImageGalleryProps {
   className?: string
 }
 
+const DURATION = 0.5
+const EASE = "power2.out"
+
 const ImageGallery = ({
   images,
   imageCurrent = 0,
@@ -20,6 +24,78 @@ const ImageGallery = ({
 }: ImageGalleryProps) => {
   const count = Math.min(5, Math.max(1, images.length))
   const currentIndex = Math.max(0, Math.min(imageCurrent, count - 1))
+  const imgRefs = useRef<Record<number, HTMLImageElement | null>>({})
+  const boxRefs = useRef<Record<number, HTMLDivElement | null>>({})
+  const prevIndexRef = useRef(currentIndex)
+  const prevRectsRef = useRef<Record<number, DOMRect>>({})
+
+  // Transición GSAP al cambiar la imagen actual (grayscale)
+  useEffect(() => {
+    const prev = prevIndexRef.current
+    prevIndexRef.current = currentIndex
+    if (prev === currentIndex) return
+
+    const fromEl = imgRefs.current[prev]
+    const toEl = imgRefs.current[currentIndex]
+    if (fromEl) {
+      gsap.to(fromEl, { filter: "grayscale(100%)", duration: DURATION, ease: EASE })
+    }
+    if (toEl) {
+      gsap.fromTo(toEl, { filter: "grayscale(100%)" }, { filter: "grayscale(0%)", duration: DURATION, ease: EASE })
+    }
+  }, [currentIndex])
+
+  // Estado inicial de filtros (para que GSAP no choque con el primer render)
+  useEffect(() => {
+    Object.entries(imgRefs.current).forEach(([i, el]) => {
+      if (!el) return
+      const idx = Number(i)
+      gsap.set(el, { filter: idx === currentIndex ? "grayscale(0%)" : "grayscale(100%)" })
+    })
+  }, [])
+
+  // FLIP: transición de cambio de lugares al reordenar (count 4 o 5)
+  useLayoutEffect(() => {
+    const boxRefsMap = boxRefs.current
+    const newRects: Record<number, DOMRect> = {}
+    const toAnimate: { el: HTMLDivElement; index: number; prevRect: DOMRect; newRect: DOMRect }[] = []
+
+    for (const key of Object.keys(boxRefsMap)) {
+      const index = Number(key)
+      const el = boxRefsMap[index]
+      if (!el) continue
+      const newRect = el.getBoundingClientRect()
+      newRects[index] = newRect
+      const prevRect = prevRectsRef.current[index]
+      if (prevRect && (count === 4 || count === 5)) {
+        toAnimate.push({ el, index, prevRect, newRect })
+      }
+    }
+
+    if (toAnimate.length > 0) {
+      toAnimate.forEach(({ el, prevRect, newRect }) => {
+        const dx = prevRect.left - newRect.left
+        const dy = prevRect.top - newRect.top
+        const scaleX = prevRect.width / newRect.width
+        const scaleY = prevRect.height / newRect.height
+        gsap.set(el, { x: dx, y: dy, scaleX, scaleY, transformOrigin: "50% 50%" })
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
+          duration: DURATION,
+          ease: EASE,
+          overwrite: true,
+          onComplete: () => {
+          gsap.set(el, { clearProps: "transform" })
+        },
+        })
+      })
+    }
+
+    prevRectsRef.current = newRects
+  }, [currentIndex, count])
 
   const gridClass = useMemo(() => {
     switch (count) {
@@ -68,16 +144,15 @@ const ImageGallery = ({
     >
       {orderedItems.map(({ src, index }, position) => (
         <div
+          ref={(el) => { boxRefs.current[index] = el }}
           key={index}
           className={clsx("relative w-full h-full min-h-[120px] overflow-hidden border-4 border-gray-700/50", getItemClass(index, position === 0))}
         >
           <img
+            ref={(el) => { imgRefs.current[index] = el }}
             src={src}
             alt={`${imageAlt} ${index + 1}`}
-            className={clsx("absolute inset-0 w-full h-full object-cover transition-[filter] duration-500 ease-out", index === currentIndex ? "grayscale-0" : "grayscale")}
-            style={{
-              filter: index === currentIndex ? "grayscale(0%)" : "grayscale(100%)",
-            }}
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       ))}

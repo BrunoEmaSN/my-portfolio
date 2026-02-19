@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
+import { gsap } from 'gsap';
 
 export interface ListMenuProps {
   title?: string;
@@ -19,11 +20,30 @@ const ListMenu = ({
   const [internalIndex, setInternalIndex] = useState(0);
   const isControlled = controlledIndex !== undefined;
   const selectedIndex = isControlled ? controlledIndex : internalIndex;
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const prevSelectedRef = useRef(selectedIndex);
 
   const handleSelect = (index: number) => {
     if (!isControlled) setInternalIndex(index);
     onSelect?.(index);
   };
+
+  // Transición GSAP al cambiar el ítem seleccionado (scale + ligero brillo)
+  useEffect(() => {
+    if (prevSelectedRef.current === selectedIndex) return;
+    const prev = prevSelectedRef.current;
+    prevSelectedRef.current = selectedIndex;
+
+    const prevEl = buttonRefs.current[prev];
+    const nextEl = buttonRefs.current[selectedIndex];
+    if (prevEl) {
+      gsap.to(prevEl, { scale: 1, duration: 0.2, ease: 'power2.out' });
+    }
+    if (nextEl) {
+      gsap.fromTo(nextEl, { scale: 1 }, { scale: 1.02, duration: 0.2, ease: 'back.out(1.4)' });
+      gsap.to(nextEl, { scale: 1, duration: 0.25, delay: 0.1, ease: 'power2.out' });
+    }
+  }, [selectedIndex]);
 
   return (
     <div
@@ -53,6 +73,7 @@ const ListMenu = ({
             return (
               <li key={`${label}-${index}`}>
                 <button
+                  ref={(el) => { buttonRefs.current[index] = el }}
                   type="button"
                   role="option"
                   aria-selected={isSelected}
