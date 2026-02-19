@@ -1,58 +1,55 @@
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import SectionTitle from './SectionTitle';
-import ExperienceTimeline from './ExperienceTimeline';
-import Card from './Card';
-import { useAppStore } from '../store';
-import clsx from 'clsx';
-import { experiencesData, projectsData } from '../../constants';
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import SectionTitle from "../components/SectionTitle"
+import ExperienceTimeline from "../components/ExperienceTimeline"
+import Card from "../components/Card"
+import { experiencesData, projectsData } from "../../constants"
 
-const Experiences = () => {
+const ExperiencesScreen = () => {
   const size = {
     sm: 100,
     md: 120,
     lg: 150,
     xl: 200,
-  };
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleFeatured = useRef<HTMLHeadingElement>(null);
-  const titleJourney = useRef<HTMLHeadingElement>(null);
-  const cardsGridRef = useRef<HTMLDivElement>(null);
-  const { showMenu } = useAppStore();
+  }
+  const sectionRef = useRef<HTMLElement>(null)
+  const titleFeatured = useRef<HTMLHeadingElement>(null)
+  const titleJourney = useRef<HTMLHeadingElement>(null)
+  const cardsGridRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    if (!sectionRef.current || !titleFeatured.current || !titleJourney.current || showMenu) return;
-    const from = { x: '-100%', opacity: 0 };
-    const scroller = sectionRef.current;
+    if (!sectionRef.current || !titleFeatured.current || !titleJourney.current) return
+    const from = { x: "-100%", opacity: 0 }
+    const scroller = sectionRef.current
 
     gsap.fromTo(titleFeatured.current, from, {
       x: 0,
       opacity: 1,
       duration: 0.8,
-      ease: 'power2.out',
+      ease: "power2.out",
       scrollTrigger: {
         trigger: titleFeatured.current,
         scroller,
-        start: 'top 90%',
-        toggleActions: 'play none none none',
+        start: "top 90%",
+        toggleActions: "play none none none",
       },
-    });
+    })
 
     gsap.fromTo(titleJourney.current, from, {
       x: 0,
       opacity: 1,
       duration: 0.6,
-      ease: 'power2.out',
+      ease: "power2.out",
       scrollTrigger: {
         trigger: titleJourney.current,
         scroller,
-        start: 'top 90%',
-        toggleActions: 'play none none none',
+        start: "top 90%",
+        toggleActions: "play none none none",
       },
-    });
+    })
 
-    const gridEl = cardsGridRef.current;
+    const gridEl = cardsGridRef.current
     if (gridEl?.children?.length) {
       gsap.fromTo(
         Array.from(gridEl.children),
@@ -62,22 +59,22 @@ const Experiences = () => {
           opacity: 1,
           duration: 0.3,
           stagger: 0.2,
-          ease: 'power2.out',
+          ease: "power2.out",
           scrollTrigger: {
             trigger: gridEl,
             scroller,
-            start: 'top 90%',
-            toggleActions: 'play none none none',
+            start: "top 90%",
+            toggleActions: "play none none none",
           },
         }
-      );
+      )
     }
-  }, [showMenu]);
+  }, [])
 
   return (
     <section ref={sectionRef} id="experiences" className="overflow-y-auto h-full">
       <SectionTitle label="WORK EXPERIENCES" textSize={size} className="text-5xl xs:text-9xl" />
-      <div className={clsx("relative z-10 pointer-events-auto flex flex-col gap-12 w-full h-full pt-50 gap-y-60", showMenu ? "pointer-events-none" : "pointer-events-auto")}>
+      <div className="relative z-10 pointer-events-auto flex flex-col gap-12 w-full h-full pt-50 gap-y-60">
         <div className="flex flex-col gap-4">
           <h3
             ref={titleFeatured}
@@ -108,7 +105,7 @@ const Experiences = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Experiences;
+export default ExperiencesScreen

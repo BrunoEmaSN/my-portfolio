@@ -1,11 +1,10 @@
-import { useRef } from 'react';
-import { Github, Instagram, Linkedin, Twitter } from 'lucide-react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import MailPanel from './MailPanel';
-import SectionTitle from './SectionTitle';
-import SocialItem from './SocialItem';
-import { useAppStore } from '../store';
+import { useRef } from "react"
+import { Github, Instagram, Linkedin, Twitter } from "lucide-react"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+import MailPanel from "../components/MailPanel"
+import SectionTitle from "../components/SectionTitle"
+import SocialItem from "../components/SocialItem"
 
 const socialItems = [
   {
@@ -13,50 +12,49 @@ const socialItems = [
     logoAlt: "linkedin",
     name: "LinkedIn",
     description: "@BrunoSanchez",
-    icon: <Linkedin />
+    icon: <Linkedin />,
   },
   {
     logoSrc: "/images/social-network/github-color.png",
     logoAlt: "github",
     name: "Github",
     description: "@BrunoSanchez",
-    icon: <Github />
+    icon: <Github />,
   },
   {
     logoSrc: "/images/social-network/twitter-color.png",
     logoAlt: "twitter",
     name: "Twitter",
     description: "@BrunoSanchez",
-    icon: <Twitter />
+    icon: <Twitter />,
   },
   {
     logoSrc: "/images/social-network/instagram-color.png",
     logoAlt: "instagram",
     name: "Instagram",
     description: "@BrunoSanchez",
-    icon: <Instagram />
-  }
+    icon: <Instagram />,
+  },
 ]
 
-const Contact = () => {
-  const { showMenu } = useAppStore();
-  const socialListRef = useRef<HTMLDivElement>(null);
+const ContactScreen = () => {
+  const socialListRef = useRef<HTMLDivElement>(null)
   const size = {
     sm: 100,
     md: 120,
     lg: 200,
-    xl: 400
-  };
+    xl: 400,
+  }
 
   useGSAP(() => {
-    if (!socialListRef.current?.children?.length || showMenu) return;
-    const children = Array.from(socialListRef.current.children);
+    if (!socialListRef.current?.children?.length) return
+    const children = Array.from(socialListRef.current.children)
     gsap.fromTo(
       children,
       { x: 60, opacity: 0, skewX: -10 },
-      { x: 0, opacity: 1, skewX: -10, duration: 0.5, stagger: 0.2, ease: 'power2.out' }
-    );
-  }, { scope: socialListRef, dependencies: [showMenu] });
+      { x: 0, opacity: 1, skewX: -10, duration: 0.5, stagger: 0.2, ease: "power2.out" }
+    )
+  }, { scope: socialListRef, dependencies: [] })
 
   return (
     <section id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden z-10">
@@ -65,7 +63,7 @@ const Contact = () => {
         <MailPanel
           backgroundImage="/images/testimonials/fake-image-1.png"
           onAction={() => {
-            console.log("Send email");
+            console.log("Send email")
           }}
           actionLabel="SEND EMAIL"
         />
@@ -81,14 +79,14 @@ const Contact = () => {
               description={item.description}
               icon={item.icon}
               onClick={() => {
-                console.log("Click on", item.name);
+                console.log("Click on", item.name)
               }}
             />
           ))}
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Contact;
+export default ContactScreen

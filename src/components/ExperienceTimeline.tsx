@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useAppStore } from '../store';
 import clsx from 'clsx';
 
 export interface TimelineExperience {
@@ -18,10 +17,8 @@ interface ExperienceTimelineProps {
 
 const ExperienceTimeline = ({ experiences, sectionRef }: ExperienceTimelineProps) => {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const { showMenu } = useAppStore();
 
   useGSAP(() => {
-    if (showMenu) return;
     const scroller = sectionRef.current;
     experiences.forEach((_, index) => {
       const el = cardRefs.current[index];
@@ -44,7 +41,7 @@ const ExperienceTimeline = ({ experiences, sectionRef }: ExperienceTimelineProps
         },
       });
     });
-  }, [showMenu, experiences]);
+  }, [experiences]);
 
   return (
     <div className="relative w-full max-w-4xl mx-auto py-8 px-4 sm:px-6 skew-x-0 lg:-skew-x-5 overflow-hidden">

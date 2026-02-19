@@ -2,8 +2,6 @@ import { useMemo, useRef, useEffect, useLayoutEffect } from "react"
 import clsx from "clsx"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
-import { useAppStore } from "../store"
-
 export interface ImageGalleryProps {
   /** Array de 1 a 5 URLs de imágenes */
   images: string[]
@@ -34,7 +32,6 @@ const ImageGallery = ({
   const gridRef = useRef<HTMLDivElement>(null)
   const prevIndexRef = useRef(currentIndex)
   const prevRectsRef = useRef<Record<number, DOMRect>>({})
-  const { showMenu } = useAppStore()
 
   // Transición GSAP al cambiar la imagen actual (grayscale)
   useEffect(() => {
@@ -61,9 +58,9 @@ const ImageGallery = ({
     })
   }, [])
 
-  // Entrada con stagger cuando playEntrance se activa
+  // Entrada con stagger
   useGSAP(() => {
-    if (showMenu || !gridRef.current) return
+    if (!gridRef.current) return
     const boxes = Array.from(gridRef.current.children) as HTMLDivElement[]
     if (boxes.length === 0) return
     gsap.set(boxes, { opacity: 0, y: 24 })
@@ -75,7 +72,7 @@ const ImageGallery = ({
       ease: EASE,
       delay: 0.3
     })
-  }, { scope: gridRef, dependencies: [showMenu] })
+  }, { scope: gridRef, dependencies: [] })
 
   // FLIP: transición de cambio de lugares al reordenar (count 4 o 5)
   useLayoutEffect(() => {

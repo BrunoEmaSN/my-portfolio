@@ -1,8 +1,6 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useAppStore } from '../store';
-
 export interface SocialLinkProps {
   /** Texto del banner superior (ej. "SEES") */
   bannerText?: string;
@@ -40,15 +38,14 @@ const SocialLink = ({
   const clampedRank = Math.min(MAX_RANK, Math.max(0, rank));
   const stars = Array.from({ length: MAX_RANK }, (_, i) => i < clampedRank);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { showMenu } = useAppStore();
 
   useGSAP(() => {
-    if (showMenu || !containerRef.current) return;
+    if (!containerRef.current) return;
     gsap.fromTo(containerRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.3, ease: 'power2.inOut' });
-  }, { scope: containerRef, dependencies: [showMenu] });
+  }, { scope: containerRef, dependencies: [] });
 
   useGSAP(() => {
-    if (showMenu || !containerRef.current) return;
+    if (!containerRef.current) return;
     gsap.fromTo(containerRef.current, { x: -10 }, { x: 0, duration: 0.3, ease: 'power2.inOut' });
   }, { scope: containerRef, dependencies: [bannerText] });
 

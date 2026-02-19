@@ -1,12 +1,13 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useAppStore } from '../store';
+import { useNavigate } from 'react-router-dom';
 import type { MobileProps } from '../types';
 import MainTitle from '../components/MainTitle';
+import { ROUTES } from '../../constants';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
-  const { closeSplash } = useAppStore();
+  const navigate = useNavigate();
   const splashRef = useRef<HTMLDivElement>(null);
   const revealBlockRef = useRef(null);
 
@@ -16,7 +17,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
       duration: 0.8,
       ease: 'power3.in',
       onComplete: () => {
-        closeSplash();
+        navigate(ROUTES.MENU);
       },
     });
   };
@@ -66,13 +67,13 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, { scope: splashRef, dependencies: [closeSplash, isMobile] });
+  }, { scope: splashRef, dependencies: [navigate, isMobile] });
 
   return (
     <div
       onClick={handleClick}
       ref={splashRef}
-      className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden"
+      className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden bg-black"
     >
       <div className="overflow-hidden">
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />

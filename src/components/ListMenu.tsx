@@ -2,8 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useAppStore } from '../store';
-
 export interface ListMenuProps {
   title?: string;
   items: string[];
@@ -25,12 +23,11 @@ const ListMenu = ({
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const prevSelectedRef = useRef(selectedIndex);
-  const { showMenu } = useAppStore();
 
   useGSAP(() => {
-    if (showMenu || !containerRef.current) return;
+    if (!containerRef.current) return;
     gsap.fromTo(containerRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: 'power2.inOut' });
-  }, { scope: containerRef, dependencies: [showMenu] });
+  }, { scope: containerRef, dependencies: [] });
 
   const handleSelect = (index: number) => {
     if (!isControlled) setInternalIndex(index);
@@ -51,10 +48,9 @@ const ListMenu = ({
   };
 
   useEffect(() => {
-    if(showMenu) return;
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown, showMenu]);
+  }, [handleKeyDown]);
 
   // Transición GSAP al cambiar el ítem seleccionado (scale + ligero brillo)
   useGSAP(() => {

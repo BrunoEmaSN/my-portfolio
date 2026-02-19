@@ -1,6 +1,5 @@
 import { Mail } from "lucide-react";
 import clsx from "clsx";
-import { useAppStore } from "../store";
 
 export interface SocialItemProps {
   /** URL o ruta de la imagen del avatar (sección izquierda) */
@@ -27,18 +26,13 @@ const SocialItem = ({
   onClick,
   className = "",
 }: SocialItemProps) => {
-  const { showMenu } = useAppStore();
   return (
     <div
       role={onClick ? "button" : undefined}
       onClick={onClick}
       className={clsx(
-        "z-50 relative flex w-full min-h-[6rem] max-w-xl rounded overflow-hidden bg-[#1E1E1E] shadow-card shadow-[#0E0D51]/80 hover:bg-white hover:text-black transition-colors",
+        "z-50 relative flex w-full min-h-[6rem] max-w-xl rounded overflow-hidden bg-[#1E1E1E] shadow-card shadow-[#0E0D51]/80 hover:bg-white hover:text-black transition-colors pointer-events-auto",
         onClick && "cursor-pointer",
-        {
-          "pointer-events-none": showMenu,
-          "pointer-events-auto": !showMenu,
-        },
         className
       )}
     >
