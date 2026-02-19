@@ -16,7 +16,7 @@ const Card = ({
   description,
 }: CardProps) => {
   return (
-    <div className="relative w-full max-w-2xl mx-auto bg-blue-950 shadow-2xl overflow-hidden border-2 border-blue-900 hover:border-blue-700 hover:shadow-card hover:-translate-y-2 transition-all duration-100"
+    <div className="relative w-full max-w-2xl mx-auto bg-blue-950 shadow-2xl overflow-hidden border-2 border-blue-900 hover:border-blue-700 hover:shadow-card hover:shadow-blue-900/50 hover:-translate-y-2 transition-all duration-100"
     >
       {/* Barra de título de la ventana */}
       <div className="relative z-20 bg-blue-900 px-4 py-3 flex items-center">

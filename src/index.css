@@ -25,4 +25,6 @@
 
 @theme {
   --shadow-card: 8px 8px 0 rgb(20, 71, 228); 
+  --shadow-card-lg: 8px 16px 0 rgb(20, 71, 228);
+  --shadow-list-menu: 4px -4px 0 rgba(0,0,0,0.4);
 }

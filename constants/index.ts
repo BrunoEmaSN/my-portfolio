@@ -135,3 +135,17 @@ export const experiencesData = [
       'Built and maintained client websites with modern JavaScript frameworks. Worked closely with design teams to implement pixel-perfect interfaces.',
   },
 ]
+
+/** Datos para tarjetas Social Link (estilo Persona) */
+export const socialLinksData = [
+  {
+    id: 'fool',
+    bannerText: 'SEES',
+    arcanaName: 'Fool',
+    rank: 5,
+    description:
+      'The SEES group visited Yakushima together. Over the course of an eventful three days, we gained a new ally, making it a very worthwhile trip...',
+    arcanaLabel: 'ARCANA',
+    backgroundImage: undefined,
+  },
+]
