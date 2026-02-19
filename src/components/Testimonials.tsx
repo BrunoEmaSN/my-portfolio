@@ -47,7 +47,7 @@ const Testimonials = () => {
             </div>
           </div>
           <div className="w-full h-[50vh] p-8">
-            <ImageGallery images={personaeImages} imageCurrent={1} />
+            <ImageGallery images={personaeImages} imageCurrent={2} />
           </div>
         </div>
         <div className="flex md:flex-row flex-col justify-between items-center pr-10 lg:pr-20 gap-5">

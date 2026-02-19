@@ -31,7 +31,7 @@ const ListMenu = ({
       role="listbox"
       aria-label={title}
     >
-      <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(30vh,28rem)]">
+      <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(40vh,28rem)]">
         {/* Título LIST con estilo 3D/retro (fijo, no hace scroll) */}
         <h2
           className="text-2xl font-black tracking-tight text-white uppercase mb-4 shrink-0"
