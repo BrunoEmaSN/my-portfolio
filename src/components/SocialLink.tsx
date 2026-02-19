@@ -36,8 +36,8 @@ const SocialLink = ({
   const stars = Array.from({ length: MAX_RANK }, (_, i) => i < clampedRank);
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="relative w-full max-w-xl mx-auto overflow-hidden border-t-8 border-r-4 border-white shadow-card-lg shadow-blue-900/50 bg-white -skew-x-10 scale-110">
+    <div className="flex flex-col gap-5 md:gap-20">
+      <div className="relative w-full max-w-xl mx-auto overflow-hidden border-t-8 border-r-4 border-white shadow-card-lg shadow-blue-900/50 bg-white -skew-x-10 scale-106 md:scale-150 md:translate-y-7">
         {/* Sección superior: encabezado e información */}
         <div className="md:pl-20 relative bg-white pt-8">
           {/* Banner superior negro */}

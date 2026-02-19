@@ -27,14 +27,14 @@ const ListMenu = ({
 
   return (
     <div
-      className={`relative w-full max-w-xs md:translate-x-20 md:-translate-y-10 ${className}`}
+      className={`relative w-full max-w-xs lg:translate-x-15 md:-translate-y-10 ${className}`}
       role="listbox"
       aria-label={title}
     >
-      <div className="relative z-10 p-4 space-y-1">
-        {/* Título LIST con estilo 3D/retro */}
+      <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(30vh,28rem)]">
+        {/* Título LIST con estilo 3D/retro (fijo, no hace scroll) */}
         <h2
-          className="text-2xl font-black tracking-tight text-white uppercase mb-4"
+          className="text-2xl font-black tracking-tight text-white uppercase mb-4 shrink-0"
           style={{
             textShadow:
               '2px 2px 0 rgba(0,0,0,0.4), 1px 1px 0 rgba(0,0,0,0.3), 0 0 8px rgba(255,255,255,0.15)',
@@ -43,8 +43,11 @@ const ListMenu = ({
           {title}
         </h2>
 
-        {/* Elementos de la lista */}
-        <ul className="space-y-1 w-full" role="list">
+        {/* Contenedor con scroll independiente de la sección */}
+        <ul
+          className="space-y-1 w-full overflow-y-auto overflow-x-hidden overscroll-contain pr-1 min-h-0"
+          role="list"
+        >
           {items.map((label, index) => {
             const isSelected = index === selectedIndex;
             return (

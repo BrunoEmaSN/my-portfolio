@@ -7,7 +7,7 @@ export interface SocialDescriptionProps {
 
 const SocialDescription = ({ name, description }: SocialDescriptionProps) => {
   return (
-    <div className="relative max-w-lg rounded-sm bg-[#01003E]/50 px-10 md:-skew-x-10">
+    <div className="relative max-w-lg rounded-sm bg-[#01003E]/50 px-10 md:-skew-x-10 lg:scale-110">
       {/* Sección del nombre con forma angular de resaltado */}
         <div
           className="absolute top-0 left-3 bg-blue-700 w-40 h-35 rotate-17 -skew-x-20 md:-skew-x-10 z-0 -translate-y-27 translate-x-10 md:translate-x-0"

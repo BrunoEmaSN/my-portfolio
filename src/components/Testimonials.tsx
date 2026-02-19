@@ -23,7 +23,7 @@ const Testimonials = () => {
     xl: 250
   }
   return (
-    <section id="testimonials">
+    <section id="testimonials" className="overflow-y-auto h-full w-full overflow-x-hidden">
       <SectionTitle label="HELP PROVIDED" textSize={size} className="text-5xl xs:text-9xl" />
       <div className={clsx("relative z-10 pointer-events-auto flex flex-col gap-12 w-full h-full pt-20 gap-60", showMenu ? "pointer-events-none" : "pointer-events-auto")}>
         <div className="flex flex-col">
@@ -36,7 +36,7 @@ const Testimonials = () => {
             ))}
           </div>
         </div>
-        <div className="flex md:flex-row flex-col justify-between items-center md:pr-10">
+        <div className="flex md:flex-row flex-col justify-between items-center pr-10 lg:pr-20 gap-5">
           <ListMenu items={personae} />
           <SocialDescription
             name="Mitsuru Kirijo"
