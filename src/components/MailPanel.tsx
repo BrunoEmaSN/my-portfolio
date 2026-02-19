@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Mail } from "lucide-react";
 import { useAppStore } from "../store";
 import clsx from "clsx";
@@ -7,12 +8,6 @@ export interface MailPanelProps {
   backgroundImage: string;
   /** Texto alternativo para la imagen de fondo */
   backgroundImageAlt?: string;
-  /** Nombre del remitente */
-  fromName: string;
-  /** Asunto o pregunta destacada (ej. "Did you get this?") */
-  subject: string;
-  /** Líneas del cuerpo del mensaje */
-  messageLines: string[];
   /** Callback al pulsar el botón de acción (derecha) */
   onAction?: () => void;
   /** Etiqueta del botón de acción (por defecto solo se muestra el icono) */
@@ -24,14 +19,15 @@ export interface MailPanelProps {
 const MailPanel = ({
   backgroundImage,
   backgroundImageAlt = 'Mail background',
-  fromName,
-  subject,
-  messageLines,
   onAction,
   actionLabel,
   className = '',
 }: MailPanelProps) => {
   const { showMenu } = useAppStore();
+  const [fromNameValue, setFromNameValue] = useState("");
+  const [fromEmailValue, setFromEmailValue] = useState("");
+  const [subjectValue, setSubjectValue] = useState("");
+  const [messageValue, setMessageValue] = useState("");
   return (
     <div
       className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-[#1E1E1E] -translate-y-15 -rotate-10 scale-103", className, {
@@ -89,19 +85,34 @@ const MailPanel = ({
       </div>
 
       {/* Contenido sobre la imagen */}
-      <div className="relative z-10 flex h-full flex-col p-5 sm:p-6 md:p-8 rotate-10 translate-x-20">
+      <div className="relative z-50 flex h-full flex-col p-5 sm:p-6 md:p-8 rotate-10 translate-x-20">
         {/* Remitente - parte superior derecha */}
         <div className="flex flex-col items-center gap-1 pt-50">
           <div className="w-fit">
-            <span className="text-transparent text-5xl font-bold" style={{ WebkitTextStroke: "1px white" }}>
-              From
-            </span>
+            <div className="flex items-end gap-2">
+              <span className="text-transparent text-5xl font-bold" style={{ WebkitTextStroke: "1px white" }}>
+                From
+              </span>
+              <input
+                type="text"
+                placeholder="Your name..."
+                value={fromNameValue}
+                onChange={(e) => setFromNameValue(e.target.value)}
+                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300"
+              />
+            </div>
             <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
               <div className="relative">
                 <Mail size={20} strokeWidth={0.5} fill="white" />
                 <Mail size={20} strokeWidth={1} color="#1E1E1E" className="absolute top-0 left-0" />
               </div>
-              <span className="text-xl font-bold">{fromName}</span>
+              <input
+                type="email"
+                placeholder="Your email..."
+                value={fromEmailValue}
+                onChange={(e) => setFromEmailValue(e.target.value)}
+                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300"
+              />
             </div>
           </div>
         </div>
@@ -109,14 +120,21 @@ const MailPanel = ({
         {/* Asunto / pregunta destacada */}
         <div className="mt-4 flex justify-center h-full max-h-[min(70vh,35rem)]">
           <div className="max-w-md w-full h-full">
-            <div className="w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold">
-              {subject}
-            </div>
+            <input
+              type="text"
+              placeholder="Subject..."
+              value={subjectValue}
+              onChange={(e) => setSubjectValue(e.target.value)}
+              className="w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold border-none outline-none"
+            />
 
             {/* Cuerpo del mensaje */}
-            <div className="mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain">
-              {messageLines.join(" ")}
-            </div>
+            <textarea
+              placeholder="Message..."
+              value={messageValue}
+              onChange={(e) => setMessageValue(e.target.value)}
+              className="mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain w-full resize-none bg-transparent border-none outline-none text-inherit"
+            />
           </div>
         </div>
       </div>
