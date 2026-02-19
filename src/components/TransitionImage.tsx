@@ -13,8 +13,8 @@ export interface TransitionImageProps {
   duration?: number
 }
 
-const DEFAULT_DURATION = 0.4
-const EASE = "power2.inOut"
+const DEFAULT_DURATION = 0.1
+const EASE = "power1.inOut"
 
 const TransitionImage = ({
   image,
@@ -40,14 +40,11 @@ const TransitionImage = ({
     }
 
     // Transición: fade out y luego actualizar src y fade in
-    gsap.to(imgEl, {
-      opacity: 0,
-      duration: duration / 2,
+    gsap.fromTo(imgEl, { opacity: 0, x: 10 }, {
+      x: 0,
+      opacity: 1,
+      duration,
       ease: EASE,
-      onComplete: () => {
-        imgEl.src = image
-        gsap.fromTo(imgEl, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: duration / 2, ease: EASE })
-      },
     })
   }, [image, duration])
 

@@ -6,13 +6,14 @@ import ExperienceTimeline from "../components/ExperienceTimeline"
 import Card from "../components/Card"
 import { experiencesData, projectsData } from "../../constants"
 
+const size = {
+  sm: 100,
+  md: 120,
+  lg: 150,
+  xl: 200,
+}
+
 const ExperiencesScreen = () => {
-  const size = {
-    sm: 100,
-    md: 120,
-    lg: 150,
-    xl: 200,
-  }
   const sectionRef = useRef<HTMLElement>(null)
   const titleFeatured = useRef<HTMLHeadingElement>(null)
   const titleJourney = useRef<HTMLHeadingElement>(null)

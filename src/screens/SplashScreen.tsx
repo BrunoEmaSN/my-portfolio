@@ -17,7 +17,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
       duration: 0.8,
       ease: 'power3.in',
       onComplete: () => {
-        navigate(ROUTES.MENU);
+        navigate(ROUTES.HOME);
       },
     });
   };
@@ -73,7 +73,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
     <div
       onClick={handleClick}
       ref={splashRef}
-      className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden bg-black"
+      className="w-full h-screen flex items-center justify-start z-50 overflow-hidden"
     >
       <div className="overflow-hidden">
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />

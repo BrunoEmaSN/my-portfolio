@@ -1,53 +1,58 @@
 import { useRef } from "react"
-import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 import SectionTitle from "../components/SectionTitle"
 import Info from "../components/Info"
 import Glass from "../components/Glass"
 import Personality from "../components/Personality"
+import { ANIMATION_CONFIG } from "../../constants"
+
+const size = {
+  sm: 100,
+  md: 200,
+  lg: 300,
+  xl: 400,
+}
 
 const AboutMeScreen = () => {
-  const size = {
-    sm: 100,
-    md: 200,
-    lg: 300,
-    xl: 400,
-  }
 
   const infoRef = useRef<HTMLDivElement>(null)
   const glassRef = useRef<HTMLDivElement>(null)
   const personalityRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLElement>(null)
-  const hasAnimatedRef = useRef(false)
 
   useGSAP(() => {
-    if (!infoRef.current || !glassRef.current || !personalityRef.current || hasAnimatedRef.current) return
-
-    hasAnimatedRef.current = true
-    gsap.set(infoRef.current, { yPercent: 100, opacity: 0 })
-    gsap.set(glassRef.current, { xPercent: 100, opacity: 0 })
-    gsap.set(personalityRef.current, { xPercent: -100, opacity: 0 })
-
-    const tl = gsap.timeline()
-    tl.to(infoRef.current, {
-      yPercent: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: "power3.out",
-    })
-      .to(glassRef.current, {
-        xPercent: 0,
+    gsap.fromTo(
+      infoRef.current,
+      { y: 80, opacity: 0 },
+      {
+        y: 0,
         opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-      }, "-=0.4")
-      .to(personalityRef.current, {
-        xPercent: 0,
+        duration: ANIMATION_CONFIG.duration,
+        ease: ANIMATION_CONFIG.ease,
+      }
+    )
+    gsap.fromTo(
+      personalityRef.current,
+      { x: -120, opacity: 0 },
+      {
+        x: 0,
         opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-      }, "-=0.4")
-  }, { scope: containerRef, dependencies: [] })
+        duration: ANIMATION_CONFIG.duration,
+        ease: ANIMATION_CONFIG.ease,
+      }
+    )
+    gsap.fromTo(
+      glassRef.current,
+      { x: 120, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: ANIMATION_CONFIG.duration,
+        ease: ANIMATION_CONFIG.ease,
+      }
+    )
+  }, [])
 
   return (
     <section ref={containerRef} id="about-me">

@@ -1,37 +1,31 @@
-export const SECTIONS = {
-  ABOUT_ME: 'about-me',
-  EXPERIENCES: 'experiences',
-  TESTIMONIALS: 'testimonials',
-  CONTACT: 'contact',
-  EXIT: 'exit',
-} as const;
-
 /** Rutas de la app (React Router) */
 export const ROUTES = {
   SPLASH: '/',
-  MENU: '/menu',
+  HOME: '/home',
   ABOUT_ME: '/about-me',
   EXPERIENCES: '/experiences',
   TESTIMONIALS: '/testimonials',
   CONTACT: '/contact',
 } as const;
 
+export type ROUTES_TYPE = '/' | '/home' | '/about-me' | '/experiences' | '/testimonials' | '/contact'
+
 /** Mapa pathname -> section id para el menú */
 export const PATH_TO_SECTION: Record<string, string> = {
-  [ROUTES.MENU]: SECTIONS.ABOUT_ME,
-  [ROUTES.ABOUT_ME]: SECTIONS.ABOUT_ME,
-  [ROUTES.EXPERIENCES]: SECTIONS.EXPERIENCES,
-  [ROUTES.TESTIMONIALS]: SECTIONS.TESTIMONIALS,
-  [ROUTES.CONTACT]: SECTIONS.CONTACT,
-  [ROUTES.SPLASH]: SECTIONS.EXIT,
+  [ROUTES.HOME]: ROUTES.HOME,
+  [ROUTES.ABOUT_ME]: ROUTES.ABOUT_ME,
+  [ROUTES.EXPERIENCES]: ROUTES.EXPERIENCES,
+  [ROUTES.TESTIMONIALS]: ROUTES.TESTIMONIALS,
+  [ROUTES.CONTACT]: ROUTES.CONTACT,
+  [ROUTES.SPLASH]: ROUTES.SPLASH,
 };
 
 export const navItems = [
-  { id: SECTIONS.ABOUT_ME, label: 'About Me', path: ROUTES.ABOUT_ME, color: 'bg-gray-500' },
-  { id: SECTIONS.EXPERIENCES, label: 'Experiences', path: ROUTES.EXPERIENCES, color: 'bg-blue-500' },
-  { id: SECTIONS.TESTIMONIALS, label: 'Testimonials', path: ROUTES.TESTIMONIALS, color: 'bg-green-500' },
-  { id: SECTIONS.CONTACT, label: 'Contact', path: ROUTES.CONTACT, color: 'bg-purple-500' },
-  { id: SECTIONS.EXIT, label: 'Exit', path: ROUTES.SPLASH, color: 'bg-gray-500' },
+  { id: ROUTES.ABOUT_ME, label: 'About Me', path: ROUTES.ABOUT_ME, color: 'bg-gray-500' },
+  { id: ROUTES.EXPERIENCES, label: 'Experiences', path: ROUTES.EXPERIENCES, color: 'bg-blue-500' },
+  { id: ROUTES.TESTIMONIALS, label: 'Testimonials', path: ROUTES.TESTIMONIALS, color: 'bg-green-500' },
+  { id: ROUTES.CONTACT, label: 'Contact', path: ROUTES.CONTACT, color: 'bg-purple-500' },
+  { id: ROUTES.SPLASH, label: 'Exit', path: ROUTES.SPLASH, color: 'bg-gray-500' },
 ];
 
 export const ANIMATION_CONFIG = {

@@ -1,29 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { navItems, SECTIONS, ROUTES, PATH_TO_SECTION } from '../../constants';
+import { navItems, ROUTES } from '../../constants';
 import type { MobileProps } from '../types';
+import { useAppStore } from '../store';
 
 const Menu = ({ isMobile }: MobileProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const isMenu = location.pathname === ROUTES.MENU;
-
-  const sectionId = PATH_TO_SECTION[location.pathname] ?? SECTIONS.ABOUT_ME;
-  const indexFromPath = navItems.findIndex((item) => item.id === sectionId);
-  const [selectedIndex, setSelectedIndex] = useState(indexFromPath >= 0 ? indexFromPath : 0);
+  const isMenu = location.pathname === ROUTES.HOME;
+  const {selectedIndex, setSelectedIndex} = useAppStore();
 
   const linkRefs = useRef<HTMLButtonElement[]>([]);
   const menuItemsRef = useRef<HTMLLIElement[]>([]);
   const menuContainerRef = useRef<HTMLUListElement>(null);
   const hasAnimatedRef = useRef(false);
-
-  useEffect(() => {
-    const idx = navItems.findIndex((item) => item.id === sectionId);
-    if (idx >= 0) setSelectedIndex(idx);
-  }, [location.pathname, sectionId]);
 
   useEffect(() => {
     if (!isMenu) return;
@@ -32,22 +25,18 @@ const Menu = ({ isMobile }: MobileProps) => {
       const key = event.key.toLowerCase();
 
       if (key === 'w') {
-        setSelectedIndex((prev) => {
-          const newIndex = prev > 0 ? prev - 1 : navItems.length - 1;
-          return newIndex;
-        });
-      } else if (key === 's') {
-        setSelectedIndex((prev) => {
-          const newIndex = prev < navItems.length - 1 ? prev + 1 : 0;
-          return newIndex;
-        });
-      } else if (key === 'enter') {
+        const newIndex = selectedIndex > 0 ? selectedIndex - 1 : navItems.length - 1;
+        setSelectedIndex(newIndex);
+      }
+      if (key === 's') {
+        const newIndex = selectedIndex < navItems.length - 1 ? selectedIndex + 1 : 0;
+        setSelectedIndex(newIndex);
+      }
+      if (key === 'enter') {
         event.preventDefault();
         event.stopPropagation();
         const selectedItem = navItems[selectedIndex];
-        if (selectedItem.path) {
-          navigate(selectedItem.path);
-        }
+        navigate(selectedItem.path);
       }
     };
 
@@ -74,14 +63,12 @@ const Menu = ({ isMobile }: MobileProps) => {
         hasAnimatedRef.current = true;
       },
     });
-  }, { scope: menuContainerRef, dependencies: [] });
+  }, { scope: menuContainerRef });
 
   return (
     <>
-      <div className={clsx("w-full h-full flex items-end justify-end pb-40", {
-        "pointer-events-none": !isMenu,
-      })}>
-        <nav className="fixed max-w-md z-50">
+      <div className={clsx("w-full h-full flex items-end justify-end pb-40")}>
+        <nav className="fixed max-w-md z-50 bg-red-500">
           <ul ref={menuContainerRef} className="flex flex-col gap-1">
             {navItems.map((item, index) => (
               <li
@@ -101,7 +88,7 @@ const Menu = ({ isMobile }: MobileProps) => {
                     if (item.path) navigate(item.path);
                   }}
                   className={clsx(
-                    'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50 w-full font-black text-4xl transition-all duration-300 block hover:bg-blue-700 uppercase',
+                    'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50 w-full font-black text-4xl h-[40px] transition-all duration-300 block hover:bg-blue-700 uppercase',
                     {
                       'bg-blue-700 text-white scale-105 shadow-lg': selectedIndex === index,
                       'text-gray-500': selectedIndex !== index,

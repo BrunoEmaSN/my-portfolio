@@ -37,14 +37,15 @@ const socialItems = [
   },
 ]
 
+const size = {
+  sm: 100,
+  md: 120,
+  lg: 200,
+  xl: 400,
+}
+
 const ContactScreen = () => {
   const socialListRef = useRef<HTMLDivElement>(null)
-  const size = {
-    sm: 100,
-    md: 120,
-    lg: 200,
-    xl: 400,
-  }
 
   useGSAP(() => {
     if (!socialListRef.current?.children?.length) return

@@ -1,7 +1,11 @@
 import { create } from 'zustand';
 
 interface AppState {
-  // Estado mínimo por si se necesita en el futuro (ej. tema, preferencias).
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
 }
 
-export const useAppStore = create<AppState>(() => ({}));
+export const useAppStore = create<AppState>((set) => ({
+  selectedIndex: 0,
+  setSelectedIndex: (index: number) => set({ selectedIndex: index }),
+}));

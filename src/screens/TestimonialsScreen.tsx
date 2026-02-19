@@ -24,6 +24,13 @@ const personaeImages = [
   "/images/testimonials/fake-image-5.png",
 ]
 
+const size = {
+  sm: 100,
+  md: 120,
+  lg: 200,
+  xl: 250,
+}
+
 const TestimonialsScreen = () => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
@@ -33,12 +40,6 @@ const TestimonialsScreen = () => {
     gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" })
   }, { scope: sectionRef, dependencies: [] })
 
-  const size = {
-    sm: 100,
-    md: 120,
-    lg: 200,
-    xl: 250,
-  }
   return (
     <section ref={sectionRef} id="testimonials" className="overflow-y-auto h-full w-full overflow-x-hidden">
       <SectionTitle label="HELP PROVIDED" textSize={size} className="text-5xl xs:text-9xl" />
