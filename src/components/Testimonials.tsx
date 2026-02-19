@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import clsx from 'clsx';
 import SectionTitle from './SectionTitle';
 import { useAppStore } from '../store';
@@ -7,6 +7,8 @@ import { socialLinksData } from '../../constants';
 import SocialDescription from './SocialDescription';
 import ListMenu from './ListMenu';
 import ImageGallery from './ImageGallery';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const personae = [
   'Mitsuru Kirijo',
@@ -26,7 +28,14 @@ const personaeImages = [
 
 const Testimonials = () => {
   const { showMenu } = useAppStore();
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);  
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    if (showMenu) return;
+    gsap.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+  }, { scope: sectionRef, dependencies: [showMenu] });
+
   const size = {
     sm: 100,
     md: 120,
@@ -34,7 +43,7 @@ const Testimonials = () => {
     xl: 250
   }
   return (
-    <section id="testimonials" className="overflow-y-auto h-full w-full overflow-x-hidden">
+    <section ref={sectionRef} id="testimonials" className="overflow-y-auto h-full w-full overflow-x-hidden">
       <SectionTitle label="HELP PROVIDED" textSize={size} className="text-5xl xs:text-9xl" />
       <div className={clsx("relative z-10 pointer-events-auto flex flex-col gap-12 w-full h-full pt-10 gap-5 items-between justify-center", showMenu ? "pointer-events-none" : "pointer-events-auto")}>
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">

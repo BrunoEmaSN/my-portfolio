@@ -23,8 +23,14 @@ const ListMenu = ({
   const isControlled = controlledIndex !== undefined;
   const selectedIndex = isControlled ? controlledIndex : internalIndex;
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
   const prevSelectedRef = useRef(selectedIndex);
   const { showMenu } = useAppStore();
+
+  useGSAP(() => {
+    if (showMenu || !containerRef.current) return;
+    gsap.fromTo(containerRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: 'power2.inOut' });
+  }, { scope: containerRef, dependencies: [showMenu] });
 
   const handleSelect = (index: number) => {
     if (!isControlled) setInternalIndex(index);
@@ -43,7 +49,7 @@ const ListMenu = ({
       handleSelect(next);
     }
   };
-  
+
   useEffect(() => {
     if(showMenu) return;
     window.addEventListener('keydown', handleKeyDown);
@@ -69,6 +75,7 @@ const ListMenu = ({
 
   return (
     <div
+      ref={containerRef}
       tabIndex={0}
       role="listbox"
       aria-label={`${title}. Usa W y S para cambiar.`}

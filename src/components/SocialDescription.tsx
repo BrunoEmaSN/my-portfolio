@@ -1,3 +1,8 @@
+import { useRef } from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useAppStore } from '../store';
+
 export interface SocialDescriptionProps {
   /** Nombre de la persona (ej. "Mitsuru Kirijo") */
   name: string;
@@ -5,9 +10,22 @@ export interface SocialDescriptionProps {
   description: string;
 }
 
-const SocialDescription = ({ name, description }: SocialDescriptionProps) => {
+const SocialDescription = ({ name, description}: SocialDescriptionProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { showMenu } = useAppStore();
+
+  useGSAP(() => {
+    if (showMenu || !containerRef.current) return;
+    gsap.fromTo(containerRef.current, { x: 120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: 'power2.inOut' });
+  }, { scope: containerRef, dependencies: [showMenu] });
+
+  useGSAP(() => {
+    if (showMenu || !containerRef.current) return;
+    gsap.fromTo(containerRef.current, { x: 120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
+  }, { scope: containerRef, dependencies: [name] });
+
   return (
-    <div className="relative max-w-lg rounded-sm bg-[#01003E]/50 px-10 md:-skew-x-10 lg:scale-110">
+    <div ref={containerRef} className="relative max-w-lg rounded-sm bg-[#01003E]/50 px-10 md:-skew-x-10 lg:scale-110">
       {/* Sección del nombre con forma angular de resaltado */}
         <div
           className="absolute top-0 left-3 bg-blue-700 w-40 h-35 rotate-17 -skew-x-20 md:-skew-x-10 z-0 -translate-y-27 translate-x-10 md:translate-x-0"

@@ -1,6 +1,8 @@
 import { useMemo, useRef, useEffect, useLayoutEffect } from "react"
 import clsx from "clsx"
 import { gsap } from "gsap"
+import { useGSAP } from "@gsap/react"
+import { useAppStore } from "../store"
 
 export interface ImageGalleryProps {
   /** Array de 1 a 5 URLs de imágenes */
@@ -13,8 +15,11 @@ export interface ImageGalleryProps {
   className?: string
 }
 
-const DURATION = 0.5
-const EASE = "power2.out"
+const DURATION = 0.8
+const EASE = "power1.inOut"
+
+const STAGGER_DURATION = 0.4
+const STAGGER_DELAY = 0.12
 
 const ImageGallery = ({
   images,
@@ -26,8 +31,10 @@ const ImageGallery = ({
   const currentIndex = Math.max(0, Math.min(imageCurrent, count - 1))
   const imgRefs = useRef<Record<number, HTMLImageElement | null>>({})
   const boxRefs = useRef<Record<number, HTMLDivElement | null>>({})
+  const gridRef = useRef<HTMLDivElement>(null)
   const prevIndexRef = useRef(currentIndex)
   const prevRectsRef = useRef<Record<number, DOMRect>>({})
+  const { showMenu } = useAppStore()
 
   // Transición GSAP al cambiar la imagen actual (grayscale)
   useEffect(() => {
@@ -53,6 +60,22 @@ const ImageGallery = ({
       gsap.set(el, { filter: idx === currentIndex ? "grayscale(0%)" : "grayscale(100%)" })
     })
   }, [])
+
+  // Entrada con stagger cuando playEntrance se activa
+  useGSAP(() => {
+    if (showMenu || !gridRef.current) return
+    const boxes = Array.from(gridRef.current.children) as HTMLDivElement[]
+    if (boxes.length === 0) return
+    gsap.set(boxes, { opacity: 0, y: 24 })
+    gsap.to(boxes, {
+      opacity: 1,
+      y: 0,
+      duration: STAGGER_DURATION,
+      stagger: STAGGER_DELAY,
+      ease: EASE,
+      delay: 0.3
+    })
+  }, { scope: gridRef, dependencies: [showMenu] })
 
   // FLIP: transición de cambio de lugares al reordenar (count 4 o 5)
   useLayoutEffect(() => {
@@ -139,6 +162,7 @@ const ImageGallery = ({
 
   return (
     <div
+      ref={gridRef}
       className={clsx("grid gap-1 sm:gap-2 w-full h-full min-h-[200px] sm:min-h-[280px] md:min-h-[320px]", gridClass, className)}
       style={{ aspectRatio: count === 1 ? "16/10" : count <= 2 ? "16/9" : undefined }}
     >
