@@ -30,12 +30,12 @@ const MailPanel = ({
   const [messageValue, setMessageValue] = useState("");
   return (
     <div
-      className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-[#1E1E1E] -translate-y-15 -rotate-10 scale-103", className, {
+      className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-[#1E1E1E] -translate-y-15 lg:-rotate-10 scale-103", className, {
         "pointer-events-none": showMenu,
         "pointer-events-auto": !showMenu,
       })}
     >
-      <div className="absolute top-0 left-0 w-full h-full bg-[#1E1E1E]/50 translate-x-20 translate-y-10 rounded-lg rotate-3" />
+      <div className="absolute top-0 left-0 w-full h-full bg-[#1E1E1E]/50 lg:translate-x-20 lg:translate-y-10 rounded-lg lg:rotate-3" />
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="relative h-2/3">
           <img
@@ -48,7 +48,7 @@ const MailPanel = ({
             className="absolute top-0 right-0 w-full h-full bg-[#1E1E1E]"
             style={{ clipPath: 'polygon(100% 0, 30% 0, 100% 70%)' }}
           />
-          <span className="absolute top-0 left-1/2 -translate-x-2/3 text-white text-[150px] font-bold -skew-x-20 -rotate-10">
+          <span className="absolute top-0 left-1/2 -translate-x-2/3 text-white text-[150px] font-bold -skew-x-20 lg:-rotate-10">
             MAIL
           </span>
           <div
@@ -58,10 +58,10 @@ const MailPanel = ({
         </div>
       </div>
       <div
-        className="absolute top-0 left-0 w-full h-full flex justify-end items-end border-l-16 border-b-16 blur-[0.5px] border-r-16 border-white/90 rounded-lg rotate-3 translate-x-10 translate-y-5" />
+        className="absolute top-0 left-0 w-full h-full hidden lg:flex justify-end items-end border-l-16 border-b-16 blur-[0.5px] border-r-16 border-white/90 rounded-lg lg:rotate-3 lg:translate-x-10 lg:translate-y-5" />
 
       {/* Contenido sobre la imagen */}
-      <div className="relative z-50 flex h-full flex-col p-5 sm:p-6 md:p-8 rotate-10 translate-x-20">
+      <div className="relative z-50 flex h-full flex-col p-5 sm:p-6 md:p-8 lg:rotate-10 lg:translate-x-20">
         {/* Remitente - parte superior derecha */}
         <div className="flex flex-col items-center gap-1 pt-50">
           <div className="w-fit">
@@ -113,15 +113,15 @@ const MailPanel = ({
             />
           </div>
         </div>
-        <div className="flex justify-end items-end">
+        <div className="flex justify-end items-end pt-20 md:pt-0">
           <button
             type="button"
             onClick={onAction}
-            className="w-20 h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer">
+            className="w-full h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer">
             <img
               src="/images/run.svg"
               alt="Mail button"
-              className="absolute w-full h-full p-2"
+              className="absolute hidden md:block w-full h-full p-2"
               style={{ filter: "invert(17%) sepia(89%) saturate(3464%) hue-rotate(226deg) brightness(95%) contrast(97%)" }}
             />
             {/* <span
@@ -131,7 +131,7 @@ const MailPanel = ({
               A
             </span> */}
             <span
-              className="m-auto flex items-center justify-center text-3xl font-bold z-10"
+              className="m-auto p-4 md:p-0 bg-blue-700 md:bg-transparent flex items-center justify-center text-3xl font-bold z-10"
               aria-label={actionLabel ?? 'Acción'}
             >
               SEND EMAIL

@@ -9,7 +9,7 @@ const Contact = () => {
     xl: 400
   }
   return (
-    <section id="contact">
+    <section id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden">
       <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
       <MailPanel
         backgroundImage="/images/testimonials/fake-image-1.png"
