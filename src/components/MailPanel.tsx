@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Mail } from "lucide-react";
 import { useAppStore } from "../store";
 import clsx from "clsx";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export interface MailPanelProps {
   /** Imagen de fondo del panel (semitransparente, escala de grises) */
@@ -24,12 +26,24 @@ const MailPanel = ({
   className = '',
 }: MailPanelProps) => {
   const { showMenu } = useAppStore();
+  const panelRef = useRef<HTMLDivElement>(null);
   const [fromNameValue, setFromNameValue] = useState("");
   const [fromEmailValue, setFromEmailValue] = useState("");
   const [subjectValue, setSubjectValue] = useState("");
   const [messageValue, setMessageValue] = useState("");
+
+  useGSAP(() => {
+    if (!panelRef.current || showMenu) return;
+    gsap.fromTo(
+      panelRef.current,
+      { x: -120, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.6, delay: 0.2, ease: 'power2.out' }
+    );
+  }, { scope: panelRef, dependencies: [showMenu] });
+
   return (
     <div
+      ref={panelRef}
       className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-[#1E1E1E] md:-translate-y-15 lg:-rotate-10 scale-103", className, {
         "pointer-events-none": showMenu,
         "pointer-events-auto": !showMenu,

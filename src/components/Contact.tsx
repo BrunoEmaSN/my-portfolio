@@ -1,7 +1,11 @@
+import { useRef } from 'react';
 import { Github, Instagram, Linkedin, Twitter } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import MailPanel from './MailPanel';
 import SectionTitle from './SectionTitle';
 import SocialItem from './SocialItem';
+import { useAppStore } from '../store';
 
 const socialItems = [
   {
@@ -35,12 +39,25 @@ const socialItems = [
 ]
 
 const Contact = () => {
+  const { showMenu } = useAppStore();
+  const socialListRef = useRef<HTMLDivElement>(null);
   const size = {
     sm: 100,
     md: 120,
     lg: 200,
     xl: 400
-  }
+  };
+
+  useGSAP(() => {
+    if (!socialListRef.current?.children?.length || showMenu) return;
+    const children = Array.from(socialListRef.current.children);
+    gsap.fromTo(
+      children,
+      { x: 60, opacity: 0, skewX: -10 },
+      { x: 0, opacity: 1, skewX: -10, duration: 0.5, stagger: 0.2, ease: 'power2.out' }
+    );
+  }, { scope: socialListRef, dependencies: [showMenu] });
+
   return (
     <section id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden z-10">
       <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
@@ -52,15 +69,17 @@ const Contact = () => {
           }}
           actionLabel="SEND EMAIL"
         />
-        <div className="flex flex-col items-center justify-center h-full w-full p-8 gap-5">
-          {socialItems.map((item, index) => (
+        <div
+          ref={socialListRef}
+          className="flex flex-col items-center justify-center h-full w-full p-8 gap-5"
+        >
+          {socialItems.map((item) => (
             <SocialItem
               key={item.name}
               logoSrc={item.logoSrc}
               name={item.name}
               description={item.description}
               icon={item.icon}
-              className={`md:translate-x-${index * 10}`}
               onClick={() => {
                 console.log("Click on", item.name);
               }}
