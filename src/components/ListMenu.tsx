@@ -79,7 +79,7 @@ const ListMenu = ({
       tabIndex={0}
       role="listbox"
       aria-label={`${title}. Usa W y S para cambiar.`}
-      className={clsx("relative w-full max-w-xs lg:translate-x-15 md:-translate-y-10 outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-inset rounded", className)}
+      className={clsx("relative w-full max-w-xs outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-inset rounded", className)}
     >
       <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(40vh,28rem)]">
         {/* Título LIST con estilo 3D/retro (fijo, no hace scroll) */}

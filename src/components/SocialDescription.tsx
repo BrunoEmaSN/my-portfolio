@@ -21,7 +21,7 @@ const SocialDescription = ({ name, description}: SocialDescriptionProps) => {
 
   useGSAP(() => {
     if (showMenu || !containerRef.current) return;
-    gsap.fromTo(containerRef.current, { x: 120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
+    gsap.fromTo(containerRef.current, { x: 15 }, { x: 0, duration: 0.3, ease: 'power2.inOut' });
   }, { scope: containerRef, dependencies: [name] });
 
   return (

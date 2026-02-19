@@ -40,13 +40,6 @@ const SocialLink = ({
   const clampedRank = Math.min(MAX_RANK, Math.max(0, rank));
   const stars = Array.from({ length: MAX_RANK }, (_, i) => i < clampedRank);
   const containerRef = useRef<HTMLDivElement>(null);
-  const bannerTextRef = useRef<HTMLSpanElement>(null);
-  const arcanaLabelRef = useRef<HTMLSpanElement>(null);
-  const arcanaNameRef = useRef<HTMLHeadingElement>(null);
-  const rankRef = useRef<HTMLSpanElement>(null);
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const starsRef = useRef<HTMLDivElement>(null);
-  const rankValueRef = useRef<HTMLSpanElement>(null);
   const { showMenu } = useAppStore();
 
   useGSAP(() => {
@@ -55,39 +48,9 @@ const SocialLink = ({
   }, { scope: containerRef, dependencies: [showMenu] });
 
   useGSAP(() => {
-    if (showMenu || !bannerTextRef.current) return;
-    gsap.fromTo(bannerTextRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
-  }, { scope: bannerTextRef, dependencies: [bannerText] });
-
-  useGSAP(() => {
-    if (showMenu || !rankRef.current) return;
-    gsap.fromTo(rankRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
-  }, { scope: rankRef, dependencies: [rank] });
-
-  useGSAP(() => {
-    if (showMenu || !descriptionRef.current) return;
-    gsap.fromTo(descriptionRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
-  }, { scope: descriptionRef, dependencies: [bannerText] });
-
-  useGSAP(() => {
-    if (showMenu || !arcanaLabelRef.current) return;
-    gsap.fromTo(arcanaLabelRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
-  }, { scope: arcanaLabelRef, dependencies: [bannerText] });
-
-  useGSAP(() => {
-    if (showMenu || !arcanaNameRef.current) return;
-    gsap.fromTo(arcanaNameRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
-  }, { scope: arcanaNameRef, dependencies: [bannerText] });
-
-  useGSAP(() => {
-    if (showMenu || !rankValueRef.current) return;
-    gsap.fromTo(rankValueRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
-  }, { scope: rankValueRef, dependencies: [bannerText] });
-
-  useGSAP(() => {
-    if (showMenu || !starsRef.current) return;
-    gsap.fromTo(starsRef.current, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.inOut' });
-  }, { scope: starsRef, dependencies: [bannerText] });
+    if (showMenu || !containerRef.current) return;
+    gsap.fromTo(containerRef.current, { x: -10 }, { x: 0, duration: 0.3, ease: 'power2.inOut' });
+  }, { scope: containerRef, dependencies: [bannerText] });
 
   return (
     <div ref={containerRef} className="flex flex-col gap-5 md:gap-20">
@@ -97,7 +60,7 @@ const SocialLink = ({
           {/* Banner superior negro */}
           {bannerText && (
             <div className="absolute top-0 left-0 right-0 pt-5 pb-2 bg-black flex items-center justify-center">
-              <span ref={bannerTextRef} className="font-sans text-white font-bold text-sm tracking-widest uppercase skew-x-10">
+              <span className="font-sans text-white font-bold text-sm tracking-widest uppercase skew-x-10">
                 {bannerText}
               </span>
             </div>
@@ -107,21 +70,21 @@ const SocialLink = ({
           <div
             className="absolute top-10 left-0 bg-black flex items-center justify-end pr-2 pl-2 pt-2 origin-left -rotate-20 translate-x-10 md:translate-x-30"
           >
-            <span ref={arcanaLabelRef} className="text-white text-[10px] font-bold tracking-widest uppercase">
+            <span className="text-white text-[10px] font-bold tracking-widest uppercase">
               {arcanaLabel}
             </span>
           </div>
 
           {/* Nombre de arcana + RANK */}
           <div className="grid grid-cols-3 items-center gap-4 pt-2 px-5">
-            <h2 ref={arcanaNameRef} className="col-span-2 text-center text-3xl sm:text-4xl text-black font-bold">
+            <h2 className="col-span-2 text-center text-3xl sm:text-4xl text-black font-bold">
               {arcanaName}
             </h2>
             <div className="flex items-center gap-2">
-              <span ref={rankRef} className="text-black text-xs font-bold tracking-widest uppercase">
+              <span className="text-black text-xs font-bold tracking-widest uppercase">
                 RANK
               </span>
-              <span ref={rankValueRef} className="bg-white leading-6 text-7xl text-black font-black leading-none z-10"
+              <span className="bg-white leading-6 text-7xl text-black font-black leading-none z-10"
                 style={{
                   lineHeight: '0.85',
                 }}
@@ -132,7 +95,7 @@ const SocialLink = ({
           </div>
 
           {/* Estrellas */}
-          <div ref={starsRef} className="flex justify-center gap-0.5 mt-3 -skew-x-15" role="img" aria-label={`Rango ${clampedRank} de ${MAX_RANK}`}>
+          <div className="flex justify-center gap-0.5 mt-3 -skew-x-15" role="img" aria-label={`Rango ${clampedRank} de ${MAX_RANK}`}>
             {stars.map((filled, i) => (
               <span key={i}>{filled ? <StarFilled /> : <StarEmpty />}</span>
             ))}
@@ -153,7 +116,7 @@ const SocialLink = ({
         <div
           className="absolute bottom-0 right-0 w-48 h-32 opacity-10"
         />
-        <p ref={descriptionRef} className="relative z-10 font-sans text-sm sm:text-base leading-relaxed p-5 text-white/95">
+        <p className="relative z-10 font-sans text-sm sm:text-base leading-relaxed p-5 text-white/95">
           {description}
         </p>
       </div>

@@ -60,7 +60,9 @@ const Testimonials = () => {
           </div>
         </div>
         <div className="flex md:flex-row flex-col justify-between items-center pr-10 lg:pr-20 gap-5">
-          <ListMenu items={personae} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
+          <div className="w-full lg:translate-x-15 md:-translate-y-10">
+            <ListMenu items={personae} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
+          </div>
           <SocialDescription
             name={socialLinksData[selectedIndex ?? 0].bannerText}
             description={socialLinksData[selectedIndex ?? 0].description}
