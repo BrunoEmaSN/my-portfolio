@@ -6,6 +6,8 @@ import Info from "../components/Info"
 import Glass from "../components/Glass"
 import Personality from "../components/Personality"
 import { ANIMATION_CONFIG } from "../../constants"
+import InfoPersona from "../components/InfoPersona"
+import SelectorPersona from "../components/SelectorPersona"
 
 const size = {
   sm: 100,
@@ -55,13 +57,16 @@ const AboutMeScreen = () => {
   }, [])
 
   return (
-    <section ref={containerRef} id="about-me">
+    <section ref={containerRef} id="about-me" className="relative">
       <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
+      {/*  */}
       <Personality ref={personalityRef} />
-      <div className="h-full w-full flex justify-end items-end">
+      {/* <Info ref={infoRef} /> */}
+      <InfoPersona />
+
+      <div className="h-full w-full flex justify-start items-end">
         <Glass ref={glassRef} />
       </div>
-      <Info ref={infoRef} />
     </section>
   )
 }

@@ -18,14 +18,13 @@ const Info = forwardRef<HTMLDivElement>((_, ref) => {
 
   return (
     <div ref={ref} className="h-full w-full flex flex-col justify-end items-center absolute">
-      <div className="w-full bg-white text-black border-t-3 border-red-600 pt-3 pb-2">
-        <div>
-          <div className="w-full bg-black flex flex-col gap-4 items-center justify-center p-4 text-white">
+      <div className="w-full bg-white text-black border-t-3 border-red-600 pt-3 pb-2 -rotate-10">
+          <div className="w-full bg-black flex flex-col gap-4 items-end justify-center p-4 text-white">
             <h2 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
               Hi. I'm <span className="text-blue-700 font-bold">Bruno Sanchez</span>, a creative developer passionate about technology.
             </h2>
           </div>
-          <div className="flex flex-col items-center justify-center p-4 gap-4">
+          <div className="flex flex-col items-end justify-center p-4 gap-4">
             {
               STEPPER_ITEMS[currentStep].id === 'info' && (
                 <ul className="flex flex-col gap-2">
@@ -65,13 +64,12 @@ const Info = forwardRef<HTMLDivElement>((_, ref) => {
               )
             }
           </div>
-          <div className="bg-black flex items-center justify-center p-1">
+          <div className="bg-black flex items-end justify-end p-1">
             <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white text-start">{STEPPER_ITEMS[currentStep].name}</h3>
           </div>
-          <p className="text-xs sm:text-sm md:text-base lg:text-md xl:text-lg p-2 font-bold text-gray-500 w-full text-center">{STEPPER_ITEMS[currentStep].description}</p>
+          <p className="text-xs sm:text-sm md:text-base lg:text-md xl:text-lg p-2 font-bold text-gray-500 w-full text-end bg-red-600">{STEPPER_ITEMS[currentStep].description}</p>
         </div>
-      </div>
-      <div className="flex w-full justify-center bg-gray-900">
+      <div className="flex w-full justify-center">
         <Stepper items={STEPPER_ITEMS} onItemChange={handleStepChange} />
       </div>
     </div>
