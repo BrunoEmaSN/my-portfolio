@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ANIMATION_CONFIG } from '../../constants';
+import { playP3RMenuSound } from '../helpers/audioContext';
 export interface ListMenuProps {
   title?: string;
   items: string[];
@@ -38,10 +39,12 @@ const ListMenu = ({
   const handleKeyDown = (e: KeyboardEvent) => {
     if (items.length === 0) return;
     if (e.key === 'w' || e.key === 'W') {
+      playP3RMenuSound();
       e.preventDefault();
       const prev = (selectedIndex - 1 + items.length) % items.length;
       handleSelect(prev);
     } else if (e.key === 's' || e.key === 'S') {
+      playP3RMenuSound();
       e.preventDefault();
       const next = (selectedIndex + 1) % items.length;
       handleSelect(next);

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { ANIMATION_CONFIG, ROUTES } from "../../constants"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { playP3RBackSound } from "../helpers/audioContext"
 
 const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMobile: boolean }) => {
     const navigate = useNavigate()
@@ -13,6 +14,7 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
+                playP3RBackSound();
                 gsap.fromTo(layoutRef.current, { opacity: 1, scale: 1 }, {
                     opacity: 0,
                     scale: 1.3,

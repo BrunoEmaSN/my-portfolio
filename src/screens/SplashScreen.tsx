@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import type { MobileProps } from '../types';
 import MainTitle from '../components/MainTitle';
 import { ANIMATION_CONFIG, ROUTES } from '../../constants';
+import { playP3RStartSound } from '../helpers/audioContext';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   const revealBlockRef = useRef(null);
 
   const startTransition = () => {
+    playP3RStartSound();
     gsap.to(splashRef.current, {
       xPercent: -100,
       duration: ANIMATION_CONFIG.duration,
