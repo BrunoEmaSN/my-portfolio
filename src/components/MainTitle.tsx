@@ -46,7 +46,7 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
         <div ref={containerRef} className="relative inline-block select-none">
         {/* CAPA 1: El borde (Outline) - Estático de fondo */}
         <div 
-            className={clsx(textStyle, "text-transparent")}
+            className={clsx(textStyle, "text-transparent font-rodin pb-1")}
             style={{ WebkitTextStroke: "3px white" }}
         >
             {words.map((word, i) => (
@@ -57,7 +57,7 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
         {/* CAPA 2: El relleno (Fill) - Animado con Clip-Path */}
         <div 
             ref={fillRef}
-            className={clsx(textStyle, "absolute inset-0 text-white")}
+            className={clsx(textStyle, "absolute inset-0 text-white font-rodin")}
             style={{ clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" }}
         >
             {words.map((word, i) => (

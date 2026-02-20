@@ -82,10 +82,7 @@ const SocialLink = ({
               <span className="text-black text-xs font-bold tracking-widest uppercase">
                 RANK
               </span>
-              <span className="bg-white leading-6 text-7xl text-black font-black leading-none z-10"
-                style={{
-                  lineHeight: '0.85',
-                }}
+              <span className="bg-white leading-6 text-5xl text-black font-black leading-none z-10"
               >
                 {clampedRank}
               </span>

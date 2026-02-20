@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "newrodin";
+  src: url("/fonts/fot-new-rodin-pro-eb.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "rodin";
+  src: url("/fonts/fot-rodin-pro-eb.otf") format("opentype");
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 0px;
@@ -33,10 +43,22 @@
   button[id="button-menu"] {
     @apply pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50
   }
+
+  div[class*="mask-internal"] {
+    @apply [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] px-20;
+  }
 }
 
 @theme {
+  --font-sans: "newrodin", ui-sans-serif, system-ui, sans-serif;
   --shadow-card: 8px 8px 0 rgb(20, 71, 228); 
+  --shadow-card-sm: 4px 4px 0 rgb(20, 71, 228); 
   --shadow-card-lg: 8px 16px 0 rgb(20, 71, 228);
   --shadow-list-menu: 4px -4px 0 rgba(0,0,0,0.4);
+}
+
+@layer base {
+  html, body {
+    font-family: var(--font-sans);
+  }
 }
