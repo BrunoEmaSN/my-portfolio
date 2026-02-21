@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
-import { playP3RMenuSound } from "../helpers/audioContext"
+import { menuAudioEffect } from "../helpers/audioContext"
 import { ANIMATION_CONFIG } from "../../constants"
 
 export interface SelectorPersonaItem {
@@ -73,7 +73,7 @@ const SelectorPersona = ({
     (direction: 1 | -1) => {
       if (items.length === 0 || isAnimatingRef.current) return
       isAnimatingRef.current = true
-      playP3RMenuSound()
+      menuAudioEffect()
 
       const fromSlot = selectedSlot
       const nextSlot = (fromSlot + direction + 3) % 3

@@ -1,7 +1,7 @@
 import { useState, useEffect, forwardRef } from 'react';
 import clsx from 'clsx';
 import StepperButton from './StepperButton';
-import { playP3RMenuSound } from '../helpers/audioContext';
+import { menuAudioEffect } from '../helpers/audioContext';
 
 export interface StepperItem {
   id: string;
@@ -30,13 +30,13 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(({
       const key = event.key.toLowerCase();
 
       if (key === 'a') {
-        playP3RMenuSound()
+        menuAudioEffect()
         setCurrentIndex((prev) => {
           const newIndex = prev > 0 ? prev - 1 : items.length - 1;
           return newIndex;
         });
       } else if (key === 'd') {
-        playP3RMenuSound()
+        menuAudioEffect()
         setCurrentIndex((prev) => {
           const newIndex = prev < items.length - 1 ? prev + 1 : 0;
           return newIndex;

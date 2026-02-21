@@ -1,4 +1,4 @@
-export const playP3RMenuSound = () => {
+export const menuAudioEffect = () => {
     const audioContext = new (window.AudioContext)();
 
     const duration = 0.08; // Un poco más largo para la textura
@@ -34,14 +34,19 @@ export const playP3RMenuSound = () => {
     filter.frequency.value = 2500;
     filter.Q.value = 0.8;
 
+    // Ganancia para igualar el nivel con el resto de sonidos del menú
+    const gainNode = audioContext.createGain();
+    gainNode.gain.value = 4;
+
     // Conexión
     source.connect(filter);
-    filter.connect(audioContext.destination);
+    filter.connect(gainNode);
+    gainNode.connect(audioContext.destination);
 
     source.start(0);
 };
 
-export const playP3RStartSound = () => {
+export const startAudioEffect = () => {
     const ctx = new (window.AudioContext)();
     const t = ctx.currentTime;
 
@@ -93,7 +98,7 @@ export const playP3RStartSound = () => {
     noiseSource.stop(t + 0.1);
 };
 
-export const playP3RBackSound = () => {
+export const backAudioEffect = () => {
     const ctx = new (window.AudioContext)();
     const t = ctx.currentTime;
 

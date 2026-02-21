@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { navItems, ROUTES } from '../../constants';
 import { useAppStore } from '../store';
-import { playP3RBackSound, playP3RMenuSound, playP3RStartSound } from '../helpers/audioContext';
+import { backAudioEffect, menuAudioEffect, startAudioEffect } from '../helpers/audioContext';
 
 const Menu = () => {
   const location = useLocation();
@@ -25,12 +25,12 @@ const Menu = () => {
       const key = event.key.toLowerCase();
 
       if (key === 'w') {
-        playP3RMenuSound()
+        menuAudioEffect()
         const newIndex = selectedIndex > 0 ? selectedIndex - 1 : navItems.length - 1;
         setSelectedIndex(newIndex);
       }
       if (key === 's') {
-        playP3RMenuSound()
+        menuAudioEffect()
         const newIndex = selectedIndex < navItems.length - 1 ? selectedIndex + 1 : 0;
         setSelectedIndex(newIndex);
       }
@@ -38,9 +38,9 @@ const Menu = () => {
         event.preventDefault();
         event.stopPropagation();
         if (selectedIndex === 4) {
-          playP3RBackSound()
+          backAudioEffect()
         } else {
-          playP3RStartSound();
+          startAudioEffect();
         }
         const selectedItem = navItems[selectedIndex];
         gsap.to(menuContainerRef.current, {

@@ -30,6 +30,7 @@ export const navItems = [
 
 export const ANIMATION_CONFIG = {
   duration: 0.4,
+  delay: 0.15,
   fast: 0.3,
   ease: "power2.inOut" as const,
 } as const

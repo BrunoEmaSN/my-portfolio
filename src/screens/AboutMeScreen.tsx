@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import gsap from "gsap"
 import SectionTitle from "../components/SectionTitle"
 import SkillsList, { type SkillData } from "../components/SkillsList"
 import StatsPanel, { type StatEntry } from "../components/StatsPanel"
@@ -19,6 +20,8 @@ import {
   StrikeSlot,
   Wind,
 } from "../components/icons"
+import { useGSAP } from "@gsap/react"
+import { ANIMATION_CONFIG } from "../../constants"
 
 const size = {
   sm: 100,
@@ -81,23 +84,51 @@ const exampleSkillsBar = [
 
 const AboutMeScreen = () => {
   const containerRef = useRef<HTMLElement>(null)
+  const personaPanelRef = useRef<HTMLDivElement>(null)
+  const bottomSectionRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const ctx = gsap.context(() => {
+      if (personaPanelRef.current) {
+        gsap.from(personaPanelRef.current, {
+          y: -80,
+          opacity: 0,
+          duration: ANIMATION_CONFIG.fast,
+          delay: ANIMATION_CONFIG.delay,
+          ease: ANIMATION_CONFIG.ease,
+        })
+      }
+      if (bottomSectionRef.current) {
+        gsap.from(bottomSectionRef.current, {
+          y: 80,
+          opacity: 0,
+          duration: ANIMATION_CONFIG.fast,
+          ease: ANIMATION_CONFIG.ease,
+          delay: ANIMATION_CONFIG.delay,
+        })
+      }
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section ref={containerRef} id="about-me" className="relative w-full h-full gap-10 justify-between">
       <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
 
-      <PersonaStatusPanel
-        characterName="Aigis"
-        arcana="Chariot"
-        persona="Palladion"
-        level={40}
-        nextExp={1832}
-        onNavigateLeft={() => { }}
-        onNavigateRight={() => { }}
-        skills={exampleSkillsBar}
-      />
+      <div ref={personaPanelRef}>
+        <PersonaStatusPanel
+          characterName="Aigis"
+          arcana="Chariot"
+          persona="Palladion"
+          level={40}
+          nextExp={1832}
+          onNavigateLeft={() => { }}
+          onNavigateRight={() => { }}
+          skills={exampleSkillsBar}
+        />
+      </div>
 
-      <div className="flex flex-col lg:flex-row justify-between w-full gap-10 md:p-20">
+      <div ref={bottomSectionRef} className="flex flex-col lg:flex-row justify-between w-full gap-10 md:p-20">
         <div className="relative p-2 rounded-sm bg-slate-900 w-full lg:max-w-2xl">
           <SkillsList
             skills={exampleSkills}
@@ -121,7 +152,6 @@ const AboutMeScreen = () => {
           <StatsPanel stats={exampleStats} className="min-w-[200px]" />
         </div>
       </div>
-
     </section>
   )
 }
