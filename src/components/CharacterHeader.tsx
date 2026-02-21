@@ -1,3 +1,9 @@
+import { useRef } from "react";
+import { ANIMATION_CONFIG } from "../../constants";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import clsx from "clsx";
+
 export interface CharacterHeaderProps {
   /** Nombre del personaje (ej. "Aigis") */
   name: string;
@@ -59,8 +65,24 @@ const CharacterHeader = ({
   nextExp,
   className = "",
 }: CharacterHeaderProps) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  useGSAP(() => {
+    gsap.fromTo(containerRef.current,
+      {
+        x: -4,
+      },
+      {
+        x: 0,
+        duration: ANIMATION_CONFIG.fast / 2,
+        delay: ANIMATION_CONFIG.delay,
+        ease: ANIMATION_CONFIG.ease,
+      }
+    )
+  }, { scope: containerRef, dependencies: [arcanaLabel] })
   return (
-    <div className={`flex flex-col items-baseline justify-between ${className}`}>
+    <div
+      className={clsx("flex flex-col items-baseline justify-between", className)}
+    >
       <div className="flex flex-col w-screen">
         <div className="max-w-sm">
           <div className="flex flex-col justify-center items-center">
@@ -76,7 +98,7 @@ const CharacterHeader = ({
         </div>
       </div>
       <div className="border-3 border-red-700 w-screen" />
-      <div className="bg-white w-screen py-4">
+      <div ref={containerRef} className="bg-white w-screen py-4">
         <div className="max-w-sm">  
           <ArcanaLabel arcanaLabel={arcanaLabel} arcana={arcana} persona={persona} />
           <LevelLabel level={level} nextExp={nextExp} />

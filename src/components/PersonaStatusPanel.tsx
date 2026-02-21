@@ -7,6 +7,7 @@ import type { SkillItem } from "./SkillIconsRow";
 export interface PersonaStatusPanelProps {
   characterName: string;
   arcana: string;
+  arcanaLabel?: string;
   persona: string;
   level: number;
   nextExp: number;
@@ -31,6 +32,7 @@ const DEFAULT_SKILLS: SkillItem[] = [
 const PersonaStatusPanel = ({
   characterName,
   arcana,
+  arcanaLabel = "ARCANA",
   persona,
   level,
   nextExp,
@@ -51,7 +53,7 @@ const PersonaStatusPanel = ({
         <div className="flex flex-col lg:scale-x-200 lg:origin-left">
           <CharacterHeader
             name={characterName}
-            arcanaLabel="ARCANA"
+            arcanaLabel={arcanaLabel}
             arcana={arcana}
             persona={persona}
             level={level}
@@ -70,7 +72,7 @@ const PersonaStatusPanel = ({
         className="relative px-4 bg-blue-700 shadow-sm"
       >
         <div className="max-w-4xl">
-          <SkillIconsRow skills={skills} />
+          <SkillIconsRow arcanaLabel={arcanaLabel} skills={skills} />
         </div>
       </div>
     </div>

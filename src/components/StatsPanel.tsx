@@ -1,13 +1,8 @@
 import clsx from 'clsx';
 import StatItem from './StatItem';
+import type { StatEntry } from '../types';
 
-export interface StatEntry {
-  label: string;
-  value: number;
-  max?: number;
-}
-
-export interface StatsPanelProps {
+interface StatsPanelProps {
   stats: StatEntry[];
   className?: string;
 }

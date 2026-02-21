@@ -1,4 +1,3 @@
-/** Rutas de la app (React Router) */
 export const ROUTES = {
   SPLASH: '/',
   HOME: '/home',
@@ -82,10 +81,6 @@ export const skillsItems = [
     ]
   },
 ]
-
-export const aboutTitle = "Hi, I'm Bruno"
-
-export const aboutDescription = "Passionate about software development with frontend expertise. Proficient in programming, analysis, and systems design. Committed to staying updated with emerging technologies and methodologies. Eager to contribute and innovate in the technology industry."
 
 export const infoStats = [
   { label: 'Year Experiencies', value: '15+' },

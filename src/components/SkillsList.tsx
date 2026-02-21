@@ -1,22 +1,14 @@
-import { type ReactNode } from 'react';
 import SkillItem from './SkillItem';
 import NextSkillLabel from './NextSkillLabel';
+import type { SkillData } from '../types';
+import clsx from 'clsx';
 
-export interface SkillData {
-  id: string;
-  name: string;
-  icon: ReactNode;
-  highlighted?: boolean;
-  locked?: boolean;
-}
+
 
 export interface SkillsListProps {
   skills: SkillData[];
   nextSkillLevel?: number;
-  /** Próxima habilidad a desbloquear (ej. Myriad Arrows) */
   nextSkill?: SkillData;
-  /** Habilidad bloqueada/no revelada (se muestra como ??????) */
-  lockedSkill?: Pick<SkillData, 'id' | 'icon'>;
   className?: string;
 }
 
@@ -27,7 +19,7 @@ const SkillsList = ({
   className = '',
 }: SkillsListProps) => {
   return (
-    <div className={`relative ${className}`}>
+    <div className={clsx("relative", className)}>
       <div className="grid grid-cols-2">
         {skills.map((skill) => (
           <SkillItem
