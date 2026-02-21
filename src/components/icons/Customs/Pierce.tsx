@@ -1,6 +1,6 @@
 import { GiSpikyEclipse } from "react-icons/gi"
 
-export const SpikyEclipse = () => {
+export const Pierce = () => {
   return (
     <div className="relative">
         <GiSpikyEclipse className="text-orange-400 scale-130 absolute left-2" size={24} />

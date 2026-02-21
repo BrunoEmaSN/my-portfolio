@@ -40,7 +40,9 @@ const SkillsList = ({
         ))}
       </div>
       <div className="mt-6 mb-4 flex flex-col md:flex-row justify-center items-end gap-4 relative">
-        <NextSkillLabel level={nextSkillLevel} className="z-10 w-full" />
+        <div className="relative z-10 w-full">
+          <NextSkillLabel level={nextSkillLevel} />
+        </div>
         <div className="relative flex items-center gap-3 w-full">
           <div
             className="absolute top-0 left-0 w-full h-full bg-blue-800 z-0"

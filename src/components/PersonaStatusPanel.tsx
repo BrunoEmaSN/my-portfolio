@@ -42,12 +42,12 @@ const PersonaStatusPanel = ({
   return (
     <div
       className={clsx(
-        "w-full mx-auto md:scale-103 md:-rotate-7 md:-translate-y-12 md:-skew-x-10 lg:-translate-y-45 lg:-skew-x-7 bg-white",
+        "w-full mx-auto md:scale-103 md:-rotate-5 xl:-rotate-10 2xl:-rotate-5 md:-translate-y-12 lg:-translate-y-30 xl:-translate-y-45 md:-skew-x-10 lg:-skew-x-7 bg-white",
         className
       )}
     >
       {/* Zona superior: fondo blanco + barra azul oscuro */}
-      <div className="bg-slate-900 lg:pt-30">
+      <div className="bg-slate-900 lg:pt-27">
         <div className="flex flex-col lg:scale-x-200 lg:origin-left">
           <CharacterHeader
             name={characterName}
@@ -67,9 +67,9 @@ const PersonaStatusPanel = ({
 
       {/* Zona inferior: fondo azul claro + íconos de habilidades */}
       <div
-        className="relative px-4 bg-blue-700 lg:shadow-card-sm shadow-blue-700"
+        className="relative px-4 bg-blue-700 shadow-sm"
       >
-        <div className="max-w-sm">
+        <div className="max-w-4xl">
           <SkillIconsRow skills={skills} />
         </div>
       </div>

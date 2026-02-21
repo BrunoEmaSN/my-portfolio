@@ -10,15 +10,16 @@ const NextSkillLabel = ({ level, className }: NextSkillLabelProps) => {
     <div
       className={clsx(
         className,
+        "absolute bottom-0 right-0 translate-y-7 w-full",
       )}
     >
       <p
-        className="text-2xl flex -translate-y-3 font-black text-blue-700 uppercase -skew-x-15 -rotate-15 font-rodin"
+        className="text-2xl lg:text-3xl flex font-black text-blue-700 uppercase -skew-x-15 -rotate-10"
       >
         Next Skill
       </p>
-      <p className="text-2xl font-black text-cyan-400 uppercase -skew-x-15 -rotate-15 text-right">
-        <span className="text-base font-bold">Lv</span>{level}
+      <p className="text-2xl lg:text-3xl font-black text-cyan-400 uppercase -skew-x-15 -rotate-10 text-right font-rodin">
+        <span className="text-base lg:text-2xl font-bold">Lv</span>{level}
       </p>
     </div>
   );

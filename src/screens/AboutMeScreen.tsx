@@ -4,14 +4,20 @@ import SkillsList, { type SkillData } from "../components/SkillsList"
 import StatsPanel, { type StatEntry } from "../components/StatsPanel"
 import PersonaStatusPanel from "../components/PersonaStatusPanel"
 import {
-  CloverSpikedSlot,
-  Cycle,
-  CycleSlot,
-  HealthNormalSlot,
-  Punch,
-  PunchSlot,
-  SpikyEclipse,
-  SpikyEclipseSlot,
+  Dark,
+  Electricity,
+  EnhanceSlot,
+  Fire,
+  Ice,
+  Light,
+  PassiveSlot,
+  Pierce,
+  PierceSlot,
+  RecoverySlot,
+  Slash,
+  Strike,
+  StrikeSlot,
+  Wind,
 } from "../components/icons"
 
 const size = {
@@ -30,30 +36,46 @@ const exampleStats: StatEntry[] = [
 ]
 
 const exampleSkills: SkillData[] = [
-  { id: "1", name: "Swift Strike", icon: <PunchSlot />, highlighted: true },
-  { id: "2", name: "Tarukaja", icon: <CloverSpikedSlot /> },
-  { id: "3", name: "Cruel Attack", icon: <SpikyEclipseSlot /> },
-  { id: "4", name: "Marakukaja", icon: <CloverSpikedSlot />, highlighted: true },
-  { id: "5", name: "Arrow Rain", icon: <SpikyEclipseSlot />, highlighted: true },
-  { id: "6", name: "Dekunda", icon: <CloverSpikedSlot /> },
-  { id: "7", name: "Diarama", icon: <HealthNormalSlot /> },
-  { id: "8", name: "Fast Heal", icon: <CycleSlot />, highlighted: true },
+  { id: "1", name: "Swift Strike", icon: <StrikeSlot />, highlighted: true },
+  { id: "2", name: "Tarukaja", icon: <EnhanceSlot /> },
+  { id: "3", name: "Cruel Attack", icon: <PierceSlot /> },
+  { id: "4", name: "Marakukaja", icon: <EnhanceSlot />, highlighted: true },
+  { id: "5", name: "Arrow Rain", icon: <PierceSlot />, highlighted: true },
+  { id: "6", name: "Dekunda", icon: <EnhanceSlot /> },
+  { id: "7", name: "Diarama", icon: <RecoverySlot /> },
+  { id: "8", name: "Fast Heal", icon: <PassiveSlot />, highlighted: true },
 ]
 
 const exampleSkillsBar = [
   {
-    color: "text-orange-400",
-    icon: <Punch />
+    icon: <Slash />,
   },
   {
-    color: "text-orange-400",
-    icon: <SpikyEclipse />,
+    icon: <Strike />
+  },
+  {
+    icon: <Pierce />,
+    showResist: true,
+  },
+  {
+    icon: <Fire />
+  },
+  {
+    icon: <Ice />,
+  },
+  {
+    icon: <Electricity />,
     highlighted: true,
     showAlert: true,
   },
   {
-    color: "text-yellow-400",
-    icon: <Cycle />,
+    icon: <Wind />
+  },
+  {
+    icon: <Light />,
+  },
+  {
+    icon: <Dark />,
   },
 ]
 
@@ -76,14 +98,14 @@ const AboutMeScreen = () => {
       />
 
       <div className="flex flex-col lg:flex-row justify-between w-full gap-10 md:p-20">
-        <div className="relative p-2 rounded-sm bg-slate-900 w-full lg:w-[min(40%,500px)]">
+        <div className="relative p-2 rounded-sm bg-slate-900 w-full lg:max-w-2xl">
           <SkillsList
             skills={exampleSkills}
             nextSkillLevel={43}
             nextSkill={{
               id: "next",
               name: "Myriad Arrows",
-              icon: <SpikyEclipseSlot />,
+              icon: <PierceSlot />,
             }}
           />
           <span
@@ -95,7 +117,7 @@ const AboutMeScreen = () => {
             ??????
           </span>
         </div>
-        <div className="w-full lg:w-[min(40%,500px)]">
+        <div className="w-full lg:max-w-xl">
           <StatsPanel stats={exampleStats} className="min-w-[200px]" />
         </div>
       </div>

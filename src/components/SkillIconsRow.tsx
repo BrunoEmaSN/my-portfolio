@@ -5,6 +5,7 @@ export interface SkillItem {
   color?: string;
   highlighted?: boolean;
   showAlert?: boolean;
+  showResist?: boolean;
 }
 
 export interface SkillIconsRowProps {
@@ -22,6 +23,7 @@ const SkillIconsRow = ({ skills, className = "" }: SkillIconsRowProps) => {
           color={skill.color}
           highlighted={skill.highlighted}
           showAlert={skill.showAlert}
+          showResist={skill.showResist}
         />
       ))}
     </div>
