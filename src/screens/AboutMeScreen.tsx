@@ -112,7 +112,7 @@ const AboutMeScreen = () => {
   }, [])
 
   return (
-    <section ref={containerRef} id="about-me" className="relative w-full h-full gap-10 justify-between">
+    <section ref={containerRef} id="about-me" className="relative w-full h-full overflow-y-auto overflow-x-hidden gap-10 justify-between">
       <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
 
       <div ref={personaPanelRef}>

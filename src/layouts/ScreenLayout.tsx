@@ -40,13 +40,13 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
     })
 
     return (
-        <main className="w-full h-screen overflow-x-hidden overflow-y-auto relative">
+        <main className="w-full h-screen relative">
             <div
                 ref={layoutRef}
                 className="absolute w-full h-full"
                 style={{ transformStyle: "preserve-3d" }}
             >
-                <div className={clsx("relative w-full h-screen")}>
+                <div className={clsx("relative w-full h-full")}>
                     <button
                         id="button-esc"
                         onClick={(e) => {

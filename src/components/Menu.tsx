@@ -81,7 +81,7 @@ const Menu = () => {
   }, { scope: menuContainerRef });
 
   return (
-    <nav className="fixed max-w-md z-50">
+    <nav className="fixed w-full md:max-w-md z-50">
       <ul ref={menuContainerRef} className="flex flex-col gap-1">
         {navItems.map((item, index) => (
           <li
@@ -95,20 +95,31 @@ const Menu = () => {
               ref={(el: HTMLButtonElement | null) => {
                 if (el) linkRefs.current[index] = el;
               }}
-              onMouseEnter={() => setSelectedIndex(index)}
+              onMouseEnter={() => {
+                setSelectedIndex(index)
+                menuAudioEffect()
+              }}
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation();
+                if (selectedIndex === 4) {
+                  backAudioEffect()
+                } else {
+                  startAudioEffect();
+                }
                 if (item.path) navigate(item.path);
               }}
               className={clsx(
-                'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 xl:pr-50 w-full font-black text-4xl h-[40px] transition-all duration-300 block hover:bg-blue-700 uppercase',
+                'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 w-full font-black text-4xl h-[40px] transition-all duration-300 block hover:bg-blue-700 uppercase',
                 {
-                  'bg-blue-700 text-white scale-105 shadow-lg': selectedIndex === index,
+                  'bg-blue-700 text-white scale-105': selectedIndex === index,
                   'text-gray-500': selectedIndex !== index,
                 }
               )}
             >
-              {item.label}
+              <div className="text-right">
+                {item.label}
+              </div>
             </button>
           </li>
         ))}

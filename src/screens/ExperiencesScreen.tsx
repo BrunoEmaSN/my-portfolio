@@ -75,7 +75,7 @@ const ExperiencesScreen = () => {
   return (
     <section ref={sectionRef} id="experiences" className="overflow-y-auto h-full">
       <SectionTitle label="WORK EXPERIENCES" textSize={size} className="text-5xl xs:text-9xl" />
-      <div className="relative z-10 pointer-events-auto flex flex-col gap-12 w-full h-full pt-50 gap-y-60">
+      <div className="relative z-10 flex flex-col gap-12 w-full h-full pt-50 gap-y-60">
         <div className="flex flex-col gap-4">
           <h3
             ref={titleFeatured}

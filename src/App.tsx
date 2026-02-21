@@ -17,7 +17,7 @@ const App = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   return (
-    <div className="bg-black">
+    <div className="bg-black overflow-hidden">
       <Routes>
         <Route path={ROUTES.SPLASH}>
           <Route index element={<SplashScreen isMobile={isMobile} />} />
