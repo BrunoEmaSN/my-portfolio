@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-export interface GameIconSlotProps {
+export interface IconSlotProps {
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -12,11 +12,11 @@ const sizeClasses = {
   lg: "h-24",
 };
 
-const GameIconSlot = ({
+const IconSlot = ({
   children,
   size = "md",
   className = "",
-}: GameIconSlotProps) => {
+}: IconSlotProps) => {
   return (
     <div
       className={clsx(
@@ -31,4 +31,4 @@ const GameIconSlot = ({
   );
 };
 
-export default GameIconSlot;
+export default IconSlot;

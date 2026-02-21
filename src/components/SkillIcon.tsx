@@ -23,7 +23,7 @@ const SkillIcon = ({
     <div className={clsx("flex flex-col items-center gap-1 translate-y-2", className)}>
       <div
         className={clsx(
-          "relative",
+          "relative overflow-hidden",
           "w-10 h-10 rounded-full flex items-center justify-center shrink-0",
           "bg-gray-900 border-2 border-gray-700",
           highlighted && "ring-2 ring-white ring-offset-2 ring-offset-blue-200 border-blue-300"

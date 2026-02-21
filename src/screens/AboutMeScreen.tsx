@@ -3,12 +3,16 @@ import SectionTitle from "../components/SectionTitle"
 import SkillsList, { type SkillData } from "../components/SkillsList"
 import StatsPanel, { type StatEntry } from "../components/StatsPanel"
 import PersonaStatusPanel from "../components/PersonaStatusPanel"
-import { GameIconPunchSlot } from "../components/icons/GameIconPunchSlot"
-import { GameIconCloverSpikedSlot } from "../components/icons/GameIconCloverSpikedSlot"
-import { GameIconSpikyEclipseSlot } from "../components/icons/GameIconSpikyEclipseSlot"
-import { GameIconHealthNormalSlot } from "../components/icons/GameIconHealthNormalSlot"
-import { GameIconCycleSlot } from "../components/icons/GameIconCycleSlot"
-import { GameIconCycle, GameIconPunch, GameIconSpikyEclipse } from "../components/icons/GameIcons"
+import {
+  CloverSpikedSlot,
+  Cycle,
+  CycleSlot,
+  HealthNormalSlot,
+  Punch,
+  PunchSlot,
+  SpikyEclipse,
+  SpikyEclipseSlot,
+} from "../components/icons"
 
 const size = {
   sm: 100,
@@ -26,30 +30,30 @@ const exampleStats: StatEntry[] = [
 ]
 
 const exampleSkills: SkillData[] = [
-  { id: "1", name: "Swift Strike", icon: <GameIconPunchSlot />,  highlighted: true },
-  { id: "2", name: "Tarukaja", icon: <GameIconCloverSpikedSlot />},
-  { id: "3", name: "Cruel Attack", icon: <GameIconSpikyEclipseSlot /> },
-  { id: "4", name: "Marakukaja", icon: <GameIconCloverSpikedSlot />, highlighted: true },
-  { id: "5", name: "Arrow Rain", icon: <GameIconSpikyEclipseSlot />, highlighted: true},
-  { id: "6", name: "Dekunda", icon:<GameIconCloverSpikedSlot /> },
-  { id: "7", name: "Diarama", icon: <GameIconHealthNormalSlot /> },
-  { id: "8", name: "Fast Heal", icon: <GameIconCycleSlot />,  highlighted: true},
+  { id: "1", name: "Swift Strike", icon: <PunchSlot />, highlighted: true },
+  { id: "2", name: "Tarukaja", icon: <CloverSpikedSlot /> },
+  { id: "3", name: "Cruel Attack", icon: <SpikyEclipseSlot /> },
+  { id: "4", name: "Marakukaja", icon: <CloverSpikedSlot />, highlighted: true },
+  { id: "5", name: "Arrow Rain", icon: <SpikyEclipseSlot />, highlighted: true },
+  { id: "6", name: "Dekunda", icon: <CloverSpikedSlot /> },
+  { id: "7", name: "Diarama", icon: <HealthNormalSlot /> },
+  { id: "8", name: "Fast Heal", icon: <CycleSlot />, highlighted: true },
 ]
 
 const exampleSkillsBar = [
   {
     color: "text-orange-400",
-    icon: <GameIconPunch />
+    icon: <Punch />
   },
   {
     color: "text-orange-400",
-    icon: <GameIconSpikyEclipse />,
+    icon: <SpikyEclipse />,
     highlighted: true,
     showAlert: true,
   },
   {
     color: "text-yellow-400",
-    icon: <GameIconCycle />,
+    icon: <Cycle />,
   },
 ]
 
@@ -66,8 +70,8 @@ const AboutMeScreen = () => {
         persona="Palladion"
         level={40}
         nextExp={1832}
-        onNavigateLeft={() => {}}
-        onNavigateRight={() => {}}
+        onNavigateLeft={() => { }}
+        onNavigateRight={() => { }}
         skills={exampleSkillsBar}
       />
 
@@ -79,7 +83,7 @@ const AboutMeScreen = () => {
             nextSkill={{
               id: "next",
               name: "Myriad Arrows",
-              icon: <GameIconSpikyEclipseSlot />,
+              icon: <SpikyEclipseSlot />,
             }}
           />
           <span

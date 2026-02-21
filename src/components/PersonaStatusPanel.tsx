@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import CharacterHeader from "./CharacterHeader";
 import NavigationArrows from "./NavigationArrows";
 import SkillIconsRow from "./SkillIconsRow";
@@ -40,7 +41,10 @@ const PersonaStatusPanel = ({
 }: PersonaStatusPanelProps) => {
   return (
     <div
-      className={`w-full mx-auto md:scale-103 md:-rotate-7 md:-translate-y-12 md:-skew-x-10 lg:-translate-y-45 lg:-skew-x-7 bg-white ${className}`}
+      className={clsx(
+        "w-full mx-auto md:scale-103 md:-rotate-7 md:-translate-y-12 md:-skew-x-10 lg:-translate-y-45 lg:-skew-x-7 bg-white",
+        className
+      )}
     >
       {/* Zona superior: fondo blanco + barra azul oscuro */}
       <div className="bg-slate-900 lg:pt-30">
@@ -63,7 +67,7 @@ const PersonaStatusPanel = ({
 
       {/* Zona inferior: fondo azul claro + íconos de habilidades */}
       <div
-        className="relative px-4 bg-blue-700 lg:shadow-card shadow-blue-700"
+        className="relative px-4 bg-blue-700 lg:shadow-card-sm shadow-blue-700"
       >
         <div className="max-w-sm">
           <SkillIconsRow skills={skills} />

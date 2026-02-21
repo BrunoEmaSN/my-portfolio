@@ -13,13 +13,13 @@ const NavigationArrows = ({ onLeft, onRight, className = "" }: NavigationArrowsP
         direction="left"
         label="A"
         onClick={onLeft}
-        className="scale-x-60 origin-left"
+        className="lg:scale-x-40 origin-left"
       />
       <StepperButton
         direction="right"
         label="D"
         onClick={onRight}
-        className="scale-x-60 origin-right"
+        className="lg:scale-x-40 origin-right"
       />
     </div>
   );
