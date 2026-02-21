@@ -40,7 +40,7 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
     })
 
     return (
-        <main className="w-full h-screen overflow-hidden relative">
+        <main className="w-full h-screen overflow-x-hidden overflow-y-auto relative">
             <div
                 ref={layoutRef}
                 className="absolute w-full h-full"

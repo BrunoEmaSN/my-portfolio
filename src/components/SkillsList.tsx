@@ -39,13 +39,13 @@ const SkillsList = ({
           />
         ))}
       </div>
-      <div className="mt-6 mb-4 flex flex-wrap items-end gap-4 relative">
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-blue-800 z-0"
-          style={{ clipPath: "polygon(60% 0, 100% 0, 100% 100%, 30% 100%)" }}
-        />
-        <NextSkillLabel level={nextSkillLevel} className="z-10" />
-        <div className="flex flex-col gap-1 min-w-[180px] z-10">
+      <div className="mt-6 mb-4 flex flex-col md:flex-row justify-center items-end gap-4 relative">
+        <NextSkillLabel level={nextSkillLevel} className="z-10 w-full" />
+        <div className="relative flex items-center gap-3 w-full">
+          <div
+            className="absolute top-0 left-0 w-full h-full bg-blue-800 z-0"
+            style={{ clipPath: "polygon(30% 0, 100% 0, 100% 100%, 0% 100%)" }}
+          />
           {nextSkill && (
             <SkillItem
               key={nextSkill.id}

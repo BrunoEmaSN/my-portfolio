@@ -9,17 +9,16 @@ const NextSkillLabel = ({ level, className }: NextSkillLabelProps) => {
   return (
     <div
       className={clsx(
-        'flex items-baseline gap-2',
-        className
+        className,
       )}
     >
       <p
-        className="text-2xl -translate-y-3 font-black text-blue-700 uppercase -skew-x-15 -rotate-15 font-newrodin"
+        className="text-2xl flex -translate-y-3 font-black text-blue-700 uppercase -skew-x-15 -rotate-15 font-rodin"
       >
         Next Skill
       </p>
-      <p className="text-2xl font-black text-cyan-400 uppercase -skew-x-20 -rotate-15 -translate-x-10">
-        <span className="text-base font-bold">Lv</span> {level}
+      <p className="text-2xl font-black text-cyan-400 uppercase -skew-x-15 -rotate-15 text-right">
+        <span className="text-base font-bold">Lv</span>{level}
       </p>
     </div>
   );
