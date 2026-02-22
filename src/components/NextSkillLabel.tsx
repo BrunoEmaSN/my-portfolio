@@ -18,7 +18,7 @@ const NextSkillLabel = ({ level, className }: NextSkillLabelProps) => {
       >
         Next Skill
       </p>
-      <p className="text-2xl lg:text-3xl font-black text-cyan-400 uppercase -skew-x-15 -rotate-10 text-right font-rodin">
+      <p className="text-2xl lg:text-3xl font-black text-cyan-400 uppercase -skew-x-15 -rotate-10 text-right">
         <span className="text-base lg:text-2xl font-bold">Lv</span>{level}
       </p>
     </div>

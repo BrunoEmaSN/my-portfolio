@@ -11,7 +11,7 @@ const StatItem = ({ label, value, max = 50 }: StatItemProps) => {
     <div className="flex gap-1 items-center justify-center">
       <div className="flex items-baseline justify-between gap-2">
         <span
-          className="font-black text-black text-2xl italic"
+          className="font-black text-black text-2xl italic font-m-plus-1p"
           style={{
             WebkitTextStroke: "1.5px #00D3F2"
           }}
@@ -19,7 +19,7 @@ const StatItem = ({ label, value, max = 50 }: StatItemProps) => {
           {label}
         </span>
         <span
-          className="font-black text-white text-2xl italic"
+          className="font-black text-white text-2xl italic font-m-plus-1p"
           style={{
             WebkitTextStroke: "1.5px black"
           }}

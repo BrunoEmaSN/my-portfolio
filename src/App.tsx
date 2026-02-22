@@ -20,13 +20,7 @@ const App = () => {
   return (
     <div className="bg-black overflow-hidden relative">
       <div className={("absolute w-full h-full hidden md:flex justify-end items-start")}>
-        <WeekdayBanner
-          date="11/12"
-          dayLabel="Thu"
-          subtitle="After School"
-          limit={20}
-          className="max-w-lg"
-        />
+        <WeekdayBanner className="max-w-md" />
       </div>
       <Routes>
         <Route path={ROUTES.SPLASH}>

@@ -1,15 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "newrodin";
-  src: url("/fonts/fot-new-rodin-pro-eb.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "rodin";
-  src: url("/fonts/fot-rodin-pro-eb.otf") format("opentype");
-}
-
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 0px;
@@ -50,7 +40,10 @@
 }
 
 @theme {
-  --font-sans: "newrodin", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --font-m-plus-1p: "M PLUS 1p", ui-sans-serif, system-ui, sans-serif;
+  --font-quantico: "Quantico", ui-sans-serif, system-ui, sans-serif;
+  --font-zen-kaku: "Zen Kaku Gothic New", ui-sans-serif, system-ui, sans-serif;
   --shadow-card: 8px 8px 0 rgb(20, 71, 228); 
   --shadow-card-sm: 4px 4px 0 rgb(20, 71, 228); 
   --shadow-card-lg: 8px 16px 0 rgb(20, 71, 228);

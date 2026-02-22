@@ -38,7 +38,7 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
     });
   }, { scope: containerRef, dependencies: [titleWrapperRef] });
 
-  const textStyle = clsx("flex flex-col leading-[0.85] font-black tracking-tighter uppercase", isMobile ? 'text-4xl sm:text-7xl md:text-[100px]' : 'text-[200px]');
+  const textStyle = clsx("flex flex-col leading-[0.85] font-black uppercase", isMobile ? 'text-4xl sm:text-7xl md:text-[100px]' : 'text-[200px]');
 
   return (
     <div ref={titleWrapperRef} className="flex gap-4 opacity-0">
@@ -46,8 +46,8 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
         <div ref={containerRef} className="relative inline-block select-none">
         {/* CAPA 1: El borde (Outline) - Estático de fondo */}
         <div 
-            className={clsx(textStyle, "text-transparent font-rodin pb-1")}
-            style={{ WebkitTextStroke: "3px white" }}
+            className={clsx(textStyle, "text-transparent pb-1 font-m-plus-1p pr-1")}
+            style={{ WebkitTextStroke: "3px white", letterSpacing: "-0.09em" }}
         >
             {words.map((word, i) => (
             <span key={`out-${i}`}>{word}</span>
@@ -57,8 +57,8 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
         {/* CAPA 2: El relleno (Fill) - Animado con Clip-Path */}
         <div 
             ref={fillRef}
-            className={clsx(textStyle, "absolute inset-0 text-white font-rodin")}
-            style={{ clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" }}
+            className={clsx(textStyle, "absolute inset-0 text-white font-m-plus-1p")}
+            style={{ clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)", letterSpacing: "-0.09em" }}
         >
             {words.map((word, i) => (
             <span key={`fill-${i}`}>{word}</span>

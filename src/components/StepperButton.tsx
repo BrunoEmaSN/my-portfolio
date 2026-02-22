@@ -47,7 +47,7 @@ const StepperButton = ({
       <div 
         className="flex items-center justify-center"
       >
-        <span className="text-white font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl italic [text-stroke:1px_black] sm:[text-stroke:1.5px_black] md:[text-stroke:2px_black] [-webkit-text-stroke:1px_black] sm:[-webkit-text-stroke:1.5px_black] md:[-webkit-text-stroke:2px_black]">
+        <span className="text-white font-m-plus-1p font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl italic [text-stroke:1px_black] sm:[text-stroke:1.5px_black] md:[text-stroke:2px_black] [-webkit-text-stroke:1px_black] sm:[-webkit-text-stroke:1.5px_black] md:[-webkit-text-stroke:2px_black]">
           {label}
         </span>
       </div>

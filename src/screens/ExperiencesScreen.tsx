@@ -79,7 +79,7 @@ const ExperiencesScreen = () => {
         <div className="flex flex-col gap-4">
           <h3
             ref={titleFeatured}
-            className="text-sm sm:text-base md:text-lg lg:text-xl font-bold skew-x-[-20deg] border-b-2 border-red-600 pb-2 w-fit pl-20 pr-5 text-black md:text-white lg:text-white"
+            className="text-sm sm:text-base md:text-lg lg:text-xl font-bold skew-x-[-20deg] border-b-2 border-red-600 pb-2 w-fit pl-20 pr-5 md:text-white text-white"
           >
             FEATURED PROJECTS
           </h3>
@@ -96,7 +96,7 @@ const ExperiencesScreen = () => {
         <div className="flex flex-col gap-20 h-full">
           <h3
             ref={titleJourney}
-            className="text-sm sm:text-base md:text-lg lg:text-xl font-bold skew-x-[-20deg] border-b-2 border-red-600 pb-2 w-fit pl-20 pr-5 text-black md:text-white lg:text-white"
+            className="text-sm sm:text-base md:text-lg lg:text-xl font-bold skew-x-[-20deg] border-b-2 border-red-600 pb-2 w-fit pl-20 pr-5 md:text-white text-white"
           >
             PROFESSIONAL JOURNEY
           </h3>
