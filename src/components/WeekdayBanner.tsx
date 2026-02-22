@@ -8,12 +8,11 @@ export interface WeekdayBannerProps {
   className?: string;
 }
 
-/** Colores del indicador de fase lunar (Tailwind yellow-400, black) */
 const MOON_LIT = "#facc15";
 const MOON_SHADOW = "#000";
 
 /**
- * Área de intersección de dos círculos de radio 1 con distancia d entre centros.
+ * Intersection area of two unit circles with center-to-center distance d.
  */
 function circleIntersectionArea(d: number): number {
   if (d >= 2) return 0;
@@ -22,8 +21,8 @@ function circleIntersectionArea(d: number): number {
 }
 
 /**
- * Dado phase (0 = nueva, 1 = llena), devuelve la distancia entre centros para que
- * el círculo de sombra deje visible la fracción phase del disco (terminador curvo).
+ * Given phase (0 = new, 1 = full), returns center offset so the shadow circle
+ * leaves the desired illuminated fraction (curved terminator). Binary search.
  */
 function shadowCircleOffset(phase: number): number {
   const targetArea = (1 - phase) * Math.PI;
@@ -37,10 +36,6 @@ function shadowCircleOffset(phase: number): number {
   return (lo + hi) / 2;
 }
 
-/**
- * Indicador de fase lunar para hemisferio sur (Argentina).
- * Terminador curvo: creciente/menguante (finos) y gibosa creciente/menguante (gordos).
- */
 const MoonPhaseIndicator = ({
   phase,
   waxing,
@@ -107,7 +102,6 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
         className
       )}
     >
-      {/* Texto de fondo grande */}
       <span
         className={clsx(
           backgroundLabel === "DARK HOUR" && "text-lime-950",
@@ -118,7 +112,6 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
       >
         {backgroundLabel}
       </span>
-      {/* Onda animada continua con GSAP (2 periodos idénticos = loop sin corte) */}
       <div className={clsx(
           "absolute bottom-0 left-0 w-full h-20 z-10 overflow-hidden"
         )}>
@@ -139,18 +132,15 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
         >
-          {/* Un periodo: 0–1000; segundo periodo idéntico: 1000–2000 */}
           <path
             fill="currentColor"
             d="M0,20 Q250,8 500,20 Q750,32 1000,20 Q1250,8 1500,20 Q1750,32 2000,20 L2000,40 L0,40 Z"
           />
         </svg>
       </div>
-      {/* Barra central azul con resplandor */}
       <div
         className="relative z-20 flex items-center justify-between w-[92%] max-w-2xl min-h-[4.5rem] px-5 py-3 mt-7 rounded-xl"
       >
-        {/* Bloque izquierdo: fecha + día + triángulo + subtítulo */}
         <div className="flex flex-col items-start">
           <div className="flex items-baseline">
             <span
@@ -185,7 +175,6 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
           </span>
         </div>
 
-        {/* Bloque derecho: LIMIT + número + icono */}
         <div className={clsx(
             backgroundLabel === "DARK HOUR" && "hidden",
             "flex items-center gap-2"

@@ -48,7 +48,6 @@ const PersonaStatusPanel = ({
         className
       )}
     >
-      {/* Zona superior: fondo blanco + barra azul oscuro */}
       <div className="bg-slate-900 lg:pt-27">
         <div className="flex flex-col lg:scale-x-200 lg:origin-left">
           <CharacterHeader
@@ -67,7 +66,6 @@ const PersonaStatusPanel = ({
         </div>
       </div>
 
-      {/* Zona inferior: fondo azul claro + íconos de habilidades */}
       <div
         className="relative px-4 bg-blue-700 shadow-sm"
       >

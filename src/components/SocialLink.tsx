@@ -3,15 +3,10 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ANIMATION_CONFIG } from '../../constants';
 export interface SocialLinkProps {
-  /** Texto del banner superior (ej. "SEES") */
   bannerText?: string;
-  /** Nombre de la arcana (ej. "Fool") */
   arcanaName: string;
-  /** Rango actual de 1 a 10 */
   rank: number;
-  /** Descripción en la sección inferior */
   comment: string;
-  /** Etiqueta diagonal (por defecto "ARCANA") */
   arcanaLabel?: string;
 }
 
@@ -53,9 +48,7 @@ const SocialLink = ({
   return (
     <div ref={containerRef} className="flex flex-col gap-5 md:gap-20">
       <div className="relative w-full max-w-xl mx-auto overflow-hidden border-t-8 border-r-4 border-white shadow-card-lg shadow-blue-900/50 bg-white -skew-x-10 scale-106 md:scale-150 md:translate-y-7">
-        {/* Sección superior: encabezado e información */}
         <div className="md:pl-20 relative bg-white pt-8">
-          {/* Banner superior negro */}
           {bannerText && (
             <div className="absolute top-0 left-0 right-0 pt-5 pb-2 bg-black flex items-center justify-center">
               <span className="font-sans text-white font-bold text-sm tracking-widest uppercase skew-x-10">
@@ -64,7 +57,6 @@ const SocialLink = ({
             </div>
           )}
 
-          {/* Etiqueta diagonal ARCANA (cinta angular) */}
           <div
             className="absolute top-10 left-0 bg-black flex items-center justify-end pr-2 pl-2 pt-2 origin-left -rotate-20 translate-x-10 md:translate-x-25"
           >
@@ -73,7 +65,6 @@ const SocialLink = ({
             </span>
           </div>
 
-          {/* Nombre de arcana + RANK */}
           <div className="grid grid-cols-3 items-center gap-4 pt-2 px-5">
             <h2 className="col-span-2 text-center text-3xl sm:text-4xl text-black font-bold">
               {arcanaName}
@@ -89,7 +80,6 @@ const SocialLink = ({
             </div>
           </div>
 
-          {/* Estrellas */}
           <div className="flex justify-center gap-0.5 mt-3 -skew-x-15" role="img" aria-label={`Rango ${clampedRank} de ${MAX_RANK}`}>
             {stars.map((filled, i) => (
               <span key={i}>{filled ? <StarFilled /> : <StarEmpty />}</span>
@@ -98,16 +88,13 @@ const SocialLink = ({
         </div>
 
       </div>
-      {/* Sección inferior: fondo azul y descripción */}
       <div className="md:pl-10 mt-5 relative max-h-[140px] text-white overflow-y-auto overflow-x-hidden">
-        {/* Patrón sutil de líneas verticales */}
         <div
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 3px, rgb(255 255 255 / 0.03) 3px, rgb(255 255 255 / 0.03) 4px)',
           }}
         />
-        {/* Silueta/figura tenue decorativa */}
         <div
           className="absolute bottom-0 right-0 w-48 h-32 opacity-10"
         />

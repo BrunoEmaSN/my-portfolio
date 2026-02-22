@@ -13,16 +13,14 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
   useGSAP(() => {
     if (!containerRef.current || !fillRef.current) return;
 
-    // Creamos la línea de tiempo
-    const tl = gsap.timeline({ 
-      repeat: -1, 
+    const tl = gsap.timeline({
+      repeat: -1,
       repeatDelay: 1,
-      defaults: { ease: "expo.inOut" } 
+      defaults: { ease: "expo.inOut" }
     });
 
     gsap.fromTo(titleWrapperRef.current, { opacity: 0 }, { opacity: 1, duration: 2, ease: "power1.out" });
 
-    // Animación de barrido diagonal (Estilo Persona 3)
     tl.fromTo(
       fillRef.current,
       { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" },
@@ -44,7 +42,6 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
     <div ref={titleWrapperRef} className="flex gap-4 opacity-0">
         <div className="bg-blue-700 w-8 sm:w-10 md:w-15 lg:w-20" />
         <div ref={containerRef} className="relative inline-block select-none">
-        {/* CAPA 1: El borde (Outline) - Estático de fondo */}
         <div 
             className={clsx(textStyle, "text-transparent pb-1 font-m-plus-1p pr-1")}
             style={{ WebkitTextStroke: "3px white", letterSpacing: "-0.09em" }}
@@ -54,7 +51,6 @@ const MainTitle = ({ isMobile = false, text = "PRESS ANY BUTTON" }) => {
             ))}
         </div>
 
-        {/* CAPA 2: El relleno (Fill) - Animado con Clip-Path */}
         <div 
             ref={fillRef}
             className={clsx(textStyle, "absolute inset-0 text-white font-m-plus-1p")}

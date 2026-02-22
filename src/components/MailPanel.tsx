@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import { ANIMATION_CONFIG } from "../../constants";
 import { HiMail, HiUser } from "react-icons/hi";
 
-/** Datos del formulario de contacto para envío de mail */
 export interface MailFormData {
   fromName: string;
   fromEmail: string;
@@ -14,15 +13,10 @@ export interface MailFormData {
 }
 
 export interface MailPanelProps {
-  /** Imagen de fondo del panel (semitransparente, escala de grises) */
   backgroundImage: string;
-  /** Texto alternativo para la imagen de fondo */
   backgroundImageAlt?: string;
-  /** Callback al enviar: recibe los datos del formulario */
   onSend?: (data: MailFormData) => void;
-  /** Etiqueta del botón de acción (por defecto solo se muestra el icono) */
   actionLabel?: string;
-  /** Clase CSS adicional para el contenedor */
   className?: string;
 }
 
@@ -118,9 +112,7 @@ const MailPanel = ({
       <div
         className="absolute top-0 left-0 w-full h-full hidden lg:flex justify-end items-end border-l-16 border-b-16 blur-[0.5px] border-r-16 border-white/90 rounded-lg lg:rotate-3 lg:translate-x-10 lg:translate-y-5" />
 
-      {/* Contenido sobre la imagen */}
       <div className="relative z-50 flex h-full flex-col p-5 sm:p-6 md:p-8 lg:rotate-10 lg:translate-x-20">
-        {/* Remitente - parte superior derecha */}
         <div className="flex flex-col items-center gap-1 pt-50">
           <div className="w-fit">
             <div className="flex items-end gap-2">
@@ -155,7 +147,6 @@ const MailPanel = ({
           </div>
         </div>
 
-        {/* Asunto / pregunta destacada */}
         <div className="mt-4 flex justify-center h-full max-h-[min(70vh,35rem)]">
           <div className="max-w-md w-full h-full">
             <input
@@ -166,7 +157,6 @@ const MailPanel = ({
               className="w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold border-none outline-none truncate"
             />
 
-            {/* Cuerpo del mensaje */}
             <textarea
               placeholder="Message..."
               value={messageValue}
@@ -193,12 +183,6 @@ const MailPanel = ({
               className="absolute hidden md:block w-full h-full p-2"
               style={{ filter: "invert(17%) sepia(89%) saturate(3464%) hue-rotate(226deg) brightness(95%) contrast(97%)" }}
             />
-            {/* <span
-              className="rotate-10 mb-10 mr-5 w-13 h-13 flex items-center justify-center rounded-full border-5 border-gray-300 text-3xl font-bold"
-              aria-label={actionLabel ?? 'Acción'}
-            >
-              A
-            </span> */}
             <span
               className="m-auto p-4 md:p-0 bg-blue-700 md:bg-transparent flex items-center justify-center text-3xl font-bold z-10"
               aria-label={actionLabel ?? 'Enviar email'}

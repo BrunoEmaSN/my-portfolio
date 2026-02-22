@@ -23,14 +23,11 @@ const StepperButton = ({
             className="absolute p-1 sm:p-1.5 md:p-2 inset-0 bg-red-600 z-10 opacity-70" 
             style={{ clipPath: 'polygon(100% 0, 0 60%, 70% 100%)' }} 
           />
-          {/* Flecha izquierda con borde */}
           <div className="relative translate-x-0.5 sm:translate-x-1">
-            {/* Borde negro (más grande) */}
             <div 
               className="absolute w-4 h-5 sm:w-5 sm:h-6 md:w-6 md:h-8 bg-black"
               style={{ clipPath: 'polygon(100% 20%, 40% 60%, 75% 80%, 70% 100%, 0% 60%, 100% 0%)' }}
             />
-            {/* Flecha blanca (más pequeña, encima del borde) */}
             <div 
               className="relative w-4 h-5 sm:w-5 sm:h-6 md:w-6 md:h-8 bg-white"
               style={{ 
@@ -43,7 +40,6 @@ const StepperButton = ({
         </div>
       )}
 
-      {/* Botón con label */}
       <div 
         className="flex items-center justify-center"
       >
@@ -58,14 +54,11 @@ const StepperButton = ({
             className="absolute p-1 sm:p-1.5 md:p-2 inset-0 bg-red-600 z-10 opacity-70" 
             style={{ clipPath: 'polygon(30% 0, 100% 40%, 0% 100%)' }} 
           />
-          {/* Flecha derecha con borde */}
           <div className="relative -translate-x-0.5 sm:-translate-x-1">
-            {/* Borde negro (más grande) */}
             <div 
               className="absolute w-4 h-5 sm:w-5 sm:h-6 md:w-6 md:h-8 bg-black"
               style={{ clipPath: 'polygon(25% 20%, 60% 60%, 0% 80%, 0% 100%, 100% 40%, 30% 0%)' }}
             />
-            {/* Flecha blanca (más pequeña, encima del borde) */}
             <div 
               className="relative w-4 h-5 sm:w-5 sm:h-6 md:w-6 md:h-8 bg-white"
               style={{ 

@@ -5,17 +5,11 @@ import gsap from "gsap";
 import clsx from "clsx";
 
 export interface CharacterHeaderProps {
-  /** Nombre del personaje (ej. "Aigis") */
   name: string;
-  /** Etiqueta de arcana (ej. "ARCANA") */
   arcanaLabel?: string;
-  /** Nombre de la arcana (ej. "Chariot") */
   arcana: string;
-  /** Nombre del persona (ej. "Palladion") */
   persona: string;
-  /** Nivel actual */
   level: number;
-  /** EXP para siguiente nivel */
   nextExp: number;
   className?: string;
 }

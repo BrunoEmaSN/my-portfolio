@@ -2,15 +2,12 @@ import { useMemo } from "react";
 
 const DAY_LABELS_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
 
-/** Ciclo lunar sinódico en días (luna nueva a luna nueva). */
 const LUNAR_CYCLE_DAYS = 29.530588;
-
-/** Luna llena de referencia para Argentina (3 Mar 2026, 08:39 Argentina ≈ 11:39 UTC). */
 const REFERENCE_FULL_MOON_MS = Date.UTC(2026, 2, 3, 11, 39);
 
 /**
- * Cuenta cuántos días faltan para la próxima luna llena desde la fecha dada.
- * Cálculo válido para cualquier zona horaria; se usa referencia alineada al calendario argentino.
+ * Days until next full moon from the given date. Uses synodic cycle and a reference full moon
+ * aligned to Argentina timezone; result is timezone-agnostic.
  */
 function getDaysUntilFullMoon(from: Date): number {
   const fromMs = from.getTime();
@@ -24,7 +21,7 @@ function getDaysUntilFullMoon(from: Date): number {
 }
 
 /**
- * Días transcurridos desde la última luna nueva (0 a ~29.53).
+ * Days elapsed since the last new moon (0 to ~29.53), used for phase and illumination.
  */
 function getDaysSinceNewMoon(from: Date): number {
   const newMoonBeforeRef = REFERENCE_FULL_MOON_MS - (LUNAR_CYCLE_DAYS / 2) * 24 * 60 * 60 * 1000;
@@ -34,8 +31,7 @@ function getDaysSinceNewMoon(from: Date): number {
 }
 
 /**
- * Fracción iluminada de la luna (0 = luna nueva, 1 = luna llena).
- * Ángulo de fase: 0° en luna nueva (cara oscura), 180° en luna llena (cara iluminada).
+ * Moon illumination fraction (0 = new, 1 = full). Phase angle 0° at new moon, 180° at full.
  */
 function getMoonPhaseIllumination(from: Date): number {
   const daysIntoCycle = getDaysSinceNewMoon(from);
@@ -45,16 +41,12 @@ function getMoonPhaseIllumination(from: Date): number {
 }
 
 /**
- * true = creciente (hacia luna llena), false = menguante (hacia luna nueva).
- * En hemisferio sur: creciente = iluminación a la izquierda, menguante = a la derecha.
+ * True if waxing (toward full moon), false if waning. Southern hemisphere: waxing = lit on left.
  */
 function isWaxing(from: Date): boolean {
   return getDaysSinceNewMoon(from) < LUNAR_CYCLE_DAYS / 2;
 }
 
-/**
- * Formatea una fecha a "DD/MM".
- */
 function formatDateDDMM(d: Date): string {
   const day = String(d.getDate()).padStart(2, "0");
   const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -62,7 +54,7 @@ function formatDateDDMM(d: Date): string {
 }
 
 /**
- * Subtítulo según día de la semana y hora (lunes a viernes por franja; fin de semana = Daytime).
+ * Subtitle by weekday and hour: weekdays use time slots (Dark Hour, Morning, etc.), weekends use "Daytime".
  */
 function getSubtitle(d: Date): string {
   const day = d.getDay();
@@ -84,12 +76,8 @@ const getBackgroundLabel = (dayLabel: string, subtitle: string): string => {
   if (subtitle === "Dark Hour") return "DARK HOUR";
   if (dayLabel === "Sat" || dayLabel === "Sun") return "WEEKEND";
   return "WEEKDAY";
-}
+};
 
-/**
- * Hook que prepara toda la información necesaria para el componente WeekdayBanner:
- * fecha formateada, etiqueta del día, subtítulo, días hasta luna llena y opciones de estilo.
- */
 export function useWeekdayBanner() {
   return useMemo(() => {
     const d = new Date();

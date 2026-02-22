@@ -4,13 +4,9 @@ import { gsap } from "gsap"
 import { ANIMATION_CONFIG } from "../../constants"
 
 export interface TransitionImageProps {
-  /** URL de la imagen a mostrar */
   image: string | null
-  /** Texto alternativo */
   imageAlt?: string
-  /** Clase CSS adicional para el contenedor */
   className?: string
-  /** Duración de la transición en segundos */
   duration?: number
 }
 const EASE = "power1.inOut"
@@ -37,7 +33,6 @@ const TransitionImage = ({
       return
     }
 
-    // Transición: fade out y luego actualizar src y fade in
     gsap.fromTo(imgEl, { opacity: 0, x: 10 }, {
       x: 0,
       opacity: 1,

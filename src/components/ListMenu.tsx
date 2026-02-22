@@ -56,7 +56,7 @@ const ListMenu = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Transición GSAP al cambiar el ítem seleccionado (scale + ligero brillo)
+  /** GSAP transition on selected item change: scale down previous, scale up + bounce on next. */
   useGSAP(() => {
     if (prevSelectedRef.current === selectedIndex) return;
     const prev = prevSelectedRef.current;
@@ -82,7 +82,6 @@ const ListMenu = ({
       className={clsx("relative w-full max-w-xs outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-inset rounded", className)}
     >
       <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(40vh,28rem)]">
-        {/* Título LIST con estilo 3D/retro (fijo, no hace scroll) */}
         <h2
           className="text-2xl font-black tracking-tight text-white uppercase mb-4 shrink-0"
           style={{
@@ -93,7 +92,6 @@ const ListMenu = ({
           {title}
         </h2>
 
-        {/* Contenedor con scroll independiente de la sección */}
         <ul
           className="space-y-1 w-full overflow-y-auto overflow-x-hidden overscroll-contain pr-1 min-h-0"
           role="list"

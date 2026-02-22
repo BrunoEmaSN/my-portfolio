@@ -1,44 +1,41 @@
+/**
+ * Short metallic "click" for menu navigation: inharmonic partials with aggressive decay and
+ * phase distortion, then highpass filter and gain to match menu level.
+ */
 export const menuAudioEffect = () => {
     const audioContext = new (window.AudioContext)();
 
-    const duration = 0.08; // Un poco más largo para la textura
+    const duration = 0.08;
     const sampleRate = audioContext.sampleRate;
     const numSamples = Math.floor(duration * sampleRate);
     const buffer = audioContext.createBuffer(1, numSamples, sampleRate);
     const data = buffer.getChannelData(0);
 
-    // Frecuencias inarmónicas (clave para el sonido de metal/maquinaria)
     const freqs = [120, 290, 480, 1100, 2200];
 
     for (let i = 0; i < numSamples; i++) {
         const t = i / sampleRate;
-        // Decay muy agresivo al principio (ataque) y luego más suave
         const envelope = Math.pow(1 - t / duration, 4);
 
         let signal = 0;
         freqs.forEach((f, index) => {
-            // Añadimos un poco de distorsión por fase
             signal += Math.sin(2 * Math.PI * f * t + Math.sin(t * 50)) * (0.2 / (index + 1));
         });
 
         data[i] = (signal) * envelope;
     }
 
-    // --- Cadena de Efectos ---
     const source = audioContext.createBufferSource();
     source.buffer = buffer;
 
-    // Filtro para darle ese tono "oscuro" y tecnológico
     const filter = audioContext.createBiquadFilter();
     filter.type = "highpass";
     filter.frequency.value = 2500;
     filter.Q.value = 0.8;
 
-    // Ganancia para igualar el nivel con el resto de sonidos del menú
     const gainNode = audioContext.createGain();
     gainNode.gain.value = 4;
 
-    // Conexión
     source.connect(filter);
     filter.connect(gainNode);
     gainNode.connect(audioContext.destination);
@@ -46,12 +43,14 @@ export const menuAudioEffect = () => {
     source.start(0);
 };
 
+/**
+ * "Confirm" sound: percussive noise body (lowpass, fast decay) plus bright square oscillator
+ * with upward frequency sweep for a metallic shimmer; both layers start together.
+ */
 export const startAudioEffect = () => {
     const ctx = new (window.AudioContext)();
     const t = ctx.currentTime;
 
-    // --- CAPA 1: EL IMPACTO (Ruido Percusivo) ---
-    // Crea el cuerpo del sonido "crunchy"
     const noiseBuffer = ctx.createBuffer(1, ctx.sampleRate * 0.2, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
     for (let i = 0; i < noiseBuffer.length; i++) {
@@ -70,20 +69,16 @@ export const startAudioEffect = () => {
     noiseGain.gain.setValueAtTime(0.3, t);
     noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
 
-    // --- CAPA 2: EL BRILLO CRISTALINO (Oscilador Agudo) ---
-    // Ese "bling" metálico que caracteriza a Persona
     const osc = ctx.createOscillator();
     const oscGain = ctx.createGain();
 
-    osc.type = 'square'; // Más suave que square pero con armónicos
+    osc.type = 'square';
     osc.frequency.setValueAtTime(800, t);
-    // Un ligero barrido ascendente para el efecto "shimmer"
     osc.frequency.exponentialRampToValueAtTime(1700, t + 0.05);
 
     oscGain.gain.setValueAtTime(0.15, t);
     oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
 
-    // --- CONEXIONES ---
     noiseSource.connect(noiseFilter);
     noiseFilter.connect(noiseGain);
     noiseGain.connect(ctx.destination);
@@ -91,19 +86,20 @@ export const startAudioEffect = () => {
     osc.connect(oscGain);
     oscGain.connect(ctx.destination);
 
-    // --- EJECUCIÓN ---
     noiseSource.start(t);
     osc.start(t);
     osc.stop(t + 0.2);
     noiseSource.stop(t + 0.1);
 };
 
+/**
+ * "Back/cancel" sound: damp noise (lowpass) plus sine with pitch drop (600Hz to 200Hz) for
+ * a soft "cancel" feel; both layers decay together.
+ */
 export const backAudioEffect = () => {
     const ctx = new (window.AudioContext)();
     const t = ctx.currentTime;
 
-    // --- CAPA 1: EL "DAMP" (Ruido Sordo) ---
-    // Usamos un filtro LowPass para que el ruido no brille, sino que sea un golpe seco
     const noiseBuffer = ctx.createBuffer(1, ctx.sampleRate * 0.1, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
     for (let i = 0; i < noiseBuffer.length; i++) {
@@ -115,26 +111,22 @@ export const backAudioEffect = () => {
 
     const lowFilter = ctx.createBiquadFilter();
     lowFilter.type = "lowpass";
-    lowFilter.frequency.setValueAtTime(1200, t); // Cortamos los agudos
+    lowFilter.frequency.setValueAtTime(1200, t);
 
     const noiseGain = ctx.createGain();
     noiseGain.gain.setValueAtTime(0.2, t);
     noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
 
-    // --- CAPA 2: EL TONO DESCENDENTE ---
-    // El secreto de "cancelar" es que la nota cae (Pitch Drop)
     const osc = ctx.createOscillator();
     const oscGain = ctx.createGain();
 
-    osc.type = 'sine'; // Senoidal para que sea más redondo y menos "agresivo"
+    osc.type = 'sine';
     osc.frequency.setValueAtTime(600, t);
-    // Caída rápida de frecuencia (de 600Hz a 200Hz)
     osc.frequency.exponentialRampToValueAtTime(200, t + 0.1);
 
     oscGain.gain.setValueAtTime(0.2, t);
     oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
 
-    // --- CONEXIONES ---
     noiseSource.connect(lowFilter);
     lowFilter.connect(noiseGain);
     noiseGain.connect(ctx.destination);
@@ -142,7 +134,6 @@ export const backAudioEffect = () => {
     osc.connect(oscGain);
     oscGain.connect(ctx.destination);
 
-    // --- EJECUCIÓN ---
     noiseSource.start(t);
     osc.start(t);
     noiseSource.stop(t + 0.12);

@@ -1,18 +1,12 @@
 import clsx from "clsx";
 
 export interface SocialItemProps {
-  /** URL o ruta de la imagen del avatar (sección izquierda) */
   logoSrc: string;
-  /** Texto alternativo para el avatar */
   logoAlt?: string;
-  /** Nombre del remitente (ej. "Keisuke Hiraga") */
   name: string;
   icon: React.ReactNode;
-  /** Descripción o asunto del mensaje (ej. "Painting buddy") */
   description: string;
-  /** Callback al hacer clic en el elemento */
   onClick?: () => void;
-  /** Clase CSS adicional para el contenedor */
   className?: string;
 }
 
@@ -35,7 +29,6 @@ const SocialItem = ({
         className
       )}
     >
-      {/* Sección izquierda: avatar con recorte diagonal */}
       <div
         className="relative w-[20%] aspect-3/2 bg-neutral-800"
         style={{
@@ -49,7 +42,6 @@ const SocialItem = ({
         />
       </div>
 
-      {/* Sección derecha: nombre + descripción */}
       <div className="flex-1 flex flex-col justify-center py-3 pr-4 pl-3 min-w-0">
         <div className="flex items-center gap-2">
           <span className="text-blue-600" aria-hidden>
