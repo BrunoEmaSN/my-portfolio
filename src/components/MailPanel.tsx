@@ -1,27 +1,37 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import clsx from "clsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ANIMATION_CONFIG } from "../../constants";
 import { HiMail, HiUser } from "react-icons/hi";
 
+/** Datos del formulario de contacto para envío de mail */
+export interface MailFormData {
+  fromName: string;
+  fromEmail: string;
+  subject: string;
+  message: string;
+}
+
 export interface MailPanelProps {
   /** Imagen de fondo del panel (semitransparente, escala de grises) */
   backgroundImage: string;
   /** Texto alternativo para la imagen de fondo */
   backgroundImageAlt?: string;
-  /** Callback al pulsar el botón de acción (derecha) */
-  onAction?: () => void;
+  /** Callback al enviar: recibe los datos del formulario */
+  onSend?: (data: MailFormData) => void;
   /** Etiqueta del botón de acción (por defecto solo se muestra el icono) */
   actionLabel?: string;
   /** Clase CSS adicional para el contenedor */
   className?: string;
 }
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const MailPanel = ({
   backgroundImage,
   backgroundImageAlt = 'Mail background',
-  onAction,
+  onSend,
   actionLabel,
   className = '',
 }: MailPanelProps) => {
@@ -30,6 +40,43 @@ const MailPanel = ({
   const [fromEmailValue, setFromEmailValue] = useState("");
   const [subjectValue, setSubjectValue] = useState("");
   const [messageValue, setMessageValue] = useState("");
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const clearStatus = useCallback(() => {
+    setStatus('idle');
+    setErrorMessage('');
+  }, []);
+
+  const handleSubmit = () => {
+    setErrorMessage("");
+    const trimmedEmail = fromEmailValue.trim();
+    const trimmedMessage = messageValue.trim();
+    if (!trimmedEmail) {
+      setStatus('error');
+      setErrorMessage("Introduce tu email.");
+      return;
+    }
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setStatus('error');
+      setErrorMessage("Email no válido.");
+      return;
+    }
+    if (!trimmedMessage) {
+      setStatus('error');
+      setErrorMessage("Escribe un mensaje.");
+      return;
+    }
+    setStatus('sending');
+    const data: MailFormData = {
+      fromName: fromNameValue.trim(),
+      fromEmail: trimmedEmail,
+      subject: subjectValue.trim(),
+      message: trimmedMessage,
+    };
+    onSend?.(data);
+    setStatus('success');
+  };
 
   useGSAP(() => {
     if (!panelRef.current) return;
@@ -48,12 +95,13 @@ const MailPanel = ({
       <div className="absolute top-0 left-0 w-full h-full bg-[#1E1E1E]/50 lg:translate-x-20 lg:translate-y-10 rounded-lg lg:rotate-3" />
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="relative h-2/3">
-          <img
-            src={backgroundImage}
-            alt={backgroundImageAlt}
-            className="absolute object-cover h-full w-full opacity-20 grayscale"
-            style={{ clipPath: 'polygon(0 0, 0% 100%, 100% 0)' }}
-          />
+          <div className="absolute top-0 left-0 w-full h-full" style={{ clipPath: 'polygon(0 0, 0% 100%, 100% 0)' }}>
+            <img
+              src={backgroundImage}
+              alt={backgroundImageAlt}
+              className="object-cover h-full w-full opacity-20 grayscale -translate-x-20 rotate-y-180"
+            />
+          </div>
           <div
             className="absolute top-0 right-0 w-full h-full bg-[#1E1E1E]"
             style={{ clipPath: 'polygon(100% 0, 30% 0, 100% 70%)' }}
@@ -88,7 +136,7 @@ const MailPanel = ({
                 type="text"
                 placeholder="Your name..."
                 value={fromNameValue}
-                onChange={(e) => setFromNameValue(e.target.value)}
+                onChange={(e) => { setFromNameValue(e.target.value); clearStatus(); }}
                 className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300 truncate"
               />
             </div>
@@ -100,7 +148,7 @@ const MailPanel = ({
                 type="email"
                 placeholder="Your email..."
                 value={fromEmailValue}
-                onChange={(e) => setFromEmailValue(e.target.value)}
+                onChange={(e) => { setFromEmailValue(e.target.value); clearStatus(); }}
                 className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300 truncate"
               />
             </div>
@@ -114,7 +162,7 @@ const MailPanel = ({
               type="text"
               placeholder="Subject..."
               value={subjectValue}
-              onChange={(e) => setSubjectValue(e.target.value)}
+              onChange={(e) => { setSubjectValue(e.target.value); clearStatus(); }}
               className="w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold border-none outline-none truncate"
             />
 
@@ -122,16 +170,23 @@ const MailPanel = ({
             <textarea
               placeholder="Message..."
               value={messageValue}
-              onChange={(e) => setMessageValue(e.target.value)}
+              onChange={(e) => { setMessageValue(e.target.value); clearStatus(); }}
               className="mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain w-full resize-none bg-transparent border-none outline-none text-inherit"
             />
+            {errorMessage && (
+              <p className="mt-2 text-red-400 text-sm font-medium" role="alert">{errorMessage}</p>
+            )}
+            {status === 'success' && (
+              <p className="mt-2 text-green-400 text-sm font-medium">Listo. Abre tu cliente de correo para enviar.</p>
+            )}
           </div>
         </div>
         <div className="flex justify-end items-end pt-20 md:pt-0">
           <button
             type="button"
-            onClick={onAction}
-            className="w-full h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer">
+            onClick={handleSubmit}
+            disabled={status === 'sending'}
+            className="w-full h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
             <img
               src="/images/run.svg"
               alt="Mail button"
@@ -146,9 +201,9 @@ const MailPanel = ({
             </span> */}
             <span
               className="m-auto p-4 md:p-0 bg-blue-700 md:bg-transparent flex items-center justify-center text-3xl font-bold z-10"
-              aria-label={actionLabel ?? 'Acción'}
+              aria-label={actionLabel ?? 'Enviar email'}
             >
-              SEND EMAIL
+              {status === 'sending' ? '...' : 'SEND EMAIL'}
             </span>
           </button>
         </div>

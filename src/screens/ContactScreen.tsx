@@ -1,36 +1,49 @@
 import { useRef } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
-import MailPanel from "../components/MailPanel"
+import MailPanel, { type MailFormData } from "../components/MailPanel"
 import SectionTitle from "../components/SectionTitle"
 import SocialItem from "../components/SocialItem"
-import { ANIMATION_CONFIG } from "../../constants"
+import { ANIMATION_CONFIG, CONTACT_EMAIL } from "../../constants"
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
+
+function buildMailtoLink(to: string, data: MailFormData): string {
+  const subject = encodeURIComponent(data.subject || "Contacto desde portfolio")
+  const body = [
+    data.message,
+    "",
+    "---",
+    `Enviado por: ${data.fromName || "Anónimo"}`,
+    `Email: ${data.fromEmail}`,
+  ].join("\n")
+  const bodyEncoded = encodeURIComponent(body)
+  return `mailto:${encodeURIComponent(to)}?subject=${subject}&body=${bodyEncoded}`
+}
 
 const socialItems = [
   {
     logoSrc: "/images/social-network/linkedin-color.png",
     logoAlt: "linkedin",
     name: "LinkedIn",
-    description: "@BrunoSanchez",
+    description: `@${import.meta.env.VITE_LINKEDIN_USERNAME}`,
     icon: <FaLinkedin size={30} />,
-    url: "https://www.linkedin.com/in/bruno-s%C3%A1nchez-373a37173/",
+    url: import.meta.env.VITE_LINKEDIN_URL,
   },
   {
     logoSrc: "/images/social-network/github-color.png",
     logoAlt: "github",
     name: "Github",
-    description: "@BrunoSanchez",
+    description: `@${import.meta.env.VITE_GITHUB_USERNAME}`,
     icon: <FaGithub size={30} />,
-    url: "https://github.com/BrunoEmaSN",
+    url: import.meta.env.VITE_GITHUB_URL,
   },
   {
     logoSrc: "/images/social-network/instagram-color.png",
     logoAlt: "instagram",
     name: "Instagram",
-    description: "@BrunoSanchez",
+    description: `@${import.meta.env.VITE_INSTAGRAM_USERNAME}`,
     icon: <FaInstagram size={30} />,
-    url: "https://www.instagram.com/the_penumbre/",
+    url: import.meta.env.VITE_INSTAGRAM_URL,
   },
 ]
 
@@ -58,15 +71,18 @@ const ContactScreen = () => {
     window.open(url, "_blank")
   }
 
+  const handleSendMail = (data: MailFormData) => {
+    const link = buildMailtoLink(CONTACT_EMAIL, data)
+    window.location.href = link
+  }
+
   return (
     <section id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden z-10">
       <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full h-full">
         <MailPanel
           backgroundImage="/images/photo.png"
-          onAction={() => {
-            console.log("Send email")
-          }}
+          onSend={handleSendMail}
           actionLabel="SEND EMAIL"
         />
         <div
