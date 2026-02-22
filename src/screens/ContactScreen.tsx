@@ -87,7 +87,7 @@ const ContactScreen = () => {
         />
         <div
           ref={socialListRef}
-          className="flex flex-col items-center justify-center h-full w-full p-8 gap-5"
+          className="flex flex-col items-center justify-center h-full w-full p-8 mb-20 gap-5"
         >
           {socialItems.map((item) => (
             <SocialItem

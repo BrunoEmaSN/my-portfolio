@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <div className="bg-black overflow-hidden relative">
-      <div className="absolute w-full h-full flex justify-end items-start">
+      <div className={("absolute w-full h-full hidden md:flex justify-end items-start")}>
         <WeekdayBanner
           date="11/12"
           dayLabel="Thu"

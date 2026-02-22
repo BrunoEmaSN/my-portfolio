@@ -55,7 +55,7 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                             backAudioEffect()
                             navigate(ROUTES.HOME)
                         }}
-                        className="text-right button-menu absolute bottom-5 text-white hover:scale-105 transition-all duration-300 z-50 bg-blue-700"
+                        className="text-right button-menu absolute bottom-5 text-white hover:scale-105 transition-all duration-300 z-100 bg-blue-700"
                     >
                         Esc
                     </button>
