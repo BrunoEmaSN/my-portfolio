@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import clsx from "clsx";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export interface WeekdayBannerProps {
   /** Fecha en formato "DD/MM" (ej. "11/12") */
@@ -40,6 +43,24 @@ const WeekdayBanner = ({
   backgroundLabel = "WEEKDAY",
   className = "",
 }: WeekdayBannerProps) => {
+  const waveRef = useRef<SVGSVGElement>(null);
+
+  useGSAP(
+    () => {
+      if (!waveRef.current) return;
+      const el = waveRef.current;
+      gsap.set(el, { force3D: true });
+      gsap.to(el, {
+        xPercent: -50,
+        duration: 4,
+        ease: "none",
+        repeat: -1,
+        overwrite: "auto",
+      });
+    },
+    { scope: waveRef, dependencies: [] }
+  );
+
   return (
     <div
       className={clsx(
@@ -54,7 +75,30 @@ const WeekdayBanner = ({
       >
         {backgroundLabel}
       </span>
-      <div className="absolute botom-0 left-0 w-full h-10 bg-blue-700/50 z-10" />
+      {/* Onda animada continua con GSAP (2 periodos idénticos = loop sin corte) */}
+      <div className="absolute bottom-0 left-0 w-full h-10 z-10 overflow-hidden">
+        <svg
+          ref={waveRef}
+          className="absolute bottom-0 left-0 h-full"
+          style={{
+            color: "rgb(29 78 216 / 0.5)",
+            willChange: "transform",
+            transform: "translateZ(0)",
+            width: "200%",
+            minWidth: "200%",
+          }}
+          viewBox="0 0 2000 40"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden
+        >
+          {/* Un periodo: 0–1000; segundo periodo idéntico: 1000–2000 */}
+          <path
+            fill="currentColor"
+            d="M0,20 Q250,8 500,20 Q750,32 1000,20 Q1250,8 1500,20 Q1750,32 2000,20 L2000,40 L0,40 Z"
+          />
+        </svg>
+      </div>
       {/* Barra central azul con resplandor */}
       <div
         className="relative z-20 flex items-center justify-between w-[92%] max-w-2xl min-h-[4.5rem] px-5 py-3 mt-7 rounded-xl"
