@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react"
 import { ANIMATION_CONFIG } from "../../constants"
 import { menuAudioEffect } from "../helpers/audioContext"
 import { AboutMeProvider, useAboutMe } from "../context/AboutMeContext"
+import { useScreenScroll } from "../hooks/useScreenScroll"
 
 const size = {
   sm: 100,
@@ -30,6 +31,8 @@ const AboutMeSection = () => {
     menuAudioEffect()
     ctxGoRight()
   }
+
+  useScreenScroll(containerRef)
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

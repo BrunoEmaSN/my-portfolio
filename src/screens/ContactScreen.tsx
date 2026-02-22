@@ -6,6 +6,7 @@ import SectionTitle from "../components/SectionTitle"
 import SocialItem from "../components/SocialItem"
 import { ANIMATION_CONFIG, CONTACT_EMAIL } from "../../constants"
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
+import { useScreenScroll } from "../hooks/useScreenScroll"
 
 function buildMailtoLink(to: string, data: MailFormData): string {
   const subject = encodeURIComponent(data.subject || "Contacto desde portfolio")
@@ -55,7 +56,10 @@ const size = {
 }
 
 const ContactScreen = () => {
+  const sectionRef = useRef<HTMLElement>(null)
   const socialListRef = useRef<HTMLDivElement>(null)
+
+  useScreenScroll(sectionRef)
 
   useGSAP(() => {
     if (!socialListRef.current?.children?.length) return
@@ -77,7 +81,7 @@ const ContactScreen = () => {
   }
 
   return (
-    <section id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden z-10">
+    <section ref={sectionRef} id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden z-10">
       <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full h-full">
         <MailPanel

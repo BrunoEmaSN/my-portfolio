@@ -5,6 +5,7 @@ import SectionTitle from "../components/SectionTitle"
 import ExperienceTimeline from "../components/ExperienceTimeline"
 import Card from "../components/Card"
 import { ANIMATION_CONFIG, experiencesData, projectsData } from "../../constants"
+import { useScreenScroll } from "../hooks/useScreenScroll"
 
 const size = {
   sm: 100,
@@ -18,6 +19,8 @@ const ExperiencesScreen = () => {
   const titleFeatured = useRef<HTMLHeadingElement>(null)
   const titleJourney = useRef<HTMLHeadingElement>(null)
   const cardsGridRef = useRef<HTMLDivElement>(null)
+
+  useScreenScroll(sectionRef)
 
   useGSAP(() => {
     if (!sectionRef.current || !titleFeatured.current || !titleJourney.current) return

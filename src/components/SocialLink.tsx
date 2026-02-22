@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ANIMATION_CONFIG } from '../../constants';
+
 export interface SocialLinkProps {
   bannerText?: string;
   arcanaName: string;

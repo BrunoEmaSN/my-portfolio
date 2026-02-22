@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ANIMATION_CONFIG } from '../../constants';
 import { menuAudioEffect } from '../helpers/audioContext';
+
 export interface ListMenuProps {
   title?: string;
   items: string[];
@@ -78,7 +79,7 @@ const ListMenu = ({
       ref={containerRef}
       tabIndex={0}
       role="listbox"
-      aria-label={`${title}. Usa W y S para cambiar.`}
+      aria-label={`${title}. W/S to change.`}
       className={clsx("relative w-full max-w-xs outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-inset rounded", className)}
     >
       <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(40vh,28rem)]">

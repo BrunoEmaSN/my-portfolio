@@ -7,6 +7,7 @@ import ListMenu from "../components/ListMenu"
 import TransitionImage from "../components/TransitionImage"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { useScreenScroll } from "../hooks/useScreenScroll"
 
 const size = {
   sm: 100,
@@ -18,6 +19,8 @@ const size = {
 const TestimonialsScreen = () => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
+
+  useScreenScroll(sectionRef)
 
   useGSAP(() => {
     if (!sectionRef.current) return
