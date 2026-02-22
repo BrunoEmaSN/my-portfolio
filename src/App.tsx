@@ -10,6 +10,7 @@ import ContactScreen from "./screens/ContactScreen"
 import { ROUTES } from "../constants"
 import ScreenLayout from "./layouts/ScreenLayout"
 import HomeScreen from "./screens/HomeScreen"
+import WeekdayBanner from "./components/WeekdayBanner"
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
@@ -17,7 +18,16 @@ const App = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   return (
-    <div className="bg-black overflow-hidden">
+    <div className="bg-black overflow-hidden relative">
+      <div className="absolute w-full h-full flex justify-end items-start">
+        <WeekdayBanner
+          date="11/12"
+          dayLabel="Thu"
+          subtitle="After School"
+          limit={20}
+          className="max-w-lg"
+        />
+      </div>
       <Routes>
         <Route path={ROUTES.SPLASH}>
           <Route index element={<SplashScreen isMobile={isMobile} />} />

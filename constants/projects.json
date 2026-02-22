@@ -1,0 +1,29 @@
+[
+  {
+    "windowTitle": "Roulette",
+    "image": "/images/projects/roulette.png",
+    "imageAlt": "Roulette",
+    "tags": ["Next.js", "React 19", "TypeScript", "PostgreSQL", "Drizzle ORM", "Better Auth", "Tailwind CSS", "Railway"],
+    "title": "Roulette - App",
+    "url": "https://roulette.up.railway.app/",
+    "description": "Web application to create and manage custom roulette wheels with editable options, customizable colors and an improved randomness system that uses weather data from Buenos Aires."
+  },
+  {
+    "windowTitle": "Cocktail",
+    "image": "/images/projects/cocktail.png",
+    "imageAlt": "Cocktail",
+    "tags": ["React", "Vite", "GSAP", "Tailwind CSS", "Vercel"],
+    "title": "Cocktail - Landing Page",
+    "url": "https://gsap-coktails.vercel.app/",
+    "description": "Cocktail landing page built. Includes GSAP animations and responsive design."
+  },
+  {
+    "windowTitle": "MacBook Pro",
+    "image": "/images/projects/macbook.png",
+    "imageAlt": "MacBook Pro",
+    "tags": ["React 19", "Vite", "React Three Fiber", "GSAP", "Tailwind CSS", "Zustand", "react-responsive", "clsx", "Vercel"],
+    "title": "MacBook Pro - Landing Page",
+    "url": "https://macbook-gsap-r3f-app.vercel.app/",
+    "description": "Una landing page interactiva y moderna para el MacBook Pro, construida con React Three Fiber (R3F) y GSAP. Esta aplicación web ofrece una experiencia inmersiva con modelos 3D interactivos, animaciones fluidas basadas en scroll y visualización de productos en tiempo real"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "title": "AI Engineer",
+    "company": "Centro de E-learning",
+    "period": "2024 - Present",
+    "description": "I am responsible for the development of Talentia platform used AI to generate content and improve the learning experience."
+  },
+  {
+    "title": "Mobile Developer",
+    "company": "Quorum IT.",
+    "period": "2022 - 2024",
+    "description": "I was responsible for the development of the mobile app for the Quorum IT company."
+  },
+  {
+    "title": "Full Stack Developer",
+    "company": "DirMOD",
+    "period": "2021 - 2022",
+    "description": "I was responsible for the development of the web app for the DirMOD company and provided continuous improvement support to clients with developed systems."
+  }
+]
