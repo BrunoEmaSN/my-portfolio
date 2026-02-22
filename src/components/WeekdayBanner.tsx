@@ -43,62 +43,50 @@ const WeekdayBanner = ({
   return (
     <div
       className={clsx(
-        "relative w-full min-h-[7rem] flex items-center justify-center overflow-hidden rounded-lg",
+        "relative w-full min-h-[7rem] flex items-end justify-center overflow-hidden",
         className
       )}
-      style={{
-        background: `
-          linear-gradient(90deg, 
-            #8B6914 0%, 
-            #A67C32 15%, 
-            #C4A35A 35%, 
-            #8B6914 50%,
-            #6B4E0E 65%,
-            #A67C32 85%,
-            #8B6914 100%
-          )
-        `,
-        boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.15)",
-      }}
     >
       {/* Texto de fondo grande */}
       <span
-        className="absolute top-2 left-1/2 -translate-x-1/2 text-[4rem] sm:text-[5rem] font-black tracking-tighter uppercase text-[#0E0D51]/40 pointer-events-none select-none"
+        className="absolute top-2 left-1/2 -translate-x-1/2 text-[4rem] sm:text-[5rem] font-black tracking-tighter uppercase text-[#141F67] pointer-events-none select-none z-10"
         aria-hidden
       >
         {backgroundLabel}
       </span>
-
+      <div className="absolute botom-0 left-0 w-full h-10 bg-blue-700/50 z-10" />
       {/* Barra central azul con resplandor */}
       <div
-        className="relative z-10 flex items-center justify-between w-[92%] max-w-2xl min-h-[4.5rem] px-5 py-3 rounded-xl"
-        style={{
-          background: "linear-gradient(180deg, rgba(59, 130, 246, 0.95) 0%, rgba(37, 99, 235, 0.9) 50%, rgba(29, 78, 216, 0.95) 100%)",
-          boxShadow: `
-            0 0 20px rgba(59, 130, 246, 0.6),
-            0 0 40px rgba(59, 130, 246, 0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2)
-          `,
-          border: "1px solid rgba(255,255,255,0.15)",
-        }}
+        className="relative z-20 flex items-center justify-between w-[92%] max-w-2xl min-h-[4.5rem] px-5 py-3 mt-7 rounded-xl"
       >
         {/* Bloque izquierdo: fecha + día + triángulo + subtítulo */}
-        <div className="flex flex-col items-start gap-0.5">
-          <div className="flex items-baseline gap-1">
-            <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        <div className="flex flex-col items-start">
+          <div className="flex items-baseline">
+            <span
+              className="text-3xl sm:text-4xl font-black text-white tracking-tight"
+              style={{ WebkitTextStroke: "1px black" }}
+            >
               {date}
             </span>
-            <div className="flex flex-col items-center">
-              <span className="text-sm font-bold text-white uppercase leading-tight">
-                {dayLabel}
-              </span>
+            <div className="flex flex-col items-center relative">
               <span
-                className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-black"
+                className="absolute w-11 h-10 bg-black"
+                style={{
+                  clipPath: 'polygon(50% 100%, 0 0, 100% 0)',
+                }}
                 aria-hidden
               />
+              <span
+                className="text-sm font-bold text-white uppercase leading-tight z-10"
+                style={{ WebkitTextStroke: "1px black" }}
+              >
+                {dayLabel}
+              </span>
             </div>
           </div>
-          <span className="text-base sm:text-lg font-bold text-cyan-300 tracking-wide">
+          <span
+            className="text-base sm:text-lg font-bold text-cyan-300 tracking-wide"
+          >
             {subtitle}
           </span>
         </div>
@@ -106,10 +94,15 @@ const WeekdayBanner = ({
         {/* Bloque derecho: LIMIT + número + icono */}
         <div className="flex items-center gap-2">
           <div className="flex flex-col items-end">
-            <span className="text-xs font-semibold text-white/90 uppercase tracking-wider">
+            <span
+              className="text-xs font-semibold text-white/90 uppercase tracking-wider"
+              style={{ WebkitTextStroke: "0.5px black" }}
+            >
               LIMIT
             </span>
-            <span className="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight">
+            <span
+              className="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight"
+            >
               {limit}
             </span>
           </div>
