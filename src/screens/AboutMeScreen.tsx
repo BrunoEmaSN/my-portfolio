@@ -110,7 +110,7 @@ const AboutMeSection = () => {
           <span
             className="font-black text-3xl absolute bottom-0 right-0 text-cyan-400 pr-5"
             style={{
-              WebkitTextStroke: "2px #1447E6",
+              WebkitTextStroke: "2px #2563eb",
             }}
           >
             ??????

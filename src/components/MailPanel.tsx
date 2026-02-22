@@ -90,9 +90,9 @@ const MailPanel = ({
   return (
     <div
       ref={panelRef}
-      className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-[#1E1E1E] md:-translate-y-15 lg:-rotate-10 scale-103 pointer-events-auto", className)}
+      className={clsx("relative w-full max-w-3xl h-full rounded-lg bg-neutral-800 md:-translate-y-15 lg:-rotate-10 scale-103 pointer-events-auto", className)}
     >
-      <div className="absolute top-0 left-0 w-full h-full bg-[#1E1E1E]/50 lg:translate-x-20 lg:translate-y-10 rounded-lg lg:rotate-3" />
+      <div className="absolute top-0 left-0 w-full h-full bg-neutral-800/50 lg:translate-x-20 lg:translate-y-10 rounded-lg lg:rotate-3" />
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="relative h-2/3">
           <div className="absolute top-0 left-0 w-full h-full" style={{ clipPath: 'polygon(0 0, 0% 100%, 100% 0)' }}>
@@ -103,7 +103,7 @@ const MailPanel = ({
             />
           </div>
           <div
-            className="absolute top-0 right-0 w-full h-full bg-[#1E1E1E]"
+            className="absolute top-0 right-0 w-full h-full bg-neutral-800"
             style={{ clipPath: 'polygon(100% 0, 30% 0, 100% 70%)' }}
           />
           <span className="absolute top-0 md:left-1/2 md:-translate-x-2/3 text-white text-8xl md:text-[150px] font-bold -skew-x-20 lg:-rotate-10">
@@ -130,7 +130,7 @@ const MailPanel = ({
             </div>
             <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
               <div className="relative">
-              <HiUser size={20} strokeWidth={0.5} color="#1E1E1E" fill="white" />
+              <HiUser size={20} strokeWidth={0.5} color="#262626" fill="white" />
               </div>
               <input
                 type="text"
@@ -142,7 +142,7 @@ const MailPanel = ({
             </div>
             <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
               <div className="relative">
-                <HiMail size={20} strokeWidth={0.5} color="#1E1E1E" fill="white" />
+                <HiMail size={20} strokeWidth={0.5} color="#262626" fill="white" />
               </div>
               <input
                 type="email"

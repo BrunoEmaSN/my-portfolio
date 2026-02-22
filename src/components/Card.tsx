@@ -34,8 +34,8 @@ const Card = ({
           className="absolute inset-0 opacity-5"
           style={{
             backgroundImage: `
-              linear-gradient(45deg, transparent 30%, rgba(6, 182, 212, 0.3) 30%, rgba(6, 182, 212, 0.3) 70%, transparent 70%),
-              linear-gradient(-45deg, transparent 30%, rgba(6, 182, 212, 0.3) 30%, rgba(6, 182, 212, 0.3) 70%, transparent 70%)
+              linear-gradient(45deg, transparent 30%, rgb(6 182 212 / 0.3) 30%, rgb(6 182 212 / 0.3) 70%, transparent 70%),
+              linear-gradient(-45deg, transparent 30%, rgb(6 182 212 / 0.3) 30%, rgb(6 182 212 / 0.3) 70%, transparent 70%)
             `,
             backgroundSize: '40px 40px',
           }}

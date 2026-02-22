@@ -87,7 +87,7 @@ const ListMenu = ({
           className="text-2xl font-black tracking-tight text-white uppercase mb-4 shrink-0"
           style={{
             textShadow:
-              '2px 2px 0 rgba(0,0,0,0.4), 1px 1px 0 rgba(0,0,0,0.3), 0 0 8px rgba(255,255,255,0.15)',
+              '2px 2px 0 rgb(0 0 0 / 0.4), 1px 1px 0 rgb(0 0 0 / 0.3), 0 0 8px rgb(255 255 255 / 0.15)',
           }}
         >
           {title}
@@ -112,7 +112,7 @@ const ListMenu = ({
                     'text-center px-4 py-3 rounded transition-all duration-150 w-full',
                     isSelected
                       ? 'bg-white shadow-list-menu shadow-red-500 text-black font-bold text-lg'
-                      : 'bg-[#01003E]/50 text-cyan-400 font-bold text-base hover:bg-[#01003E] hover:text-white'
+                      : 'bg-blue-950/50 text-cyan-400 font-bold text-base hover:bg-blue-950 hover:text-white'
                   )}
                 >
                   {label}

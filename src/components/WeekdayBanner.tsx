@@ -8,8 +8,8 @@ export interface WeekdayBannerProps {
   className?: string;
 }
 
-/** Colores del indicador de fase lunar */
-const MOON_LIT = "#FACC15";
+/** Colores del indicador de fase lunar (Tailwind yellow-400, black) */
+const MOON_LIT = "#facc15";
 const MOON_SHADOW = "#000";
 
 /**
@@ -111,7 +111,7 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
       <span
         className={clsx(
           backgroundLabel === "DARK HOUR" && "text-lime-950",
-          backgroundLabel !== "DARK HOUR" && "text-[#141F67] left-1/2 -translate-x-1/2",
+          backgroundLabel !== "DARK HOUR" && "text-blue-900 left-1/2 -translate-x-1/2",
           "absolute top-2 text-[5rem] font-black tracking-tighter uppercase pointer-events-none select-none z-10"
         )}
         aria-hidden

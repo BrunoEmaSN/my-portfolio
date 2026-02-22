@@ -13,7 +13,7 @@ const StatItem = ({ label, value, max = 50 }: StatItemProps) => {
         <span
           className="font-black text-black text-2xl italic font-m-plus-1p"
           style={{
-            WebkitTextStroke: "1.5px #00D3F2"
+            WebkitTextStroke: "1.5px #22d3ee"
           }}
         >
           {label}

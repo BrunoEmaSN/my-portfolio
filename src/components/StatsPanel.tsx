@@ -12,7 +12,7 @@ const StatsPanel = ({ stats, className = '' }: StatsPanelProps) => {
     <div
       className={clsx(
         "-rotate-5 -skew-x-10",
-        "bg-[#010BC3] mask-internal py-4 shadow-lg border border-blue-800/50",
+        "bg-blue-800 mask-internal py-4 shadow-lg border border-blue-800/50",
         className
       )}
     >

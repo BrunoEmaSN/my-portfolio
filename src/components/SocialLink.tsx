@@ -104,7 +104,7 @@ const SocialLink = ({
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,0.03) 3px, rgba(255,255,255,0.03) 4px)',
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 3px, rgb(255 255 255 / 0.03) 3px, rgb(255 255 255 / 0.03) 4px)',
           }}
         />
         {/* Silueta/figura tenue decorativa */}

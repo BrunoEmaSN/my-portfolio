@@ -25,7 +25,7 @@ const ProgressBar = ({ value, max, className }: ProgressBarProps) => {
   return (
     <div
       className={clsx(
-        'h-2.5 w-full overflow-hidden bg-[#173245] shadow-inner-lg -skew-x-10 shadow-card-sm shadow-[#070C62]',
+        'h-2.5 w-full overflow-hidden bg-slate-800 shadow-inner-lg -skew-x-10 shadow-card-sm shadow-blue-950',
         className
       )}
       role="progressbar"

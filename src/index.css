@@ -3,13 +3,13 @@
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 0px;
-  background: #0E0D51;
+  background: theme(colors.blue.950);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #fff;
+  background: theme(colors.white);
   border-radius: 0px;
-  border: 2px solid #0E0D51;
+  border: 2px solid theme(colors.blue.950);
 }
 
 @layer components {
@@ -44,10 +44,10 @@
   --font-m-plus-1p: "M PLUS 1p", ui-sans-serif, system-ui, sans-serif;
   --font-quantico: "Quantico", ui-sans-serif, system-ui, sans-serif;
   --font-zen-kaku: "Zen Kaku Gothic New", ui-sans-serif, system-ui, sans-serif;
-  --shadow-card: 8px 8px 0 rgb(20, 71, 228); 
-  --shadow-card-sm: 4px 4px 0 rgb(20, 71, 228); 
-  --shadow-card-lg: 8px 16px 0 rgb(20, 71, 228);
-  --shadow-list-menu: 4px -4px 0 rgba(0,0,0,0.4);
+  --shadow-card: 8px 8px 0 #2563eb;
+  --shadow-card-sm: 4px 4px 0 #2563eb;
+  --shadow-card-lg: 8px 16px 0 #2563eb;
+  --shadow-list-menu: 4px -4px 0 rgb(0 0 0 / 0.4);
 }
 
 @layer base {
