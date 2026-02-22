@@ -98,52 +98,55 @@ export const infoFeatures = [
 
 export const projectsData = [
   {
-    windowTitle: 'Work Experience 1',
-    image: '/images/projects/project-1.png',
-    imageAlt: 'Work Experience 1',
-    tags: ['Tag 1', 'Tag 2', 'Tag 3'],
-    title: 'Work Experience 1',
-    description: 'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+    windowTitle: 'Roulette',
+    image: '/images/projects/roulette.png',
+    imageAlt: 'Roulette',
+    tags: ['Next.js','React 19','TypeScript','PostgreSQL', 'Drizzle ORM','Better Auth','Tailwind CSS','Railway'],
+    title: 'Roulette - App',
+    url: 'https://roulette.up.railway.app/',
+    description: 'Web application to create and manage custom roulette wheels with editable options, customizable colors and an improved randomness system that uses weather data from Buenos Aires.',
   },
   {
-    windowTitle: 'Work Experience 2',
-    image: '/images/projects/project-2.png',
-    imageAlt: 'Work Experience 2',
-    tags: ['Tag 1', 'Tag 2', 'Tag 3'],
-    title: 'Work Experience 2',
-    description: 'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+    windowTitle: 'Cocktail',
+    image: '/images/projects/cocktail.png',
+    imageAlt: 'Cocktail',
+    tags: ['React', 'Vite', 'GSAP', 'Tailwind CSS', 'Vercel'],
+    title: 'Cocktail - Landing Page',
+    url: 'https://gsap-coktails.vercel.app/',
+    description: 'Cocktail landing page built. Includes GSAP animations and responsive design.',
   },
   {
-    windowTitle: 'Work Experience 3',
-    image: '/images/projects/project-3.png',
-    imageAlt: 'Work Experience 3',
-    tags: ['Tag 1', 'Tag 2', 'Tag 3'],
-    title: 'Work Experience 3',
-    description: 'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+    windowTitle: 'MacBook Pro',
+    image: '/images/projects/macbook.png',
+    imageAlt: 'MacBook Pro',
+    tags: ['React 19','Vite','React Three Fiber','GSAP','Tailwind CSS','Zustand','react-responsive','clsx', 'Vercel'],
+    title: 'MacBook Pro - Landing Page',
+    url: 'https://macbook-gsap-r3f-app.vercel.app/',
+    description: 'Una landing page interactiva y moderna para el MacBook Pro, construida con React Three Fiber (R3F) y GSAP. Esta aplicación web ofrece una experiencia inmersiva con modelos 3D interactivos, animaciones fluidas basadas en scroll y visualización de productos en tiempo real',
   },
 ]
 
 export const experiencesData = [
   {
-    title: 'Frontend Developer',
-    company: 'Digital Solutions Co.',
-    period: '2019 - 2021',
+    title: 'AI Engineer',
+    company: 'Centro de E-learning',
+    period: '2024 - Present',
     description:
-      'Developed responsive web applications using React and TypeScript. Collaborated with designers and backend engineers to deliver high-quality products.',
+      'I am responsible for the development of Talentia platform used AI to generate content and improve the learning experience.',
   },
   {
-    title: 'Senior Frontend Engineer',
-    company: 'Tech Innovations Inc.',
-    period: '2021 - Present',
+    title: 'Mobile Developer',
+    company: 'Quorum IT.',
+    period: '2022 - 2024',
     description:
-      'Lead frontend architecture and mentor junior developers. Implemented design systems and improved performance across multiple product lines.',
+      'I was responsible for the development of the mobile app for the Quorum IT company.',
   },
   {
-    title: 'Web Developer',
-    company: 'Creative Agency',
-    period: '2017 - 2019',
+    title: 'Full Stack Developer',
+    company: 'DirMOD',
+    period: '2021 - 2022',
     description:
-      'Built and maintained client websites with modern JavaScript frameworks. Worked closely with design teams to implement pixel-perfect interfaces.',
+      'I was responsible for the development of the web app for the DirMOD company and provided continuous improvement support to clients with developed systems.',
   },
 ]
 

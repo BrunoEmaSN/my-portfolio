@@ -37,7 +37,7 @@ const ExperienceTimeline = ({ experiences, sectionRef }: ExperienceTimelineProps
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: 'top 150%',
+          start: 'top 60%',
           toggleActions: 'play none none none',
         },
       });

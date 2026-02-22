@@ -86,7 +86,7 @@ const ExperiencesScreen = () => {
           <div className="w-full items-center justify-center flex p-4">
             <div ref={cardsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-5/6">
               {projectsData.map((project) => (
-                <div key={project.windowTitle} className="hover:-translate-y-2 transition-all duration-100">
+                <div key={project.windowTitle} className="h-full hover:-translate-y-2 transition-all duration-100">
                   <Card {...project} />
                 </div>
               ))}
