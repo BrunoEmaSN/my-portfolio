@@ -10,7 +10,7 @@ export interface SocialLinkProps {
   /** Rango actual de 1 a 10 */
   rank: number;
   /** Descripción en la sección inferior */
-  description: string;
+  comment: string;
   /** Etiqueta diagonal (por defecto "ARCANA") */
   arcanaLabel?: string;
 }
@@ -33,7 +33,7 @@ const SocialLink = ({
   bannerText = 'SEES',
   arcanaName,
   rank,
-  description,
+  comment,
   arcanaLabel = 'ARCANA',
 }: SocialLinkProps) => {
   const clampedRank = Math.min(MAX_RANK, Math.max(0, rank));
@@ -66,7 +66,7 @@ const SocialLink = ({
 
           {/* Etiqueta diagonal ARCANA (cinta angular) */}
           <div
-            className="absolute top-10 left-0 bg-black flex items-center justify-end pr-2 pl-2 pt-2 origin-left -rotate-20 translate-x-10 md:translate-x-30"
+            className="absolute top-10 left-0 bg-black flex items-center justify-end pr-2 pl-2 pt-2 origin-left -rotate-20 translate-x-10 md:translate-x-25"
           >
             <span className="text-white text-[10px] font-bold tracking-widest uppercase">
               {arcanaLabel}
@@ -99,7 +99,7 @@ const SocialLink = ({
 
       </div>
       {/* Sección inferior: fondo azul y descripción */}
-      <div className="md:pl-20 relative min-h-[140px] text-white overflow-hidden">
+      <div className="md:pl-10 mt-5 relative max-h-[140px] text-white overflow-y-auto overflow-x-hidden">
         {/* Patrón sutil de líneas verticales */}
         <div
           className="absolute inset-0 opacity-20"
@@ -112,7 +112,7 @@ const SocialLink = ({
           className="absolute bottom-0 right-0 w-48 h-32 opacity-10"
         />
         <p className="relative z-10 font-sans text-sm sm:text-base leading-relaxed p-5 text-white/95">
-          {description}
+          {comment}
         </p>
       </div>
     </div>

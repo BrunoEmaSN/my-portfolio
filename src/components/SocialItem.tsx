@@ -1,4 +1,3 @@
-import { Mail } from "lucide-react";
 import clsx from "clsx";
 
 export interface SocialItemProps {
@@ -54,7 +53,7 @@ const SocialItem = ({
       <div className="flex-1 flex flex-col justify-center py-3 pr-4 pl-3 min-w-0">
         <div className="flex items-center gap-2">
           <span className="text-[#2563eb]" aria-hidden>
-            {icon ?? <Mail size={18} strokeWidth={0.5} fill="#93c5fd" className="text-[#1d4ed8]" />}
+            {icon}
           </span>
           <span className="text-[#1d4ed8] font-medium text-sm truncate">{name}</span>
         </div>

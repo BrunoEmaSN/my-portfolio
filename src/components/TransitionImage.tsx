@@ -5,7 +5,7 @@ import { ANIMATION_CONFIG } from "../../constants"
 
 export interface TransitionImageProps {
   /** URL de la imagen a mostrar */
-  image: string
+  image: string | null
   /** Texto alternativo */
   imageAlt?: string
   /** Clase CSS adicional para el contenedor */
@@ -55,12 +55,20 @@ const TransitionImage = ({
       )}
       style={{ aspectRatio: "16/10" }}
     >
-      <img
-        ref={imgRef}
-        src={image}
-        alt={imageAlt}
-        className="absolute inset-0 w-full h-full object-cover border-4 border-gray-700/50"
-      />
+      {image ? (
+        <img
+          ref={imgRef}
+          src={image}
+          alt={imageAlt}
+          className="absolute inset-0 w-full h-full object-cover border-4 border-gray-700/50"
+        />
+      ) : (
+        <div className="absolute inset-0 w-full h-full bg-gray-700/50 flex items-center justify-center">
+          <p className="text-white text-7xl font-bold -rotate-15 -skew-x-15">
+            IMAGE NOT FOUND
+          </p>
+        </div>
+      )}
     </div>
   )
 }

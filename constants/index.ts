@@ -154,47 +154,13 @@ export const experiencesData = [
 export const socialLinksData = [
   {
     id: 'fool',
-    bannerText: 'SEES',
-    arcanaName: 'Fool',
-    rank: 5,
-    description:
-      'A third-year Gekkoukan High School student, Class D. A memeber of the fencing team. Also the student council president.',
-    arcanaLabel: 'ARCANA',
-  },
-  {
-    id: 'magician',
-    bannerText: 'Makoto Yuki',
-    arcanaName: 'Magician',
+    bannerText: 'Mirian Gonzalez',
+    arcanaName: 'PM',
     rank: 10,
     description:
-      'Makoto Yuki is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
-    arcanaLabel: 'ARCANA',
-  },
-  {
-    id: 'priestess',
-    bannerText: 'Akihiko Sanada',
-    arcanaName: 'Priestess',
-    rank: 7,
-    description:
-      'Akihiko Sanada is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
-    arcanaLabel: 'ARCANA',
-  },
-  {
-    id: 'empress',
-    bannerText: 'Shinjiro Aragaki',
-    arcanaName: 'Empress',
-    rank: 9,
-    description:
-      'Shinjiro Aragaki is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
-    arcanaLabel: 'ARCANA',
-  },
-  {
-    id: 'emperor',
-    bannerText: 'Yukari Takeba',
-    arcanaName: 'Emperor',
-    rank: 8,
-    description:
-      'Yukari Takeba is a young boy who dreams of becoming a Hunter, a professional who explores the world in search of rare items and experiences.',
-    arcanaLabel: 'ARCANA',
+      'With more than 13 years of experience specializing in the management of software and mobile application projects.',
+    comment: 'I had the pleasure of working with Bruno in his early career as a Developer. His ability to learn quickly and apply his knowledge was excellent. He demonstrated skill in creating user interfaces and collaborated effectively with the team to integrate front-end solutions. He is a great colleague who conducts himself responsibly and in accordance with business standards. He also has a lot of potential and would be a valuable addition to any team.',
+    arcanaLabel: 'Quorum IT',
+    image: null,
   },
 ]

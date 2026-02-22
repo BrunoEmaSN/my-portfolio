@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
-import { Mail } from "lucide-react";
 import clsx from "clsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ANIMATION_CONFIG } from "../../constants";
+import { HiMail, HiUser } from "react-icons/hi";
 
 export interface MailPanelProps {
   /** Imagen de fondo del panel (semitransparente, escala de grises) */
@@ -76,9 +76,14 @@ const MailPanel = ({
         <div className="flex flex-col items-center gap-1 pt-50">
           <div className="w-fit">
             <div className="flex items-end gap-2">
-              <span className="text-transparent text-5xl font-bold" style={{ WebkitTextStroke: "1px white" }}>
+              <span className="text-transparent text-5xl font-black" style={{ WebkitTextStroke: "1px white" }}>
                 From
               </span>
+            </div>
+            <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
+              <div className="relative">
+              <HiUser size={20} strokeWidth={0.5} color="#1E1E1E" fill="white" />
+              </div>
               <input
                 type="text"
                 placeholder="Your name..."
@@ -89,8 +94,7 @@ const MailPanel = ({
             </div>
             <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
               <div className="relative">
-                <Mail size={20} strokeWidth={0.5} fill="white" />
-                <Mail size={20} strokeWidth={1} color="#1E1E1E" className="absolute top-0 left-0" />
+                <HiMail size={20} strokeWidth={0.5} color="#1E1E1E" fill="white" />
               </div>
               <input
                 type="email"

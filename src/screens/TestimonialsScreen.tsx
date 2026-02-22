@@ -8,22 +8,6 @@ import TransitionImage from "../components/TransitionImage"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 
-const personae = [
-  "Mitsuru Kirijo",
-  "Akihiko Sanada",
-  "Shinjiro Aragaki",
-  "Yukari Takeba",
-  "Junpei Iori",
-]
-
-const personaeImages = [
-  "/images/testimonials/fake-image-1.png",
-  "/images/testimonials/fake-image-2.png",
-  "/images/testimonials/fake-image-3.png",
-  "/images/testimonials/fake-image-4.png",
-  "/images/testimonials/fake-image-5.png",
-]
-
 const size = {
   sm: 100,
   md: 120,
@@ -50,16 +34,16 @@ const TestimonialsScreen = () => {
               SOCIAL LINKS
             </h3>
             <div className="max-w-xl">
-              <SocialLink {...socialLinksData[selectedIndex ?? 0]} />
+              <SocialLink {...socialLinksData[selectedIndex]} />
             </div>
           </div>
           <div className="h-[50vh] w-full p-8 hidden md:block">
-            <TransitionImage image={personaeImages[selectedIndex]} imageAlt={personae[selectedIndex]} />
+            <TransitionImage image={socialLinksData[selectedIndex].image} imageAlt={socialLinksData[selectedIndex].bannerText} />
           </div>
         </div>
         <div className="flex md:flex-row flex-col justify-between items-center pr-10 lg:pr-20 gap-5">
           <div className="w-full lg:translate-x-15 md:-translate-y-10">
-            <ListMenu items={personae} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
+            <ListMenu items={socialLinksData.map((item) => item.bannerText)} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
           </div>
           <SocialDescription
             name={socialLinksData[selectedIndex ?? 0].bannerText}
