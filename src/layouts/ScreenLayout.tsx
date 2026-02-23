@@ -10,26 +10,35 @@ import { useGamepad } from "../hooks/useGamepad"
 import ControlsHint from "../components/ControlsHint"
 import { useAppStore, type InputDevice } from "../store"
 
-/** Controls: back + scroll. */
-const LAYOUT_CONTROLS: Record<InputDevice, string[]> = {
-  keyboard: ["ESC", "↑", "↓"],
-  playstation: ["Circle", "Share", "Stick der. ↑↓"],
-  xbox: ["B", "View", "Stick der. ↑↓"],
-}
-
-/** Controls when the screen has horizontal movement (e.g. About Me): back + scroll + A/D; panel with L1/R1 or LB/RB; scroll with right stick. */
-const LAYOUT_CONTROLS_WITH_HORIZONTAL: Record<InputDevice, string[]> = {
-  keyboard: ["ESC", "A", "D", "↑", "↓"],
-  playstation: ["Circle", "Share", "L1/R1 ←→", "Stick der. ↑↓"],
-  xbox: ["B", "View", "LB/RB ←→", "Stick der. ↑↓"],
+/** Controles por página (pathname). Solo rutas del layout: back + scroll o según pantalla. */
+const PAGE_CONTROLS: Partial<Record<string, Record<InputDevice, string[]>>> = {
+  [ROUTES.ABOUT_ME]: {
+    keyboard: ["ESC", "A", "D", "↑", "↓"],
+    playstation: ["Circle", "Share", "L1/R1 ←→", "Stick der. ↑↓"],
+    xbox: ["B", "View", "LB/RB ←→", "Stick der. ↑↓"],
+  },
+  [ROUTES.EXPERIENCES]: {
+    keyboard: ["ESC", "↑", "↓"],
+    playstation: ["Circle", "Share", "Stick der. ↑↓"],
+    xbox: ["B", "View", "Stick der. ↑↓"],
+  },
+  [ROUTES.TESTIMONIALS]: {
+    keyboard: ["ESC", "↑", "↓"],
+    playstation: ["Circle", "Share", "Stick der. ↑↓"],
+    xbox: ["B", "View", "Stick der. ↑↓"],
+  },
+  [ROUTES.CONTACT]: {
+    keyboard: ["ESC", "↑", "↓", "ENTER"],
+    playstation: ["Circle", "Share", "D-Pad ↑↓", "Stick der. ↑↓", "Cross"],
+    xbox: ["B", "View", "D-Pad ↑↓", "Stick der. ↑↓", "A"],
+  },
 }
 
 const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMobile: boolean }) => {
     const navigate = useNavigate()
     const location = useLocation()
     const inputDevice = useAppStore((s) => s.inputDevice)
-    const hasHorizontal = location.pathname === ROUTES.ABOUT_ME
-    const layoutControls = hasHorizontal ? LAYOUT_CONTROLS_WITH_HORIZONTAL : LAYOUT_CONTROLS
+    const pageControls = PAGE_CONTROLS[location.pathname]
     const layoutRef = useRef<HTMLDivElement>(null)
     const outletWrapperRef = useRef<HTMLDivElement>(null)
 
@@ -91,8 +100,8 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                     <div ref={outletWrapperRef} className="w-full h-full">
                         {children}
                     </div>
-                    {!isMobile && (
-                        <ControlsHint items={layoutControls[inputDevice]} inputDevice={inputDevice} />
+                    {!isMobile && pageControls && (
+                        <ControlsHint items={pageControls[inputDevice]} inputDevice={inputDevice} />
                     )}
                 </div>
             </div>

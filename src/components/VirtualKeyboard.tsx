@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useGamepad } from "../hooks/useGamepad";
 import { menuAudioEffect } from "../helpers/audioContext";
+import ControlsHint from "./ControlsHint";
+import { useAppStore } from "../store";
 
 type KeyAction = "backspace" | "done";
 
@@ -36,6 +38,11 @@ export interface VirtualKeyboardProps {
   disablePhysicalKeyboard?: boolean;
 }
 
+const CONTROLS = {
+  "playstation": ["Circle", "Share", "D-Pad ←→", "D-Pad ↑↓", "Cross"],
+  "xbox": ["B", "View", "D-Pad ←→", "D-Pad ↑↓", "A"],
+}
+
 const VirtualKeyboard = ({
   value,
   onChange,
@@ -47,6 +54,7 @@ const VirtualKeyboard = ({
   const [selectedRow, setSelectedRow] = useState(0);
   const [selectedCol, setSelectedCol] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const inputDevice = useAppStore((s) => s.inputDevice)
 
   const row = GRID[selectedRow];
   const maxCol = row ? row.length - 1 : 0;
@@ -139,7 +147,7 @@ const VirtualKeyboard = ({
           </p>
         )}
         <div className="mb-3 rounded-lg flex items-center w-full bg-gray-700 px-4 py-3 text-xl font-mono text-white min-h-[3rem] break-all md:mb-4 md:min-h-[4rem] md:text-2xl">
-          {value || "\u00a0"}
+          {value || "\u00a0"}|
         </div>
         <div className="flex w-full p-4 flex-col justify-center gap-2 md:gap-3">
           {GRID.map((cells, r) => (
@@ -169,9 +177,9 @@ const VirtualKeyboard = ({
             </div>
           ))}
         </div>
-        <p className="mt-3 text-center text-sm text-gray-400 md:mt-4">
-          D-Pad: move · A: type · B: close
-        </p>
+        <div className="h-20 relative">
+          <ControlsHint items={inputDevice === "playstation" || inputDevice === "xbox" ? CONTROLS[inputDevice] : []} inputDevice={inputDevice} />
+        </div>
       </div>
     </div>
   );

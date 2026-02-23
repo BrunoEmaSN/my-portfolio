@@ -26,6 +26,7 @@ function getButtonImages(
     View: ["xbox_View_button.svg"],
     Menu: ["xbox_Menu_button.svg"],
     "D-Pad ↑↓": ["xbox_D-pad_(U).svg", "xbox_D-pad_(D).svg"],
+    "D-Pad ←→": ["xbox_D-pad_(L).svg", "xbox_D-pad_(R).svg"],
     "LB/RB ←→": ["xbox_LB_bumper.svg", "xbox_RB_bumper.svg"],
     "Stick der. ↑↓": ["xbox_R.svg"],
   }
@@ -35,6 +36,7 @@ function getButtonImages(
     Share: ["playstation_Share_button.svg"],
     Options: ["playstation_Options_button.svg"],
     "D-Pad ↑↓": ["playstation_Up_button.svg", "playstation_Down_button.svg"],
+    "D-Pad ←→": ["playstation_Left_button.svg", "playstation_Right_button.svg"],
     "L1/R1 ←→": ["playstation_button_L1.svg", "playstation_button_R1.svg"],
     "Stick der. ↑↓": ["playstation_button_L3.svg"],
   }
