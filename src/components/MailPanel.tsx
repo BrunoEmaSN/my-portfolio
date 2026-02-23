@@ -65,6 +65,8 @@ const MailPanel = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [virtualKeyboardOpenLocal, setVirtualKeyboardOpenLocal] = useState(false);
   const [virtualKeyboardFieldLocal, setVirtualKeyboardFieldLocal] = useState<0 | 1 | 2 | 3 | null>(null);
+  /** Si no es null, ese input está activo para escribir (Enter activó); W/S no navegan. Enter de nuevo desactiva. */
+  const [typingModeIndex, setTypingModeIndex] = useState<number | null>(null);
   const inputDevice = useAppStore((s) => s.inputDevice);
   const isGamepad = inputDevice === "playstation" || inputDevice === "xbox";
 
@@ -100,29 +102,45 @@ const MailPanel = ({
     focusAt(next);
     return true;
   };
+
+  const exitTypingMode = useCallback((index: number) => {
+    setTypingModeIndex(null);
+    focusAt(index);
+    return true;
+  }, [focusAt]);
+
   const confirmForm = () => {
     if (selectedIndex === 4) {
       handleSubmit();
       return true;
     }
-    if (isGamepad && selectedIndex >= 0 && selectedIndex <= 3) {
-      if (typeof document !== "undefined" && document.activeElement && "blur" in document.activeElement) {
-        (document.activeElement as HTMLElement).blur();
+    if (selectedIndex >= 0 && selectedIndex <= 3) {
+      if (typingModeIndex !== null) {
+        exitTypingMode(typingModeIndex);
+        return true;
       }
-      if (keyboardControlledByParent && onOpenVirtualKeyboard) {
-        const field = selectedIndex as 0 | 1 | 2 | 3;
-        const getters: (() => string)[] = [() => fromNameValue, () => fromEmailValue, () => subjectValue, () => messageValue];
-        const setters: ((v: string) => void)[] = [
-          (v) => { setFromNameValue(v); clearStatus(); },
-          (v) => { setFromEmailValue(v); clearStatus(); },
-          (v) => { setSubjectValue(v); clearStatus(); },
-          (v) => { setMessageValue(v); clearStatus(); },
-        ];
-        onOpenVirtualKeyboard(field, getters[field], setters[field], FIELD_TITLES[field]);
-      } else {
-        setVirtualKeyboardFieldLocal(selectedIndex as 0 | 1 | 2 | 3);
-        setVirtualKeyboardOpenLocal(true);
+      if (isGamepad) {
+        if (typeof document !== "undefined" && document.activeElement && "blur" in document.activeElement) {
+          (document.activeElement as HTMLElement).blur();
+        }
+        if (keyboardControlledByParent && onOpenVirtualKeyboard) {
+          const field = selectedIndex as 0 | 1 | 2 | 3;
+          const getters: (() => string)[] = [() => fromNameValue, () => fromEmailValue, () => subjectValue, () => messageValue];
+          const setters: ((v: string) => void)[] = [
+            (v) => { setFromNameValue(v); clearStatus(); },
+            (v) => { setFromEmailValue(v); clearStatus(); },
+            (v) => { setSubjectValue(v); clearStatus(); },
+            (v) => { setMessageValue(v); clearStatus(); },
+          ];
+          onOpenVirtualKeyboard(field, getters[field], setters[field], FIELD_TITLES[field]);
+        } else {
+          setVirtualKeyboardFieldLocal(selectedIndex as 0 | 1 | 2 | 3);
+          setVirtualKeyboardOpenLocal(true);
+        }
+        return true;
       }
+      setTypingModeIndex(selectedIndex);
+      focusAt(selectedIndex);
       return true;
     }
     focusAt(selectedIndex);
@@ -162,14 +180,16 @@ const MailPanel = ({
 
   useKeyboard(
     'contact-form',
-    {
-      w: movePrev,
-      s: moveNext,
-      Enter: (e) => {
-        if (selectedIndex === 4) e.preventDefault();
-        return confirmForm();
-      },
-    },
+    typingModeIndex !== null
+      ? { Enter: (e) => { e.preventDefault(); return exitTypingMode(typingModeIndex); } }
+      : {
+          w: movePrev,
+          s: moveNext,
+          Enter: (e) => {
+            if (selectedIndex === 4) e.preventDefault();
+            return confirmForm();
+          },
+        },
     { priority: 70, ignoreInInputs: false }
   );
 
@@ -269,7 +289,8 @@ const MailPanel = ({
                 value={fromNameValue}
                 onChange={(e) => { setFromNameValue(e.target.value); clearStatus(); }}
                 onFocus={() => setSelectedIndex(0)}
-                readOnly={virtualKeyboardOpen && virtualKeyboardField === 0}
+                readOnly={(virtualKeyboardOpen && virtualKeyboardField === 0) || typingModeIndex !== 0}
+                onBlur={() => { if (typingModeIndex === 0) setTypingModeIndex(null); }}
                 className={clsx(
                   "text-xl font-bold bg-transparent outline-none w-full min-w-0 text-gray-300 truncate focus:border-b-2 focus:border-blue-500")}
               />
@@ -285,7 +306,8 @@ const MailPanel = ({
                 value={fromEmailValue}
                 onChange={(e) => { setFromEmailValue(e.target.value); clearStatus(); }}
                 onFocus={() => setSelectedIndex(1)}
-                readOnly={virtualKeyboardOpen && virtualKeyboardField === 1}
+                readOnly={(virtualKeyboardOpen && virtualKeyboardField === 1) || typingModeIndex !== 1}
+                onBlur={() => { if (typingModeIndex === 1) setTypingModeIndex(null); }}
                 className={clsx(
                   "text-xl font-bold bg-transparent outline-none w-full min-w-0 text-gray-300 truncate focus:border-b-2 focus:border-blue-500"
                 )}
@@ -303,7 +325,8 @@ const MailPanel = ({
               value={subjectValue}
               onChange={(e) => { setSubjectValue(e.target.value); clearStatus(); }}
               onFocus={() => setSelectedIndex(2)}
-              readOnly={virtualKeyboardOpen && virtualKeyboardField === 2}
+              readOnly={(virtualKeyboardOpen && virtualKeyboardField === 2) || typingModeIndex !== 2}
+              onBlur={() => { if (typingModeIndex === 2) setTypingModeIndex(null); }}
               className={clsx(
                 "w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold outline-none truncatefocus:border-b-2 focus:border-blue-500"
               )}
@@ -315,7 +338,8 @@ const MailPanel = ({
               value={messageValue}
               onChange={(e) => { setMessageValue(e.target.value); clearStatus(); }}
               onFocus={() => setSelectedIndex(3)}
-              readOnly={virtualKeyboardOpen && virtualKeyboardField === 3}
+              readOnly={(virtualKeyboardOpen && virtualKeyboardField === 3) || typingModeIndex !== 3}
+              onBlur={() => { if (typingModeIndex === 3) setTypingModeIndex(null); }}
               className={clsx(
                 "mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain w-full resize-none bg-transparent outline-none text-inherit focus:border-b-2 focus:border-blue-500"
               )}

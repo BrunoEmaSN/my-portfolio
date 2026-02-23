@@ -15,22 +15,22 @@ const PAGE_CONTROLS: Partial<Record<string, Record<InputDevice, string[]>>> = {
   [ROUTES.ABOUT_ME]: {
     keyboard: ["ESC", "A", "D", "↑", "↓"],
     playstation: ["Circle", "Share", "L1/R1 ←→", "Stick der. ↑↓"],
-    xbox: ["B", "View", "LB/RB ←→", "Stick der. ↑↓"],
+    xbox: ["B", "LB/RB ←→", "Stick der. ↑↓"],
   },
   [ROUTES.EXPERIENCES]: {
     keyboard: ["ESC", "↑", "↓"],
     playstation: ["Circle", "Share", "Stick der. ↑↓"],
-    xbox: ["B", "View", "Stick der. ↑↓"],
+    xbox: ["B", "Stick der. ↑↓"],
   },
   [ROUTES.TESTIMONIALS]: {
     keyboard: ["ESC", "↑", "↓"],
     playstation: ["Circle", "Share", "Stick der. ↑↓"],
-    xbox: ["B", "View", "Stick der. ↑↓"],
+    xbox: ["B", "Stick der. ↑↓"],
   },
   [ROUTES.CONTACT]: {
-    keyboard: ["ESC", "↑", "↓", "ENTER"],
+    keyboard: ["ESC", "W", "S", "ENTER" , "↑", "↓"],
     playstation: ["Circle", "Share", "D-Pad ↑↓", "Stick der. ↑↓", "Cross"],
-    xbox: ["B", "View", "D-Pad ↑↓", "Stick der. ↑↓", "A"],
+    xbox: ["B", "D-Pad ↑↓", "Stick der. ↑↓", "A"],
   },
 }
 
@@ -95,7 +95,7 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                         }}
                         className="text-right button-menu absolute bottom-5 text-white hover:scale-105 transition-all duration-300 z-100 bg-blue-700"
                     >
-                        Esc
+                        BACK
                     </button>
                     <div ref={outletWrapperRef} className="w-full h-full">
                         {children}
