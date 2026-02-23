@@ -176,8 +176,6 @@ const MailPanel = ({
   useGamepad('contact-form', {
     'dpad-up': movePrev,
     'dpad-down': moveNext,
-    'stick-left-up': movePrev,
-    'stick-left-down': moveNext,
     a: confirmForm,
   }, { priority: 70 });
 

@@ -77,26 +77,6 @@ const VirtualKeyboard = ({
             setSelectedCol((c) => Math.min(GRID[selectedRow].length - 1, c + 1));
             return true;
           },
-          "stick-left-up": () => {
-            menuAudioEffect();
-            setSelectedRow((r) => Math.max(0, r - 1));
-            return true;
-          },
-          "stick-left-down": () => {
-            menuAudioEffect();
-            setSelectedRow((r) => Math.min(GRID.length - 1, r + 1));
-            return true;
-          },
-          "stick-left-left": () => {
-            menuAudioEffect();
-            setSelectedCol((c) => Math.max(0, c - 1));
-            return true;
-          },
-          "stick-left-right": () => {
-            menuAudioEffect();
-            setSelectedCol((c) => Math.min(GRID[selectedRow].length - 1, c + 1));
-            return true;
-          },
           a: () => {
             const cell = GRID[selectedRow]?.[col];
             if (!cell) return true;
@@ -190,7 +170,7 @@ const VirtualKeyboard = ({
           ))}
         </div>
         <p className="mt-3 text-center text-sm text-gray-400 md:mt-4">
-          D-Pad / Stick: move · A: type · B: close
+          D-Pad: move · A: type · B: close
         </p>
       </div>
     </div>

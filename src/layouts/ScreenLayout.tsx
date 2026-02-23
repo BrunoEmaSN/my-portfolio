@@ -17,11 +17,11 @@ const LAYOUT_CONTROLS: Record<InputDevice, string[]> = {
   xbox: ["B", "View", "Stick der. ↑↓"],
 }
 
-/** Controls when the screen has horizontal movement (e.g. About Me): back + scroll + A/D or left stick. */
+/** Controls when the screen has horizontal movement (e.g. About Me): back + scroll + A/D; panel with L1/R1 or LB/RB; scroll with right stick. */
 const LAYOUT_CONTROLS_WITH_HORIZONTAL: Record<InputDevice, string[]> = {
   keyboard: ["ESC", "A", "D", "↑", "↓"],
-  playstation: ["Circle", "Share", "Stick izq. ←→", "Stick der. ↑↓"],
-  xbox: ["B", "View", "Stick izq. ←→", "Stick der. ↑↓"],
+  playstation: ["Circle", "Share", "L1/R1 ←→", "Stick der. ↑↓"],
+  xbox: ["B", "View", "LB/RB ←→", "Stick der. ↑↓"],
 }
 
 const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMobile: boolean }) => {

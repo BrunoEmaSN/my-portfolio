@@ -65,8 +65,6 @@ const ListMenu = ({
       : {
           'dpad-up': movePrev,
           'dpad-down': moveNext,
-          'stick-left-up': movePrev,
-          'stick-left-down': moveNext,
         },
     { priority: 70 }
   );

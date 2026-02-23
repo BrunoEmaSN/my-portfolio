@@ -54,19 +54,11 @@ const AboutMeSection = () => {
   useGamepad(
     'about-me',
     {
-      'dpad-left': () => {
+      lb: () => {
         goLeft();
         return true;
       },
-      'dpad-right': () => {
-        goRight();
-        return true;
-      },
-      'stick-left-left': () => {
-        goLeft();
-        return true;
-      },
-      'stick-left-right': () => {
+      rb: () => {
         goRight();
         return true;
       },
