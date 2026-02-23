@@ -1,13 +1,12 @@
 import clsx from "clsx"
 import type { InputDevice } from "../store"
+import { HiArrowSmDown, HiArrowSmUp } from "react-icons/hi";
 
 export interface ControlsHintProps {
   /** List of keys or buttons to show, e.g. ['W', 'S', 'ENTER'] or ['D-Pad', 'A'] */
   items: string[];
   /** Current input device: keyboard shows text, xbox/playstation show button images when available. */
   inputDevice?: InputDevice;
-  /** Label before the list. Default "CONTROLS:". */
-  label?: string;
   /** Hide on mobile (small viewport). Default true. */
   hideOnMobile?: boolean;
   className?: string;
@@ -47,7 +46,6 @@ function getButtonImages(
 const ControlsHint = ({
   items,
   inputDevice = "keyboard",
-  label = "CONTROLS:",
   hideOnMobile = true,
   className,
 }: ControlsHintProps) => {
@@ -59,12 +57,11 @@ const ControlsHint = ({
   return (
     <div
       className={clsx(
-        "absolute bottom-5 right-5 bg-blue-700 text-white p-4 rounded-lg text-xs font-mono opacity-50 flex flex-wrap items-center gap-1",
+        "absolute bottom-5 right-5 text-white p-4 rounded-lg text-xs opacity-80 font-mono flex flex-wrap items-center gap-1",
         hideOnMobile && "hidden md:flex",
         className
       )}
     >
-      <span className="mr-2">{label}</span>
       {items.map((item) => {
         const images =
           isGamepad && (inputDevice === "xbox" || inputDevice === "playstation")
@@ -73,13 +70,14 @@ const ControlsHint = ({
 
         if (images && images.length > 0) {
           return (
-            <span key={item} className="inline-flex items-center gap-0.5 mx-0.5">
+            <span key={item} className={"inline-flex items-center gap-0.5 mx-0.5"}>
               {images.map((src) => (
                 <img
                   key={src}
                   src={`${prefix}/${src}`}
                   alt={item}
-                  className="h-5 w-auto inline-block"
+                  className={"h-7 w-auto inline-block"}
+                  style={{ filter: inputDevice === "xbox" ? "invert(100%)" : "invert(0%)" }}
                   aria-hidden
                 />
               ))}
@@ -87,9 +85,21 @@ const ControlsHint = ({
           )
         }
 
+        if (item === "↑") {
+          return (
+            <HiArrowSmUp size={24} key={item} className="border border-white" />
+          )
+        }
+
+        if (item === "↓") {
+          return (
+            <HiArrowSmDown size={24} key={item} className="border border-white" />
+          )
+        }
+
         return (
-          <span key={item} className="mx-0.5">
-            [{item}]
+          <span key={item} className="mx-0.5 border border-white px-2 py-1">
+            {item}
           </span>
         )
       })}
