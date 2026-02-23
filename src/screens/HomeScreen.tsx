@@ -2,6 +2,7 @@ import { useRef, useLayoutEffect } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import Menu from "../components/Menu"
+import ControlsHint from "../components/ControlsHint"
 import type { MobileProps } from "../types"
 import clsx from "clsx"
 import { useAppStore } from "../store"
@@ -56,9 +57,7 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
         <Menu />
       </div>
       {!isMobile && (
-        <div className="absolute bottom-5 right-5 bg-black text-white p-4 rounded-lg text-xs font-mono opacity-50">
-          CONTROLS: [W] [S] [ENTER]
-        </div>
+        <ControlsHint items={["W", "S", "ENTER"]} />
       )}
     </main>
   )
