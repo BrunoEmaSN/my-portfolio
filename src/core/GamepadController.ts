@@ -6,6 +6,8 @@
  * Solo dispara en "press" (transición a pulsado), no mientras se mantiene.
  */
 
+import { useAppStore, getInputDeviceFromGamepadId } from '../store';
+
 export type GamepadActionHandler = () => void | boolean;
 
 export interface GamepadBindings {
@@ -140,6 +142,7 @@ export class GamepadController {
       if (!pad || !pad.connected) continue;
 
       const prevB = this.prevButtons[g] ?? [];
+      const device = getInputDeviceFromGamepadId(pad.id);
 
       // Botones
       for (let i = 0; i < pad.buttons.length; i++) {
@@ -148,6 +151,7 @@ export class GamepadController {
         const pressed = this.isPressed(pad.buttons[i].value);
         const wasPressed = i < prevB.length && this.isPressed(prevB[i]);
         if (pressed && !wasPressed) {
+          useAppStore.getState().setInputDevice(device);
           if (this.dispatch(action)) break;
         }
       }
@@ -169,6 +173,7 @@ export class GamepadController {
 
         if (nowNeg) {
           if (now - lastNeg >= STICK_REPEAT_MS || lastNeg === 0) {
+            useAppStore.getState().setInputDevice(device);
             if (this.dispatch(negAction)) break;
             this.stickLastDispatch[negKey] = now;
           }
@@ -178,6 +183,7 @@ export class GamepadController {
 
         if (nowPos) {
           if (now - lastPos >= STICK_REPEAT_MS || lastPos === 0) {
+            useAppStore.getState().setInputDevice(device);
             if (this.dispatch(posAction)) break;
             this.stickLastDispatch[posKey] = now;
           }

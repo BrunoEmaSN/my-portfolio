@@ -7,6 +7,8 @@
  * - Chain of responsibility: evaluated by priority; the first to handle the key consumes the event.
  */
 
+import { useAppStore } from '../store';
+
 export type KeyHandler = (event: KeyboardEvent) => void | boolean;
 
 export interface KeyBindings {
@@ -116,6 +118,7 @@ export class KeyboardController {
   }
 
   private handleKeyDown(event: KeyboardEvent): void {
+    useAppStore.getState().setInputDevice('keyboard');
     const keyNormalized = this.normalizeKey(event.key);
     for (const contextId of this.sortedContextIds) {
       const entry = this.contexts.get(contextId);
