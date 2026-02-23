@@ -144,24 +144,24 @@ const VirtualKeyboard = ({
     <div
       ref={overlayRef}
       tabIndex={-1}
-      className="absolute inset-0 z-[200] flex flex-col outline-none md:translate-y-30 lg:rotate-10 scale-100"
+      className="absolute inset-0 z-[200] flex flex-col outline-none bg-black/80 justify-center items-center"
       aria-label={title}
     >
       <div
-        className="flex h-full w-full flex-col p-4 md:p-6 lg:p-8"
+        className="flex md:max-w-2xl bg-gray-900 flex-col p-4 md:p-6 lg:p-8 shadow-card-lg shadow-blue-950"
         role="dialog"
         aria-modal="true"
         aria-label={title}
       >
         {title && (
-          <p className="mb-2 text-center text-lg font-semibold text-white md:mb-4 md:text-xl">
+          <p className="mb-2 text-center text-lg font-black text-white md:mb-4 md:text-xl uppercase">
             {title}
           </p>
         )}
-        <div className="mb-3 rounded-lg bg-neutral-900 px-4 py-3 text-xl font-mono text-white min-h-[3rem] break-all md:mb-4 md:min-h-[4rem] md:text-2xl">
+        <div className="mb-3 rounded-lg flex items-center w-full bg-gray-700 px-4 py-3 text-xl font-mono text-white min-h-[3rem] break-all md:mb-4 md:min-h-[4rem] md:text-2xl">
           {value || "\u00a0"}
         </div>
-        <div className="flex p-4 flex-col justify-center gap-2 md:gap-3 bg-black/90">
+        <div className="flex w-full p-4 flex-col justify-center gap-2 md:gap-3">
           {GRID.map((cells, r) => (
             <div key={r} className="flex justify-center gap-2 md:gap-3">
               {cells.map((cell, c) => {
@@ -174,12 +174,12 @@ const VirtualKeyboard = ({
                     disabled
                     aria-hidden
                     className={clsx(
-                      "min-w-[2.5rem] rounded-lg px-3 py-3 text-base font-bold transition-all select-none md:min-w-[3rem] md:px-4 md:py-4 md:text-lg",
+                      "min-w-[2.5rem] px-3 py-3 text-base font-bold transition-all select-none md:min-w-[3rem] md:px-4 md:py-4 md:text-lg shadow-card-sm shadow-blue-950",
                       isSpecial && "min-w-[4rem] md:min-w-[5rem]",
                       cell.action === "done" && "min-w-[5rem] md:min-w-[6rem]",
                       isSelected
                         ? "bg-blue-600 text-white scale-110 ring-2 ring-white"
-                        : "bg-neutral-700 text-gray-200"
+                        : "bg-slate-700 text-gray-400"
                     )}
                   >
                     {cell.key}

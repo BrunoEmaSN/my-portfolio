@@ -18,17 +18,30 @@ export interface MailFormData {
   message: string;
 }
 
+export type VirtualKeyboardFieldIndex = 0 | 1 | 2 | 3 | null;
+
 export interface MailPanelProps {
   backgroundImage: string;
   backgroundImageAlt?: string;
   onSend?: (data: MailFormData) => void;
   actionLabel?: string;
   className?: string;
+  /** Cuando se pasan, el teclado virtual se controla desde el padre (ej. ContactScreen) */
+  virtualKeyboardOpen?: boolean;
+  virtualKeyboardField?: VirtualKeyboardFieldIndex;
+  onOpenVirtualKeyboard?: (
+    field: 0 | 1 | 2 | 3,
+    getValue: () => string,
+    setValue: (v: string) => void,
+    title: string
+  ) => void;
 }
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const FOCUSABLE_COUNT = 5; // name, email, subject, message, submit button
+
+const FIELD_TITLES = ["NAME", "EMAIL", "SUBJECT", "MESSAGE"] as const;
 
 const MailPanel = ({
   backgroundImage,
@@ -36,6 +49,9 @@ const MailPanel = ({
   onSend,
   actionLabel,
   className = '',
+  virtualKeyboardOpen: virtualKeyboardOpenProp,
+  virtualKeyboardField: virtualKeyboardFieldProp,
+  onOpenVirtualKeyboard,
 }: MailPanelProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const focusableRefs = useRef<(HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | null)[]>([]);
@@ -47,10 +63,14 @@ const MailPanel = ({
   const [messageValue, setMessageValue] = useState("");
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState("");
-  const [virtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false);
-  const [virtualKeyboardField, setVirtualKeyboardField] = useState<0 | 1 | 2 | 3 | null>(null);
+  const [virtualKeyboardOpenLocal, setVirtualKeyboardOpenLocal] = useState(false);
+  const [virtualKeyboardFieldLocal, setVirtualKeyboardFieldLocal] = useState<0 | 1 | 2 | 3 | null>(null);
   const inputDevice = useAppStore((s) => s.inputDevice);
   const isGamepad = inputDevice === "playstation" || inputDevice === "xbox";
+
+  const keyboardControlledByParent = onOpenVirtualKeyboard != null;
+  const virtualKeyboardOpen = keyboardControlledByParent ? (virtualKeyboardOpenProp ?? false) : virtualKeyboardOpenLocal;
+  const virtualKeyboardField = keyboardControlledByParent ? (virtualKeyboardFieldProp ?? null) : virtualKeyboardFieldLocal;
 
   const clearStatus = useCallback(() => {
     setStatus('idle');
@@ -89,8 +109,20 @@ const MailPanel = ({
       if (typeof document !== "undefined" && document.activeElement && "blur" in document.activeElement) {
         (document.activeElement as HTMLElement).blur();
       }
-      setVirtualKeyboardField(selectedIndex as 0 | 1 | 2 | 3);
-      setVirtualKeyboardOpen(true);
+      if (keyboardControlledByParent && onOpenVirtualKeyboard) {
+        const field = selectedIndex as 0 | 1 | 2 | 3;
+        const getters: (() => string)[] = [() => fromNameValue, () => fromEmailValue, () => subjectValue, () => messageValue];
+        const setters: ((v: string) => void)[] = [
+          (v) => { setFromNameValue(v); clearStatus(); },
+          (v) => { setFromEmailValue(v); clearStatus(); },
+          (v) => { setSubjectValue(v); clearStatus(); },
+          (v) => { setMessageValue(v); clearStatus(); },
+        ];
+        onOpenVirtualKeyboard(field, getters[field], setters[field], FIELD_TITLES[field]);
+      } else {
+        setVirtualKeyboardFieldLocal(selectedIndex as 0 | 1 | 2 | 3);
+        setVirtualKeyboardOpenLocal(true);
+      }
       return true;
     }
     focusAt(selectedIndex);
@@ -324,17 +356,19 @@ const MailPanel = ({
         </div>
       </div>
 
-      <VirtualKeyboard
-        visible={virtualKeyboardOpen}
-        value={virtualKeyboardValue}
-        onChange={setVirtualKeyboardValue}
-        onClose={() => {
-          setVirtualKeyboardOpen(false);
-          setVirtualKeyboardField(null);
-        }}
-        title={virtualKeyboardTitle}
-        disablePhysicalKeyboard
-      />
+      {!keyboardControlledByParent && (
+        <VirtualKeyboard
+          visible={virtualKeyboardOpen}
+          value={virtualKeyboardValue}
+          onChange={setVirtualKeyboardValue}
+          onClose={() => {
+            setVirtualKeyboardOpenLocal(false);
+            setVirtualKeyboardFieldLocal(null);
+          }}
+          title={virtualKeyboardTitle}
+          disablePhysicalKeyboard
+        />
+      )}
     </div>
   );
 };

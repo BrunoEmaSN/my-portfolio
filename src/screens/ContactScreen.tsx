@@ -1,9 +1,10 @@
-import { useRef } from "react"
+import { useRef, useState, useCallback } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import MailPanel, { type MailFormData } from "../components/MailPanel"
 import SectionTitle from "../components/SectionTitle"
 import SocialItem from "../components/SocialItem"
+import VirtualKeyboard from "../components/VirtualKeyboard"
 import { ANIMATION_CONFIG, CONTACT_EMAIL } from "../../constants"
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
 import { useScreenScroll } from "../hooks/useScreenScroll"
@@ -55,9 +56,37 @@ const size = {
   xl: 400,
 }
 
+type VirtualKeyboardField = 0 | 1 | 2 | 3 | null
+
 const ContactScreen = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const socialListRef = useRef<HTMLDivElement>(null)
+  const [virtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false)
+  const [virtualKeyboardField, setVirtualKeyboardField] = useState<VirtualKeyboardField>(null)
+  const [virtualKeyboardValue, setVirtualKeyboardValue] = useState("")
+  const [virtualKeyboardTitle, setVirtualKeyboardTitle] = useState("")
+  const keyboardFieldSetterRef = useRef<(v: string) => void>(() => {})
+
+  const onOpenVirtualKeyboard = useCallback(
+    (field: 0 | 1 | 2 | 3, getValue: () => string, setValue: (v: string) => void, title: string) => {
+      keyboardFieldSetterRef.current = setValue
+      setVirtualKeyboardField(field)
+      setVirtualKeyboardTitle(title)
+      setVirtualKeyboardValue(getValue())
+      setVirtualKeyboardOpen(true)
+    },
+    []
+  )
+
+  const handleKeyboardChange = useCallback((v: string) => {
+    keyboardFieldSetterRef.current?.(v)
+    setVirtualKeyboardValue(v)
+  }, [])
+
+  const handleKeyboardClose = useCallback(() => {
+    setVirtualKeyboardOpen(false)
+    setVirtualKeyboardField(null)
+  }, [])
 
   useScreenScroll(sectionRef)
 
@@ -88,6 +117,9 @@ const ContactScreen = () => {
           backgroundImage="/images/photo.png"
           onSend={handleSendMail}
           actionLabel="SEND EMAIL"
+          virtualKeyboardOpen={virtualKeyboardOpen}
+          virtualKeyboardField={virtualKeyboardField}
+          onOpenVirtualKeyboard={onOpenVirtualKeyboard}
         />
         <div
           ref={socialListRef}
@@ -105,6 +137,14 @@ const ContactScreen = () => {
           ))}
         </div>
       </div>
+      <VirtualKeyboard
+        visible={virtualKeyboardOpen}
+        value={virtualKeyboardValue}
+        onChange={handleKeyboardChange}
+        onClose={handleKeyboardClose}
+        title={virtualKeyboardTitle}
+        disablePhysicalKeyboard
+      />
     </section>
   )
 }
