@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import gsap from "gsap"
 import SectionTitle from "../components/SectionTitle"
 import SkillsList from "../components/SkillsList"
@@ -9,6 +9,7 @@ import { ANIMATION_CONFIG } from "../../constants"
 import { menuAudioEffect } from "../helpers/audioContext"
 import { AboutMeProvider, useAboutMe } from "../context/AboutMeContext"
 import { useScreenScroll } from "../hooks/useScreenScroll"
+import { useKeyboard } from "../hooks/useKeyboard"
 
 const size = {
   sm: 100,
@@ -34,17 +35,20 @@ const AboutMeSection = () => {
 
   useScreenScroll(containerRef)
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "a") {
-        goLeft()
-      } else if (e.key === "d") {
-        goRight()
-      }
-    }
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [goLeft, goRight])
+  useKeyboard(
+    'about-me',
+    {
+      a: () => {
+        goLeft();
+        return true;
+      },
+      d: () => {
+        goRight();
+        return true;
+      },
+    },
+    { priority: 70 }
+  )
 
   useGSAP(() => {
     const ctx = gsap.context(() => {

@@ -6,6 +6,7 @@ import type { MobileProps } from '../types';
 import MainTitle from '../components/MainTitle';
 import { ANIMATION_CONFIG, ROUTES } from '../../constants';
 import { startAudioEffect } from '../helpers/audioContext';
+import { useKeyboard } from '../hooks/useKeyboard';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
   const navigate = useNavigate();
@@ -27,6 +28,19 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   const handleClick = () => {
     startTransition();
   };
+
+  useKeyboard(
+    'splash',
+    {
+      Enter: (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        startTransition();
+        return true;
+      },
+    },
+    { priority: 85 }
+  );
 
   useGSAP(() => {
     if (!splashRef.current || !revealBlockRef.current) return;
@@ -55,20 +69,6 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
         { xPercent: -100, duration: ANIMATION_CONFIG.fast, ease: "power3.in" },
         "+=0.2"
       );
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      startTransition();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
   }, { scope: splashRef, dependencies: [navigate, isMobile] });
 
   return (

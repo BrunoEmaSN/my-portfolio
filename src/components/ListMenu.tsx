@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ANIMATION_CONFIG } from '../../constants';
 import { menuAudioEffect } from '../helpers/audioContext';
+import { useKeyboard } from '../hooks/useKeyboard';
 
 export interface ListMenuProps {
   title?: string;
@@ -37,25 +38,26 @@ const ListMenu = ({
     onSelect?.(index);
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (items.length === 0) return;
-    if (e.key === 'w' || e.key === 'W') {
-      menuAudioEffect();
-      e.preventDefault();
-      const prev = (selectedIndex - 1 + items.length) % items.length;
-      handleSelect(prev);
-    } else if (e.key === 's' || e.key === 'S') {
-      menuAudioEffect();
-      e.preventDefault();
-      const next = (selectedIndex + 1) % items.length;
-      handleSelect(next);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
+  useKeyboard(
+    'list-menu',
+    items.length === 0
+      ? {}
+      : {
+          w: () => {
+            menuAudioEffect();
+            const prev = (selectedIndex - 1 + items.length) % items.length;
+            handleSelect(prev);
+            return true;
+          },
+          s: () => {
+            menuAudioEffect();
+            const next = (selectedIndex + 1) % items.length;
+            handleSelect(next);
+            return true;
+          },
+        },
+    { priority: 70 }
+  );
 
   /** GSAP transition on selected item change: scale down previous, scale up + bounce on next. */
   useGSAP(() => {

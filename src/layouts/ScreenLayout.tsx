@@ -1,19 +1,21 @@
 import clsx from "clsx"
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { ANIMATION_CONFIG, ROUTES } from "../../constants"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { backAudioEffect } from "../helpers/audioContext"
+import { useKeyboard } from "../hooks/useKeyboard"
 
 const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMobile: boolean }) => {
     const navigate = useNavigate()
     const layoutRef = useRef<HTMLDivElement>(null)
     const outletWrapperRef = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
+    useKeyboard(
+        'screen-layout',
+        {
+            Escape: () => {
                 backAudioEffect();
                 gsap.fromTo(layoutRef.current, { opacity: 1, scale: 1 }, {
                     opacity: 0,
@@ -23,12 +25,12 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                     onComplete: () => {
                         navigate(ROUTES.HOME)
                     }
-                })
+                });
+                return true;
             }
-        }
-        window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [])
+        },
+        { priority: 100 }
+    )
 
     useGSAP(() => {
         gsap.fromTo(layoutRef.current, { opacity: 0, scale: 1.3 }, {

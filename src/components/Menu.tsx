@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,6 +6,9 @@ import clsx from 'clsx';
 import { navItems, ROUTES } from '../../constants';
 import { useAppStore } from '../store';
 import { backAudioEffect, menuAudioEffect, startAudioEffect } from '../helpers/audioContext';
+import { useKeyboard } from '../hooks/useKeyboard';
+
+const MENU_CONTEXT_ID = 'menu';
 
 const Menu = () => {
   const location = useLocation();
@@ -18,46 +21,46 @@ const Menu = () => {
   const menuContainerRef = useRef<HTMLUListElement>(null);
   const hasAnimatedRef = useRef(false);
 
-  useEffect(() => {
-    if (!isMenu) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const key = event.key.toLowerCase();
-
-      if (key === 'w') {
-        menuAudioEffect()
-        const newIndex = selectedIndex > 0 ? selectedIndex - 1 : navItems.length - 1;
-        setSelectedIndex(newIndex);
-      }
-      if (key === 's') {
-        menuAudioEffect()
-        const newIndex = selectedIndex < navItems.length - 1 ? selectedIndex + 1 : 0;
-        setSelectedIndex(newIndex);
-      }
-      if (key === 'enter') {
-        event.preventDefault();
-        event.stopPropagation();
-        if (selectedIndex === 4) {
-          backAudioEffect()
-        } else {
-          startAudioEffect();
+  useKeyboard(
+    MENU_CONTEXT_ID,
+    isMenu
+      ? {
+          w: () => {
+            menuAudioEffect();
+            const newIndex = selectedIndex > 0 ? selectedIndex - 1 : navItems.length - 1;
+            setSelectedIndex(newIndex);
+            return true;
+          },
+          s: () => {
+            menuAudioEffect();
+            const newIndex = selectedIndex < navItems.length - 1 ? selectedIndex + 1 : 0;
+            setSelectedIndex(newIndex);
+            return true;
+          },
+          Enter: (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (selectedIndex === 4) {
+              backAudioEffect();
+            } else {
+              startAudioEffect();
+            }
+            const selectedItem = navItems[selectedIndex];
+            gsap.to(menuContainerRef.current, {
+              xPercent: 100,
+              duration: 0.3,
+              ease: 'power3.in',
+              onComplete: () => {
+                navigate(selectedItem.path);
+                if (selectedIndex === 4) setSelectedIndex(0);
+              },
+            });
+            return true;
+          },
         }
-        const selectedItem = navItems[selectedIndex];
-        gsap.to(menuContainerRef.current, {
-          xPercent: 100,
-          duration: 0.3,
-          ease: 'power3.in',
-          onComplete: () => {
-            navigate(selectedItem.path);
-            if (selectedIndex === 4) setSelectedIndex(0);
-          }
-      })
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, isMenu, navigate]);
+      : {},
+    { priority: 90 }
+  );
 
   useGSAP(() => {
     if (!menuContainerRef.current || hasAnimatedRef.current) return;

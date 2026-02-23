@@ -1,9 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useRef, useId } from "react";
+import { useKeyboard } from "./useKeyboard";
 
 const SCROLL_STEP = 280;
 
 /**
- * Binds ArrowUp and ArrowDown to vertical scroll of the given container (e.g. section).
+ * Binds ArrowUp and ArrowDown to vertical scroll of the given container.
+ * Uses the centralized keyboard controller (low priority so it does not override menus).
  */
 export function useScreenScroll(
   containerRef: React.RefObject<HTMLElement | null>,
@@ -12,24 +14,26 @@ export function useScreenScroll(
   const step = options?.scrollStep ?? SCROLL_STEP;
   const stepRef = useRef(step);
   stepRef.current = step;
+  const contextId = `scroll-${useId()}`;
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
-
-      const target = e.target as HTMLElement;
-      const tag = target.tagName?.toLowerCase();
-      if (tag === "input" || tag === "textarea" || target.isContentEditable) return;
-
-      const container = containerRef.current;
-      if (!container) return;
-
-      e.preventDefault();
-      const amount = e.key === "ArrowDown" ? stepRef.current : -stepRef.current;
-      container.scrollBy({ top: amount, behavior: "smooth" });
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [containerRef]);
+  useKeyboard(
+    contextId,
+    {
+      ArrowUp: (e) => {
+        const container = containerRef.current;
+        if (!container) return false;
+        e.preventDefault();
+        container.scrollBy({ top: -stepRef.current, behavior: "smooth" });
+        return true;
+      },
+      ArrowDown: (e) => {
+        const container = containerRef.current;
+        if (!container) return false;
+        e.preventDefault();
+        container.scrollBy({ top: stepRef.current, behavior: "smooth" });
+        return true;
+      },
+    },
+    { priority: 10, ignoreInInputs: true }
+  );
 }

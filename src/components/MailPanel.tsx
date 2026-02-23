@@ -1,9 +1,12 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import clsx from "clsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ANIMATION_CONFIG } from "../../constants";
 import { HiMail, HiUser } from "react-icons/hi";
+import { menuAudioEffect } from "../helpers/audioContext";
+import { useKeyboard } from "../hooks/useKeyboard";
+import { Mark } from "./Mark";
 
 export interface MailFormData {
   fromName: string;
@@ -22,6 +25,8 @@ export interface MailPanelProps {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const FOCUSABLE_COUNT = 5; // name, email, subject, message, submit button
+
 const MailPanel = ({
   backgroundImage,
   backgroundImageAlt = 'Mail background',
@@ -30,6 +35,9 @@ const MailPanel = ({
   className = '',
 }: MailPanelProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
+  const focusableRefs = useRef<(HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | null)[]>([]);
+  const selectedTargetRef = useRef<HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [fromNameValue, setFromNameValue] = useState("");
   const [fromEmailValue, setFromEmailValue] = useState("");
   const [subjectValue, setSubjectValue] = useState("");
@@ -41,6 +49,45 @@ const MailPanel = ({
     setStatus('idle');
     setErrorMessage('');
   }, []);
+
+  const focusAt = useCallback((index: number) => {
+    const el = focusableRefs.current[index];
+    if (el && 'focus' in el) el.focus();
+  }, []);
+
+  useEffect(() => {
+    selectedTargetRef.current = focusableRefs.current[selectedIndex] ?? null;
+  }, [selectedIndex]);
+
+  useKeyboard(
+    'contact-form',
+    {
+      w: () => {
+        menuAudioEffect();
+        const prev = (selectedIndex - 1 + FOCUSABLE_COUNT) % FOCUSABLE_COUNT;
+        setSelectedIndex(prev);
+        focusAt(prev);
+        return true;
+      },
+      s: () => {
+        menuAudioEffect();
+        const next = (selectedIndex + 1) % FOCUSABLE_COUNT;
+        setSelectedIndex(next);
+        focusAt(next);
+        return true;
+      },
+      Enter: (e) => {
+        if (selectedIndex === 4) {
+          e.preventDefault();
+          handleSubmit();
+          return true;
+        }
+        focusAt(selectedIndex);
+        return true;
+      },
+    },
+    { priority: 70, ignoreInInputs: false }
+  );
 
   const handleSubmit = () => {
     setErrorMessage("");
@@ -113,6 +160,7 @@ const MailPanel = ({
         className="absolute top-0 left-0 w-full h-full hidden lg:flex justify-end items-end border-l-16 border-b-16 blur-[0.5px] border-r-16 border-white/90 rounded-lg lg:rotate-3 lg:translate-x-10 lg:translate-y-5" />
 
       <div className="relative z-50 flex h-full flex-col p-5 sm:p-6 md:p-8 lg:rotate-10 lg:translate-x-20">
+        <Mark targetRef={selectedTargetRef} targetKey={selectedIndex} />
         <div className="flex flex-col items-center gap-1 pt-50">
           <div className="w-fit">
             <div className="flex items-end gap-2">
@@ -122,14 +170,17 @@ const MailPanel = ({
             </div>
             <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
               <div className="relative">
-              <HiUser size={20} strokeWidth={0.5} color="#262626" fill="white" />
+                <HiUser size={20} strokeWidth={0.5} color="#262626" fill="white" />
               </div>
               <input
+                ref={(el) => { focusableRefs.current[0] = el; }}
                 type="text"
                 placeholder="Your name..."
                 value={fromNameValue}
                 onChange={(e) => { setFromNameValue(e.target.value); clearStatus(); }}
-                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300 truncate"
+                onFocus={() => setSelectedIndex(0)}
+                className={clsx(
+                  "text-xl font-bold bg-transparent outline-none w-full min-w-0 text-gray-300 truncate focus:border-b-2 focus:border-blue-500")}
               />
             </div>
             <div className="flex items-center gap-2 font-sans text-sm text-gray-300">
@@ -137,11 +188,15 @@ const MailPanel = ({
                 <HiMail size={20} strokeWidth={0.5} color="#262626" fill="white" />
               </div>
               <input
+                ref={(el) => { focusableRefs.current[1] = el; }}
                 type="email"
                 placeholder="Your email..."
                 value={fromEmailValue}
                 onChange={(e) => { setFromEmailValue(e.target.value); clearStatus(); }}
-                className="text-xl font-bold bg-transparent border-none outline-none w-full min-w-0 text-gray-300 truncate"
+                onFocus={() => setSelectedIndex(1)}
+                className={clsx(
+                  "text-xl font-bold bg-transparent outline-none w-full min-w-0 text-gray-300 truncate focus:border-b-2 focus:border-blue-500"
+                )}
               />
             </div>
           </div>
@@ -150,18 +205,26 @@ const MailPanel = ({
         <div className="mt-4 flex justify-center h-full max-h-[min(70vh,35rem)]">
           <div className="max-w-md w-full h-full">
             <input
+              ref={(el) => { focusableRefs.current[2] = el; }}
               type="text"
               placeholder="Subject..."
               value={subjectValue}
               onChange={(e) => { setSubjectValue(e.target.value); clearStatus(); }}
-              className="w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold border-none outline-none truncate"
+              onFocus={() => setSelectedIndex(2)}
+              className={clsx(
+                "w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold outline-none truncatefocus:border-b-2 focus:border-blue-500"
+              )}
             />
 
             <textarea
+              ref={(el) => { focusableRefs.current[3] = el; }}
               placeholder="Message..."
               value={messageValue}
               onChange={(e) => { setMessageValue(e.target.value); clearStatus(); }}
-              className="mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain w-full resize-none bg-transparent border-none outline-none text-inherit"
+              onFocus={() => setSelectedIndex(3)}
+              className={clsx(
+                "mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain w-full resize-none bg-transparent outline-none text-inherit focus:border-b-2 focus:border-blue-500"
+              )}
             />
             {errorMessage && (
               <p className="mt-2 text-red-400 text-sm font-medium" role="alert">{errorMessage}</p>
@@ -173,14 +236,18 @@ const MailPanel = ({
         </div>
         <div className="flex justify-end items-end pt-20 md:pt-0">
           <button
+            ref={(el) => { focusableRefs.current[4] = el; }}
             type="button"
             onClick={handleSubmit}
+            onFocus={() => setSelectedIndex(4)}
             disabled={status === 'sending'}
-            className="w-full h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
+            className={clsx(
+              "w-full h-20 md:w-40 md:h-40 relative flex justify-end items-end hover:scale-105 hover:opacity-90 transition-all duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed outline-none focus:scale-105 focus:opacity-90"
+            )}>
             <img
               src="/images/run.svg"
               alt="Mail button"
-              className="absolute hidden md:block w-full h-full p-2"
+              className="absolute hidden md:block w-full h-full md:translate-x-5"
               style={{ filter: "invert(17%) sepia(89%) saturate(3464%) hue-rotate(226deg) brightness(95%) contrast(97%)" }}
             />
             <span
