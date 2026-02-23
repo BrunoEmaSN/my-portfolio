@@ -7,6 +7,7 @@ import type { MobileProps } from "../types"
 import clsx from "clsx"
 import { useAppStore, type InputDevice } from "../store"
 import { ANIMATION_CONFIG } from "../../constants"
+import Footer from "../components/Footer"
 
 /** Main menu controls per device: navigate and confirm. */
 const HOME_CONTROLS: Record<InputDevice, string[]> = {
@@ -19,6 +20,7 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
   const menuRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const revealBlockRef = useRef<HTMLDivElement>(null)
+  const footerRef = useRef<HTMLDivElement>(null)
   const isInitialized = useRef(false)
   const { selectedIndex, inputDevice } = useAppStore();
 
@@ -33,6 +35,13 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
       xPercent: -100,
     }, {
       xPercent: 100,
+      duration: ANIMATION_CONFIG.fast,
+      ease: "power3.out",
+    })
+    gsap.fromTo(footerRef.current, {
+      y: 100,
+    }, {
+      y: 0,
       duration: ANIMATION_CONFIG.fast,
       ease: "power3.out",
     })
@@ -66,6 +75,9 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
       {!isMobile && (
         <ControlsHint items={HOME_CONTROLS[inputDevice]} inputDevice={inputDevice} />
       )}
+      <div className="relative" ref={footerRef}>
+        <Footer />
+      </div>
     </main>
   )
 }
