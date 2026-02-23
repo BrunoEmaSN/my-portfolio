@@ -24,7 +24,7 @@ const SocialItem = ({
       role={onClick ? "button" : undefined}
       onClick={onClick}
       className={clsx(
-        "z-50 relative flex w-full min-h-[6rem] max-w-xl rounded overflow-hidden bg-neutral-800 shadow-card shadow-blue-950/80 hover:bg-white hover:text-black transition-colors pointer-events-auto",
+        "z-0 relative flex w-full min-h-[6rem] max-w-xl rounded overflow-hidden bg-neutral-800 shadow-card shadow-blue-950/80 hover:bg-white hover:text-black transition-colors pointer-events-auto",
         onClick && "cursor-pointer",
         className
       )}

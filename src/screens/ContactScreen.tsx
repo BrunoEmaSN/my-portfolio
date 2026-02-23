@@ -83,7 +83,7 @@ const ContactScreen = () => {
   return (
     <section ref={sectionRef} id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden z-10">
       <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full h-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full h-full z-10">
         <MailPanel
           backgroundImage="/images/photo.png"
           onSend={handleSendMail}

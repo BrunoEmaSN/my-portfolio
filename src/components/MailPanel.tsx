@@ -7,7 +7,9 @@ import { HiMail, HiUser } from "react-icons/hi";
 import { menuAudioEffect } from "../helpers/audioContext";
 import { useKeyboard } from "../hooks/useKeyboard";
 import { useGamepad } from "../hooks/useGamepad";
+import { useAppStore } from "../store";
 import { Mark } from "./Mark";
+import VirtualKeyboard from "./VirtualKeyboard";
 
 export interface MailFormData {
   fromName: string;
@@ -45,6 +47,10 @@ const MailPanel = ({
   const [messageValue, setMessageValue] = useState("");
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState("");
+  const [virtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false);
+  const [virtualKeyboardField, setVirtualKeyboardField] = useState<0 | 1 | 2 | 3 | null>(null);
+  const inputDevice = useAppStore((s) => s.inputDevice);
+  const isGamepad = inputDevice === "playstation" || inputDevice === "xbox";
 
   const clearStatus = useCallback(() => {
     setStatus('idle');
@@ -79,9 +85,48 @@ const MailPanel = ({
       handleSubmit();
       return true;
     }
+    if (isGamepad && selectedIndex >= 0 && selectedIndex <= 3) {
+      if (typeof document !== "undefined" && document.activeElement && "blur" in document.activeElement) {
+        (document.activeElement as HTMLElement).blur();
+      }
+      setVirtualKeyboardField(selectedIndex as 0 | 1 | 2 | 3);
+      setVirtualKeyboardOpen(true);
+      return true;
+    }
     focusAt(selectedIndex);
     return true;
   };
+
+  const virtualKeyboardValue =
+    virtualKeyboardField === 0
+      ? fromNameValue
+      : virtualKeyboardField === 1
+        ? fromEmailValue
+        : virtualKeyboardField === 2
+          ? subjectValue
+          : virtualKeyboardField === 3
+            ? messageValue
+            : "";
+  const setVirtualKeyboardValue = useCallback(
+    (v: string) => {
+      if (virtualKeyboardField === 0) setFromNameValue(v);
+      else if (virtualKeyboardField === 1) setFromEmailValue(v);
+      else if (virtualKeyboardField === 2) setSubjectValue(v);
+      else if (virtualKeyboardField === 3) setMessageValue(v);
+      clearStatus();
+    },
+    [virtualKeyboardField, clearStatus]
+  );
+  const virtualKeyboardTitle =
+    virtualKeyboardField === 0
+      ? "Nombre"
+      : virtualKeyboardField === 1
+        ? "Email"
+        : virtualKeyboardField === 2
+          ? "Asunto"
+          : virtualKeyboardField === 3
+            ? "Mensaje"
+            : "";
 
   useKeyboard(
     'contact-form',
@@ -194,6 +239,7 @@ const MailPanel = ({
                 value={fromNameValue}
                 onChange={(e) => { setFromNameValue(e.target.value); clearStatus(); }}
                 onFocus={() => setSelectedIndex(0)}
+                readOnly={virtualKeyboardOpen && virtualKeyboardField === 0}
                 className={clsx(
                   "text-xl font-bold bg-transparent outline-none w-full min-w-0 text-gray-300 truncate focus:border-b-2 focus:border-blue-500")}
               />
@@ -209,6 +255,7 @@ const MailPanel = ({
                 value={fromEmailValue}
                 onChange={(e) => { setFromEmailValue(e.target.value); clearStatus(); }}
                 onFocus={() => setSelectedIndex(1)}
+                readOnly={virtualKeyboardOpen && virtualKeyboardField === 1}
                 className={clsx(
                   "text-xl font-bold bg-transparent outline-none w-full min-w-0 text-gray-300 truncate focus:border-b-2 focus:border-blue-500"
                 )}
@@ -226,6 +273,7 @@ const MailPanel = ({
               value={subjectValue}
               onChange={(e) => { setSubjectValue(e.target.value); clearStatus(); }}
               onFocus={() => setSelectedIndex(2)}
+              readOnly={virtualKeyboardOpen && virtualKeyboardField === 2}
               className={clsx(
                 "w-full rounded shadow-card shadow-blue-700 bg-white px-4 py-3 text-center text-2xl text-black font-bold outline-none truncatefocus:border-b-2 focus:border-blue-500"
               )}
@@ -237,6 +285,7 @@ const MailPanel = ({
               value={messageValue}
               onChange={(e) => { setMessageValue(e.target.value); clearStatus(); }}
               onFocus={() => setSelectedIndex(3)}
+              readOnly={virtualKeyboardOpen && virtualKeyboardField === 3}
               className={clsx(
                 "mt-4 h-full text-2xl font-bold overflow-y-auto overflow-x-hidden overscroll-contain w-full resize-none bg-transparent outline-none text-inherit focus:border-b-2 focus:border-blue-500"
               )}
@@ -274,6 +323,18 @@ const MailPanel = ({
           </button>
         </div>
       </div>
+
+      <VirtualKeyboard
+        visible={virtualKeyboardOpen}
+        value={virtualKeyboardValue}
+        onChange={setVirtualKeyboardValue}
+        onClose={() => {
+          setVirtualKeyboardOpen(false);
+          setVirtualKeyboardField(null);
+        }}
+        title={virtualKeyboardTitle}
+        disablePhysicalKeyboard
+      />
     </div>
   );
 };
