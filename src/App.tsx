@@ -20,7 +20,7 @@ const App = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const setInputDevice = useAppStore((s) => s.setInputDevice)
 
-  // Detección inicial y al conectar/desconectar mandos
+  // Initial detection and on gamepad connect/disconnect
   useEffect(() => {
     const detectConnected = () => {
       if (typeof navigator === 'undefined' || !navigator.getGamepads) return

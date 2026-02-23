@@ -32,7 +32,7 @@ export interface VirtualKeyboardProps {
   onClose: () => void;
   visible: boolean;
   title?: string;
-  /** Si true, el teclado físico no escribe y no se muestra (inputs readonly, bloqueo keydown). */
+  /** If true, physical keyboard input is disabled and hidden (inputs readonly, keydown blocked). */
   disablePhysicalKeyboard?: boolean;
 }
 
@@ -52,7 +52,7 @@ const VirtualKeyboard = ({
   const maxCol = row ? row.length - 1 : 0;
   const col = Math.min(selectedCol, maxCol);
 
-  // Navegación con joystick/dpad (prioridad alta para capturar cuando está abierto)
+  // Joystick/dpad navigation (high priority to capture when open)
   useGamepad(
     "virtual-keyboard",
     visible
@@ -120,13 +120,13 @@ const VirtualKeyboard = ({
     { priority: 200 }
   );
 
-  // Sincronizar col cuando cambia la fila (por si la nueva fila tiene menos columnas)
+  // Sync col when row changes (in case the new row has fewer columns)
   useEffect(() => {
     const max = GRID[selectedRow]?.length ?? 0;
     setSelectedCol((c) => (max ? Math.min(c, max - 1) : 0));
   }, [selectedRow]);
 
-  // Bloquear teclado físico y atrapar foco cuando está visible
+  // Block physical keyboard and trap focus when visible
   useEffect(() => {
     if (!visible || !disablePhysicalKeyboard) return;
     overlayRef.current?.focus();
@@ -190,7 +190,7 @@ const VirtualKeyboard = ({
           ))}
         </div>
         <p className="mt-3 text-center text-sm text-gray-400 md:mt-4">
-          D-Pad / Stick: mover · A: escribir · B: cerrar
+          D-Pad / Stick: move · A: type · B: close
         </p>
       </div>
     </div>

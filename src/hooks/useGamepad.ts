@@ -6,15 +6,15 @@ import {
 } from '../core/GamepadController';
 
 /**
- * Registra bindings de gamepad con el controlador global para el contexto dado.
- * Los handlers leen del ref actual, así que pueden usar el estado más reciente.
- * Al desmontar se desregistra el contexto.
+ * Registers gamepad bindings with the global controller for the given context.
+ * Handlers read from the current ref, so they can use the latest state.
+ * On unmount the context is unregistered.
  *
- * Acciones disponibles (Xbox / PlayStation):
+ * Available actions (Xbox / PlayStation):
  * - a, b, x, y (A/Cross, B/Circle, X/Square, Y/Triangle)
- * - lb, rb, lt, rt (bumpers y triggers)
+ * - lb, rb, lt, rt (bumpers and triggers)
  * - back, start (View/Share, Menu/Options)
- * - l3, r3 (clic de sticks)
+ * - l3, r3 (stick click)
  * - dpad-up, dpad-down, dpad-left, dpad-right
  * - stick-left-up, stick-left-down, stick-left-left, stick-left-right
  * - stick-right-up, stick-right-down, stick-right-left, stick-right-right

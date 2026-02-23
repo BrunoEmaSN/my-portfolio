@@ -1,9 +1,9 @@
 /**
- * Controlador centralizado de gamepad (mando Xbox/PlayStation).
+ * Centralized gamepad controller (Xbox/PlayStation).
  *
- * Usa la Gamepad API estándar (W3C): Xbox y PlayStation se mapean igual.
- * Mismo patrón que KeyboardController: singleton, prioridad, bindings por acción.
- * Solo dispara en "press" (transición a pulsado), no mientras se mantiene.
+ * Uses the standard Gamepad API (W3C): Xbox and PlayStation map the same.
+ * Same pattern as KeyboardController: singleton, priority, bindings per action.
+ * Fires on "press" (transition to pressed), not while held.
  */
 
 import { useAppStore, getInputDeviceFromGamepadId } from '../store';
@@ -11,12 +11,12 @@ import { useAppStore, getInputDeviceFromGamepadId } from '../store';
 export type GamepadActionHandler = () => void | boolean;
 
 export interface GamepadBindings {
-  /** Acciones: a, b, x, y, lb, rb, lt, rt, back, start, l3, r3, dpad-up, dpad-down, dpad-left, dpad-right, stick-left-up, stick-left-down, stick-left-left, stick-left-right, stick-right-up, ... */
+  /** Actions: a, b, x, y, lb, rb, lt, rt, back, start, l3, r3, dpad-up, dpad-down, dpad-left, dpad-right, stick-left-up, stick-left-down, stick-left-left, stick-left-right, stick-right-up, ... */
   [action: string]: GamepadActionHandler;
 }
 
 export interface GamepadRegisterOptions {
-  /** Mayor prioridad = se evalúa antes. Por defecto 50. */
+  /** Higher priority = evaluated first. Default 50. */
   priority?: number;
 }
 
@@ -25,7 +25,7 @@ interface ContextEntry {
   priority: number;
 }
 
-/** Índices estándar W3C: igual para Xbox y PlayStation (Cross=A, Circle=B, etc.). */
+/** Standard W3C indices: same for Xbox and PlayStation (Cross=A, Circle=B, etc.). */
 const BUTTON_TO_ACTION: Record<number, string> = {
   0: 'a',        // A / Cross
   1: 'b',        // B / Circle
@@ -45,7 +45,7 @@ const BUTTON_TO_ACTION: Record<number, string> = {
   15: 'dpad-right',
 };
 
-/** Eje → acciones: [negativo, positivo]. axes[1] tiene -1 = arriba. */
+/** Axis → actions: [negative, positive]. axes[1] has -1 = up. */
 const AXIS_ACTIONS: Record<number, [string, string]> = {
   0: ['stick-left-left', 'stick-left-right'],   // Left X
   1: ['stick-left-up', 'stick-left-down'],      // Left Y (-1 = up)
@@ -55,7 +55,7 @@ const AXIS_ACTIONS: Record<number, [string, string]> = {
 
 const DEFAULT_PRIORITY = 50;
 const AXIS_THRESHOLD = 0.5;
-/** Mientras el stick se mantiene inclinado, repetir la acción cada N ms. */
+/** While stick is held tilted, repeat the action every N ms. */
 const STICK_REPEAT_MS = 100;
 
 export class GamepadController {
@@ -65,7 +65,7 @@ export class GamepadController {
   private rafId: number | null = null;
   private prevButtons: (boolean | number)[][] = [];
   private prevAxes: number[][] = [];
-  /** Por gamepad: último dispatch por eje y dirección para repeat continuo. */
+  /** Per gamepad: last dispatch time per axis and direction for continuous repeat. */
   private stickLastDispatch: Record<string, number> = {};
 
   private constructor() {}
@@ -144,7 +144,7 @@ export class GamepadController {
       const prevB = this.prevButtons[g] ?? [];
       const device = getInputDeviceFromGamepadId(pad.id);
 
-      // Botones
+      // Buttons
       for (let i = 0; i < pad.buttons.length; i++) {
         const action = BUTTON_TO_ACTION[i];
         if (!action) continue;
@@ -156,7 +156,7 @@ export class GamepadController {
         }
       }
 
-      // Ejes (sticks): repeat continuo mientras se mantiene inclinado
+      // Axes (sticks): continuous repeat while held tilted
       for (let i = 0; i < pad.axes.length; i++) {
         const actions = AXIS_ACTIONS[i];
         if (!actions) continue;

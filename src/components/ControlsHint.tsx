@@ -1,11 +1,11 @@
 import clsx from "clsx"
 
 export interface ControlsHintProps {
-  /** Lista de teclas o botones a mostrar, p. ej. ['W', 'S', 'ENTER'] o ['D-Pad', 'A'] */
+  /** List of keys or buttons to show, e.g. ['W', 'S', 'ENTER'] or ['D-Pad', 'A'] */
   items: string[];
-  /** Etiqueta previa a la lista. Por defecto "CONTROLS:" */
+  /** Label before the list. Default "CONTROLS:". */
   label?: string;
-  /** No mostrar en móvil (ocultar en viewport pequeño). Por defecto true. */
+  /** Hide on mobile (small viewport). Default true. */
   hideOnMobile?: boolean;
   className?: string;
 }

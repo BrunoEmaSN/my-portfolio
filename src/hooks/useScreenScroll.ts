@@ -3,7 +3,7 @@ import { useGamepad } from "./useGamepad";
 
 const SCROLL_STEP = 100;
 const SCROLL_DURATION_MS = 480;
-/** Intervalo de repetición del scroll mientras se mantiene la tecla (ms). */
+/** Scroll repeat interval while key is held (ms). */
 const KEY_REPEAT_MS = 120;
 
 function easeOutCubic(t: number): number {
@@ -30,7 +30,7 @@ function smoothScrollTo(
 
 /**
  * Binds ArrowUp and ArrowDown to vertical scroll of the given container.
- * Scroll suave y lento (teclado y stick derecho). Low priority para no pisar menús.
+ * Smooth, slow scroll (keyboard and right stick). Low priority so it doesn't override menus.
  */
 export function useScreenScroll(
   containerRef: React.RefObject<HTMLElement | null>,
@@ -65,7 +65,7 @@ export function useScreenScroll(
   scrollUpRef.current = scrollUp;
   scrollDownRef.current = scrollDown;
 
-  // Teclado: scroll continuo mientras se mantienen ArrowUp / ArrowDown
+  // Keyboard: continuous scroll while ArrowUp / ArrowDown are held
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const keysHeldRef = useRef<{ ArrowUp: boolean; ArrowDown: boolean }>({ ArrowUp: false, ArrowDown: false });
 
@@ -102,7 +102,7 @@ export function useScreenScroll(
       const key = e.key as 'ArrowUp' | 'ArrowDown';
       keysHeldRef.current[key] = false;
       clearRepeat();
-      // Si la otra tecla sigue pulsada, reanudar repeat en esa dirección
+      // If the other key is still held, resume repeat in that direction
       if (keysHeldRef.current.ArrowUp) {
         scrollUpRef.current();
         intervalRef.current = setInterval(() => scrollUpRef.current(), KEY_REPEAT_MS);

@@ -8,7 +8,7 @@ import clsx from "clsx"
 import { useAppStore, type InputDevice } from "../store"
 import { ANIMATION_CONFIG } from "../../constants"
 
-/** Controles del menú principal por dispositivo: navegar y confirmar. */
+/** Main menu controls per device: navigate and confirm. */
 const HOME_CONTROLS: Record<InputDevice, string[]> = {
   keyboard: ["W", "S", "ENTER"],
   playstation: ["D-Pad ↑↓", "Cross"],

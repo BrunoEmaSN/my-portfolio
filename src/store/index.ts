@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 export type InputDevice = 'keyboard' | 'playstation' | 'xbox';
 
-/** Detecta si el id del gamepad es PlayStation o Xbox. */
+/** Detects whether the gamepad id is PlayStation or Xbox. */
 export function getInputDeviceFromGamepadId(id: string): 'playstation' | 'xbox' {
   const lower = id.toLowerCase();
   if (
@@ -16,13 +16,13 @@ export function getInputDeviceFromGamepadId(id: string): 'playstation' | 'xbox' 
   ) {
     return 'playstation';
   }
-  return 'xbox'; // Xbox, XINPUT, Microsoft o genérico
+  return 'xbox'; // Xbox, XINPUT, Microsoft or generic
 }
 
 interface AppState {
   selectedIndex: number;
   setSelectedIndex: (index: number) => void;
-  /** Último dispositivo de entrada usado: teclado, mando PlayStation o Xbox. */
+  /** Last input device used: keyboard, PlayStation or Xbox controller. */
   inputDevice: InputDevice;
   setInputDevice: (device: InputDevice) => void;
 }

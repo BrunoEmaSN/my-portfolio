@@ -10,14 +10,14 @@ import { useGamepad } from "../hooks/useGamepad"
 import ControlsHint from "../components/ControlsHint"
 import { useAppStore, type InputDevice } from "../store"
 
-/** Controles: volver + scroll. */
+/** Controls: back + scroll. */
 const LAYOUT_CONTROLS: Record<InputDevice, string[]> = {
   keyboard: ["ESC", "↑", "↓"],
   playstation: ["Circle", "Share", "Stick der. ↑↓"],
   xbox: ["B", "View", "Stick der. ↑↓"],
 }
 
-/** Controles cuando la pantalla tiene movimiento horizontal (p. ej. About Me): volver + scroll + A/D o stick izq. */
+/** Controls when the screen has horizontal movement (e.g. About Me): back + scroll + A/D or left stick. */
 const LAYOUT_CONTROLS_WITH_HORIZONTAL: Record<InputDevice, string[]> = {
   keyboard: ["ESC", "A", "D", "↑", "↓"],
   playstation: ["Circle", "Share", "Stick izq. ←→", "Stick der. ↑↓"],
