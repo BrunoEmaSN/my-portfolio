@@ -5,15 +5,22 @@ import Menu from "../components/Menu"
 import ControlsHint from "../components/ControlsHint"
 import type { MobileProps } from "../types"
 import clsx from "clsx"
-import { useAppStore } from "../store"
+import { useAppStore, type InputDevice } from "../store"
 import { ANIMATION_CONFIG } from "../../constants"
+
+/** Controles del menú principal por dispositivo: navegar y confirmar. */
+const HOME_CONTROLS: Record<InputDevice, string[]> = {
+  keyboard: ["W", "S", "ENTER"],
+  playstation: ["D-Pad ↑↓", "Cross"],
+  xbox: ["D-Pad ↑↓", "A"],
+}
 
 const HomeScreen = ({ isMobile }: MobileProps) => {
   const menuRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const revealBlockRef = useRef<HTMLDivElement>(null)
   const isInitialized = useRef(false)
-  const {selectedIndex} = useAppStore();
+  const { selectedIndex, inputDevice } = useAppStore();
 
   useLayoutEffect(() => {
     if (isInitialized.current) return
@@ -57,7 +64,7 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
         <Menu />
       </div>
       {!isMobile && (
-        <ControlsHint items={["W", "S", "ENTER"]} />
+        <ControlsHint items={HOME_CONTROLS[inputDevice]} />
       )}
     </main>
   )

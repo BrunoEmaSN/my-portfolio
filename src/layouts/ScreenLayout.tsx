@@ -1,15 +1,35 @@
 import clsx from "clsx"
 import { useRef } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { ANIMATION_CONFIG, ROUTES } from "../../constants"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { backAudioEffect } from "../helpers/audioContext"
 import { useKeyboard } from "../hooks/useKeyboard"
 import { useGamepad } from "../hooks/useGamepad"
+import ControlsHint from "../components/ControlsHint"
+import { useAppStore, type InputDevice } from "../store"
+
+/** Controles: volver + scroll. */
+const LAYOUT_CONTROLS: Record<InputDevice, string[]> = {
+  keyboard: ["ESC", "↑", "↓"],
+  playstation: ["Circle", "Share", "Stick der. ↑↓"],
+  xbox: ["B", "View", "Stick der. ↑↓"],
+}
+
+/** Controles cuando la pantalla tiene movimiento horizontal (p. ej. About Me): volver + scroll + A/D o stick izq. */
+const LAYOUT_CONTROLS_WITH_HORIZONTAL: Record<InputDevice, string[]> = {
+  keyboard: ["ESC", "A", "D", "↑", "↓"],
+  playstation: ["Circle", "Share", "Stick izq. ←→", "Stick der. ↑↓"],
+  xbox: ["B", "View", "Stick izq. ←→", "Stick der. ↑↓"],
+}
 
 const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMobile: boolean }) => {
     const navigate = useNavigate()
+    const location = useLocation()
+    const inputDevice = useAppStore((s) => s.inputDevice)
+    const hasHorizontal = location.pathname === ROUTES.ABOUT_ME
+    const layoutControls = hasHorizontal ? LAYOUT_CONTROLS_WITH_HORIZONTAL : LAYOUT_CONTROLS
     const layoutRef = useRef<HTMLDivElement>(null)
     const outletWrapperRef = useRef<HTMLDivElement>(null)
 
@@ -72,9 +92,7 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                         {children}
                     </div>
                     {!isMobile && (
-                        <div className="fixed bottom-5 right-5 bg-black text-white p-4 rounded-lg text-xs font-mono opacity-50">
-                            CONTROLS: [ESC] return to menu
-                        </div>
+                        <ControlsHint items={layoutControls[inputDevice]} />
                     )}
                 </div>
             </div>
