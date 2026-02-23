@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import { ANIMATION_CONFIG } from '../../constants';
 import { menuAudioEffect } from '../helpers/audioContext';
 import { useKeyboard } from '../hooks/useKeyboard';
+import { useGamepad } from '../hooks/useGamepad';
 
 export interface ListMenuProps {
   title?: string;
@@ -38,23 +39,34 @@ const ListMenu = ({
     onSelect?.(index);
   };
 
+  const movePrev = () => {
+    menuAudioEffect();
+    const prev = (selectedIndex - 1 + items.length) % items.length;
+    handleSelect(prev);
+    return true;
+  };
+  const moveNext = () => {
+    menuAudioEffect();
+    const next = (selectedIndex + 1) % items.length;
+    handleSelect(next);
+    return true;
+  };
+
   useKeyboard(
+    'list-menu',
+    items.length === 0 ? {} : { w: movePrev, s: moveNext },
+    { priority: 70 }
+  );
+
+  useGamepad(
     'list-menu',
     items.length === 0
       ? {}
       : {
-          w: () => {
-            menuAudioEffect();
-            const prev = (selectedIndex - 1 + items.length) % items.length;
-            handleSelect(prev);
-            return true;
-          },
-          s: () => {
-            menuAudioEffect();
-            const next = (selectedIndex + 1) % items.length;
-            handleSelect(next);
-            return true;
-          },
+          'dpad-up': movePrev,
+          'dpad-down': moveNext,
+          'stick-left-up': movePrev,
+          'stick-left-down': moveNext,
         },
     { priority: 70 }
   );

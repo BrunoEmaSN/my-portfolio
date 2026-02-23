@@ -10,6 +10,7 @@ import { menuAudioEffect } from "../helpers/audioContext"
 import { AboutMeProvider, useAboutMe } from "../context/AboutMeContext"
 import { useScreenScroll } from "../hooks/useScreenScroll"
 import { useKeyboard } from "../hooks/useKeyboard"
+import { useGamepad } from "../hooks/useGamepad"
 
 const size = {
   sm: 100,
@@ -48,7 +49,30 @@ const AboutMeSection = () => {
       },
     },
     { priority: 70 }
-  )
+  );
+
+  useGamepad(
+    'about-me',
+    {
+      'dpad-left': () => {
+        goLeft();
+        return true;
+      },
+      'dpad-right': () => {
+        goRight();
+        return true;
+      },
+      'stick-left-left': () => {
+        goLeft();
+        return true;
+      },
+      'stick-left-right': () => {
+        goRight();
+        return true;
+      },
+    },
+    { priority: 70 }
+  );
 
   useGSAP(() => {
     const ctx = gsap.context(() => {

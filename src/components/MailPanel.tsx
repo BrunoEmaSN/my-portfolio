@@ -6,6 +6,7 @@ import { ANIMATION_CONFIG } from "../../constants";
 import { HiMail, HiUser } from "react-icons/hi";
 import { menuAudioEffect } from "../helpers/audioContext";
 import { useKeyboard } from "../hooks/useKeyboard";
+import { useGamepad } from "../hooks/useGamepad";
 import { Mark } from "./Mark";
 
 export interface MailFormData {
@@ -59,35 +60,49 @@ const MailPanel = ({
     selectedTargetRef.current = focusableRefs.current[selectedIndex] ?? null;
   }, [selectedIndex]);
 
+  const movePrev = () => {
+    menuAudioEffect();
+    const prev = (selectedIndex - 1 + FOCUSABLE_COUNT) % FOCUSABLE_COUNT;
+    setSelectedIndex(prev);
+    focusAt(prev);
+    return true;
+  };
+  const moveNext = () => {
+    menuAudioEffect();
+    const next = (selectedIndex + 1) % FOCUSABLE_COUNT;
+    setSelectedIndex(next);
+    focusAt(next);
+    return true;
+  };
+  const confirmForm = () => {
+    if (selectedIndex === 4) {
+      handleSubmit();
+      return true;
+    }
+    focusAt(selectedIndex);
+    return true;
+  };
+
   useKeyboard(
     'contact-form',
     {
-      w: () => {
-        menuAudioEffect();
-        const prev = (selectedIndex - 1 + FOCUSABLE_COUNT) % FOCUSABLE_COUNT;
-        setSelectedIndex(prev);
-        focusAt(prev);
-        return true;
-      },
-      s: () => {
-        menuAudioEffect();
-        const next = (selectedIndex + 1) % FOCUSABLE_COUNT;
-        setSelectedIndex(next);
-        focusAt(next);
-        return true;
-      },
+      w: movePrev,
+      s: moveNext,
       Enter: (e) => {
-        if (selectedIndex === 4) {
-          e.preventDefault();
-          handleSubmit();
-          return true;
-        }
-        focusAt(selectedIndex);
-        return true;
+        if (selectedIndex === 4) e.preventDefault();
+        return confirmForm();
       },
     },
     { priority: 70, ignoreInInputs: false }
   );
+
+  useGamepad('contact-form', {
+    'dpad-up': movePrev,
+    'dpad-down': moveNext,
+    'stick-left-up': movePrev,
+    'stick-left-down': moveNext,
+    a: confirmForm,
+  }, { priority: 70 });
 
   const handleSubmit = () => {
     setErrorMessage("");

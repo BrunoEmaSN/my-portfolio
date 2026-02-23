@@ -77,14 +77,14 @@ export const Mark = ({ targetRef, targetKey = 0 }: MarkProps) => {
         timeline.to("#mark", {
             x: 10,
             y: -10,
-            duration: ANIMATION_CONFIG.fast,
+            duration: ANIMATION_CONFIG.fast / 2,
             ease: ANIMATION_CONFIG.ease,
         });
 
         timeline.to("#mark", {
             x: 0,
             y: 0,
-            duration: ANIMATION_CONFIG.fast,
+            duration: ANIMATION_CONFIG.fast / 2,
             ease: ANIMATION_CONFIG.ease,
         });
     }, []);

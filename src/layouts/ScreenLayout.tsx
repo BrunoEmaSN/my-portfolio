@@ -6,29 +6,36 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { backAudioEffect } from "../helpers/audioContext"
 import { useKeyboard } from "../hooks/useKeyboard"
+import { useGamepad } from "../hooks/useGamepad"
 
 const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMobile: boolean }) => {
     const navigate = useNavigate()
     const layoutRef = useRef<HTMLDivElement>(null)
     const outletWrapperRef = useRef<HTMLDivElement>(null)
 
+    const goBack = () => {
+        backAudioEffect();
+        gsap.fromTo(layoutRef.current, { opacity: 1, scale: 1 }, {
+            opacity: 0,
+            scale: 1.3,
+            duration: ANIMATION_CONFIG.fast,
+            ease: ANIMATION_CONFIG.ease,
+            onComplete: () => {
+                navigate(ROUTES.HOME)
+            }
+        });
+        return true;
+    };
+
     useKeyboard(
         'screen-layout',
-        {
-            Escape: () => {
-                backAudioEffect();
-                gsap.fromTo(layoutRef.current, { opacity: 1, scale: 1 }, {
-                    opacity: 0,
-                    scale: 1.3,
-                    duration: ANIMATION_CONFIG.fast,
-                    ease: ANIMATION_CONFIG.ease,
-                    onComplete: () => {
-                        navigate(ROUTES.HOME)
-                    }
-                });
-                return true;
-            }
-        },
+        { Escape: goBack },
+        { priority: 100 }
+    );
+
+    useGamepad(
+        'screen-layout',
+        { back: goBack, b: goBack },
         { priority: 100 }
     )
 

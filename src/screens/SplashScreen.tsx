@@ -7,6 +7,7 @@ import MainTitle from '../components/MainTitle';
 import { ANIMATION_CONFIG, ROUTES } from '../../constants';
 import { startAudioEffect } from '../helpers/audioContext';
 import { useKeyboard } from '../hooks/useKeyboard';
+import { useGamepad } from '../hooks/useGamepad';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
   const navigate = useNavigate();
@@ -38,6 +39,41 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
         startTransition();
         return true;
       },
+    },
+    { priority: 85 }
+  );
+
+  const anyButton = () => {
+    startTransition();
+    return true;
+  };
+  useGamepad(
+    'splash',
+    {
+      a: anyButton,
+      b: anyButton,
+      x: anyButton,
+      y: anyButton,
+      lb: anyButton,
+      rb: anyButton,
+      lt: anyButton,
+      rt: anyButton,
+      back: anyButton,
+      start: anyButton,
+      l3: anyButton,
+      r3: anyButton,
+      'dpad-up': anyButton,
+      'dpad-down': anyButton,
+      'dpad-left': anyButton,
+      'dpad-right': anyButton,
+      'stick-left-up': anyButton,
+      'stick-left-down': anyButton,
+      'stick-left-left': anyButton,
+      'stick-left-right': anyButton,
+      'stick-right-up': anyButton,
+      'stick-right-down': anyButton,
+      'stick-right-left': anyButton,
+      'stick-right-right': anyButton,
     },
     { priority: 85 }
   );

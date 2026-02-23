@@ -7,6 +7,7 @@ import { navItems, ROUTES } from '../../constants';
 import { useAppStore } from '../store';
 import { backAudioEffect, menuAudioEffect, startAudioEffect } from '../helpers/audioContext';
 import { useKeyboard } from '../hooks/useKeyboard';
+import { useGamepad } from '../hooks/useGamepad';
 
 const MENU_CONTEXT_ID = 'menu';
 
@@ -21,42 +22,62 @@ const Menu = () => {
   const menuContainerRef = useRef<HTMLUListElement>(null);
   const hasAnimatedRef = useRef(false);
 
+  const movePrev = () => {
+    menuAudioEffect();
+    const newIndex = selectedIndex > 0 ? selectedIndex - 1 : navItems.length - 1;
+    setSelectedIndex(newIndex);
+    return true;
+  };
+  const moveNext = () => {
+    menuAudioEffect();
+    const newIndex = selectedIndex < navItems.length - 1 ? selectedIndex + 1 : 0;
+    setSelectedIndex(newIndex);
+    return true;
+  };
+  const confirm = () => {
+    if (selectedIndex === 4) {
+      backAudioEffect();
+    } else {
+      startAudioEffect();
+    }
+    const selectedItem = navItems[selectedIndex];
+    gsap.to(menuContainerRef.current, {
+      xPercent: 100,
+      duration: 0.3,
+      ease: 'power3.in',
+      onComplete: () => {
+        navigate(selectedItem.path);
+        if (selectedIndex === 4) setSelectedIndex(0);
+      },
+    });
+    return true;
+  };
+
   useKeyboard(
     MENU_CONTEXT_ID,
     isMenu
       ? {
-          w: () => {
-            menuAudioEffect();
-            const newIndex = selectedIndex > 0 ? selectedIndex - 1 : navItems.length - 1;
-            setSelectedIndex(newIndex);
-            return true;
-          },
-          s: () => {
-            menuAudioEffect();
-            const newIndex = selectedIndex < navItems.length - 1 ? selectedIndex + 1 : 0;
-            setSelectedIndex(newIndex);
-            return true;
-          },
+          w: movePrev,
+          s: moveNext,
           Enter: (event) => {
             event.preventDefault();
             event.stopPropagation();
-            if (selectedIndex === 4) {
-              backAudioEffect();
-            } else {
-              startAudioEffect();
-            }
-            const selectedItem = navItems[selectedIndex];
-            gsap.to(menuContainerRef.current, {
-              xPercent: 100,
-              duration: 0.3,
-              ease: 'power3.in',
-              onComplete: () => {
-                navigate(selectedItem.path);
-                if (selectedIndex === 4) setSelectedIndex(0);
-              },
-            });
-            return true;
+            return confirm();
           },
+        }
+      : {},
+    { priority: 90 }
+  );
+
+  useGamepad(
+    MENU_CONTEXT_ID,
+    isMenu
+      ? {
+          'dpad-up': movePrev,
+          'dpad-down': moveNext,
+          'stick-left-up': movePrev,
+          'stick-left-down': moveNext,
+          a: confirm,
         }
       : {},
     { priority: 90 }
