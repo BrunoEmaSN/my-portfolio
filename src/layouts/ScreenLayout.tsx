@@ -92,7 +92,7 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                         {children}
                     </div>
                     {!isMobile && (
-                        <ControlsHint items={layoutControls[inputDevice]} />
+                        <ControlsHint items={layoutControls[inputDevice]} inputDevice={inputDevice} />
                     )}
                 </div>
             </div>

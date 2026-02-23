@@ -64,7 +64,7 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
         <Menu />
       </div>
       {!isMobile && (
-        <ControlsHint items={HOME_CONTROLS[inputDevice]} />
+        <ControlsHint items={HOME_CONTROLS[inputDevice]} inputDevice={inputDevice} />
       )}
     </main>
   )
