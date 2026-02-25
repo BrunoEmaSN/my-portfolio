@@ -77,6 +77,7 @@ const MoonPhaseIndicator = ({
 
 const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
   const waveRef = useRef<SVGSVGElement>(null);
+  const wave2Ref = useRef<SVGSVGElement>(null);
   const { date, dayLabel, subtitle, limit, backgroundLabel, moonPhase, moonWaxing } = useWeekdayBanner();
 
   useGSAP(
@@ -87,6 +88,17 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
       gsap.to(el, {
         xPercent: -50,
         duration: 4,
+        ease: "none",
+        repeat: -1,
+        overwrite: "auto",
+      });
+      if (!wave2Ref.current) return;
+      const el2 = wave2Ref.current;
+      gsap.set(el2, { force3D: true });
+      gsap.to(el2, {
+        xPercent: -50,
+        duration: 7,
+        delay: 0.5,
         ease: "none",
         repeat: -1,
         overwrite: "auto",
@@ -113,13 +125,43 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
         {backgroundLabel}
       </span>
       <div className={clsx(
-          "absolute bottom-0 left-0 w-full h-20 z-10 overflow-hidden"
+          "absolute bottom-0 left-0 w-full h-20 z-10 overflow-hidden",
+          "mask-r-from-90% mask-l-from-90% mask-b-from-80% mask-radial-from-70% mask-radial-to-85%"
+        )}>
+        <svg
+          ref={wave2Ref}
+          className={clsx(
+            backgroundLabel === "DARK HOUR" && "text-green-900/70",
+            backgroundLabel !== "DARK HOUR" && "text-blue-900/70",
+            "absolute bottom-0 left-0 h-full"
+          )}
+          style={{
+            willChange: "transform",
+            transform: "translateZ(0)",
+            width: "200%",
+            minWidth: "200%",
+          }}
+          viewBox="0 0 2000 40"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden
+        >
+          <path
+            fill="currentColor"
+            d="M0,20 Q250,8 500,20 Q750,32 1000,20 Q1250,8 1500,20 Q1750,32 2000,20 L2000,40 L0,40 Z"
+          />
+        </svg>
+      </div>
+      <div className={clsx(
+          "absolute bottom-0 left-0 w-full h-20 z-10 overflow-hidden -translate-y-1.5",
+          "mask-r-from-90% mask-l-from-10% mask-b-from-80% mask-radial-from-70% mask-radial-to-85%"
         )}>
         <svg
           ref={waveRef}
           className={clsx(
-            backgroundLabel === "DARK HOUR" && "text-green-700/80",
-            "absolute bottom-0 left-0 h-full text-blue-600/80"
+            backgroundLabel === "DARK HOUR" && "text-green-700/90",
+            backgroundLabel !== "DARK HOUR" && "text-blue-600/90",
+            "absolute bottom-0 left-0 h-full"
           )}
           style={{
             willChange: "transform",

@@ -36,14 +36,14 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
     }, {
       xPercent: 100,
       duration: ANIMATION_CONFIG.fast,
-      ease: "power3.out",
+      ease: ANIMATION_CONFIG.ease,
     })
     gsap.fromTo(footerRef.current, {
       y: 100,
     }, {
       y: 0,
       duration: ANIMATION_CONFIG.fast,
-      ease: "power3.out",
+      ease: ANIMATION_CONFIG.ease,
     })
   }, { scope: containerRef, dependencies: [] })
 

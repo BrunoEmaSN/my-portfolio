@@ -25,6 +25,8 @@ interface AppState {
   /** Last input device used: keyboard, PlayStation or Xbox controller. */
   inputDevice: InputDevice;
   setInputDevice: (device: InputDevice) => void;
+  setVisibleWeekdayBanner: (visible: boolean) => void;
+  visibleWeekdayBanner: boolean;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -32,4 +34,6 @@ export const useAppStore = create<AppState>((set) => ({
   setSelectedIndex: (index: number) => set({ selectedIndex: index }),
   inputDevice: 'keyboard',
   setInputDevice: (device: InputDevice) => set({ inputDevice: device }),
+  visibleWeekdayBanner: true,
+  setVisibleWeekdayBanner: (visible: boolean) => set({ visibleWeekdayBanner: visible }),
 }));

@@ -15,7 +15,7 @@ const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMenu = location.pathname === ROUTES.HOME;
-  const { selectedIndex, setSelectedIndex } = useAppStore();
+  const { selectedIndex, setSelectedIndex, visibleWeekdayBanner, setVisibleWeekdayBanner } = useAppStore();
 
   const linkRefs = useRef<HTMLButtonElement[]>([]);
   const menuItemsRef = useRef<HTMLLIElement[]>([]);
@@ -41,6 +41,9 @@ const Menu = () => {
       startAudioEffect();
     }
     const selectedItem = navItems[selectedIndex];
+    if(selectedIndex === 4) {
+      setVisibleWeekdayBanner(false);
+    }
     gsap.to(menuContainerRef.current, {
       xPercent: 100,
       duration: 0.3,
@@ -100,6 +103,10 @@ const Menu = () => {
         hasAnimatedRef.current = true;
       },
     });
+
+    if(!visibleWeekdayBanner) {
+      setVisibleWeekdayBanner(true);
+    }
   }, { scope: menuContainerRef });
 
   return (

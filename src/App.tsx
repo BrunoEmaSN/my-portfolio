@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { Routes, Route, Outlet } from "react-router-dom"
 import { useMediaQuery } from "react-responsive"
 import { ScrollTrigger, SplitText } from "gsap/all"
@@ -8,17 +8,19 @@ import AboutMeScreen from "./screens/AboutMeScreen"
 import ExperiencesScreen from "./screens/ExperiencesScreen"
 import TestimonialsScreen from "./screens/TestimonialsScreen"
 import ContactScreen from "./screens/ContactScreen"
-import { ROUTES } from "../constants"
+import { ANIMATION_CONFIG, ROUTES } from "../constants"
 import ScreenLayout from "./layouts/ScreenLayout"
 import HomeScreen from "./screens/HomeScreen"
 import WeekdayBanner from "./components/WeekdayBanner"
 import { useAppStore, getInputDeviceFromGamepadId } from "./store"
+import { useGSAP } from "@gsap/react"
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
 const App = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
-  const setInputDevice = useAppStore((s) => s.setInputDevice)
+  const {setInputDevice, visibleWeekdayBanner} = useAppStore((s) => s)
+  const weekdayBannerRef = useRef<HTMLDivElement>(null)
 
   // Initial detection and on gamepad connect/disconnect
   useEffect(() => {
@@ -57,10 +59,19 @@ const App = () => {
     }
   }, [setInputDevice])
 
+  useGSAP(() => {
+    if (!weekdayBannerRef.current) return
+    gsap.to(weekdayBannerRef.current, {
+      y: visibleWeekdayBanner ? 0 : -150,
+      duration: ANIMATION_CONFIG.fast,
+      ease: ANIMATION_CONFIG.ease,
+    })
+  }, { scope: weekdayBannerRef, dependencies: [visibleWeekdayBanner] })
+
   return (
     <div className="bg-black overflow-hidden relative">
-      <div className={("absolute w-full h-full hidden md:flex justify-end items-start")}>
-        <WeekdayBanner className="max-w-md" />
+      <div ref={weekdayBannerRef} className={("absolute w-full h-full hidden md:flex justify-end items-start z-50")}>
+        <WeekdayBanner  className="max-w-md" />
       </div>
       <Routes>
         <Route path={ROUTES.SPLASH}>
