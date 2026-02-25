@@ -1,22 +1,27 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useAppStore } from '../store';
+import { useNavigate } from 'react-router-dom';
 import type { MobileProps } from '../types';
 import MainTitle from '../components/MainTitle';
+import { ANIMATION_CONFIG, ROUTES } from '../../constants';
+import { startAudioEffect } from '../helpers/audioContext';
+import { useKeyboard } from '../hooks/useKeyboard';
+import { useGamepad } from '../hooks/useGamepad';
 
 const SplashScreen = ({ isMobile }: MobileProps) => {
-  const { closeSplash } = useAppStore();
+  const navigate = useNavigate();
   const splashRef = useRef<HTMLDivElement>(null);
   const revealBlockRef = useRef(null);
 
   const startTransition = () => {
+    startAudioEffect();
     gsap.to(splashRef.current, {
       xPercent: -100,
-      duration: 0.8,
+      duration: ANIMATION_CONFIG.duration,
       ease: 'power3.in',
       onComplete: () => {
-        closeSplash();
+        navigate(ROUTES.HOME);
       },
     });
   };
@@ -24,6 +29,50 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   const handleClick = () => {
     startTransition();
   };
+
+  useKeyboard(
+    'splash',
+    {
+      Enter: (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        startTransition();
+        return true;
+      },
+    },
+    { priority: 85 }
+  );
+
+  const anyButton = () => {
+    startTransition();
+    return true;
+  };
+  useGamepad(
+    'splash',
+    {
+      a: anyButton,
+      b: anyButton,
+      x: anyButton,
+      y: anyButton,
+      lb: anyButton,
+      rb: anyButton,
+      lt: anyButton,
+      rt: anyButton,
+      back: anyButton,
+      start: anyButton,
+      l3: anyButton,
+      r3: anyButton,
+      'dpad-up': anyButton,
+      'dpad-down': anyButton,
+      'dpad-left': anyButton,
+      'dpad-right': anyButton,
+      'stick-right-up': anyButton,
+      'stick-right-down': anyButton,
+      'stick-right-left': anyButton,
+      'stick-right-right': anyButton,
+    },
+    { priority: 85 }
+  );
 
   useGSAP(() => {
     if (!splashRef.current || !revealBlockRef.current) return;
@@ -45,44 +94,20 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
 
     tl.to(
       revealBlockRef.current,
-      { xPercent: 0, duration: 0.4, ease: "power3.out" }
+      { xPercent: 0, duration: ANIMATION_CONFIG.fast, ease: "power3.out" }
     )
       .to(
         revealBlockRef.current,
-        { xPercent: -100, duration: 0.4, ease: "power3.in" },
+        { xPercent: -100, duration: ANIMATION_CONFIG.fast, ease: "power3.in" },
         "+=0.2"
       );
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      startTransition();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, { scope: splashRef, dependencies: [closeSplash, isMobile] });
+  }, { scope: splashRef, dependencies: [navigate, isMobile] });
 
   return (
-    <div
-      onClick={handleClick}
-      ref={splashRef}
-      className="fixed inset-0 w-full h-screen flex items-center justify-start z-50 overflow-hidden"
-    >
-      <div className="overflow-hidden">
+    <div onClick={handleClick} ref={splashRef} className="cmp-splash">
+      <div className="cmp-splash__inner">
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />
-        <div
-          ref={revealBlockRef}
-          className="absolute top-1/2 -translate-y-1/2 w-full bg-blue-700 z-10 h-16 md:h-44 lg:h-128"
-          style={{
-            willChange: 'transform',
-          }}
-        />
+        <div ref={revealBlockRef} className="cmp-splash__reveal" style={{ willChange: 'transform' }} />
       </div>
     </div>
   );

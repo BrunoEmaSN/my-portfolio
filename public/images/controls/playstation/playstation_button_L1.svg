@@ -1,0 +1,50 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 12" width="20" height="12">
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m2.33 0c-1.39 0-2.31 0.92-2.31 2.31 0 0-0.84 9.68 9.52 9.68 10.36 0 9.49-9.68 9.49-9.68 0-1.39-0.92-2.31-2.31-2.31zm0 1.39h14.39q0.93-0.01 0.92 0.92v0.06 0.07c0.01 0.02 0.27 3.57-1.9 5.93q-2.06 2.22-6.2 2.23-4.14-0.01-6.21-2.23c-2.18-2.36-1.93-5.91-1.92-5.94v-0.06-0.06q-0.01-0.93 0.92-0.92z"/>
+		</clipPath>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,11.993,-19.047,0,9.524,0)">
+			<stop offset="0" stop-color="#5b5b5f"/>
+			<stop offset=".063" stop-color="#535356"/>
+			<stop offset=".302" stop-color="#373739"/>
+			<stop offset=".54" stop-color="#242425"/>
+			<stop offset=".774" stop-color="#181818"/>
+			<stop offset="1" stop-color="#141414"/>
+		</linearGradient>
+		<image  width="20" height="12" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMAQMAAABYwg+4AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYCQBAwABaAANoCQH3QAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+			<path d="m5.59 9.07v-7.02h1.47v5.74h3.49v1.28z"/>
+		</clipPath>
+		<image  width="20" height="12" id="img2" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMAQMAAABYwg+4AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYCQBAwABaAANoCQH3QAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp3">
+			<path d="m12.08 9.07v-4.85h-1.44v-0.96q0.46 0 0.76-0.07 0.31-0.07 0.51-0.23 0.19-0.15 0.29-0.38 0.1-0.23 0.13-0.53h1.13v7.02z"/>
+		</clipPath>
+		<image  width="20" height="12" id="img3" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMAQMAAABYwg+4AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYCQBAwABaAANoCQH3QAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: #ffffff } 
+	</style>
+	<g>
+		<g>
+			<g clip-path="url(#cp1)">
+				<path class="s0" d="m2.33 0c-1.39 0-2.31 0.92-2.31 2.31 0 0-0.84 9.68 9.52 9.68 10.36 0 9.49-9.68 9.49-9.68 0-1.39-0.92-2.31-2.31-2.31zm0 1.39h14.39q0.93-0.01 0.92 0.92v0.06 0.07c0.01 0.02 0.27 3.57-1.9 5.93q-2.06 2.22-6.2 2.23-4.14-0.01-6.21-2.23c-2.18-2.36-1.93-5.91-1.92-5.94v-0.06-0.06q-0.01-0.93 0.92-0.92z"/>
+				<use id="Capa 1 copy 2" href="#img1" x="0" y="0"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g clip-path="url(#cp2)">
+					<path class="s1" d="m5.59 9.07v-7.02h1.47v5.74h3.49v1.28z"/>
+					<use id="Capa 1 copy" href="#img2" x="0" y="0"/>
+				</g>
+			</g>
+			<g>
+				<g clip-path="url(#cp3)">
+					<path class="s1" d="m12.08 9.07v-4.85h-1.44v-0.96q0.46 0 0.76-0.07 0.31-0.07 0.51-0.23 0.19-0.15 0.29-0.38 0.1-0.23 0.13-0.53h1.13v7.02z"/>
+					<use id="Capa 1" href="#img3" x="0" y="0"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

@@ -1,8 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useAppStore } from '../store';
+import { ANIMATION_CONFIG } from '../../constants';
+import { menuAudioEffect } from '../helpers/audioContext';
+import { useKeyboard } from '../hooks/useKeyboard';
+import { useGamepad } from '../hooks/useGamepad';
 
 export interface ListMenuProps {
   title?: string;
@@ -25,38 +28,48 @@ const ListMenu = ({
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const prevSelectedRef = useRef(selectedIndex);
-  const { showMenu } = useAppStore();
 
   useGSAP(() => {
-    if (showMenu || !containerRef.current) return;
-    gsap.fromTo(containerRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.5, ease: 'power2.inOut' });
-  }, { scope: containerRef, dependencies: [showMenu] });
+    if (!containerRef.current) return;
+    gsap.fromTo(containerRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: ANIMATION_CONFIG.fast, delay: 0.5, ease: 'power2.inOut' });
+  }, { scope: containerRef, dependencies: [] });
 
   const handleSelect = (index: number) => {
     if (!isControlled) setInternalIndex(index);
     onSelect?.(index);
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (items.length === 0) return;
-    if (e.key === 'w' || e.key === 'W') {
-      e.preventDefault();
-      const prev = (selectedIndex - 1 + items.length) % items.length;
-      handleSelect(prev);
-    } else if (e.key === 's' || e.key === 'S') {
-      e.preventDefault();
-      const next = (selectedIndex + 1) % items.length;
-      handleSelect(next);
-    }
+  const movePrev = () => {
+    menuAudioEffect();
+    const prev = (selectedIndex - 1 + items.length) % items.length;
+    handleSelect(prev);
+    return true;
+  };
+  const moveNext = () => {
+    menuAudioEffect();
+    const next = (selectedIndex + 1) % items.length;
+    handleSelect(next);
+    return true;
   };
 
-  useEffect(() => {
-    if(showMenu) return;
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown, showMenu]);
+  useKeyboard(
+    'list-menu',
+    items.length === 0 ? {} : { w: movePrev, s: moveNext },
+    { priority: 70 }
+  );
 
-  // Transición GSAP al cambiar el ítem seleccionado (scale + ligero brillo)
+  useGamepad(
+    'list-menu',
+    items.length === 0
+      ? {}
+      : {
+          'dpad-up': movePrev,
+          'dpad-down': moveNext,
+        },
+    { priority: 70 }
+  );
+
+  /** GSAP transition on selected item change: scale down previous, scale up + bounce on next. */
   useGSAP(() => {
     if (prevSelectedRef.current === selectedIndex) return;
     const prev = prevSelectedRef.current;
@@ -68,8 +81,8 @@ const ListMenu = ({
       gsap.to(prevEl, { scale: 1, duration: 0.2, ease: 'power2.out' });
     }
     if (nextEl) {
-      gsap.fromTo(nextEl, { scale: 1 }, { scale: 1.02, duration: 0.2, ease: 'back.out(1.4)' });
-      gsap.to(nextEl, { scale: 1, duration: 0.25, delay: 0.1, ease: 'power2.out' });
+      gsap.fromTo(nextEl, { scale: 1 }, { scale: 1.02, duration: ANIMATION_CONFIG.fast, ease: 'back.out(1.4)' });
+      gsap.to(nextEl, { scale: 1, duration: ANIMATION_CONFIG.fast, delay: 0.1, ease: 'power2.out' });
     }
   }, { scope: buttonRefs, dependencies: [selectedIndex] });
 
@@ -78,26 +91,15 @@ const ListMenu = ({
       ref={containerRef}
       tabIndex={0}
       role="listbox"
-      aria-label={`${title}. Usa W y S para cambiar.`}
-      className={clsx("relative w-full max-w-xs outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-inset rounded", className)}
+      aria-label={`${title}. W/S to change.`}
+      className={clsx("cmp-list-menu", className)}
     >
-      <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(40vh,28rem)]">
-        {/* Título LIST con estilo 3D/retro (fijo, no hace scroll) */}
-        <h2
-          className="text-2xl font-black tracking-tight text-white uppercase mb-4 shrink-0"
-          style={{
-            textShadow:
-              '2px 2px 0 rgba(0,0,0,0.4), 1px 1px 0 rgba(0,0,0,0.3), 0 0 8px rgba(255,255,255,0.15)',
-          }}
-        >
+      <div className="cmp-list-menu__inner">
+        <h2 className="cmp-list-menu__title" style={{ textShadow: '2px 2px 0 rgb(0 0 0 / 0.4), 1px 1px 0 rgb(0 0 0 / 0.3), 0 0 8px rgb(255 255 255 / 0.15)' }}>
           {title}
         </h2>
 
-        {/* Contenedor con scroll independiente de la sección */}
-        <ul
-          className="space-y-1 w-full overflow-y-auto overflow-x-hidden overscroll-contain pr-1 min-h-0"
-          role="list"
-        >
+        <ul role="list">
           {items.map((label, index) => {
             const isSelected = index === selectedIndex;
             return (
@@ -108,12 +110,7 @@ const ListMenu = ({
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => handleSelect(index)}
-                  className={clsx(
-                    'text-center px-4 py-3 rounded transition-all duration-150 w-full',
-                    isSelected
-                      ? 'bg-white shadow-list-menu shadow-red-500 text-black font-bold text-lg'
-                      : 'bg-[#01003E]/50 text-cyan-400 font-bold text-base hover:bg-[#01003E] hover:text-white'
-                  )}
+                  className={clsx('cmp-list-menu__item', isSelected && 'is-selected')}
                 >
                   {label}
                 </button>

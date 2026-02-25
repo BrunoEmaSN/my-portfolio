@@ -1,0 +1,37 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 19" width="20" height="19">
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m9.53 0c-5.27 0-9.53 4.27-9.53 9.52 0 5.26 4.26 9.53 9.53 9.53 5.26 0 9.52-4.27 9.52-9.53 0-5.25-4.26-9.52-9.52-9.52zm0 1.53c4.41 0 8 3.58 8 7.99 0 4.42-3.59 8-8 8-4.42 0-8.01-3.58-8.01-8 0-4.41 3.59-7.99 8.01-7.99z"/>
+		</clipPath>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,19.049,-19.049,0,9.525,0)">
+			<stop offset="0" stop-color="#5a5b5f"/>
+			<stop offset=".02" stop-color="#56575a"/>
+			<stop offset=".152" stop-color="#3e3e40"/>
+			<stop offset=".299" stop-color="#2b2a2c"/>
+			<stop offset=".465" stop-color="#1e1c1e"/>
+			<stop offset=".666" stop-color="#161416"/>
+			<stop offset="1" stop-color="#141213"/>
+		</linearGradient>
+		<image  width="20" height="19" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+			<path d="m13.32 6.73l-1-1-2.79 2.8-2.8-2.8-1 1 2.8 2.79-2.8 2.8 1 1 2.8-2.79 2.79 2.79 1-1-2.79-2.8z"/>
+		</clipPath>
+		<image  width="20" height="19" id="img2" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: #edeceb } 
+	</style>
+	<g>
+		<g>
+			<g clip-path="url(#cp1)">
+				<path class="s0" d="m9.53 0c-5.27 0-9.53 4.27-9.53 9.52 0 5.26 4.26 9.53 9.53 9.53 5.26 0 9.52-4.27 9.52-9.53 0-5.25-4.26-9.52-9.52-9.52zm0 1.53c4.41 0 8 3.58 8 7.99 0 4.42-3.59 8-8 8-4.42 0-8.01-3.58-8.01-8 0-4.41 3.59-7.99 8.01-7.99z"/>
+				<use id="Capa 1" href="#img1" x="0" y="0"/>
+			</g>
+		</g>
+		<g clip-path="url(#cp2)">
+			<path fill-rule="evenodd" class="s1" d="m13.32 6.73l-1-1-2.79 2.8-2.8-2.8-1 1 2.8 2.79-2.8 2.8 1 1 2.8-2.79 2.79 2.79 1-1-2.79-2.8z"/>
+			<use id="Capa 1 copy" href="#img2" x="0" y="0"/>
+		</g>
+	</g>
+</svg>

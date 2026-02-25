@@ -5,6 +5,7 @@ interface CardProps {
   tags?: string[];
   title: string;
   description: string;
+  url?: string;
 }
 
 const Card = ({
@@ -14,66 +15,45 @@ const Card = ({
   tags = [],
   title,
   description,
+  url,
 }: CardProps) => {
+  const handleClick = () => {
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
   return (
-    <div className="relative w-full max-w-2xl mx-auto bg-blue-950 shadow-2xl overflow-hidden border-2 border-blue-900 hover:border-blue-700 hover:shadow-card hover:shadow-blue-900/50 hover:-translate-y-2 transition-all duration-100"
-    >
-      {/* Barra de título de la ventana */}
-      <div className="relative z-20 bg-blue-900 px-4 py-3 flex items-center">
-        {/* Patrones geométricos angulares sutiles en el fondo de la barra */}
+    <div className="cmp-card" onClick={handleClick}>
+      <div className="cmp-card__header">
         <div
-          className="absolute inset-0 opacity-5"
+          className="cmp-card__header-bg"
           style={{
-            backgroundImage: `
-              linear-gradient(45deg, transparent 30%, rgba(6, 182, 212, 0.3) 30%, rgba(6, 182, 212, 0.3) 70%, transparent 70%),
-              linear-gradient(-45deg, transparent 30%, rgba(6, 182, 212, 0.3) 30%, rgba(6, 182, 212, 0.3) 70%, transparent 70%)
-            `,
+            backgroundImage: `linear-gradient(45deg, transparent 30%, rgb(6 182 212 / 0.3) 30%, rgb(6 182 212 / 0.3) 70%, transparent 70%), linear-gradient(-45deg, transparent 30%, rgb(6 182 212 / 0.3) 30%, rgb(6 182 212 / 0.3) 70%, transparent 70%)`,
             backgroundSize: '40px 40px',
           }}
         />
-        <div className="relative z-10 font-sans text-sm sm:text-base text-cyan-400 tracking-wide">
-          {windowTitle}
-        </div>
+        <div className="cmp-card__header-title">{windowTitle}</div>
       </div>
 
-      {/* Sección de imagen superior */}
       {image && (
-        <img
-          src={image}
-          alt={imageAlt}
-          className="absolute top-0 left-0 w-full h-full object-cover"
-        />
+        <img src={image} alt={imageAlt} className="cmp-card__img" />
       )}
 
-      {/* Contenido de la ventana */}
-      <div className="relative z-10 h-full">
-        <div className="relative w-full pb-80 overflow-hidden" />
+      <div className="cmp-card__body">
+        <div className="cmp-card__spacer" />
 
-        {/* Sección de texto inferior */}
-        <div className="relative bg-blue-950/70 p-4 sm:p-6 space-y-3 h-full">
-          {/* Tags */}
+        <div className="cmp-card__content">
           {tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
+            <div className="cmp-card__tags">
               {tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="font-sans text-xs sm:text-sm text-cyan-400 font-medium tracking-wide"
-                >
-                  #{tag}
-                </span>
+                <span key={index} className="cmp-card__tag">#{tag}</span>
               ))}
             </div>
           )}
 
-          {/* Título */}
-          <h3 className="font-sans text-lg sm:text-xl md:text-2xl text-white font-semibold tracking-wide">
-            {title}
-          </h3>
+          <h3 className="cmp-card__title">{title}</h3>
 
-          {/* Descripción */}
-          <p className="font-sans text-xs sm:text-sm text-gray-300 leading-relaxed">
-            {description}
-          </p>
+          <p className="cmp-card__description">{description}</p>
         </div>
       </div>
     </div>

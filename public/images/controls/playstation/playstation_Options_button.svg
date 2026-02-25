@@ -1,0 +1,94 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 25" width="20" height="25">
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m19.18 1.17q-0.03-0.27-0.2-0.41-0.18-0.13-0.52-0.13-0.63 0-0.63 0.43 0 0.16 0.13 0.27 0.13 0.1 0.42 0.17 0.34 0.08 0.6 0.15 0.25 0.07 0.46 0.16 0.12 0.05 0.22 0.13 0.11 0.07 0.18 0.18 0.07 0.1 0.12 0.25 0.04 0.15 0.04 0.37 0 0.26-0.11 0.46-0.11 0.19-0.29 0.33-0.18 0.14-0.43 0.21-0.25 0.07-0.52 0.07-0.78 0-1.17-0.3-0.4-0.3-0.42-0.89h0.72q0.01 0.27 0.23 0.43 0.21 0.16 0.54 0.16 0.36 0 0.54-0.13 0.18-0.13 0.19-0.35-0.01-0.08-0.03-0.16-0.02-0.07-0.08-0.13-0.06-0.06-0.17-0.1-0.11-0.05-0.28-0.09-0.41-0.08-0.71-0.17-0.29-0.09-0.49-0.22-0.19-0.13-0.28-0.32-0.1-0.19-0.1-0.48 0-0.22 0.09-0.41 0.08-0.2 0.24-0.34 0.17-0.14 0.41-0.23 0.25-0.08 0.58-0.08 0.32 0 0.58 0.08 0.26 0.09 0.44 0.24 0.19 0.15 0.29 0.37 0.1 0.22 0.12 0.48z"/>
+		</clipPath>
+		<image  width="20" height="25" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+			<path d="m16.22 3.69l-1.53-2.4v2.4h-0.69v-3.57h0.79l1.42 2.29v-2.29h0.7v3.57z"/>
+		</clipPath>
+		<image  width="20" height="25" id="img2" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp3">
+			<path d="m12.09 3.81q-0.83 0-1.27-0.48-0.45-0.48-0.45-1.39 0-0.46 0.12-0.82 0.11-0.36 0.33-0.61 0.22-0.25 0.54-0.38 0.32-0.13 0.73-0.13 0.41 0 0.73 0.13 0.32 0.13 0.53 0.39 0.22 0.25 0.33 0.61 0.11 0.37 0.11 0.82 0 0.93-0.44 1.4-0.43 0.47-1.26 0.46zm0-0.64q0.2 0 0.38-0.07 0.17-0.07 0.31-0.22 0.13-0.15 0.2-0.38 0.08-0.23 0.08-0.55 0-0.63-0.25-0.96-0.25-0.33-0.72-0.33-0.47 0-0.73 0.33-0.25 0.33-0.25 0.96 0 0.64 0.26 0.93 0.25 0.29 0.72 0.29z"/>
+		</clipPath>
+		<image  width="20" height="25" id="img3" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp4">
+			<path d="m9.43 3.69v-3.57h0.74v3.57z"/>
+		</clipPath>
+		<image  width="20" height="25" id="img4" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp5">
+			<path d="m7.45 3.69v-2.95h-1.08v-0.62h2.91v0.62h-1.09v2.95z"/>
+		</clipPath>
+		<image  width="20" height="25" id="img5" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp6">
+			<path d="m3.63 3.69v-3.57h1.57q0.27 0 0.48 0.09 0.21 0.08 0.36 0.24 0.15 0.16 0.23 0.37 0.08 0.21 0.08 0.45 0 0.25-0.08 0.45-0.08 0.21-0.23 0.36-0.15 0.15-0.36 0.23-0.21 0.09-0.48 0.08h-0.83v1.3zm1.46-1.9q0.33 0 0.47-0.15 0.14-0.15 0.14-0.39 0-0.22-0.14-0.37-0.15-0.14-0.47-0.14h-0.71v1.05c0 0 0.71 0 0.71 0z"/>
+		</clipPath>
+		<image  width="20" height="25" id="img6" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp7">
+			<path d="m1.72 3.81q-0.83 0-1.28-0.48-0.44-0.48-0.44-1.39 0-0.46 0.11-0.82 0.12-0.36 0.34-0.61 0.21-0.25 0.53-0.38 0.32-0.13 0.74-0.13 0.41 0 0.73 0.13 0.31 0.13 0.53 0.39 0.21 0.25 0.33 0.61 0.11 0.37 0.11 0.82 0 0.93-0.44 1.4-0.44 0.46-1.26 0.46zm0-0.64q0.2 0 0.37-0.07 0.18-0.07 0.31-0.22 0.13-0.15 0.21-0.38 0.07-0.23 0.07-0.55 0-0.63-0.24-0.96-0.25-0.33-0.72-0.33-0.48 0-0.73 0.33-0.25 0.33-0.25 0.96 0 0.64 0.25 0.93 0.26 0.29 0.72 0.29z"/>
+		</clipPath>
+		<image  width="20" height="25" id="img7" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp8">
+			<path d="m16.32 18.64c0 3.06-2.83 5.55-6.32 5.55-3.49 0-6.32-2.48-6.32-5.55v-8.88c0-3.06 2.83-5.55 6.32-5.55 3.49 0 6.32 2.48 6.32 5.55z"/>
+		</clipPath>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,19.978,-12.638,0,9.999,4.21)">
+			<stop offset="0" stop-color="#5b5b5f"/>
+			<stop offset="1" stop-color="#141414"/>
+		</linearGradient>
+		<image  width="20" height="25" id="img8" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZAQMAAAAL2ZyQAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQxBgAFeAAaGyYHBgAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: #000000 } 
+		.s1 { fill: url(#g1) } 
+	</style>
+	<g>
+		<g>
+			<g clip-path="url(#cp1)">
+				<path class="s0" d="m19.18 1.17q-0.03-0.27-0.2-0.41-0.18-0.13-0.52-0.13-0.63 0-0.63 0.43 0 0.16 0.13 0.27 0.13 0.1 0.42 0.17 0.34 0.08 0.6 0.15 0.25 0.07 0.46 0.16 0.12 0.05 0.22 0.13 0.11 0.07 0.18 0.18 0.07 0.1 0.12 0.25 0.04 0.15 0.04 0.37 0 0.26-0.11 0.46-0.11 0.19-0.29 0.33-0.18 0.14-0.43 0.21-0.25 0.07-0.52 0.07-0.78 0-1.17-0.3-0.4-0.3-0.42-0.89h0.72q0.01 0.27 0.23 0.43 0.21 0.16 0.54 0.16 0.36 0 0.54-0.13 0.18-0.13 0.19-0.35-0.01-0.08-0.03-0.16-0.02-0.07-0.08-0.13-0.06-0.06-0.17-0.1-0.11-0.05-0.28-0.09-0.41-0.08-0.71-0.17-0.29-0.09-0.49-0.22-0.19-0.13-0.28-0.32-0.1-0.19-0.1-0.48 0-0.22 0.09-0.41 0.08-0.2 0.24-0.34 0.17-0.14 0.41-0.23 0.25-0.08 0.58-0.08 0.32 0 0.58 0.08 0.26 0.09 0.44 0.24 0.19 0.15 0.29 0.37 0.1 0.22 0.12 0.48z"/>
+				<use id="Capa 1 copy" href="#img1" x="0" y="0"/>
+			</g>
+		</g>
+		<g id="Layer copy 8">
+			<g clip-path="url(#cp2)">
+				<path class="s0" d="m16.22 3.69l-1.53-2.4v2.4h-0.69v-3.57h0.79l1.42 2.29v-2.29h0.7v3.57z"/>
+				<use id="Capa 1 copy" href="#img2" x="0" y="0"/>
+			</g>
+		</g>
+		<g id="Layer copy 9">
+			<g clip-path="url(#cp3)">
+				<path class="s0" d="m12.09 3.81q-0.83 0-1.27-0.48-0.45-0.48-0.45-1.39 0-0.46 0.12-0.82 0.11-0.36 0.33-0.61 0.22-0.25 0.54-0.38 0.32-0.13 0.73-0.13 0.41 0 0.73 0.13 0.32 0.13 0.53 0.39 0.22 0.25 0.33 0.61 0.11 0.37 0.11 0.82 0 0.93-0.44 1.4-0.43 0.47-1.26 0.46zm0-0.64q0.2 0 0.38-0.07 0.17-0.07 0.31-0.22 0.13-0.15 0.2-0.38 0.08-0.23 0.08-0.55 0-0.63-0.25-0.96-0.25-0.33-0.72-0.33-0.47 0-0.73 0.33-0.25 0.33-0.25 0.96 0 0.64 0.26 0.93 0.25 0.29 0.72 0.29z"/>
+				<use id="Capa 1 copy" href="#img3" x="0" y="0"/>
+			</g>
+		</g>
+		<g id="Layer copy 10">
+			<g clip-path="url(#cp4)">
+				<path class="s0" d="m9.43 3.69v-3.57h0.74v3.57z"/>
+				<use id="Capa 1 copy" href="#img4" x="0" y="0"/>
+			</g>
+		</g>
+		<g id="Layer copy 11">
+			<g clip-path="url(#cp5)">
+				<path class="s0" d="m7.45 3.69v-2.95h-1.08v-0.62h2.91v0.62h-1.09v2.95z"/>
+				<use id="Capa 1 copy" href="#img5" x="0" y="0"/>
+			</g>
+		</g>
+		<g id="Layer copy 12">
+			<g clip-path="url(#cp6)">
+				<path class="s0" d="m3.63 3.69v-3.57h1.57q0.27 0 0.48 0.09 0.21 0.08 0.36 0.24 0.15 0.16 0.23 0.37 0.08 0.21 0.08 0.45 0 0.25-0.08 0.45-0.08 0.21-0.23 0.36-0.15 0.15-0.36 0.23-0.21 0.09-0.48 0.08h-0.83v1.3zm1.46-1.9q0.33 0 0.47-0.15 0.14-0.15 0.14-0.39 0-0.22-0.14-0.37-0.15-0.14-0.47-0.14h-0.71v1.05c0 0 0.71 0 0.71 0z"/>
+				<use id="Capa 1 copy" href="#img6" x="0" y="0"/>
+			</g>
+		</g>
+		<g id="Layer copy 13">
+			<g clip-path="url(#cp7)">
+				<path class="s0" d="m1.72 3.81q-0.83 0-1.28-0.48-0.44-0.48-0.44-1.39 0-0.46 0.11-0.82 0.12-0.36 0.34-0.61 0.21-0.25 0.53-0.38 0.32-0.13 0.74-0.13 0.41 0 0.73 0.13 0.31 0.13 0.53 0.39 0.21 0.25 0.33 0.61 0.11 0.37 0.11 0.82 0 0.93-0.44 1.4-0.44 0.46-1.26 0.46zm0-0.64q0.2 0 0.37-0.07 0.18-0.07 0.31-0.22 0.13-0.15 0.21-0.38 0.07-0.23 0.07-0.55 0-0.63-0.24-0.96-0.25-0.33-0.72-0.33-0.48 0-0.73 0.33-0.25 0.33-0.25 0.96 0 0.64 0.25 0.93 0.26 0.29 0.72 0.29z"/>
+				<use id="Capa 1 copy" href="#img7" x="0" y="0"/>
+			</g>
+		</g>
+		<g>
+			<g clip-path="url(#cp8)">
+				<path class="s1" d="m16.32 18.64c0 3.06-2.83 5.55-6.32 5.55-3.49 0-6.32-2.48-6.32-5.55v-8.88c0-3.06 2.83-5.55 6.32-5.55 3.49 0 6.32 2.48 6.32 5.55z"/>
+				<use id="Capa 1" href="#img8" x="0" y="0"/>
+			</g>
+		</g>
+	</g>
+</svg>

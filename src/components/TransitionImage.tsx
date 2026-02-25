@@ -1,26 +1,20 @@
 import { useRef, useEffect } from "react"
 import clsx from "clsx"
 import { gsap } from "gsap"
+import { ANIMATION_CONFIG } from "../../constants"
 
 export interface TransitionImageProps {
-  /** URL de la imagen a mostrar */
-  image: string
-  /** Texto alternativo */
+  image: string | null
   imageAlt?: string
-  /** Clase CSS adicional para el contenedor */
   className?: string
-  /** Duración de la transición en segundos */
   duration?: number
 }
-
-const DEFAULT_DURATION = 0.4
-const EASE = "power2.inOut"
+const EASE = "power1.inOut"
 
 const TransitionImage = ({
   image,
   imageAlt = "Image",
   className = "",
-  duration = DEFAULT_DURATION,
 }: TransitionImageProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
@@ -39,33 +33,23 @@ const TransitionImage = ({
       return
     }
 
-    // Transición: fade out y luego actualizar src y fade in
-    gsap.to(imgEl, {
-      opacity: 0,
-      duration: duration / 2,
+    gsap.fromTo(imgEl, { opacity: 0, x: 10 }, {
+      x: 0,
+      opacity: 1,
+      duration: ANIMATION_CONFIG.fast,
       ease: EASE,
-      onComplete: () => {
-        imgEl.src = image
-        gsap.fromTo(imgEl, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: duration / 2, ease: EASE })
-      },
     })
-  }, [image, duration])
+  }, [image])
 
   return (
-    <div
-      ref={containerRef}
-      className={clsx(
-        "relative w-full h-full min-h-[200px] sm:min-h-[280px] md:min-h-[320px] overflow-hidden",
-        className
+    <div ref={containerRef} className={clsx("cmp-transition-image", className)} style={{ aspectRatio: "16/10" }}>
+      {image ? (
+        <img ref={imgRef} src={image} alt={imageAlt} />
+      ) : (
+        <div className="cmp-transition-image__placeholder">
+          <p className="cmp-transition-image__placeholder-text">IMAGE NOT FOUND</p>
+        </div>
       )}
-      style={{ aspectRatio: "16/10" }}
-    >
-      <img
-        ref={imgRef}
-        src={image}
-        alt={imageAlt}
-        className="absolute inset-0 w-full h-full object-cover border-4 border-gray-700/50"
-      />
     </div>
   )
 }

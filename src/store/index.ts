@@ -1,24 +1,39 @@
 import { create } from 'zustand';
-import { SECTIONS } from '../../constants';
+
+export type InputDevice = 'keyboard' | 'playstation' | 'xbox';
+
+/** Detects whether the gamepad id is PlayStation or Xbox. */
+export function getInputDeviceFromGamepadId(id: string): 'playstation' | 'xbox' {
+  const lower = id.toLowerCase();
+  if (
+    lower.includes('playstation') ||
+    lower.includes('dualshock') ||
+    lower.includes('dualsense') ||
+    lower.includes('ps3') ||
+    lower.includes('ps4') ||
+    lower.includes('ps5') ||
+    lower.includes('sony')
+  ) {
+    return 'playstation';
+  }
+  return 'xbox'; // Xbox, XINPUT, Microsoft or generic
+}
 
 interface AppState {
-  activeSection: string;
-  showMenu: boolean;
-  showSplash: boolean;
-  setActiveSection: (sectionId: string) => void;
-  selectSection: (sectionId: string) => void;
-  backToMenu: () => void;
-  toggleApp: () => void;
-  closeSplash: () => void;
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
+  /** Last input device used: keyboard, PlayStation or Xbox controller. */
+  inputDevice: InputDevice;
+  setInputDevice: (device: InputDevice) => void;
+  setVisibleWeekdayBanner: (visible: boolean) => void;
+  visibleWeekdayBanner: boolean;
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  activeSection: SECTIONS.ABOUT_ME,
-  showMenu: true,
-  showSplash: true,
-  setActiveSection: (sectionId: string) => set({ activeSection: sectionId }),
-  selectSection: (sectionId: string) => set({ activeSection: sectionId, showMenu: false }),
-  backToMenu: () => set({ showMenu: true }),
-  toggleApp: () => set((prev) => ({ showSplash: !prev.showSplash, activeSection: SECTIONS.ABOUT_ME })),
-  closeSplash: () => set({ showSplash: false }),
+  selectedIndex: 0,
+  setSelectedIndex: (index: number) => set({ selectedIndex: index }),
+  inputDevice: 'keyboard',
+  setInputDevice: (device: InputDevice) => set({ inputDevice: device }),
+  visibleWeekdayBanner: true,
+  setVisibleWeekdayBanner: (visible: boolean) => set({ visibleWeekdayBanner: visible }),
 }));

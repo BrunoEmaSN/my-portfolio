@@ -21,7 +21,6 @@ const SectionTitle = ({
     xl: 250
   }
 }: SectionTitleProps) => {
-  // Generar un ID único basado en el label para evitar conflictos
   const uniqueId = `section-title-${label.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (

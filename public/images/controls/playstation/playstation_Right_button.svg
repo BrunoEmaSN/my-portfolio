@@ -1,0 +1,80 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 19" width="20" height="19">
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m13.77 12.63l-2.83-3.18 2.83-3.17h4.22c0.59 0 1.07 0.47 1.07 1.06v4.23c0 0.58-0.48 1.06-1.07 1.06z"/>
+		</clipPath>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-6.349,8.119,0,14.998,12.628)">
+			<stop offset=".3" stop-color="#0044a1"/>
+			<stop offset="1" stop-color="#5fb1da"/>
+		</linearGradient>
+		<image  width="20" height="19" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+			<path d="m11.64 0h-4.22c-0.59 0-1.07 0.48-1.07 1.06v4.23l3.18 2.83 3.17-2.83v-4.23c0-0.58-0.47-1.06-1.06-1.06zm0 0.62c0.25 0 0.44 0.2 0.44 0.44v3.95l-2.55 2.28-2.56-2.28v-3.95c0-0.24 0.2-0.44 0.45-0.44z"/>
+		</clipPath>
+		<linearGradient id="g2" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-8.118,6.35,0,9.528,8.118)">
+			<stop offset="0" stop-color="#141414"/>
+			<stop offset=".226" stop-color="#181818"/>
+			<stop offset=".46" stop-color="#242425"/>
+			<stop offset=".698" stop-color="#373739"/>
+			<stop offset=".938" stop-color="#535356"/>
+			<stop offset="1" stop-color="#5b5b5f"/>
+		</linearGradient>
+		<image  width="20" height="19" id="img2" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp3">
+			<path d="m9.53 10.79l-3.18 2.83v4.22c0 0.59 0.48 1.07 1.07 1.07h4.22c0.59 0 1.06-0.48 1.06-1.07v-4.22zm0 0.83l2.56 2.28v3.95c0 0.24-0.2 0.44-0.44 0.44h-4.23c-0.24 0-0.44-0.2-0.44-0.44v-3.95z"/>
+		</clipPath>
+		<linearGradient id="g3" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-8.12,6.35,0,9.528,18.906)">
+			<stop offset="0" stop-color="#141414"/>
+			<stop offset=".226" stop-color="#181818"/>
+			<stop offset=".46" stop-color="#242425"/>
+			<stop offset=".698" stop-color="#373739"/>
+			<stop offset=".938" stop-color="#535356"/>
+			<stop offset="1" stop-color="#5b5b5f"/>
+		</linearGradient>
+		<image  width="20" height="19" id="img3" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp4">
+			<path d="m5.29 6.28h-4.23c-0.58 0-1.06 0.47-1.06 1.06v4.23c0 0.58 0.48 1.06 1.06 1.06h4.23l2.83-3.18zm-0.28 0.62l2.28 2.56-2.28 2.55h-3.95c-0.24 0-0.44-0.2-0.44-0.44v-4.22c0-0.25 0.2-0.45 0.44-0.45z"/>
+		</clipPath>
+		<linearGradient id="g4" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-6.349,8.118,0,4.059,12.627)">
+			<stop offset="0" stop-color="#141414"/>
+			<stop offset=".226" stop-color="#181818"/>
+			<stop offset=".46" stop-color="#242425"/>
+			<stop offset=".698" stop-color="#373739"/>
+			<stop offset=".938" stop-color="#535356"/>
+			<stop offset="1" stop-color="#5b5b5f"/>
+		</linearGradient>
+		<image  width="20" height="19" id="img4" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: url(#g2) } 
+		.s2 { fill: url(#g3) } 
+		.s3 { fill: url(#g4) } 
+	</style>
+	<g>
+		<g>
+			<g clip-path="url(#cp1)">
+				<path class="s0" d="m13.77 12.63l-2.83-3.18 2.83-3.17h4.22c0.59 0 1.07 0.47 1.07 1.06v4.23c0 0.58-0.48 1.06-1.07 1.06z"/>
+				<use id="Capa 1 copy 3" href="#img1" x="0" y="0"/>
+			</g>
+		</g>
+		<g>
+			<g clip-path="url(#cp2)">
+				<path class="s1" d="m11.64 0h-4.22c-0.59 0-1.07 0.48-1.07 1.06v4.23l3.18 2.83 3.17-2.83v-4.23c0-0.58-0.47-1.06-1.06-1.06zm0 0.62c0.25 0 0.44 0.2 0.44 0.44v3.95l-2.55 2.28-2.56-2.28v-3.95c0-0.24 0.2-0.44 0.45-0.44z"/>
+				<use id="Capa 1 copy 2" href="#img2" x="0" y="0"/>
+			</g>
+		</g>
+		<g>
+			<g clip-path="url(#cp3)">
+				<path class="s2" d="m9.53 10.79l-3.18 2.83v4.22c0 0.59 0.48 1.07 1.07 1.07h4.22c0.59 0 1.06-0.48 1.06-1.07v-4.22zm0 0.83l2.56 2.28v3.95c0 0.24-0.2 0.44-0.44 0.44h-4.23c-0.24 0-0.44-0.2-0.44-0.44v-3.95z"/>
+				<use id="Capa 1 copy" href="#img3" x="0" y="0"/>
+			</g>
+		</g>
+		<g>
+			<g clip-path="url(#cp4)">
+				<path class="s3" d="m5.29 6.28h-4.23c-0.58 0-1.06 0.47-1.06 1.06v4.23c0 0.58 0.48 1.06 1.06 1.06h4.23l2.83-3.18zm-0.28 0.62l2.28 2.56-2.28 2.55h-3.95c-0.24 0-0.44-0.2-0.44-0.44v-4.22c0-0.25 0.2-0.45 0.44-0.45z"/>
+				<use id="Capa 1" href="#img4" x="0" y="0"/>
+			</g>
+		</g>
+	</g>
+</svg>
