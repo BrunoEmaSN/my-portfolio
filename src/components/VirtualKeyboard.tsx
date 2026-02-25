@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useGamepad } from "../hooks/useGamepad";
-import { menuAudioEffect } from "../helpers/audioContext";
+import { backAudioEffect, confirmAudioEffect, keyboardAudioEffect } from "../helpers/audioContext";
 import ControlsHint from "./ControlsHint";
 import { useAppStore } from "../store";
 
@@ -66,29 +66,29 @@ const VirtualKeyboard = ({
     visible
       ? {
           "dpad-up": () => {
-            menuAudioEffect();
+            keyboardAudioEffect();
             setSelectedRow((r) => Math.max(0, r - 1));
             return true;
           },
           "dpad-down": () => {
-            menuAudioEffect();
+            keyboardAudioEffect();
             setSelectedRow((r) => Math.min(GRID.length - 1, r + 1));
             return true;
           },
           "dpad-left": () => {
-            menuAudioEffect();
+            keyboardAudioEffect();
             setSelectedCol((c) => Math.max(0, c - 1));
             return true;
           },
           "dpad-right": () => {
-            menuAudioEffect();
+            keyboardAudioEffect();
             setSelectedCol((c) => Math.min(GRID[selectedRow].length - 1, c + 1));
             return true;
           },
           a: () => {
             const cell = GRID[selectedRow]?.[col];
             if (!cell) return true;
-            menuAudioEffect();
+            confirmAudioEffect();
             if (cell.action === "backspace") {
               onChange(value.slice(0, -1));
             } else if (cell.action === "done") {
@@ -99,7 +99,7 @@ const VirtualKeyboard = ({
             return true;
           },
           b: () => {
-            menuAudioEffect();
+            backAudioEffect();
             onClose();
             return true;
           },
