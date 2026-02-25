@@ -1,32 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="20.001px" height="20px" viewBox="0 0 20.001 20" enable-background="new 0 0 20.001 20" xml:space="preserve">
-<g>
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 19" width="20" height="19">
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m9.53 0c-5.27 0-9.53 4.27-9.53 9.52 0 5.26 4.26 9.53 9.53 9.53 5.26 0 9.52-4.27 9.52-9.53 0-5.25-4.26-9.52-9.52-9.52zm0 1.53c4.41 0 8 3.58 8 7.99 0 4.42-3.59 8-8 8-4.42 0-8.01-3.58-8.01-8 0-4.41 3.59-7.99 8.01-7.99z"/>
+		</clipPath>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,19.049,-19.049,0,9.525,0)">
+			<stop offset="0" stop-color="#5a5b5f"/>
+			<stop offset=".02" stop-color="#56575a"/>
+			<stop offset=".152" stop-color="#3e3e40"/>
+			<stop offset=".299" stop-color="#2b2a2c"/>
+			<stop offset=".465" stop-color="#1e1c1e"/>
+			<stop offset=".666" stop-color="#161416"/>
+			<stop offset="1" stop-color="#141213"/>
+		</linearGradient>
+		<image  width="20" height="19" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+			<path d="m13.32 6.73l-1-1-2.79 2.8-2.8-2.8-1 1 2.8 2.79-2.8 2.8 1 1 2.8-2.79 2.79 2.79 1-1-2.79-2.8z"/>
+		</clipPath>
+		<image  width="20" height="19" id="img2" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATAQMAAACqQr/2AAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAA9JREFUeJxjZGBgYKQSBgADRAAUCtFKKAAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: #edeceb } 
+	</style>
 	<g>
-		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="10.001" y1="0" x2="10.001" y2="17.9003">
-			<stop  offset="0" style="stop-color:#5A5B5F"/>
-			<stop  offset="0.0326" style="stop-color:#57585C"/>
-			<stop  offset="0.456" style="stop-color:#333234"/>
-			<stop  offset="0.7932" style="stop-color:#1C1B1C"/>
-			<stop  offset="1" style="stop-color:#141213"/>
-		</linearGradient>
-		<circle fill="url(#SVGID_1_)" cx="10.001" cy="10" r="10"/>
-		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="10.001" y1="0" x2="10.001" y2="20">
-			<stop  offset="0" style="stop-color:#5A5B5F"/>
-			<stop  offset="0.0197" style="stop-color:#56575A"/>
-			<stop  offset="0.1524" style="stop-color:#3E3E40"/>
-			<stop  offset="0.2989" style="stop-color:#2B2A2C"/>
-			<stop  offset="0.4647" style="stop-color:#1E1C1E"/>
-			<stop  offset="0.6657" style="stop-color:#161416"/>
-			<stop  offset="1" style="stop-color:#141213"/>
-		</linearGradient>
-		<path fill="url(#SVGID_2_)" d="M10.001,1.602c4.633,0,8.4,3.768,8.4,8.398c0,4.633-3.768,8.4-8.4,8.4c-4.631,0-8.4-3.768-8.4-8.4
-			C1.601,5.369,5.37,1.602,10.001,1.602 M10.001,0c-5.523,0-10,4.479-10,10c0,5.523,4.477,10,10,10s10-4.477,10-10
-			C20.001,4.479,15.524,0,10.001,0L10.001,0z"/>
+		<g>
+			<g clip-path="url(#cp1)">
+				<path class="s0" d="m9.53 0c-5.27 0-9.53 4.27-9.53 9.52 0 5.26 4.26 9.53 9.53 9.53 5.26 0 9.52-4.27 9.52-9.53 0-5.25-4.26-9.52-9.52-9.52zm0 1.53c4.41 0 8 3.58 8 7.99 0 4.42-3.59 8-8 8-4.42 0-8.01-3.58-8.01-8 0-4.41 3.59-7.99 8.01-7.99z"/>
+				<use id="Capa 1" href="#img1" x="0" y="0"/>
+			</g>
+		</g>
+		<g clip-path="url(#cp2)">
+			<path fill-rule="evenodd" class="s1" d="m13.32 6.73l-1-1-2.79 2.8-2.8-2.8-1 1 2.8 2.79-2.8 2.8 1 1 2.8-2.79 2.79 2.79 1-1-2.79-2.8z"/>
+			<use id="Capa 1 copy" href="#img2" x="0" y="0"/>
+		</g>
 	</g>
-	<polygon fill="#EDECEB" points="13.987,7.064 12.937,6.016 10.001,8.951 7.065,6.016 6.017,7.064 8.952,10 6.017,12.936 
-		7.065,13.986 10.001,11.051 12.937,13.986 13.987,12.936 11.052,10 	"/>
-</g>
 </svg>
