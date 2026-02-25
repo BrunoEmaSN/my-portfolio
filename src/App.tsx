@@ -70,7 +70,7 @@ const App = () => {
 
   return (
     <div className="cmp-app">
-      <div ref={weekdayBannerRef} className="cmp-app-banner-wrap">
+      <div ref={weekdayBannerRef} className="cmp-app-banner-wrap pointer-events-none">
         <WeekdayBanner className="max-w-md" />
       </div>
       <Routes>
