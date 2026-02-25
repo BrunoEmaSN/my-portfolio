@@ -508,7 +508,7 @@
 
   /* ControlsHint */
   .cmp-controls-hint {
-    @apply absolute bottom-5 right-5 text-white p-4 rounded-lg text-xs opacity-80 font-mono flex flex-wrap items-center gap-1;
+    @apply absolute bottom-5 right-5 text-white p-4 rounded-lg text-xs opacity-80 font-mono flex flex-wrap justify-center items-center gap-1;
   }
 
   .cmp-controls-hint.hide-mobile {

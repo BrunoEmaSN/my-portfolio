@@ -27,9 +27,9 @@ const PAGE_CONTROLS: Partial<Record<string, Record<InputDevice, string[]>>> = {
     xbox: ["B", "Stick der. ↑↓"],
   },
   [ROUTES.CONTACT]: {
-    keyboard: ["ESC", "W", "S", "ENTER" , "↑", "↓"],
-    playstation: ["Circle", "Share", "D-Pad ↑↓", "Stick der. ↑↓", "Cross"],
-    xbox: ["B", "D-Pad ↑↓", "Stick der. ↑↓", "A"],
+    keyboard: ["ESC", "ENTER", "W", "S" , "↑", "↓"],
+    playstation: ["Circle", "Cross", "Share", "D-Pad ↑↓", "Stick der. ↑↓"],
+    xbox: ["B", "A", "D-Pad ↑↓", "Stick der. ↑↓"],
   },
 }
 

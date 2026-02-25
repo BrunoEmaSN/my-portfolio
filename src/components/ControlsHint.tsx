@@ -43,6 +43,26 @@ function getButtonImages(
   return map[item] ?? null
 }
 
+/** Returns the human-readable label for a control (e.g. "A" → "Confirm"). */
+function getButtonLabel(item: string): string {
+  const labels: Record<string, string> = {
+    A: "Confirm",
+    B: "Back",
+    Cross: "Confirm",
+    Circle: "Back",
+    "D-Pad ↑↓": "Up / Down",
+    "D-Pad ←→": "Left / Right",
+    "Stick der. ↑↓": "Scroll",
+    View: "View",
+    Menu: "Menu",
+    Share: "Share",
+    Options: "Options",
+    "LB/RB ←→": "Left / Right",
+    "L1/R1 ←→": "Left / Right",
+  }
+  return labels[item] ?? ""
+}
+
 const ControlsHint = ({
   items,
   inputDevice = "keyboard",
@@ -57,7 +77,7 @@ const ControlsHint = ({
   return (
     <div
       className={clsx(
-        "cmp-controls-hint",
+        "cmp-controls-hint flex items-start gap-2",
         hideOnMobile && "hide-mobile",
         className
       )}
@@ -70,18 +90,21 @@ const ControlsHint = ({
 
         if (images && images.length > 0) {
           return (
-            <span key={item} className="cmp-controls-hint__item">
-              {images.map((src) => (
-                <img
-                  key={src}
-                  src={`${prefix}/${src}`}
-                  alt={item}
-                  className="cmp-controls-hint__key"
-                  style={{ filter: inputDevice === "xbox" ? "invert(100%)" : "invert(0%)" }}
-                  aria-hidden
-                />
-              ))}
-            </span>
+            <div key={item} className="flex flex-col items-center justify-center gap-2">
+              <span key={item} className="cmp-controls-hint__item">
+                {images.map((src) => (
+                  <img
+                    key={src}
+                    src={`${prefix}/${src}`}
+                    alt={item}
+                    className="cmp-controls-hint__key"
+                    style={{ filter: inputDevice === "xbox" ? "invert(100%)" : "invert(0%)" }}
+                    aria-hidden
+                  />
+                ))}
+              </span>
+              <p>{getButtonLabel(item)}</p>
+            </div>
           )
         }
 

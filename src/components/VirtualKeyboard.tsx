@@ -23,7 +23,7 @@ const ROW4: KeyCell[] = [
   { key: "-" },
   { key: "_" },
   { key: "⌫", action: "backspace" },
-  { key: "Listo", action: "done" },
+  { key: "Done", action: "done" },
 ];
 
 const GRID: KeyCell[][] = [ROW0, ROW1, ROW2, ROW3, ROW4];
@@ -39,8 +39,8 @@ export interface VirtualKeyboardProps {
 }
 
 const CONTROLS = {
-  "playstation": ["Circle", "Share", "D-Pad ←→", "D-Pad ↑↓", "Cross"],
-  "xbox": ["B", "View", "D-Pad ←→", "D-Pad ↑↓", "A"],
+  "playstation": ["Circle", "Cross", "Share", "D-Pad ←→", "D-Pad ↑↓"],
+  "xbox": ["B", "A", "View", "D-Pad ←→", "D-Pad ↑↓"],
 }
 
 const VirtualKeyboard = ({
@@ -137,7 +137,7 @@ const VirtualKeyboard = ({
         <div className="cmp-virtual-keyboard__input-wrap">
           {value || "\u00a0"}|
         </div>
-        <div className="cmp-virtual-keyboard__grid-wrap">
+        <div className="cmp-virtual-keyboard__grid-wrap pb-10">
           {GRID.map((cells, r) => (
             <div key={r} className="cmp-virtual-keyboard__row">
               {cells.map((cell, c) => {
