@@ -34,6 +34,6 @@ export const useAppStore = create<AppState>((set) => ({
   setSelectedIndex: (index: number) => set({ selectedIndex: index }),
   inputDevice: 'keyboard',
   setInputDevice: (device: InputDevice) => set({ inputDevice: device }),
-  visibleWeekdayBanner: true,
+  visibleWeekdayBanner: false,
   setVisibleWeekdayBanner: (visible: boolean) => set({ visibleWeekdayBanner: visible }),
 }));
