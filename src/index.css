@@ -185,11 +185,13 @@
   }
 
   div[class*="mask-internal"] {
-    @apply [mask-image:linear-gradient(to_right, transparent, black_20%, black_80%, transparent)] px-20;
+    mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+    @apply px-20;
   }
 
   div[class*="mask-internal-bottom"] {
-    @apply [mask-image:linear-gradient(to_bottom, transparent, black_10%, black_60%, transparent)] px-20;
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 60%, transparent);
+    @apply px-20;
   }
 
   /* App */
@@ -245,7 +247,8 @@
   }
 
   .cmp-list-menu__inner {
-    @apply relative z-10 p-4 flex flex-col h-full max-h-[min(40vh, 28rem)];
+    max-height: min(40vh, 28rem);
+    @apply relative z-10 p-4 flex flex-col h-full;
   }
 
   .cmp-list-menu__title {
