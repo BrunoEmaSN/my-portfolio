@@ -76,34 +76,24 @@ const ExperiencesScreen = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} id="experiences" className="overflow-y-auto h-full">
+    <section ref={sectionRef} id="experiences" className="cmp-experiences">
       <SectionTitle label="WORK EXPERIENCES" textSize={size} className="text-5xl xs:text-9xl" />
-      <div className="relative z-10 flex flex-col gap-12 w-full h-full pt-50 gap-y-60">
-        <div className="flex flex-col gap-4">
-          <h3
-            ref={titleFeatured}
-            className="text-sm sm:text-base md:text-lg lg:text-xl font-bold skew-x-[-20deg] border-b-2 border-red-600 pb-2 w-fit pl-20 pr-5 md:text-white text-white"
-          >
-            FEATURED PROJECTS
-          </h3>
-          <div className="w-full items-center justify-center flex p-4">
-            <div ref={cardsGridRef} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-5/6">
+      <div className="cmp-experiences__content">
+        <div className="cmp-experiences__block">
+          <h3 ref={titleFeatured} className="cmp-experiences__subtitle">FEATURED PROJECTS</h3>
+          <div className="cmp-experiences__grid-wrap">
+            <div ref={cardsGridRef} className="cmp-experiences__grid">
               {projectsData.map((project) => (
-                <div key={project.windowTitle} className="h-full hover:-translate-y-2 transition-all duration-100">
+                <div key={project.windowTitle} className="cmp-experiences__card-wrap">
                   <Card {...project} />
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-20 h-full">
-          <h3
-            ref={titleJourney}
-            className="text-sm sm:text-base md:text-lg lg:text-xl font-bold skew-x-[-20deg] border-b-2 border-red-600 pb-2 w-fit pl-20 pr-5 md:text-white text-white"
-          >
-            PROFESSIONAL JOURNEY
-          </h3>
-          <div className="flex items-center justify-center w-full h-full py-8 px-4">
+        <div className="cmp-experiences__journey">
+          <h3 ref={titleJourney} className="cmp-experiences__subtitle">PROFESSIONAL JOURNEY</h3>
+          <div className="cmp-experiences__timeline-wrap">
             <ExperienceTimeline experiences={experiencesData} sectionRef={sectionRef} />
           </div>
         </div>

@@ -106,7 +106,7 @@ const AboutMeSection = () => {
   }, { scope: skillsListRef, dependencies: [currentData.arcanaLabel] })
 
   return (
-    <section ref={containerRef} id="about-me" className="relative w-full h-full overflow-y-auto overflow-x-hidden gap-10 justify-between">
+    <section ref={containerRef} id="about-me">
       <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
 
       <div ref={personaPanelRef}>
@@ -123,19 +123,14 @@ const AboutMeSection = () => {
         />
       </div>
 
-      <div ref={bottomSectionRef} className="flex flex-col lg:flex-row justify-between w-full gap-10 md:p-20">
+      <div ref={bottomSectionRef} className="flex flex-col md:flex-row justify-between w-full gap-10 md:p-20">
         <div ref={skillsListRef} className="relative p-2 rounded-sm bg-slate-900 w-full lg:max-w-2xl">
           <SkillsList
             skills={currentData.skills}
             nextSkillLevel={currentData.nextSkillLevel}
             nextSkill={currentData.nextSkill}
           />
-          <span
-            className="font-black text-3xl absolute bottom-0 right-0 text-cyan-400 pr-5"
-            style={{
-              WebkitTextStroke: "2px #2563eb",
-            }}
-          >
+          <span className="font-black text-3xl absolute bottom-0 right-0 text-cyan-400 pr-5" style={{ WebkitTextStroke: "2px #2563eb" }}>
             ??????
           </span>
         </div>

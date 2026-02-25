@@ -104,20 +104,10 @@ const SplashScreen = ({ isMobile }: MobileProps) => {
   }, { scope: splashRef, dependencies: [navigate, isMobile] });
 
   return (
-    <div
-      onClick={handleClick}
-      ref={splashRef}
-      className="w-full h-screen flex items-center justify-start z-50 overflow-hidden"
-    >
-      <div className="overflow-hidden">
+    <div onClick={handleClick} ref={splashRef} className="cmp-splash">
+      <div className="cmp-splash__inner">
         <MainTitle isMobile={isMobile} text={isMobile ? 'TAP ANYWHERE' : 'PRESS ANY BUTTON'} />
-        <div
-          ref={revealBlockRef}
-          className="absolute top-1/2 -translate-y-1/2 w-full bg-blue-700 z-10 h-16 md:h-44 lg:h-128"
-          style={{
-            willChange: 'transform',
-          }}
-        />
+        <div ref={revealBlockRef} className="cmp-splash__reveal" style={{ willChange: 'transform' }} />
       </div>
     </div>
   );

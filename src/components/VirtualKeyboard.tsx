@@ -129,32 +129,21 @@ const VirtualKeyboard = ({
   if (!visible) return null;
 
   return (
-    <div
-      ref={overlayRef}
-      tabIndex={-1}
-      className="absolute inset-0 z-[200] flex flex-col outline-none bg-black/80 justify-center items-center"
-      aria-label={title}
-    >
-      <div
-        className="flex md:max-w-2xl bg-gray-900 flex-col p-4 md:p-6 lg:p-8 shadow-card-lg shadow-blue-950"
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-      >
+    <div ref={overlayRef} tabIndex={-1} className="cmp-virtual-keyboard" aria-label={title}>
+      <div className="cmp-virtual-keyboard__dialog" role="dialog" aria-modal="true" aria-label={title}>
         {title && (
-          <p className="mb-2 text-center text-lg font-black text-white md:mb-4 md:text-xl uppercase">
-            {title}
-          </p>
+          <p className="cmp-virtual-keyboard__title">{title}</p>
         )}
-        <div className="mb-3 rounded-lg flex items-center w-full bg-gray-700 px-4 py-3 text-xl font-mono text-white min-h-[3rem] break-all md:mb-4 md:min-h-[4rem] md:text-2xl">
+        <div className="cmp-virtual-keyboard__input-wrap">
           {value || "\u00a0"}|
         </div>
-        <div className="flex w-full p-4 flex-col justify-center gap-2 md:gap-3">
+        <div className="cmp-virtual-keyboard__grid-wrap">
           {GRID.map((cells, r) => (
-            <div key={r} className="flex justify-center gap-2 md:gap-3">
+            <div key={r} className="cmp-virtual-keyboard__row">
               {cells.map((cell, c) => {
                 const isSelected = r === selectedRow && c === col;
                 const isSpecial = cell.action != null;
+                const isDone = cell.action === "done";
                 return (
                   <button
                     key={`${r}-${c}`}
@@ -162,12 +151,10 @@ const VirtualKeyboard = ({
                     disabled
                     aria-hidden
                     className={clsx(
-                      "min-w-[2.5rem] px-3 py-3 text-base font-bold transition-all select-none md:min-w-[3rem] md:px-4 md:py-4 md:text-lg shadow-card-sm shadow-blue-950",
-                      isSpecial && "min-w-[4rem] md:min-w-[5rem]",
-                      cell.action === "done" && "min-w-[5rem] md:min-w-[6rem]",
-                      isSelected
-                        ? "bg-blue-600 text-white scale-110 ring-2 ring-white"
-                        : "bg-slate-700 text-gray-400"
+                      "cmp-virtual-keyboard__key",
+                      isSpecial && "is-special",
+                      isDone && "is-done",
+                      isSelected && "is-selected"
                     )}
                   >
                     {cell.key}
@@ -177,7 +164,7 @@ const VirtualKeyboard = ({
             </div>
           ))}
         </div>
-        <div className="h-20 relative">
+        <div className="cmp-virtual-keyboard__hint-wrap">
           <ControlsHint items={inputDevice === "playstation" || inputDevice === "xbox" ? CONTROLS[inputDevice] : []} inputDevice={inputDevice} />
         </div>
       </div>

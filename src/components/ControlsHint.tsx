@@ -57,8 +57,8 @@ const ControlsHint = ({
   return (
     <div
       className={clsx(
-        "absolute bottom-5 right-5 text-white p-4 rounded-lg text-xs opacity-80 font-mono flex flex-wrap items-center gap-1",
-        hideOnMobile && "hidden md:flex",
+        "cmp-controls-hint",
+        hideOnMobile && "hide-mobile",
         className
       )}
     >
@@ -70,13 +70,13 @@ const ControlsHint = ({
 
         if (images && images.length > 0) {
           return (
-            <span key={item} className={"inline-flex items-center gap-0.5 mx-0.5"}>
+            <span key={item} className="cmp-controls-hint__item">
               {images.map((src) => (
                 <img
                   key={src}
                   src={`${prefix}/${src}`}
                   alt={item}
-                  className={"h-7 w-auto inline-block"}
+                  className="cmp-controls-hint__key"
                   style={{ filter: inputDevice === "xbox" ? "invert(100%)" : "invert(0%)" }}
                   aria-hidden
                 />
@@ -98,7 +98,7 @@ const ControlsHint = ({
         }
 
         return (
-          <span key={item} className="mx-0.5 border border-white px-2 py-1">
+          <span key={item} className="cmp-controls-hint__key-label">
             {item}
           </span>
         )

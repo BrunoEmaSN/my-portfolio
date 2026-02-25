@@ -9,14 +9,8 @@ interface StatsPanelProps {
 
 const StatsPanel = ({ stats, className = '' }: StatsPanelProps) => {
   return (
-    <div
-      className={clsx(
-        "-rotate-5 -skew-x-10",
-        "bg-blue-800 mask-internal py-4 shadow-lg border border-blue-800/50",
-        className
-      )}
-    >
-      <div className="flex flex-col gap-3 z-10">
+    <div className={clsx("cmp-stats-panel mask-internal", className)}>
+      <div className="cmp-stats-panel__inner">
         {stats.map((stat, index) => (
           <StatItem
             key={`${stat.label}-${index}`}

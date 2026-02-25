@@ -42,26 +42,12 @@ const TransitionImage = ({
   }, [image])
 
   return (
-    <div
-      ref={containerRef}
-      className={clsx(
-        "relative w-full h-full min-h-[200px] sm:min-h-[280px] md:min-h-[320px] overflow-hidden",
-        className
-      )}
-      style={{ aspectRatio: "16/10" }}
-    >
+    <div ref={containerRef} className={clsx("cmp-transition-image", className)} style={{ aspectRatio: "16/10" }}>
       {image ? (
-        <img
-          ref={imgRef}
-          src={image}
-          alt={imageAlt}
-          className="absolute inset-0 w-full h-full object-cover border-4 border-gray-700/50"
-        />
+        <img ref={imgRef} src={image} alt={imageAlt} />
       ) : (
-        <div className="absolute inset-0 w-full h-full bg-gray-700/50 flex items-center justify-center">
-          <p className="text-white text-7xl font-bold -rotate-15 -skew-x-15">
-            IMAGE NOT FOUND
-          </p>
+        <div className="cmp-transition-image__placeholder">
+          <p className="cmp-transition-image__placeholder-text">IMAGE NOT FOUND</p>
         </div>
       )}
     </div>

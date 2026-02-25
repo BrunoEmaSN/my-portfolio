@@ -89,7 +89,7 @@ const SocialLink = ({
         </div>
 
       </div>
-      <div className="md:pl-10 mt-5 relative max-h-[140px] text-white overflow-y-auto overflow-x-hidden">
+      <div className="md:pl-10 mt-5 relative text-white">
         <div
           className="absolute inset-0 opacity-20"
           style={{

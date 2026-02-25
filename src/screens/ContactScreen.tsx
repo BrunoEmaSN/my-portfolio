@@ -110,9 +110,9 @@ const ContactScreen = () => {
   }
 
   return (
-    <section ref={sectionRef} id="contact" className="overflow-y-auto h-full w-full overflow-x-hidden z-10">
+    <section ref={sectionRef} id="contact" className="cmp-contact">
       <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full h-full z-10">
+      <div className="cmp-contact__grid">
         <MailPanel
           backgroundImage="/images/photo.png"
           onSend={handleSendMail}
@@ -121,10 +121,7 @@ const ContactScreen = () => {
           virtualKeyboardField={virtualKeyboardField}
           onOpenVirtualKeyboard={onOpenVirtualKeyboard}
         />
-        <div
-          ref={socialListRef}
-          className="flex flex-col items-center justify-center h-full w-full p-8 mb-20 gap-5"
-        >
+        <div ref={socialListRef} className="cmp-contact__social-wrap">
           {socialItems.map((item) => (
             <SocialItem
               key={item.name}

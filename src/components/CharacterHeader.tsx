@@ -16,18 +16,12 @@ export interface CharacterHeaderProps {
 
 const ArcanaLabel = ({ arcanaLabel, arcana, persona }: { arcanaLabel: string, arcana: string, persona: string }) => {
   return (
-    <div className="flex items-center justify-center w-full -skew-x-20">
-      <div className="relative flex flex-col">
-        <span className="text-xl text-gray-400 uppercase">
-          {arcanaLabel}
-        </span>
-        <span className="text-4xl font-black text-gray-300">
-          {arcana}
-        </span>
-        <div className="absolute top-0 left-0 w-full h-full flex justify-end items-end pb-1 translate-x-13">
-          <span className="font-bold text-black z-10 skew-x-20">
-            {persona}
-          </span>
+    <div className="cmp-arcana-wrap">
+      <div className="cmp-arcana-inner">
+        <span className="cmp-arcana-label">{arcanaLabel}</span>
+        <span className="cmp-arcana-name">{arcana}</span>
+        <div className="cmp-arcana-persona-wrap">
+          <span className="cmp-arcana-persona">{persona}</span>
         </div>
       </div>
     </div>
@@ -36,15 +30,11 @@ const ArcanaLabel = ({ arcanaLabel, arcana, persona }: { arcanaLabel: string, ar
 
 const LevelLabel = ({ level, nextExp }: { level: number, nextExp: number }) => {
   return (
-    <div className="flex items-baseline gap-3 justify-center w-full items-end">
-      <span className="text-2xl font-black text-black">
-        LV{level}
-      </span>
-      <div className="flex flex-col">
-        <span className="text-[10px] font-bold text-black uppercase">NEXT</span>
-        <span className="text-xl font-black text-black">
-          {nextExp.toLocaleString()}
-        </span>
+    <div className="cmp-level-wrap">
+      <span className="cmp-level-lv">LV{level}</span>
+      <div className="cmp-level-next-wrap">
+        <span className="cmp-level-next-label">NEXT</span>
+        <span className="cmp-level-next-value">{nextExp.toLocaleString()}</span>
       </div>
     </div>
   )
@@ -74,26 +64,20 @@ const CharacterHeader = ({
     )
   }, { scope: containerRef, dependencies: [arcanaLabel] })
   return (
-    <div
-      className={clsx("flex flex-col items-baseline justify-between", className)}
-    >
-      <div className="flex flex-col w-screen">
-        <div className="max-w-sm">
-          <div className="flex flex-col justify-center items-center">
-            <div className="w-fit">
-              <div className="text-4xl font-black text-transparent">
-                {arcana}
-              </div>
-              <div className="text-lg font-bold text-cyan-400">
-                {name}
-              </div>
+    <div className={clsx("cmp-character-header cmp-root", className)}>
+      <div className="cmp-screen-wrap">
+        <div className="cmp-max-wrap">
+          <div className="cmp-center-wrap">
+            <div className="cmp-w-fit">
+              <div className="cmp-name-title">{arcana}</div>
+              <div className="cmp-name-sub">{name}</div>
             </div>
           </div>
         </div>
       </div>
-      <div className="border-3 border-red-700 w-screen" />
-      <div ref={containerRef} className="bg-white w-screen py-4">
-        <div className="max-w-sm">  
+      <div className="cmp-divider" />
+      <div ref={containerRef} className="cmp-white-bar">
+        <div className="cmp-max-wrap">
           <ArcanaLabel arcanaLabel={arcanaLabel} arcana={arcana} persona={persona} />
           <LevelLabel level={level} nextExp={nextExp} />
         </div>

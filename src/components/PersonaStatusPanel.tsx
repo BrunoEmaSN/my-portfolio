@@ -42,14 +42,9 @@ const PersonaStatusPanel = ({
   className = "",
 }: PersonaStatusPanelProps) => {
   return (
-    <div
-      className={clsx(
-        "w-full mx-auto md:scale-103 md:-rotate-5 xl:-rotate-10 2xl:-rotate-5 md:-translate-y-12 lg:-translate-y-30 xl:-translate-y-45 md:-skew-x-10 lg:-skew-x-7 bg-white",
-        className
-      )}
-    >
-      <div className="bg-slate-900 lg:pt-27">
-        <div className="flex flex-col lg:scale-x-200 lg:origin-left">
+    <div className={clsx("cmp-persona-panel", className)}>
+      <div className="cmp-persona-panel__top">
+        <div className="cmp-persona-panel__scale">
           <CharacterHeader
             name={characterName}
             arcanaLabel={arcanaLabel}
@@ -58,18 +53,16 @@ const PersonaStatusPanel = ({
             level={level}
             nextExp={nextExp}
           />
-          <div className="relative max-w-md -translate-y-5 lg:-translate-y-10 md:ml-5">
-            <div className="absolute bottom-0 left-0 w-full">
+          <div className="cmp-persona-panel__arrows-wrap">
+            <div className="cmp-persona-panel__arrows-inner">
               <NavigationArrows onLeft={onNavigateLeft} onRight={onNavigateRight} />
             </div>
           </div>
         </div>
       </div>
 
-      <div
-        className="relative px-4 bg-blue-700 shadow-sm"
-      >
-        <div className="max-w-4xl">
+      <div className="cmp-persona-panel__bottom">
+        <div className="cmp-persona-panel__bottom-inner">
           <SkillIconsRow arcanaLabel={arcanaLabel} skills={skills} />
         </div>
       </div>

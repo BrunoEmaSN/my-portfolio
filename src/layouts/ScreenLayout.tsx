@@ -1,4 +1,3 @@
-import clsx from "clsx"
 import { useRef } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { ANIMATION_CONFIG, ROUTES } from "../../constants"
@@ -78,13 +77,9 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
     })
 
     return (
-        <main className="w-full h-screen relative">
-            <div
-                ref={layoutRef}
-                className="absolute w-full h-full"
-                style={{ transformStyle: "preserve-3d" }}
-            >
-                <div className={clsx("relative w-full h-full")}>
+        <main className="cmp-screen-layout">
+            <div ref={layoutRef} className="cmp-screen-layout__inner" style={{ transformStyle: "preserve-3d" }}>
+                <div className="cmp-screen-layout__content">
                     <button
                         id="button-esc"
                         onClick={(e) => {
@@ -93,11 +88,11 @@ const ScreenLayout = ({ children, isMobile }: { children: React.ReactNode, isMob
                             backAudioEffect()
                             navigate(ROUTES.HOME)
                         }}
-                        className="text-right button-menu absolute bottom-5 text-white hover:scale-105 transition-all duration-300 z-100 bg-blue-700"
+                        className="cmp-screen-layout__back button-menu"
                     >
                         BACK
                     </button>
-                    <div ref={outletWrapperRef} className="w-full h-full">
+                    <div ref={outletWrapperRef} className="cmp-screen-layout__outlet">
                         {children}
                     </div>
                     {!isMobile && pageControls && (

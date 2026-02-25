@@ -90,11 +90,11 @@ export const Mark = ({ targetRef, targetKey = 0 }: MarkProps) => {
     }, []);
 
     return (
-        <div id="mark" className="relative flex w-full justify-end">
-            <div className="relative w-fit">
+        <div id="mark">
+            <div className="cmp-mark__inner">
                 <div
                     ref={markRef}
-                    className="pointer-events-none fixed z-[100] bg-blue-700 w-20 h-20 translate-y-7 -rotate-5 -skew-x-20 md:-skew-x-10"
+                    className="cmp-mark__shape"
                     style={{
                         clipPath: "polygon(100% 46%, 0 100%, 100% 100%)",
                         top: 0,

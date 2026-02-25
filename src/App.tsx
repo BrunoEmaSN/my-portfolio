@@ -69,9 +69,9 @@ const App = () => {
   }, { scope: weekdayBannerRef, dependencies: [visibleWeekdayBanner] })
 
   return (
-    <div className="bg-black overflow-hidden relative">
-      <div ref={weekdayBannerRef} className={("absolute w-full h-full hidden md:flex justify-end items-start z-50")}>
-        <WeekdayBanner  className="max-w-md" />
+    <div className="cmp-app">
+      <div ref={weekdayBannerRef} className="cmp-app-banner-wrap">
+        <WeekdayBanner className="max-w-md" />
       </div>
       <Routes>
         <Route path={ROUTES.SPLASH}>

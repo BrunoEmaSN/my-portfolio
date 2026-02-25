@@ -19,8 +19,8 @@ const SkillsList = ({
   className = '',
 }: SkillsListProps) => {
   return (
-    <div className={clsx("relative", className)}>
-      <div className="grid grid-cols-2">
+    <div className={clsx("cmp-skills-list", className)}>
+      <div className="cmp-skills-list__grid">
         {skills.map((skill) => (
           <SkillItem
             key={skill.id}
@@ -31,21 +31,14 @@ const SkillsList = ({
           />
         ))}
       </div>
-      <div className="mt-6 mb-4 flex flex-col md:flex-row justify-center items-end gap-4 relative">
-        <div className="relative z-10 w-full">
+      <div className="cmp-skills-list__bottom flex">
+        <div className="cmp-skills-list__next-wrap">
           <NextSkillLabel level={nextSkillLevel} />
         </div>
-        <div className="relative flex items-center gap-3 w-full">
-          <div
-            className="absolute top-0 left-0 w-full h-full bg-blue-800 z-0"
-            style={{ clipPath: "polygon(30% 0, 100% 0, 100% 100%, 0% 100%)" }}
-          />
+        <div className="cmp-skills-list__next-item-wrap">
+          <div className="cmp-skills-list__next-bg" style={{ clipPath: "polygon(30% 0, 100% 0, 100% 100%, 0% 100%)" }} />
           {nextSkill && (
-            <SkillItem
-              key={nextSkill.id}
-              name={nextSkill.name}
-              icon={nextSkill.icon}
-            />
+            <SkillItem key={nextSkill.id} name={nextSkill.name} icon={nextSkill.icon} />
           )}
         </div>
       </div>

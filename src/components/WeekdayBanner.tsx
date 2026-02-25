@@ -51,16 +51,8 @@ const MoonPhaseIndicator = ({
   const shadowCx = waxing ? cx + d * r : cx - d * r;
 
   return (
-    <div
-      className="w-8 h-8 flex-shrink-0 rounded-full overflow-hidden"
-      aria-hidden
-      title={`Fase lunar: ${Math.round(phase * 100)}%`}
-    >
-      <svg
-        viewBox="0 0 32 32"
-        className="w-full h-full"
-        style={{ transform: "translateZ(0)" }}
-      >
+    <div className="cmp-moon-indicator" aria-hidden title={`Fase lunar: ${Math.round(phase * 100)}%`}>
+      <svg viewBox="0 0 32 32" style={{ transform: "translateZ(0)" }}>
         <defs>
           <clipPath id={clipId}>
             <circle cx={cx} cy={cy} r={r} />
@@ -107,131 +99,57 @@ const WeekdayBanner = ({ className }: WeekdayBannerProps) => {
     { scope: waveRef, dependencies: [] }
   );
 
+  const isDark = backgroundLabel === "DARK HOUR";
   return (
-    <div
-      className={clsx(
-        "relative w-full min-h-[2rem] md:min-h-[3rem] lg:min-h-[5rem] xl:min-h-[7rem] flex items-end justify-center overflow-hidden pointer-events-none",
-        className
-      )}
-    >
+    <div className={clsx("cmp-weekday-banner", className)}>
       <span
-        className={clsx(
-          backgroundLabel === "DARK HOUR" && "text-lime-950",
-          backgroundLabel !== "DARK HOUR" && "text-blue-900 left-1/2 -translate-x-1/2",
-          "absolute top-2 text-[5rem] font-black tracking-tighter uppercase pointer-events-none select-none z-10"
-        )}
+        className={clsx("cmp-weekday-banner__bg-text", isDark ? "dark" : "light")}
         aria-hidden
       >
         {backgroundLabel}
       </span>
-      <div className={clsx(
-          "absolute bottom-0 left-0 w-full h-20 z-10 overflow-hidden",
-          "mask-r-from-90% mask-l-from-90% mask-b-from-80% mask-radial-from-70% mask-radial-to-85%"
-        )}>
+      <div className="cmp-weekday-banner__wave-wrap wave-2">
         <svg
           ref={wave2Ref}
-          className={clsx(
-            backgroundLabel === "DARK HOUR" && "text-green-900/70",
-            backgroundLabel !== "DARK HOUR" && "text-blue-900/70",
-            "absolute bottom-0 left-0 h-full"
-          )}
-          style={{
-            willChange: "transform",
-            transform: "translateZ(0)",
-            width: "200%",
-            minWidth: "200%",
-          }}
+          className={clsx("cmp-weekday-banner__wave-svg", isDark ? "dark-bg" : "light-bg")}
+          style={{ willChange: "transform", transform: "translateZ(0)", width: "200%", minWidth: "200%" }}
           viewBox="0 0 2000 40"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
         >
-          <path
-            fill="currentColor"
-            d="M0,20 Q250,8 500,20 Q750,32 1000,20 Q1250,8 1500,20 Q1750,32 2000,20 L2000,40 L0,40 Z"
-          />
+          <path fill="currentColor" d="M0,20 Q250,8 500,20 Q750,32 1000,20 Q1250,8 1500,20 Q1750,32 2000,20 L2000,40 L0,40 Z" />
         </svg>
       </div>
-      <div className={clsx(
-          "absolute bottom-0 left-0 w-full h-20 z-10 overflow-hidden -translate-y-1.5",
-          "mask-r-from-90% mask-l-from-10% mask-b-from-80% mask-radial-from-70% mask-radial-to-85%"
-        )}>
+      <div className="cmp-weekday-banner__wave-wrap wave-1">
         <svg
           ref={waveRef}
-          className={clsx(
-            backgroundLabel === "DARK HOUR" && "text-green-700/90",
-            backgroundLabel !== "DARK HOUR" && "text-blue-600/90",
-            "absolute bottom-0 left-0 h-full"
-          )}
-          style={{
-            willChange: "transform",
-            transform: "translateZ(0)",
-            width: "200%",
-            minWidth: "200%",
-          }}
+          className={clsx("cmp-weekday-banner__wave-svg", isDark ? "dark" : "light")}
+          style={{ willChange: "transform", transform: "translateZ(0)", width: "200%", minWidth: "200%" }}
           viewBox="0 0 2000 40"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
         >
-          <path
-            fill="currentColor"
-            d="M0,20 Q250,8 500,20 Q750,32 1000,20 Q1250,8 1500,20 Q1750,32 2000,20 L2000,40 L0,40 Z"
-          />
+          <path fill="currentColor" d="M0,20 Q250,8 500,20 Q750,32 1000,20 Q1250,8 1500,20 Q1750,32 2000,20 L2000,40 L0,40 Z" />
         </svg>
       </div>
-      <div
-        className="relative z-20 flex items-center justify-between w-[92%] max-w-2xl min-h-[4.5rem] px-5 py-3 mt-7 rounded-xl"
-      >
-        <div className="flex flex-col items-start">
-          <div className="flex items-baseline">
-            <span
-              className="text-3xl sm:text-4xl font-black text-white tracking-tight"
-              style={{ WebkitTextStroke: "1px black" }}
-            >
-              {date}
-            </span>
-            <div className="flex flex-col items-center relative">
-              <span
-                className="absolute w-11 h-10 bg-black"
-                style={{
-                  clipPath: 'polygon(50% 100%, 0 0, 100% 0)',
-                }}
-                aria-hidden
-              />
-              <span
-                className="text-sm font-bold text-white uppercase leading-tight z-10"
-                style={{ WebkitTextStroke: "1px black" }}
-              >
-                {dayLabel}
-              </span>
+      <div className="cmp-weekday-banner__bar">
+        <div className="cmp-weekday-banner__bar-left">
+          <div className="cmp-weekday-banner__bar-date-wrap">
+            <span className="cmp-weekday-banner__date" style={{ WebkitTextStroke: "1px black" }}>{date}</span>
+            <div className="cmp-weekday-banner__day-wrap">
+              <span className="cmp-weekday-banner__day-bg" style={{ clipPath: 'polygon(50% 100%, 0 0, 100% 0)' }} aria-hidden />
+              <span className="cmp-weekday-banner__day-label" style={{ WebkitTextStroke: "1px black" }}>{dayLabel}</span>
             </div>
           </div>
-          <span
-            className={clsx(
-              backgroundLabel === "DARK HOUR" && "text-emerald-500",
-              "text-base sm:text-lg font-bold text-cyan-300 tracking-wide"
-            )}
-          >
-            {subtitle}
-          </span>
+          <span className={clsx("cmp-weekday-banner__subtitle", isDark ? "dark" : "light")}>{subtitle}</span>
         </div>
 
-        <div className={clsx(
-            backgroundLabel === "DARK HOUR" && "hidden",
-            "flex items-center gap-2"
-          )}>
+        <div className={clsx("cmp-weekday-banner__limit-wrap", isDark && "hidden-sun")}>
           <div className="flex flex-col items-end">
-            <span
-              className="text-xs font-semibold text-amber-400/80 uppercase tracking-wider"
-            >
-              LIMIT
-            </span>
-            <span
-              className="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight"
-            >
-              {limit}
-            </span>
+            <span className="cmp-weekday-banner__limit-label">LIMIT</span>
+            <span className="cmp-weekday-banner__limit-value">{limit}</span>
           </div>
           <MoonPhaseIndicator phase={moonPhase} waxing={moonWaxing} />
         </div>

@@ -110,8 +110,8 @@ const Menu = () => {
   }, { scope: menuContainerRef });
 
   return (
-    <nav className="fixed w-full md:max-w-md z-50">
-      <ul ref={menuContainerRef} className="flex flex-col gap-1">
+    <nav className="cmp-menu">
+      <ul ref={menuContainerRef}>
         {navItems.map((item, index) => (
           <li
             key={item.id}
@@ -138,15 +138,9 @@ const Menu = () => {
                 }
                 if (item.path) navigate(item.path);
               }}
-              className={clsx(
-                'cursor-pointer relative pr-5 sm:pr-10 md:pr-20 lg:pr-30 w-full font-black text-4xl h-[40px] transition-all duration-300 block hover:bg-blue-700 uppercase',
-                {
-                  'bg-blue-700 text-white scale-105': selectedIndex === index,
-                  'text-gray-500': selectedIndex !== index,
-                }
-              )}
+              className={clsx('cmp-menu__btn', selectedIndex === index && 'is-selected')}
             >
-              <div className="text-right">
+              <div className="cmp-menu__btn-label">
                 {item.label}
               </div>
             </button>

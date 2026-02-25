@@ -4,7 +4,6 @@ import { useGSAP } from "@gsap/react"
 import Menu from "../components/Menu"
 import ControlsHint from "../components/ControlsHint"
 import type { MobileProps } from "../types"
-import clsx from "clsx"
 import { useAppStore, type InputDevice } from "../store"
 import { ANIMATION_CONFIG } from "../../constants"
 import Footer from "../components/Footer"
@@ -50,22 +49,16 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
   return (
     <main
       ref={containerRef}
-      className="w-full h-screen overflow-hidden relative"
+      className="cmp-home"
       style={{
         perspective: "1500px",
         perspectiveOrigin: "center center",
       }}
     >
-      <div
-        ref={menuRef}
-        className="relative w-full h-full flex items-end justify-end pb-40"
-        style={{ transformStyle: "preserve-3d" }}
-      >
+      <div ref={menuRef} className="cmp-home__menu-wrap" style={{ transformStyle: "preserve-3d" }}>
         <div
           ref={revealBlockRef}
-          className={clsx(
-            "absolute right-0 bg-blue-700 z-50 h-10 w-full",
-          )}
+          className="cmp-home__reveal-block"
           style={{
             bottom: 332 - (selectedIndex * 40)
           }}
@@ -75,7 +68,7 @@ const HomeScreen = ({ isMobile }: MobileProps) => {
       {!isMobile && (
         <ControlsHint items={HOME_CONTROLS[inputDevice]} inputDevice={inputDevice} />
       )}
-      <div className="relative" ref={footerRef}>
+      <div className="cmp-home__footer-wrap" ref={footerRef}>
         <Footer />
       </div>
     </main>

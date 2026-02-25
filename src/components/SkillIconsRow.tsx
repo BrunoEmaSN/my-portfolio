@@ -35,10 +35,7 @@ const SkillIconsRow = ({ arcanaLabel, skills, className = "" }: SkillIconsRowPro
     )
   }, { scope: containerRef, dependencies: [arcanaLabel] })
   return (
-    <div
-      ref={containerRef}
-      className={clsx("flex items-end justify-center gap-3 flex-wrap", className)}
-    >
+    <div ref={containerRef} className={clsx("cmp-skill-icons-row", className)}>
       {skills.map((skill, i) => (
         <SkillIcon
           key={i}

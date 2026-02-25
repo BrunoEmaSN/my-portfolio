@@ -92,23 +92,14 @@ const ListMenu = ({
       tabIndex={0}
       role="listbox"
       aria-label={`${title}. W/S to change.`}
-      className={clsx("relative w-full max-w-xs outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-inset rounded", className)}
+      className={clsx("cmp-list-menu", className)}
     >
-      <div className="relative z-10 p-4 flex flex-col h-full max-h-[min(40vh,28rem)]">
-        <h2
-          className="text-2xl font-black tracking-tight text-white uppercase mb-4 shrink-0"
-          style={{
-            textShadow:
-              '2px 2px 0 rgb(0 0 0 / 0.4), 1px 1px 0 rgb(0 0 0 / 0.3), 0 0 8px rgb(255 255 255 / 0.15)',
-          }}
-        >
+      <div className="cmp-list-menu__inner">
+        <h2 className="cmp-list-menu__title" style={{ textShadow: '2px 2px 0 rgb(0 0 0 / 0.4), 1px 1px 0 rgb(0 0 0 / 0.3), 0 0 8px rgb(255 255 255 / 0.15)' }}>
           {title}
         </h2>
 
-        <ul
-          className="space-y-1 w-full overflow-y-auto overflow-x-hidden overscroll-contain pr-1 min-h-0"
-          role="list"
-        >
+        <ul role="list">
           {items.map((label, index) => {
             const isSelected = index === selectedIndex;
             return (
@@ -119,12 +110,7 @@ const ListMenu = ({
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => handleSelect(index)}
-                  className={clsx(
-                    'text-center px-4 py-3 rounded transition-all duration-150 w-full',
-                    isSelected
-                      ? 'bg-white shadow-list-menu shadow-red-500 text-black font-bold text-lg'
-                      : 'bg-blue-950/50 text-cyan-400 font-bold text-base hover:bg-blue-950 hover:text-white'
-                  )}
+                  className={clsx('cmp-list-menu__item', isSelected && 'is-selected')}
                 >
                   {label}
                 </button>

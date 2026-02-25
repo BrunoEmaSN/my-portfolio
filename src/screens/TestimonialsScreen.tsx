@@ -28,24 +28,22 @@ const TestimonialsScreen = () => {
   }, { scope: sectionRef, dependencies: [] })
 
   return (
-    <section ref={sectionRef} id="testimonials" className="overflow-y-auto h-full w-full overflow-x-hidden">
+    <section ref={sectionRef} id="testimonials" className="cmp-testimonials">
       <SectionTitle label="HELP PROVIDED" textSize={size} className="text-5xl xs:text-9xl" />
-      <div className="relative pointer-events-auto flex flex-col gap-12 w-full h-full pt-10 gap-5 items-between justify-center">
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-          <div className="pt-10 md:pt-120 xl:pt-0">
-            <h3 className="text-white text-5xl md:text-7xl -skew-x-10 font-bold translate-y-2">
-              SOCIAL LINKS
-            </h3>
-            <div className="max-w-xl">
+      <div className="cmp-testimonials__content">
+        <div className="cmp-testimonials__grid">
+          <div className="cmp-testimonials__left">
+            <h3 className="cmp-testimonials__title">SOCIAL LINKS</h3>
+            <div className="cmp-testimonials__desc-wrap">
               <SocialLink {...socialLinksData[selectedIndex]} />
             </div>
           </div>
-          <div className="h-[50vh] w-full p-8 hidden md:block">
+          <div className="cmp-testimonials__right">
             <TransitionImage image={socialLinksData[selectedIndex].image} imageAlt={socialLinksData[selectedIndex].bannerText} />
           </div>
         </div>
-        <div className="flex md:flex-row flex-col justify-between items-center pr-10 lg:pr-20 gap-5">
-          <div className="w-full lg:translate-x-15 md:-translate-y-10">
+        <div className="cmp-testimonials__bottom">
+          <div className="cmp-testimonials__list-wrap">
             <ListMenu items={socialLinksData.map((item) => item.bannerText)} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
           </div>
           <SocialDescription
