@@ -40,19 +40,23 @@
   }
 
   section#about-me {
-    @apply relative w-full h-full overflow-y-auto overflow-x-hidden gap-10 justify-between bg-[url('/images/backgrounds/about-me.svg')] bg-cover bg-center;
+    @apply relative w-full h-full overflow-y-auto overflow-x-hidden gap-10 justify-between;
+    @apply bg-[url('/images/backgrounds/about-me_sm.svg')] md:bg-[url('/images/backgrounds/about-me_md.svg')] lg:bg-[url('/images/backgrounds/about-me_lg.svg')] xl:bg-[url('/images/backgrounds/about-me_xl.svg')] 2xl:bg-[url('/images/backgrounds/about-me_2xl.svg')] bg-cover bg-center bg-no-repeat;
   }
 
   section#experiences {
-    @apply overflow-y-auto h-full bg-[url('/images/backgrounds/work-experiences.svg')] bg-cover bg-center;
+    @apply overflow-y-auto h-full;
+    @apply bg-[url('/images/backgrounds/work-experiences_sm.svg')] md:bg-[url('/images/backgrounds/work-experiences_md.svg')] lg:bg-[url('/images/backgrounds/work-experiences_lg.svg')] xl:bg-[url('/images/backgrounds/work-experiences_xl.svg')] 2xl:bg-[url('/images/backgrounds/work-experiences_2xl.svg')] bg-cover bg-center bg-no-repeat;
   }
 
   section#testimonials {
-    @apply overflow-y-auto h-full w-full overflow-x-hidden bg-[url('/images/backgrounds/help-provided.svg')] bg-cover bg-center;
+    @apply overflow-y-auto h-full w-full overflow-x-hidden;
+    @apply bg-[url('/images/backgrounds/help-provided_sm.svg')] md:bg-[url('/images/backgrounds/help-provided_md.svg')] lg:bg-[url('/images/backgrounds/help-provided_lg.svg')] xl:bg-[url('/images/backgrounds/help-provided_xl.svg')] 2xl:bg-[url('/images/backgrounds/help-provided_2xl.svg')] bg-cover bg-center bg-no-repeat;
   }
 
   section#contact {
-    @apply overflow-y-auto h-full w-full overflow-x-hidden z-10 bg-[url('/images/backgrounds/forge-bonds.svg')] bg-cover bg-center;
+    @apply overflow-y-auto h-full w-full overflow-x-hidden z-10;
+    @apply bg-[url('/images/backgrounds/forge-bonds_sm.svg')] md:bg-[url('/images/backgrounds/forge-bonds_md.svg')] lg:bg-[url('/images/backgrounds/forge-bonds_lg.svg')] xl:bg-[url('/images/backgrounds/forge-bonds_xl.svg')] 2xl:bg-[url('/images/backgrounds/forge-bonds_2xl.svg')] bg-cover bg-center bg-no-repeat;
   }
 
   /* HomeScreen */
@@ -214,7 +218,7 @@
 
   /* App */
   .cmp-app {
-    @apply bg-black overflow-hidden relative;
+    @apply bg-[url('/images/backgrounds/ocean.svg')] bg-cover bg-center overflow-hidden relative object-cover object-center;
   }
 
   .cmp-app-banner-wrap {
