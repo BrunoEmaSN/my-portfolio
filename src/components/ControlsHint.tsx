@@ -37,7 +37,7 @@ function getButtonImages(
     "D-Pad ↑↓": ["playstation_Up_button.svg", "playstation_Down_button.svg"],
     "D-Pad ←→": ["playstation_Left_button.svg", "playstation_Right_button.svg"],
     "L1/R1 ←→": ["playstation_button_L1.svg", "playstation_button_R1.svg"],
-    "Stick der. ↑↓": ["playstation_button_L3.svg"],
+    "Stick der. ↑↓": ["playstation_button_R3.svg"],
   }
   const map = platform === "xbox" ? xbox : playstation
   return map[item] ?? null
@@ -97,7 +97,10 @@ const ControlsHint = ({
                     key={src}
                     src={`${prefix}/${src}`}
                     alt={item}
-                    className="cmp-controls-hint__key"
+                    className={clsx(
+                      "cmp-controls-hint__key",
+                      item === "Stick der. ↑↓" && "scale-140"
+                    )}
                     style={{ filter: inputDevice === "xbox" ? "invert(100%)" : "invert(0%)" }}
                     aria-hidden
                   />
