@@ -2,7 +2,6 @@ import { useRef, useState, useCallback } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import MailPanel, { type MailFormData } from "../components/MailPanel"
-import SectionTitle from "../components/SectionTitle"
 import SocialItem from "../components/SocialItem"
 import VirtualKeyboard from "../components/VirtualKeyboard"
 import { ANIMATION_CONFIG, CONTACT_EMAIL } from "../../constants"
@@ -48,13 +47,6 @@ const socialItems = [
     url: import.meta.env.VITE_INSTAGRAM_URL,
   },
 ]
-
-const size = {
-  sm: 100,
-  md: 120,
-  lg: 200,
-  xl: 400,
-}
 
 type VirtualKeyboardField = 0 | 1 | 2 | 3 | null
 
@@ -111,7 +103,6 @@ const ContactScreen = () => {
 
   return (
     <section ref={sectionRef} id="contact" className="cmp-contact">
-      <SectionTitle label="FORGE BONDS" textSize={size} className="text-5xl xs:text-9xl" />
       <div className="cmp-contact__grid">
         <MailPanel
           backgroundImage="/images/photo.png"

@@ -1,6 +1,5 @@
 import { useRef } from "react"
 import gsap from "gsap"
-import SectionTitle from "../components/SectionTitle"
 import SkillsList from "../components/SkillsList"
 import StatsPanel from "../components/StatsPanel"
 import PersonaStatusPanel from "../components/PersonaStatusPanel"
@@ -11,13 +10,6 @@ import { AboutMeProvider, useAboutMe } from "../context/AboutMeContext"
 import { useScreenScroll } from "../hooks/useScreenScroll"
 import { useKeyboard } from "../hooks/useKeyboard"
 import { useGamepad } from "../hooks/useGamepad"
-
-const size = {
-  sm: 100,
-  md: 200,
-  lg: 300,
-  xl: 400,
-}
 
 const AboutMeSection = () => {
   const containerRef = useRef<HTMLElement>(null)
@@ -107,8 +99,6 @@ const AboutMeSection = () => {
 
   return (
     <section ref={containerRef} id="about-me">
-      <SectionTitle label="ABOUT ME" textSize={size} className="text-8xl xs:text-9xl" />
-
       <div ref={personaPanelRef}>
         <PersonaStatusPanel
           characterName={panelData.characterName}

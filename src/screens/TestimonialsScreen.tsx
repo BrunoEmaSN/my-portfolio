@@ -1,5 +1,4 @@
 import { useState, useRef } from "react"
-import SectionTitle from "../components/SectionTitle"
 import SocialLink from "../components/SocialLink"
 import { ANIMATION_CONFIG, socialLinksData } from "../../constants"
 import SocialDescription from "../components/SocialDescription"
@@ -8,13 +7,6 @@ import TransitionImage from "../components/TransitionImage"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { useScreenScroll } from "../hooks/useScreenScroll"
-
-const size = {
-  sm: 100,
-  md: 120,
-  lg: 200,
-  xl: 250,
-}
 
 const TestimonialsScreen = () => {
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -29,7 +21,6 @@ const TestimonialsScreen = () => {
 
   return (
     <section ref={sectionRef} id="testimonials" className="cmp-testimonials">
-      <SectionTitle label="HELP PROVIDED" textSize={size} className="text-5xl xs:text-9xl" />
       <div className="cmp-testimonials__content">
         <div className="cmp-testimonials__grid">
           <div className="cmp-testimonials__left">

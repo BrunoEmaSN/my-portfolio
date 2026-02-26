@@ -36,23 +36,23 @@
   section[id^="experiences"],
   section[id^="testimonials"],
   section[id^="contact"] {
-    @apply h-screen w-full flex flex-col items-start justify-start bg-gray-950 text-white;
+    @apply h-screen w-full flex flex-col items-start justify-start;
   }
 
   section#about-me {
-    @apply relative w-full h-full overflow-y-auto overflow-x-hidden gap-10 justify-between;
+    @apply relative w-full h-full overflow-y-auto overflow-x-hidden gap-10 justify-between bg-[url('/images/backgrounds/about-me.svg')] bg-cover bg-center;
   }
 
   section#experiences {
-    @apply overflow-y-auto h-full;
+    @apply overflow-y-auto h-full bg-[url('/images/backgrounds/work-experiences.svg')] bg-cover bg-center;
   }
 
   section#testimonials {
-    @apply overflow-y-auto h-full w-full overflow-x-hidden;
+    @apply overflow-y-auto h-full w-full overflow-x-hidden bg-[url('/images/backgrounds/help-provided.svg')] bg-cover bg-center;
   }
 
   section#contact {
-    @apply overflow-y-auto h-full w-full overflow-x-hidden z-10;
+    @apply overflow-y-auto h-full w-full overflow-x-hidden z-10 bg-[url('/images/backgrounds/forge-bonds.svg')] bg-cover bg-center;
   }
 
   /* HomeScreen */

@@ -1,18 +1,10 @@
 import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
-import SectionTitle from "../components/SectionTitle"
 import ExperienceTimeline from "../components/ExperienceTimeline"
 import Card from "../components/Card"
 import { ANIMATION_CONFIG, experiencesData, projectsData } from "../../constants"
 import { useScreenScroll } from "../hooks/useScreenScroll"
-
-const size = {
-  sm: 100,
-  md: 120,
-  lg: 150,
-  xl: 200,
-}
 
 const ExperiencesScreen = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -77,7 +69,6 @@ const ExperiencesScreen = () => {
 
   return (
     <section ref={sectionRef} id="experiences" className="cmp-experiences">
-      <SectionTitle label="WORK EXPERIENCES" textSize={size} className="text-5xl xs:text-9xl" />
       <div className="cmp-experiences__content">
         <div className="cmp-experiences__block">
           <h3 ref={titleFeatured} className="cmp-experiences__subtitle">FEATURED PROJECTS</h3>
