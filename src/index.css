@@ -36,7 +36,7 @@
   section[id^="experiences"],
   section[id^="testimonials"],
   section[id^="contact"] {
-    @apply h-screen w-full flex flex-col items-start justify-start;
+    @apply h-screen w-full flex flex-col items-start justify-start text-white;
   }
 
   section#about-me {

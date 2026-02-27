@@ -1,4 +1,6 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+const ONE_HOUR_MS = 60 * 60 * 1000;
 
 const DAY_LABELS_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
 
@@ -64,9 +66,9 @@ function getSubtitle(d: Date): string {
 
   if (h >= 0 && h < 6) return "Dark Hour";
   if (h >= 6 && h < 9) return "Early Morning";
-  if (h >= 9 && h < 13) return "Morning";
+  if (h >= 9 && h < 12) return "Morning";
   if (h >= 13 && h < 14) return "Lunchtime";
-  if (h >= 14 && h < 18) return "Afternoon";
+  if (h >= 12 && h < 18) return "Afternoon";
   if (h >= 18 && h < 20) return "After Office";
   if (h >= 20 && h < 23) return "Evening";
   return "Late Night";
@@ -79,6 +81,13 @@ const getBackgroundLabel = (dayLabel: string, subtitle: string): string => {
 };
 
 export function useWeekdayBanner() {
+  const [hourTick, setHourTick] = useState(() => Date.now());
+
+  useEffect(() => {
+    const id = setInterval(() => setHourTick(Date.now()), ONE_HOUR_MS);
+    return () => clearInterval(id);
+  }, []);
+
   return useMemo(() => {
     const d = new Date();
     const subtitle = getSubtitle(d);
@@ -98,5 +107,5 @@ export function useWeekdayBanner() {
       moonPhase,
       moonWaxing,
     };
-  }, []);
+  }, [hourTick]);
 }
